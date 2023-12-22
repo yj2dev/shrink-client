@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal";
+import "./index.css";
 
 const LoginModal = ({ show, onClose, onShowRegister }) => {
   const navigate = useNavigate();
