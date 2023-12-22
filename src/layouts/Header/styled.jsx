@@ -17,8 +17,8 @@ export const LeftSection = styled.div`
   }
 
   h1 {
-    font-size: 1.5rem;
-    font-weight: 400;
+    font-size: 2rem;
+    font-weight: bold;
     padding: 0;
     margin: 0;
   }

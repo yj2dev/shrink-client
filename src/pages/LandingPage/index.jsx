@@ -1,11 +1,14 @@
-import { Container } from "./styled";
-
+import React from 'react'
+import './index.css'
+import Cards from './Cards/Cards'
 const LandingPage = () => {
   return (
-    <Container>
-      <h1>LandingPage</h1>
-    </Container>
-  );
-};
+    <div className="LandingPage">
+        <h1>Dashboard</h1>
+        <Cards/>
 
-export default LandingPage;
+    </div>
+  )
+}
+
+export default LandingPage
