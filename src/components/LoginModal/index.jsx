@@ -115,9 +115,8 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
         </button>
       </div>
       <div className="registerLine">
-                      회원이 아니신가요? <Link to={onShowRegister}>회원가입</Link>
-                    </div>
-      
+        회원이 아니신가요? <Link to={onShowRegister}>회원가입</Link>
+      </div>
     </Modal>
   );
 };
