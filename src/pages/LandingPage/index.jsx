@@ -1,6 +1,7 @@
 import React from 'react'
 import './index.css'
 import Cards from './Cards/Cards'
+import Table from './Table/Table'
 const LandingPage = () => {
   return (
     <div className="LandingPage">
@@ -9,6 +10,7 @@ const LandingPage = () => {
         <span>한눈에 보기</span>
         <div className='explain'>최근 1년간 가격대신 부피가 줄어든 상품이에요.</div>
         <Cards/>
+        <Table/>
     </div>
   )
 }

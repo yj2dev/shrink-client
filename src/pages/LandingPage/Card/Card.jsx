@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Card.css'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimateSharedLayout } from 'framer-motion'
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Chart from 'react-apexcharts'
@@ -11,14 +11,14 @@ const Card = (props) => {
 const [expanded, setExpanded] = useState(false);
 
   return (
-    <AnimatePresence>
+    <AnimateSharedLayout>
         {
             expanded? (
                 <ExpandedCard param={props} setExpanded={()=>setExpanded(false)} />
                     ) : (
             <CompactCard param = {props} setExpanded={()=>setExpanded(true)}/>
         )}
-    </AnimatePresence>
+    </AnimateSharedLayout>
   )
 }
 
@@ -26,7 +26,7 @@ const [expanded, setExpanded] = useState(false);
 function CompactCard ({param, setExpanded }){
     const Png = param.png;
     return (
-        <div className="CompactCard"
+        <motion.div className="CompactCard"
         style={{
             background: "rgb(255, 255, 255)",
             boxShadow: param.color.boxShadow,
@@ -47,7 +47,7 @@ function CompactCard ({param, setExpanded }){
                 <span>${param.value}</span>
                 <span>100g 당 가격 00$</span>
             </div>
-        </div>
+        </motion.div>
     )
 }
 
