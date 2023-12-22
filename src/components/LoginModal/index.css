@@ -65,8 +65,10 @@
     color: #bcbcbc;
     font-size: 13px;
     margin-bottom: 35px;
-    a {
+    .registerButton {
+        border: none;
         color: black;
+        background-color: white;
         text-decoration: underline;
         cursor: pointer;
     }
