@@ -1,0 +1,8 @@
+/* 폰트 적요 예시 입니다.*/
+/*@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');*/
+
+body {
+    margin: 0;
+    background-color: #F0F0F0;
+    /*font-family: 'Black Han Sans', sans-serif;*/
+}
