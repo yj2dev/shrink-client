@@ -104,7 +104,8 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           )}
         </div>
       </div>
-      <div>
+      
+      <div className="bottomWrap">
         <button
           disabled={notAllow}
           style={{ marginTop: "40px" }}
@@ -113,11 +114,11 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
         >
           확인
         </button>
-      </div>
-      <div className="registerLine">
-                      회원이 아니신가요? <button className="registerButton" onClick={onShowRegister}>회원가입</button>
-                    </div>
       
+        <div className="registerLine">
+                        회원이 아니신가요? <button className="registerButton" onClick={onShowRegister}>회원가입</button>
+                      </div>
+      </div>
     </Modal>
   );
 };

@@ -65,14 +65,15 @@
     color: white;
     cursor: pointer;
     margin-bottom: 5%;
+    margin-top: 40px;
 }
 
-.registerLine {
+.loginLine {
     text-align: center;
     color: #bcbcbc;
     font-size: 13px;
     margin-bottom: 35px;
-    .registerButton {
+    .loginButton {
         border: none;
         color: black;
         background-color: white;
