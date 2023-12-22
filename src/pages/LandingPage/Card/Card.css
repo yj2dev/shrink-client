@@ -1,12 +1,13 @@
 .CompactCard {
     display: flex;
     flex: 1;
-    height: 10rem !important;
+    height: 12rem !important;
     border-radius: 0.7rem;
     color: rgb(255, 255, 255);
     padding: 1rem;
     position: relative;
     cursor: pointer;
+    margin: 0.5rem;
 }
 
 .CompactCard:hover {
@@ -25,14 +26,14 @@
 }
 
 .CircularProgressbar {
-    width: 4rem !important;
+    width: 8rem !important;
     overflow: visible;
 }
 
 .CircularProgressbar-path {
-    stroke: rgb(20, 194, 251 ) !important;
+    stroke: #4c67ff !important;
     stroke-width: 12px !important;
-    filter: drop-shadow(2px 4px 6px rgb(126, 218, 248));
+    filter: drop-shadow(2px 4px 6px #3F5DFE);
 }
 .CircularProgressbar-trail {
     display: none;
@@ -58,16 +59,16 @@
 }
 
 .detail > span:nth-child(2) {
-    font-size: 22px;
+    font-size: 30px;
     font-weight: bold;
 }
 .detail > span:nth-child(3) {
     font-weight: bold;
-    font-size: 22px;
+    font-size: 30px;
 }
 .detail > span:nth-child(4) {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 /* ExpandedCard */
