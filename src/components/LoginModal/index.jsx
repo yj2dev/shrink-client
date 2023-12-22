@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Modal from "../Modal";
 import "./index.css";
 
@@ -114,7 +114,10 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           확인
         </button>
       </div>
-      {/*<button onClick={onShowRegister}>회원가입</button>*/}
+      <div className="registerLine">
+                      회원이 아니신가요? <Link to={onShowRegister}>회원가입</Link>
+                    </div>
+      
     </Modal>
   );
 };

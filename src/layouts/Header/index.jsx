@@ -1,8 +1,8 @@
-import { Container, LeftSection, RightSection } from "./styled";
-import logoImg from "./img/logo.png";
 import { useEffect, useRef, useState } from "react";
 import LoginModal from "../../components/LoginModal";
 import RegisterModal from "../../components/RegisterModal";
+import logoImg from "./img/logo.png";
+import { Container, LeftSection, RightSection } from "./styled";
 
 const Header = () => {
   /*
@@ -94,8 +94,9 @@ const Header = () => {
             onClick={() => {
               setShowLoginModal(!showLoginModal);
             }}
+            className="login-button"
           >
-            로그인
+            <div className="loginTitle">로그인</div>
           </button>
         )}
 

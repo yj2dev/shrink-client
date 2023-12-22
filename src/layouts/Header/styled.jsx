@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const Container = styled.header`
   display: flex;
   justify-content: space-between;
@@ -22,12 +23,15 @@ export const LeftSection = styled.div`
     padding: 0;
     margin: 0;
   }
+
+  @media (max-width: 768px) {
+    order: -1;
+    flex-grow: 1;
+    justify-content: center;
+  }
 `;
 
 export const RightSection = styled.div`
-  display: flex;
-  align-items: center;
-
   .profile-img {
     cursor: pointer;
     width: 36px;
@@ -43,5 +47,16 @@ export const RightSection = styled.div`
     position: absolute;
     top: 64px;
     right: 0;
+  }
+
+  .login-button {
+    padding: 10px 27px;
+    font-color: white;
+    border: none;
+    background-color: #0F62FE;
+  }
+  .loginTitle {
+    color: white;
+    font-weight: 700;
   }
 `;

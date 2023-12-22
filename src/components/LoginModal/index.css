@@ -56,6 +56,18 @@
     background-color: #0F62FE;
     border-radius: 64px;
     color: white;
-    margin-bottom: 16px;
-    cursor: pointer
+    cursor: pointer;
+    margin-bottom: 5%;
+}
+
+.registerLine {
+    text-align: center;
+    color: #bcbcbc;
+    font-size: 13px;
+    margin-bottom: 35px;
+    a {
+        color: black;
+        text-decoration: underline;
+        cursor: pointer;
+    }
 }
