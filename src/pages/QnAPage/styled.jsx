@@ -228,7 +228,7 @@ export const Container = styled.div`
       
       ul.pagination li a {
         text-decoration: none;
-        color: #337ab7;
+        color: #0F62FE;
         font-size: 1rem;
       }
       
@@ -237,7 +237,7 @@ export const Container = styled.div`
       }
     
       ul.pagination li.active {
-        background-color: #337ab7;
+        background-color: #0F62FE;
       }
       
       ul.pagination li a:hover,
@@ -249,6 +249,15 @@ export const Container = styled.div`
         width: 48px;
         height: 30px;
         color: #337ab7;
+      }
+
+      .write-wrap p {
+        font-size: 13px;
+      }
+
+      .write-wrap span {
+        color: #0F62FE;
+        font-weight: bold;
       }
   
 `;

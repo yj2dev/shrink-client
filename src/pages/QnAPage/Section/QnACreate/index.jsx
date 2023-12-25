@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Container } from "./styled";
 import { useNavigate } from "react-router";
 import { PostDispatchContext } from "../../../../App";
+import { CiViewList } from "react-icons/ci";
 
 const QnACreate = ({isEdit, originData}) => {
 
@@ -84,7 +85,7 @@ const QnACreate = ({isEdit, originData}) => {
                 </div>
                 <div className="btn-container">
                     <button onClick={handleList}>
-                        목록보기
+                        <CiViewList/> 목록
                     </button>
                     <button onClick={handleSubmit}>
                         등록하기

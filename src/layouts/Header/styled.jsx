@@ -54,9 +54,11 @@ export const RightSection = styled.div`
     font-color: white;
     border: none;
     background-color: #0F62FE;
+    cursor: pointer;
   }
   .loginTitle {
     color: white;
     font-weight: 700;
+    cursor: pointer;
   }
 `;
