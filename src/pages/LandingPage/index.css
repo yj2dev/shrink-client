@@ -1,0 +1,25 @@
+.LandingPage{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+    width: 70%;
+    margin-top: 3rem;
+    margin-left: 3rem;
+}
+.explain{
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(89, 89, 89);
+    margin-bottom: 2rem;
+}
+.LandingPage > span {
+    color: black;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.LandingPage > span > span:nth-of-type(1) {
+    color: #3F5DFE;
+    font-size: 50px;
+    font-weight: bold;
+}
