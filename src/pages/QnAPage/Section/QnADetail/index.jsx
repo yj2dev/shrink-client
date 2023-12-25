@@ -48,16 +48,65 @@ const QnADetail = () => {
    }else {
     return (
         <Container>
-        <div className="QnADetail">
+            <section class="notice">
+                <div class="page-title">
+                    <div class="container">
+                    <h3>상세 페이지</h3>
+                    </div>
+                </div>
+
+            <div id="board-detail">
+                <div class="container">
+                    <div class="detail-window">
+                            <div className="detail-title">
+                                <p>{data.title}</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div id="board-list">
+                <div class="container">
+                    <table class="board-content">
+                    <tr className="detail-plus">
+                        <p>작성일 : {new Date(data.date).toLocaleString()}</p>
+                    </tr>
+                    <tr className="detail-content">
+                        <p>{data.content}</p>
+                    </tr>
+                    </table>
+                </div>
+        </div>
+
+        <div className="btn-container">
+                <button className="left-btn" onClick={handleList}>
+                    목록보기
+                </button>
+                <div className="right-btns">
+                <button onClick={handleEdit}>
+                    수정하기
+                </button>
+                <button onClick={handleRemove}>
+                    삭제하기
+                </button>
+                </div>
+                
+            </div>
+
+    </section>
+        {/* <div className="QnADetail">
             <h2>상세 페이지</h2>
             <div>
                 <div><p>제목</p></div>
-                <div className="detail">{data.title}</div>
+                <div className="detail-title">
+                    <p>{data.title}</p>
+                </div>
                 
             </div>
             <div>
                 <div><p>내용</p></div>
-                <div className="detail">{data.content}</div>
+                <div className="detail-content">
+                    <p>{data.content}</p>
+                    </div>
                 
             </div>
             <div className="btn-container">
@@ -74,7 +123,7 @@ const QnADetail = () => {
                 </div>
                 
             </div>
-        </div>
+        </div> */}
     
     </Container>
   );

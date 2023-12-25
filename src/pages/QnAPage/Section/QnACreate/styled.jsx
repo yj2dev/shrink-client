@@ -13,10 +13,12 @@ export const Container = styled.div`
     textarea {
         margin-bottom: 20px;
         width: 500px;
-        pdding: 10px;
+        padding: 20px 20px 20px 20px;
         height: 30px;
         // box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
         // border:5px outset;
+        border: none;
+        border-radius: 5px;
     }
 
     .QnACreate textarea {

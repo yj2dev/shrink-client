@@ -70,6 +70,7 @@ const QnACreate = ({isEdit, originData}) => {
                     ref={titleInput}
                     name="title" 
                     value={state.title}
+                    placeholder="제목을 입력해주세요"
                     onChange={handleChangeState}/>
                 </div>
                 <div>
@@ -78,6 +79,7 @@ const QnACreate = ({isEdit, originData}) => {
                     ref={contentInput}
                     name="content"
                     value={state.content}
+                    placeholder="내용을 입력해주세요"
                     onChange={handleChangeState}/>
                 </div>
                 <div className="btn-container">
