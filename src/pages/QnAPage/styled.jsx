@@ -138,8 +138,8 @@ export const Container = styled.div`
     
     .search-btn:hover,
     .search-btn:focus {
-        background: #0000FF; 
-        border-color: #0000FF; 
+        background: #0F62FE; 
+        // border-color: #0000FF; 
         color: #fff;
     }
 
@@ -160,8 +160,8 @@ export const Container = styled.div`
 
     .write-btn:hover,
     .write-btn:focus {
-        background: #0000FF; 
-        border-color: #0000FF; 
+        background: #0F62FE; 
+        // border-color: #0000FF; 
         color: #fff;
     }
     

@@ -40,8 +40,8 @@ export const Container = styled.div`
 
     .QnACreate button:hover,
     .QnACreate button:focus {
-        background: #0000FF; 
-        border-color: #0000FF; 
+        background: #0F62FE; 
+        border:none;
         color: #fff;
     }
 

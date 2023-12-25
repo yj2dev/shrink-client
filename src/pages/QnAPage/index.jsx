@@ -8,7 +8,6 @@ import { PostStateContext } from "../../App";
 const QnAPage = () => {
 
   const postList = useContext(PostStateContext);
-
     // const [currentPage, setCurrentPage] = useState(1);
 
     // const handlePageChange = (page) => {

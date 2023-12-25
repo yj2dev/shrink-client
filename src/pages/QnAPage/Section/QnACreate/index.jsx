@@ -47,10 +47,11 @@ const QnACreate = ({isEdit, originData}) => {
             }
             else {
                 onEdit(originData.id, state.date, state.title, state.content);
+                //console.log(state.title, state.content);
             }
         }
         
-        navigate('/question');
+         navigate('/question');
     }
 
     useEffect(()=> {
