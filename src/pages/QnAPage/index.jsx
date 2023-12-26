@@ -1,5 +1,5 @@
 import { useContext, useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container } from "./styled";
 import { FaSearch } from "react-icons/fa";
 import { PostStateContext } from "../../App";
@@ -11,6 +11,7 @@ const QnAPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5; // 페이지당 표시할 항목 수
+  const [searchResults, setSearchResults] = useState([]);
 
   // 현재 페이지에 표시할 항목들을 계산
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -24,8 +25,21 @@ const QnAPage = () => {
   };
 
   const handleSearchInputChange = (e) => {
+    setSearchResults(postList);
     setSearchTerm(e.target.value);
   };
+
+  const handleSearch = (e) => {
+    // 현재는 더미데이터에 검색되도록
+    // API 요청을 통해 서버에서 검색 수행해야 함
+    e.preventDefault();
+    const results = onSearch(searchTerm);
+    setSearchResults(results);
+  }
+  
+  const onSearch = (searchTerm) => {
+    return postList.filter((post) => post.title.toLowerCase().includes(searchTerm.toLowerCase()));
+  }
   
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -59,7 +73,7 @@ const QnAPage = () => {
                             <div class="search-wrap">
                                 <label for="search" class="blind">질문게시판 내용 검색</label>
                                 <input id="search" type="text" name="" placeholder="검색어를 입력해주세요." value={searchTerm} onChange={handleSearchInputChange}/>
-                                <button type="submit" class="btn search-btn">검색 <FaSearch className="search-icon"/></button>
+                                <button type="submit" class="btn search-btn" onClick={handleSearch}>검색 <FaSearch className="search-icon"/></button>
                             </div>
                         </form>
                     </div>
@@ -76,10 +90,18 @@ const QnAPage = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        {currentItems.map((it)=> (
+                        {searchTerm.length !== 0 ? searchResults.map((it) => (
+                          <tr key={it.id}>
+                            <td>{it.id}</td>
+                            <th><Link to={`/question/${it.id}`}>{it.title}</Link></th>
+                            <td>{new Date(it.date).toLocaleString()}</td>
+                          </tr>
+                        ))
+                        :
+                         currentItems.map((it)=> (
                             <tr key={it.id}>
                                 <td>{it.id}</td>
-                                <th><a href={`/question/${it.id}`}>{it.title}</a></th>
+                                <th><Link to={`/question/${it.id}`}>{it.title}</Link></th>
                                 <td>{new Date(it.date).toLocaleString()}</td>
                             </tr>
                         ))}
