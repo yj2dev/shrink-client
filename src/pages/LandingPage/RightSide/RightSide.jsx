@@ -6,8 +6,8 @@ const RightSide = () => {
     const data = {
         series: [
           {
-            name: "Review",
-            data: [10, 50, 30, 90, 40, 120, 100],
+            name: "가격",
+            data: [1000, 2000, 1000, 4000, 3000, 6000, 5000],
           },
         ],
         options: {
@@ -33,7 +33,7 @@ const RightSide = () => {
             },
           },
           grid: {
-            show: false,
+            show: true,
           },
           xaxis: {
             type: "datetime",
@@ -48,7 +48,7 @@ const RightSide = () => {
             ],
           },
           yaxis: {
-            show: false
+            show: true
           },
           toolbar:{
             show: false
@@ -58,6 +58,8 @@ const RightSide = () => {
       return (
       
       <div className="CustomerReview">
+            <h2>00상품 가격 변동</h2>
+            <Chart options={data.options} series={data.series} type="area" />
             <h2>00상품 가격 변동</h2>
             <Chart options={data.options} series={data.series} type="area" />
             <h2>00상품 가격 변동</h2>

@@ -107,3 +107,20 @@
     width: 40px;
     height: 40px;
 }
+
+
+@media screen and (max-width: 1460px) {
+    .Cards{
+      flex-direction: column;
+    }
+    
+    .CompactCard{
+      width: 90%;
+    }
+    .ExpandedCard{
+        top: 10rem;
+        width: 60vw;
+        height: 50vh;
+        left: 13rem;
+    }
+  }

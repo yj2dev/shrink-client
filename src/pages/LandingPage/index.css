@@ -1,7 +1,7 @@
 .LandingPage{
     display: flex;
     flex-direction: row;
-    /* justify-content: space-evenly; */
+    justify-content: space-evenly;
     width: 100%;
     margin-top: 3rem;
     margin-left: 3rem;
@@ -9,6 +9,7 @@
 /* .main{
     width: 50%;
 } */
+
 .explain{
     font-size: 25px;
     font-weight: bold;
@@ -30,4 +31,16 @@
 .RightSide {
     padding: 20px;
     width: 20%;
+}
+
+@media screen and (max-width: 1200px) {
+    .LandingPage {
+        grid-template-columns: 10% 50% auto;
+        overflow-y: scroll;
+        /* flex-direction: column; */
+    }
+    .main {
+        justify-content: flex-start;
+        margin-top: 2rem;
+    }
 }
