@@ -4,12 +4,15 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../Modal";
 import "./index.css";
 
-const RegisterModal = ({ show, onClose, onShowLogin }) => {
+const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
   const navigate = useNavigate();
 
   const [phone, setPhone] = useState("");
+  const [code, setCode] = useState("");
   const [nickname, setNickname] = useState();
-  const [password, setPassword] = useState("");
+  const [authnumber, setAuthnumber] = useState("");
+  const [codeValid, setCodeValid] = useState(true);
+  const [phoneValid, setPhoneValid] = useState(false);
 
   const onChangePhone = (e) => {
     setPhone(e.target.value);
@@ -17,22 +20,60 @@ const RegisterModal = ({ show, onClose, onShowLogin }) => {
   const onChangeNickname = (e) => {
     setNickname(e.target.value);
   };
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
+  const onChangeCode = (e) => {
+    setCode(e.target.value);
   };
+
+  const onClickPhone = (e) => {
+    
+    axios
+      .post("/api/auth/code", {phone})
+      .then((res) => {
+        console.log("res >> ", res);
+        if (res.data.data.statusName === "success") {
+          setPhoneValid(true);
+
+        } else {
+          setPhoneValid(false);
+        }
+      })
+      .catch((err) => {
+        console.log("err >> ", err);
+        if (err.response.data.status === "fail") {
+          setPhoneValid(false);
+        } else {
+          setPhoneValid(true);
+        }
+      });
+  };
+
   const onClickRegister = (e) => {
     const payload = {
       phone,
-      password,
+      code,
     };
 
     axios
-      .post("/api/auth/register", payload)
-      .catch((res) => {
+      .post("/api/auth/code/check", payload)
+      .then((res) => {
+        // setLoding()
         console.log("res >> ", res);
+        if (res.data.status !== "success") {
+          setCodeValid(false);
+        } else {
+          setCodeValid(true);
+          console.log("phone >> ", {phone});
+          console.log("phone >> ", phone.phone);
+          onShowUserPassword({phone});
+        }
       })
-      .then((err) => {
-        console.log(err);
+      .catch((err) => {
+        console.log("err >> ", err);
+        if (err.response.data.statusName !== "success") {
+          setCodeValid(false);
+        } else {
+          setCodeValid(true);
+        }
       });
   };
 
@@ -58,37 +99,63 @@ const RegisterModal = ({ show, onClose, onShowLogin }) => {
             <div>올바른 전화번호를 입력해주세요.</div>
           )}
         </div>
-      
-        <div style={{ marginTop: "20px" }} className="inputTitle">
-          비밀번호
-        </div>
-        <div className="inputWrap">
-          <input
-            className="input"
-            type="password"
-            value={password}
-            onChange={onChangePassword}
-            placeholder="영문, 숫자, 특수문자 포함 8자리 이상"
-          />
-        </div>
-        <div className="errorMessageWrap">
-          {password.length > 0 && (
-            <div>영문, 숫자 포함 8자 이상 입력해주세요.</div>
-          )}
-        </div>
-      </div>
-      <div className="bottomWrap">
-        <button
-          className="bottomButton"
-          onClick={onClickRegister}
-        >
-          회원가입 완료
-        </button>
 
-        <div className="loginLine">
-                        계정이 있으신가요? <button className="loginButton" onClick={onShowLogin}>로그인</button>
+        <div className="bottomWrap">
+          <button
+            className="bottomButton"
+            onClick={onClickPhone}
+          >
+            인증번호 전송
+          </button>
+
+          <div className="loginLine">
+                        <button className="loginButton" onClick={onClickPhone}>인증번호 재전송</button>
                       </div>
+        </div>
       </div>
+      
+      {/* <div className="errorMessageWrap">
+        {phone.length !== 11 && phone.length > 0 && (
+          <div>올바른 전화번호를 입력해주세요.</div>
+        )}
+      </div> */}
+      
+      <div className="validcodeWrap">
+        {phoneValid && (
+          <div>
+          <div style={{ marginTop: "20px" }} className="inputTitle">
+            인증번호
+          </div>
+          <div className="inputWrap">
+            <input
+              className="input"
+              type="text"
+              value={code}
+              onChange={onChangeCode}
+              placeholder="인증번호를 입력해주세요"
+            />
+          </div>
+          <div className="errorMessageWrap">
+            {!codeValid && (
+              <div>잘못된 인증번호입니다.</div>
+            )}
+          </div>
+          <div className="bottomWrap">
+            <button
+              className="bottomButton"
+              onClick={onClickRegister}
+            >
+              회원가입 완료
+            </button>
+
+            <div className="loginLine">
+                            계정이 있으신가요? <button className="loginButton" onClick={onShowLogin}>로그인</button>
+            </div>
+          </div>
+          </div>
+        )}
+      </div>
+      
     </Modal>
   );
 };

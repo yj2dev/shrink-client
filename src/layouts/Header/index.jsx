@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import LoginModal from "../../components/LoginModal";
 import RegisterModal from "../../components/RegisterModal";
+import UserPasswordModal from "../../components/UserPasswordModal";
 import logoImg from "./img/logo.png";
 import { Container, LeftSection, RightSection } from "./styled";
 
@@ -26,6 +27,7 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showUserPasswordModal, setShowUserPasswordModal] = useState(false);
 
   const menuRef = useRef();
   const triggerRef = useRef();
@@ -61,11 +63,19 @@ const Header = () => {
   const onShowRegisterModal = () => {
     setShowLoginModal(false);
     setShowRegisterModal(true);
+    setShowUserPasswordModal(false);
   };
+
+  const onShowUserPasswordModal = () => {
+    setShowLoginModal(false);
+    setShowRegisterModal(false);
+    setShowUserPasswordModal(true);
+  }
 
   const onCloseModal = () => {
     setShowLoginModal(false);
     setShowRegisterModal(false);
+    setShowUserPasswordModal(false);
   };
 
   return (
@@ -104,11 +114,19 @@ const Header = () => {
           show={showLoginModal}
           onClose={onCloseModal}
           onShowRegister={onShowRegisterModal}
+          onShowUserPassword={onShowUserPasswordModal}
         />
         <RegisterModal
           show={showRegisterModal}
           onClose={onCloseModal}
           onShowLogin={onShowLoginModal}
+          onShowUserPassword={onShowUserPasswordModal}
+        />
+        <UserPasswordModal
+          show={showUserPasswordModal}
+          onClose={onCloseModal}
+          onShowLogin={onShowLoginModal}
+          onShowRegister={onShowRegisterModal}
         />
       </RightSection>
     </Container>

@@ -16,7 +16,7 @@ export const Container = styled.div`
     position: relative;
     background: white;
     width: 300px;
-    height: 450px;
+    // height: 450px;
     padding: 20px;
     border-radius: 30px;
   }
