@@ -1,4 +1,4 @@
-import { Container, HamburgerMenu } from "./styled";
+import { Container, ContainerSpace, HamburgerMenu } from "./styled";
 import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import {
@@ -8,7 +8,7 @@ import {
   MdQuestionMark,
 } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
-import {IoCameraOutline} from "react-icons/io5";
+import { IoCameraOutline } from "react-icons/io5";
 
 const LeftNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,11 +36,16 @@ const LeftNav = () => {
   };
   return (
     <>
+      <ContainerSpace />
+      {/* isOpen ? 로 합치면 버그 상태 변하지 않는 버그 발생 => 합치기 금지 */}
       {!isOpen && (
         <HamburgerMenu onClick={() => setIsOpen(true)}>&#9776;</HamburgerMenu>
       )}
-
+      {isOpen && (
+        <HamburgerMenu onClick={() => setIsOpen(false)}>&#10005;</HamburgerMenu>
+      )}
       <Container isOpen={isOpen} ref={navRef}>
+        <div className="space" />
         <ul>
           <li onClick={closeMenu}>
             <NavLink to="/" className={getClassName}>

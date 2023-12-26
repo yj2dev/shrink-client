@@ -1,31 +1,29 @@
 import styled from "styled-components";
-
 export const Container = styled.div`
   width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
+
 export const WebcamContainer = styled.div`
-  //width: 500px;
-  //height: 350px;
-  //border: 2px dashed mediumvioletred;
-
-  width: 50%;
-
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   video {
-    //padding: 8px;
-    //border: 2px dashed darkgoldenrod;
-    //max-width: 80%;
-    //max-height: 80%;
+    width: 100%;
+    height: auto;
     object-fit: cover;
     transform: scaleX(-1);
-    border-radius: 25px 25px 0 0;
   }
 
   button {
     transition: 0.2s;
-    margin: 12px 0 0 0;
     height: 84px;
     font-size: 1.5em;
     border: none;
@@ -33,8 +31,9 @@ export const WebcamContainer = styled.div`
     color: #fff;
     cursor: pointer;
     outline: none;
-    position: fixed;
     bottom: 0;
+    //position: relative;
+    //position: fixed;
     width: 100%;
   }
 

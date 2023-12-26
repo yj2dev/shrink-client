@@ -8,7 +8,7 @@ const AnalysisPage = () => {
 
   return (
     <Container>
-      <Link to="/">홈페이지</Link>
+      {/*<Link to="/">홈페이지</Link>*/}
       <WebcamContainer>
         <Webcam ref={webcamRef} />
         <button>상품 분석</button>
