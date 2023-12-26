@@ -11,6 +11,12 @@ export const LeftSection = styled.div`
   display: flex;
   align-items: center;
 
+  .logo-section {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
   .logo-img {
     width: 32px;
     height: 32px;
@@ -53,7 +59,7 @@ export const RightSection = styled.div`
     padding: 10px 27px;
     font-color: white;
     border: none;
-    background-color: #0F62FE;
+    background-color: #0f62fe;
     cursor: pointer;
   }
   .loginTitle {

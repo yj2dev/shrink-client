@@ -14,6 +14,7 @@ import React, { useMemo, useReducer, useRef} from "react";
 import QnACreate from "./pages/QnAPage/Section/QnACreate";
 import QnADetail from "./pages/QnAPage/Section/QnADetail";
 import QnAEdit from "./pages/QnAPage/Section/QnAEdit";
+import AnalysisPage from "./pages/AnalysisPage";
 
 const reducer = (state, action) => {
   let newState = [];
@@ -129,6 +130,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/account" element={<AccountPage />} />
+            <Route path="/analysis" element={<AnalysisPage />} />
             <Route path="/favorite" element={<FavoritePage />} />
             <Route path="/question" element={<QnAPage/>} />
             <Route path="/report" element={<ReportPage />} />

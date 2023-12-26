@@ -8,6 +8,7 @@ import {
   MdQuestionMark,
 } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
+import {IoCameraOutline} from "react-icons/io5";
 
 const LeftNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,6 +46,12 @@ const LeftNav = () => {
             <NavLink to="/" className={getClassName}>
               <MdOutlineHome />
               &nbsp;&nbsp;메인화면
+            </NavLink>
+          </li>
+          <li onClick={closeMenu}>
+            <NavLink to="/analysis" className={getClassName}>
+              <IoCameraOutline />
+              &nbsp;&nbsp;제품분석
             </NavLink>
           </li>
           <li onClick={closeMenu}>

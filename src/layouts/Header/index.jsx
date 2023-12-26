@@ -3,6 +3,7 @@ import LoginModal from "../../components/LoginModal";
 import RegisterModal from "../../components/RegisterModal";
 import logoImg from "./img/logo.png";
 import { Container, LeftSection, RightSection } from "./styled";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   /*
@@ -27,6 +28,7 @@ const Header = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
+  const navigate = useNavigate();
   const menuRef = useRef();
   const triggerRef = useRef();
 
@@ -68,11 +70,17 @@ const Header = () => {
     setShowRegisterModal(false);
   };
 
+  const onClickLogo = () => {
+    navigate("/");
+  };
+
   return (
     <Container>
       <LeftSection>
-        <img src={logoImg} alt="logo" className="logo-img" />
-        <h1>줄었슈링크</h1>
+        <div className="logo-section" onClick={onClickLogo}>
+          <img src={logoImg} alt="logo" className="logo-img" />
+          <h1>줄었슈링크</h1>
+        </div>
       </LeftSection>
       <RightSection>
         {showMenu && (

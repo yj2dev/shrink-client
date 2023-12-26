@@ -5,6 +5,7 @@ export const Container = styled.nav`
   height: 100vh;
   //box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   box-shadow: 4px 0 4px -4px rgba(0, 0, 0, 0.2);
+  z-index: 100;
 
   padding-top: 24px;
   @media (max-width: 768px) {
