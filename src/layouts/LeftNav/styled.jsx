@@ -1,12 +1,30 @@
 import styled from "styled-components";
+export const ContainerSpace = styled.nav`
+  flex-shrink: 0;
+  width: 200px;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
 export const Container = styled.nav`
+  position: fixed;
   background-color: #fff;
   width: 200px;
   height: 100vh;
-  //box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   box-shadow: 4px 0 4px -4px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  overflow: auto;
+  z-index: 100;
+  flex-shrink: 0;
 
-  padding-top: 24px;
+  .space {
+    height: 24px;
+    //@media (max-width: 768px) {
+    //  height: 16px;
+    //display: none;
+    //}
+  }
+
   @media (max-width: 768px) {
     position: fixed;
     width: 200px;
@@ -76,8 +94,8 @@ export const HamburgerMenu = styled.div`
   @media (max-width: 768px) {
     display: block;
     position: fixed;
-    top: 15px;
-    left: 15px;
+    top: 18px;
+    left: 24px;
     z-index: 1000;
     cursor: pointer;
     border: none;

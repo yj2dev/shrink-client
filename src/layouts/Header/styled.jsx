@@ -1,15 +1,32 @@
 import styled from "styled-components";
 
+export const ContainerSpace = styled.header`
+  height: 78px;
+`;
 export const Container = styled.header`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 220;
+  width: 100%;
   padding: 16px 30px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
 `;
 
 export const LeftSection = styled.div`
   display: flex;
   align-items: center;
+
+  .logo-section {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
 
   .logo-img {
     width: 32px;
@@ -53,7 +70,7 @@ export const RightSection = styled.div`
     padding: 10px 27px;
     font-color: white;
     border: none;
-    background-color: #0F62FE;
+    background-color: #0f62fe;
     cursor: pointer;
   }
   .loginTitle {

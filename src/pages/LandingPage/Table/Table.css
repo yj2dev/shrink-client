@@ -1,0 +1,33 @@
+.MuiTableRow-root > * {
+    padding: 15px;
+    
+  }
+  
+  .MuiTableRow-root.MuiTableRow-head > * {
+    font-weight: bold !important;
+  }
+  .Table tr, th,td {
+    font-size: 17px !important;
+    font-family: 'Black Han Sans', sans-serif !important;
+    font-family: 'Inter', sans-serif !important;
+    font-family: 'Noto Sans KR', sans-serif !important;
+  }
+
+  .Table td,
+  th {
+    border: none !important;
+  }
+  
+  .Table:first-child {
+    
+    border-radius: 0.7rem !important;
+  }
+  .status {
+    font-weight: bold !important;
+    padding: 8px;
+    border-radius: 9px;
+  }
+  
+  .Details {
+    color: #00b5ff !important;
+  }

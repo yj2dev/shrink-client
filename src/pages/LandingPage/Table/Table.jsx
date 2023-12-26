@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import "./Table.css";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -28,37 +29,31 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(name, change, week, month, year) {
+  return { name, change, week, month, year };
 }
 
 const rows = [
-  createData('허니버터아몬드', 1234, 1234, 1234, 1234),
-  createData('옛날국수 소면', 1234, 1234, 1234, 1234),
-  createData('백설 소면', 1234, 1234, 1234, 1234),
-  createData('비비고 왕교자', 1234, 1234, 1234, 1234),
-  createData('생야채돼지고기물만두', 1234, 1234, 1234, 1234),
+  createData('허니버터아몬드', "변동 없음", 1234, 1234, 1234),
+  createData('옛날국수 소면', "변동 있음", 1234, 1234, 1234),
+  createData('백설 소면', "변동 있음", 1234, 1234, 1234),
+  createData('비비고 왕교자', "변동 없음", 1234, 1234, 1234),
+  createData('생야채돼지고기물만두', "변동 있음", 1234, 1234, 1234),
 ];
 
 const makeStyle=(status)=>{
-  if(status === 'Approved')
+  if(status === '변동 없음')
   {
     return {
       background: 'rgb(145 254 159 / 47%)',
       color: 'green',
     }
   }
-  else if(status === 'Pending')
+  else if(status === '변동 있음')
   {
     return{
       background: '#ffadad8f',
       color: 'red',
-    }
-  }
-  else{
-    return{
-      background: '#59bfff',
-      color: 'white',
     }
   }
 }
@@ -73,10 +68,10 @@ export default function CustomizedTables() {
                 <TableHead>
                 <TableRow>
                     <StyledTableCell>상품 (100g 당 가격)</StyledTableCell>
-                    <StyledTableCell align="right">금주</StyledTableCell>
-                    <StyledTableCell align="right">2주전</StyledTableCell>
-                    <StyledTableCell align="right">한달전</StyledTableCell>
-                    <StyledTableCell align="right">1년전</StyledTableCell>
+                    <StyledTableCell align="right">최근 가격 변동 사항</StyledTableCell>
+                    <StyledTableCell align="right">이번 주</StyledTableCell>
+                    <StyledTableCell align="right">1달 전</StyledTableCell>
+                    <StyledTableCell align="right">1년 전</StyledTableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
@@ -86,12 +81,11 @@ export default function CustomizedTables() {
                         {row.name}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                    <span className="status" style={makeStyle(row.calories)}>{row.calories}</span>
+                    <span className="status" style={makeStyle(row.change)}>{row.change}</span>
                     </StyledTableCell>
-
-                    <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                    <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                    <StyledTableCell align="right">{row.week}</StyledTableCell>
+                    <StyledTableCell align="right">{row.month}</StyledTableCell>
+                    <StyledTableCell align="right">{row.year}</StyledTableCell>
                     </StyledTableRow>
                 ))}
                 </TableBody>

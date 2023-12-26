@@ -1,0 +1,17 @@
+.RightSide{
+    flex-direction: column;
+    /* padding-top: 1rem; */
+    width: 55%;
+    justify-content: space-evenly;
+}
+
+.CustomerReview {
+    margin-left: 20px;
+    width: 80%;
+    
+}
+
+
+@media screen and (max-width: 1200px) {
+
+}

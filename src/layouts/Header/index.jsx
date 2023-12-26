@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LoginModal from "../../components/LoginModal";
 import RegisterModal from "../../components/RegisterModal";
 import UserPasswordModal from "../../components/UserPasswordModal";
 import logoImg from "./img/logo.png";
-import { Container, LeftSection, RightSection } from "./styled";
+import { Container, ContainerSpace, LeftSection, RightSection } from "./styled";
 
 const Header = () => {
   /*
@@ -29,6 +30,7 @@ const Header = () => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showUserPasswordModal, setShowUserPasswordModal] = useState(false);
 
+  const navigate = useNavigate();
   const menuRef = useRef();
   const triggerRef = useRef();
 
@@ -78,58 +80,67 @@ const Header = () => {
     setShowUserPasswordModal(false);
   };
 
-  return (
-    <Container>
-      <LeftSection>
-        <img src={logoImg} alt="logo" className="logo-img" />
-        <h1>줄었슈링크</h1>
-      </LeftSection>
-      <RightSection>
-        {showMenu && (
-          <nav className="user-menu" ref={menuRef}>
-            <button onClick={onClickLogout}>로그아웃</button>
-          </nav>
-        )}
-        {user ? (
-          <img
-            src={user.profile_url}
-            onClick={() => {
-              setShowMenu(!showMenu);
-            }}
-            className="profile-img"
-            ref={triggerRef}
-          />
-        ) : (
-          <button
-            onClick={() => {
-              setShowLoginModal(!showLoginModal);
-            }}
-            className="login-button"
-          >
-            <div className="loginTitle">로그인</div>
-          </button>
-        )}
+  const onClickLogo = () => {
+    navigate("/");
+  };
 
-        <LoginModal
-          show={showLoginModal}
-          onClose={onCloseModal}
-          onShowRegister={onShowRegisterModal}
-          onShowUserPassword={onShowUserPasswordModal}
-        />
-        <RegisterModal
-          show={showRegisterModal}
-          onClose={onCloseModal}
-          onShowLogin={onShowLoginModal}
-          onShowUserPassword={onShowUserPasswordModal}
-        />
-        <UserPasswordModal
-          show={showUserPasswordModal}
-          onClose={onCloseModal}
-          onShowLogin={onShowLoginModal}
-          onShowRegister={onShowRegisterModal}
-        />
-      </RightSection>
-    </Container>
+  return (
+    <>
+      <ContainerSpace />
+      <Container>
+        <LeftSection>
+          <div className="logo-section" onClick={onClickLogo}>
+            <img src={logoImg} alt="logo" className="logo-img" />
+            <h1>줄었슈링크</h1>
+          </div>
+        </LeftSection>
+        <RightSection>
+          {showMenu && (
+            <nav className="user-menu" ref={menuRef}>
+              <button onClick={onClickLogout}>로그아웃</button>
+            </nav>
+          )}
+          {user ? (
+            <img
+              src={user.profile_url}
+              onClick={() => {
+                setShowMenu(!showMenu);
+              }}
+              className="profile-img"
+              ref={triggerRef}
+            />
+          ) : (
+            <button
+              onClick={() => {
+                setShowLoginModal(!showLoginModal);
+              }}
+              className="login-button"
+            >
+              <div className="loginTitle">로그인</div>
+            </button>
+          )}
+
+          <LoginModal
+            show={showLoginModal}
+            onClose={onCloseModal}
+            onShowRegister={onShowRegisterModal}
+            onShowUserPassword={onShowUserPasswordModal}
+          />
+          <RegisterModal
+            show={showRegisterModal}
+            onClose={onCloseModal}
+            onShowLogin={onShowLoginModal}
+            onShowUserPassword={onShowUserPasswordModal}
+          />
+          <UserPasswordModal
+            show={showUserPasswordModal}
+            onClose={onCloseModal}
+            onShowLogin={onShowLoginModal}
+            onShowRegister={onShowRegisterModal}
+          />
+        </RightSection>
+      </Container>
+    </>
   );
 };
 

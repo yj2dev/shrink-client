@@ -1,25 +1,46 @@
 .LandingPage{
     display: flex;
-    flex-direction: column;
-    /* justify-content: space-evenly; */
-    width: 70%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
     margin-top: 3rem;
     margin-left: 3rem;
 }
+/* .main{
+    width: 50%;
+} */
+
 .explain{
     font-size: 25px;
     font-weight: bold;
     color: rgb(89, 89, 89);
     margin-bottom: 2rem;
 }
-.LandingPage > span {
+.main > span {
     color: black;
     font-size: 50px;
     font-weight: bold;
 }
 
-.LandingPage > span > span:nth-of-type(1) {
+.main > span > span:nth-of-type(1) {
     color: #3F5DFE;
     font-size: 50px;
     font-weight: bold;
+}
+
+.RightSide {
+    padding: 20px;
+    width: 20%;
+}
+
+@media screen and (max-width: 1200px) {
+    .LandingPage {
+        grid-template-columns: 10% 50% auto;
+        overflow-y: scroll;
+        /* flex-direction: column; */
+    }
+    .main {
+        justify-content: flex-start;
+        margin-top: 2rem;
+    }
 }
