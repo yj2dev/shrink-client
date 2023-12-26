@@ -88,21 +88,21 @@ export const cardsData = [
       },
     ],
   },
-  {
-    title: "상품명",
-    color: {
-      backGround:
-        "linear-gradient(rgb(248, 212, 154) -146.42%, rgb(255 202 113) -46.42%)",
-      boxShadow: "5px 7px 7px -1px #3F5DFE",
-    },
-    barValue: 60,
-    value: "4,270",
-    png: UilClipboardAlt,
-    series: [
-      {
-        name: "Expenses",
-        data: [10, 25, 15, 30, 12, 15, 20],
-      },
-    ],
-  },
+  // {
+  //   title: "상품명",
+  //   color: {
+  //     backGround:
+  //       "linear-gradient(rgb(248, 212, 154) -146.42%, rgb(255 202 113) -46.42%)",
+  //     boxShadow: "5px 7px 7px -1px #3F5DFE",
+  //   },
+  //   barValue: 60,
+  //   value: "4,270",
+  //   png: UilClipboardAlt,
+  //   series: [
+  //     {
+  //       name: "Expenses",
+  //       data: [10, 25, 15, 30, 12, 15, 20],
+  //     },
+  //   ],
+  // },
 ];

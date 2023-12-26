@@ -1,6 +1,7 @@
 .CompactCard {
     display: flex;
     flex: 1;
+    width: 20rem;
     height: 12rem !important;
     border-radius: 2rem;
     color: rgb(255, 255, 255);
