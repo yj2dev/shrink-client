@@ -1,5 +1,97 @@
 import styled from "styled-components";
 
+export const AnalysisResultMenu = styled.div`
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  z-index: 10;
+  right: -300px;
+  top: 78px;
+  background-color: rgb(250, 250, 250);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: 0.4s ease;
+
+  &.active {
+    right: 0px;
+  }
+  .item-details {
+    background-color: #f8f8f8;
+    padding: 10px;
+    margin-top: 5px;
+    border-top: 1px solid #ddd;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      max-height 0.3s ease,
+      opacity 0.3s ease;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    padding: 12px 24px;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    &.expanded .item-details {
+      max-height: 200px;
+      opacity: 1;
+    }
+
+    span {
+      float: right;
+      color: #888;
+    }
+  }
+
+  .result-btn {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: calc(50% - 64px);
+    left: -36px;
+    transform: translate(0, -50%);
+    background-color: rgb(250, 250, 250);
+    border: none;
+    color: #333;
+    font-size: 24px;
+    border-radius: 32px 0 0 32px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    //justify-content: center;
+    opacity: 0.5;
+    cursor: pointer;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+
+    &:hover {
+      transform: translate(0, -50%) scale(1.1);
+      opacity: 1;
+    }
+
+    & > svg {
+      transition: transform 0.3s ease;
+    }
+
+    &.active > svg {
+      transform: rotate(180deg);
+    }
+  }
+`;
+
 export const AlertContainer = styled.div`
   position: absolute;
   top: -100px;
@@ -8,7 +100,6 @@ export const AlertContainer = styled.div`
   font-size: 1.2em;
   justify-content: center;
   align-items: center;
-  //background-color: rgba(0, 100, 0, 1);
   background-color: rgba(0, 0, 0, 0.5);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 100%;
@@ -55,6 +146,7 @@ export const WebcamContainer = styled.div`
     width: 100%;
     height: auto;
     //height: 450px;
+    min-height: 500px;
 
     object-fit: cover;
     transform: scaleX(-1);
@@ -62,27 +154,31 @@ export const WebcamContainer = styled.div`
 
   button {
     border-radius: 0 0 32px 32px;
-    transition: 0.2s;
+    transition: 0.4s ease;
+
     height: 84px;
     font-size: 1.5em;
     border: none;
-    background-color: #3f5dfe;
     color: #fff;
     cursor: pointer;
     outline: none;
-    bottom: 0;
-    //position: relative;
-    //position: fixed;
     width: 100%;
 
+    background-color: #3f5dfe;
+    background-image: linear-gradient(to top, #3f5dfe 50%, #2245fd 50%);
+    background-size: 100% 200%;
+    background-position: bottom;
+
     &:disabled {
-      background-color: #aab4fe; // 비활성화 상태의 배경색 변경
-      color: #ddd; // 비활성화 상태의 글씨색 변경
-      cursor: default; // 마우스 커서를 기본 상태로 변경
+      background-color: #aab4fe;
+      color: #ddd;
+      cursor: default;
     }
+
     &:not(:disabled):hover {
-      background-color: #2245fd;
+      transition: 0.4s ease;
       border-radius: 0 0 0 0;
+      background-position: top;
     }
   }
 `;

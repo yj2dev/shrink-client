@@ -1,14 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
 import Webcam from "react-webcam";
-import { AlertContainer, Container, WebcamContainer } from "./styled";
+import {
+  AlertContainer,
+  AnalysisResultMenu,
+  Container,
+  WebcamContainer,
+} from "./styled";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { ScaleLoader } from "react-spinners";
+import { IoIosArrowBack } from "react-icons/io";
 const AnalysisPage = () => {
   const webcamRef = useRef(null);
 
   const [isLoading, setIsLoading] = useState(false);
   const [alertStatus, setAlertStatus] = useState("");
+
+  const [showResultMenu, setShowResultMenu] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [expandedItems, setExpandedItems] = useState({});
+
   const onSubmit = () => {
     if (webcamRef.current) {
       setIsLoading(true);
@@ -35,7 +46,7 @@ const AnalysisPage = () => {
             setAlertStatus("noShrink");
             setTimeout(() => {
               setAlertStatus("");
-            }, 3000);
+            }, 4000);
           }
         })
         .catch((err) => {
@@ -43,13 +54,21 @@ const AnalysisPage = () => {
           setAlertStatus("checkInternet");
           setTimeout(() => {
             setAlertStatus("");
-          }, 3000);
+          }, 4000);
         })
         .finally(() => {
           setIsLoading(false);
         });
     }
   };
+
+  const handleItemClick = (item) => {
+    setExpandedItems((prevItems) => ({
+      ...prevItems,
+      [item]: !prevItems[item],
+    }));
+  };
+
   return (
     <>
       <Container>
@@ -60,6 +79,31 @@ const AnalysisPage = () => {
           {alertStatus === "checkInternet" &&
             "서버와 통신이 원활하지 않습니다."}
         </AlertContainer>
+
+        <AnalysisResultMenu className={showResultMenu ? "active" : ""}>
+          <button
+            className={`result-btn ${showResultMenu ? "active" : ""}`}
+            onClick={() => setShowResultMenu(!showResultMenu)}
+          >
+            <IoIosArrowBack />
+          </button>
+          <ul>
+            {["바나나킥", "콘초", "동원 참치", "분석 실패"].map(
+              (item, index) => (
+                <li
+                  key={index}
+                  onClick={() => handleItemClick(item)}
+                  className={expandedItems[item] ? "expanded" : ""}
+                >
+                  {item} <span>1분전</span>
+                  {expandedItems[item] && (
+                    <div className="item-details">상세 정보: {item}</div>
+                  )}
+                </li>
+              ),
+            )}
+          </ul>
+        </AnalysisResultMenu>
 
         <WebcamContainer>
           <Webcam ref={webcamRef} />
