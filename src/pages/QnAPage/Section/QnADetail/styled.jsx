@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+
+    max-width: 80%;
     button {
         width: 20%;
         padding: 10px;

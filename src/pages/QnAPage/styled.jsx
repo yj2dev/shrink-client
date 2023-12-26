@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+
+    max-width: 80%;
+
     table {
         border-collapse: collapse;
         border-spacing: 0;
@@ -8,6 +11,7 @@ export const Container = styled.div`
      section.notice {
         padding: 50px 0;
         margin-left: 100px;
+        
     }
     .page-title {
         margin-bottom: 40px;
@@ -81,6 +85,10 @@ export const Container = styled.div`
     .board-table .th-date {
         width: 200px;
     }
+
+    // .board-table .th-title {
+    //      width: 50%;
+    // }
   
     .board-table th, .board-table td {
         padding: 14px 0;
