@@ -42,14 +42,13 @@ const UserPasswordModal = ({phone, show, onClose, onShowLogin}) => {
         .catch(({err}) => {
             console.log("err >> ", err);
             console.log("phone check >> ", phone);
-            alert('ID 또는 비밀번호가 틀립니다.');
+            alert('회원가입 할 수 없습니다.');
         })
         
     };
     
     const onChangePassword = (e) => {
         setPassword(e.target.value);
-        console.log("changed >> ", password)
     };
 
     return (
