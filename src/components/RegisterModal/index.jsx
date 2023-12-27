@@ -90,6 +90,7 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
             console.log("data successed >> ", data);
             localStorage.setItem("token", JSON.stringify(data.token));
             localStorage.setItem("user", JSON.stringify(data.user));
+            alert("회원가입이 완료되었습니다.")
         } else {
             console.log("data unsuccessed >> ", data)
         }

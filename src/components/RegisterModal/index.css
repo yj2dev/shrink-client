@@ -8,7 +8,6 @@
 .contentWrap {
     margin-top: 26px;
     flex: 1;
-    /* flex: 1; 하면 contentWrap말고 다른 애들이 밑으로 붙어야하는데 안 붙음.. */
 }
 
 .inputTitle {

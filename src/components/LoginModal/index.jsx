@@ -13,7 +13,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
   // 전화번호 유효성 검사 정규표현식 이용
   const [phoneValid, setPhoneValid] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
-  const [notAllow, setNotAllow] = useState(true);
+  // const [notAllow, setNotAllow] = useState(true);
 
   const handlePhone = (e) => {
     setPhone(e.target.value);
@@ -48,7 +48,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
       phone,
       password,
     };
-
+    // console.log(payload)
     axios
       .post("/api/auth/login", payload)
       .then(({ data }) => {
@@ -59,7 +59,10 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
         }
         onClose();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+
+        console.log(err)
+      });
   };
 
   return (
@@ -107,7 +110,6 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
       
       <div className="bottomWrap">
         <button
-          disabled={notAllow}
           style={{ marginTop: "40px" }}
           className="bottomButton"
           onClick={onClickLogin}
