@@ -57,7 +57,7 @@ const RightSide = () => {
       };
       return (
       
-      <div className="CustomerReview">
+      <div className="ProductGraph">
             <h2>00상품 가격 변동</h2>
             <Chart options={data.options} series={data.series} type="area" />
             <h2>00상품 가격 변동</h2>

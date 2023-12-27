@@ -31,3 +31,29 @@
   .Details {
     color: #00b5ff !important;
   }
+
+  @media screen and (max-width: 1200px) {
+    .Table1 {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 95%;
+      margin-top: 2rem;
+    }
+  }
+  
+  
+  @media screen and (max-width: 768px) {
+    .Table1 {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 95%;
+      margin-top: 0rem;
+    }
+    .Table1 h1{
+      font-size: 30px;
+    }
+  }
