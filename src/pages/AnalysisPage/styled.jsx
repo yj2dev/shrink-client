@@ -158,9 +158,12 @@ export const WebcamContainer = styled.div`
   }
 
   button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     border-radius: 0 0 32px 32px;
     transition: 0.4s ease;
-
     height: 84px;
     font-size: 1.5em;
     border: none;
