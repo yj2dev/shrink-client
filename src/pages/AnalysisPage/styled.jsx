@@ -73,6 +73,7 @@ export const AnalysisResultMenu = styled.div`
     //justify-content: center;
     opacity: 0.5;
     cursor: pointer;
+
     transition:
       transform 0.3s ease,
       opacity 0.3s ease;
@@ -84,6 +85,10 @@ export const AnalysisResultMenu = styled.div`
 
     & > svg {
       transition: transform 0.3s ease;
+    }
+
+    &.active {
+      opacity: 1;
     }
 
     &.active > svg {

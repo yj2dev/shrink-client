@@ -1,24 +1,27 @@
 import { IoMdClose } from "react-icons/io";
 import { Container } from "./styled";
 
-const Modal = (props) => {
-  if (!props.show) return null;
+const Modal = ({ show, onClose, onCloseOutside = true, children }) => {
+  if (!show) return null;
 
   const onCloseClick = (e) => {
-    e.stopPropagation();
-    props.onClose();
+    if (onCloseOutside) {
+      e.stopPropagation();
+      onClose();
+    }
   };
 
   return (
     <Container onClick={onCloseClick}>
       <div className="content" onClick={(e) => e.stopPropagation()}>
         <button
-          style={{ marginTop:"10px" }}
+          style={{ marginTop: "10px" }}
           className="close-btn"
-          onClick={props.onClose}>
+          onClick={onClose}
+        >
           <IoMdClose />
         </button>
-        {props.children}
+        {children}
       </div>
     </Container>
   );
