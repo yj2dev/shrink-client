@@ -1,40 +1,55 @@
 import axios from "axios";
 import { useState } from "react";
+// import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal";
 
-const UserPasswordModal = ({show, onClose, onShowLogin, phone}) => {
+const UserPasswordModal = ({phone, show, onClose, onShowLogin}) => {
     const navigate = useNavigate();
 
-    // const [phone, setPhone] = useState("");
+    // const user = useSelector((state) => state.user);
+    // const [phone, setPhone] = useState(""); //(user.phone);
     const [password, setPassword] = useState("");
 
     // 전화번호 유효성 검사 정규표현식 이용
     const [phoneValid, setPhoneValid] = useState(false);
     const [passwordValid, setPasswordValid] = useState(false);
-    const [notAllow, setNotAllow] = useState(true);
 
-    const onClickLogin = (e) => {
+    const onClickRegister = (e) => {
+        console.log("clicked");
+        // console.log("user phone >> ", user.phone, typeof user.phone)
+        console.log("just phone >> ", phone, typeof phone)
         const payload = {
             phone,
             password,
+            withCredentials: true,
         };
 
         axios
-        .post("/api/auth/login", payload)
+        .post("/api/auth/register", payload)
         .then(({ data }) => {
             console.log("data >> ", data);
             if (data.status === "success") {
+                console.log("data success >> ", data);
+                console.log("phone check >> ", phone);
                 localStorage.setItem("token", JSON.stringify(data.token));
                 localStorage.setItem("user", JSON.stringify(data.user));
+            } else {
+                console.log("data unsuccessed >> ", data)
             }
             onClose();
         })
-        .catch((err) => console.log(err));
+        .catch(({err}) => {
+            console.log("err >> ", err);
+            console.log("phone check >> ", phone);
+            alert('ID 또는 비밀번호가 틀립니다.');
+        })
+        
     };
     
     const onChangePassword = (e) => {
         setPassword(e.target.value);
+        console.log("changed >> ", password)
     };
 
     return (
@@ -44,23 +59,8 @@ const UserPasswordModal = ({show, onClose, onShowLogin, phone}) => {
             </div>
 
             <div className="contentWrap">
-                <div className="inputTitle">전화번호</div>
-                <div className="inputWrap">
-                {/* <input
-                    className="input"
-                    type="text"
-                    value={phone}
-                    // onChange={onChangePhone}
-                    // onChange={handlePhone}
-                    placeholder="01012345678"
-                /> */}
-                <div className="phoneNumber">{phone}</div>
-                </div>
-                {/* <div className="errorMessageWrap">
-                    {!phoneValid && phone.length !== 11 && phone.length > 0 && (
-                    <div>올바른 전화번호를 입력해주세요.</div>
-                    )}
-                </div> */}
+                {/* <div className="inputTitle">전화번호</div>
+                <div>{phone}{1+1}</div> */}
 
                 <div style={{ marginTop: "20px" }} className="inputTitle">
                     비밀번호
@@ -83,12 +83,14 @@ const UserPasswordModal = ({show, onClose, onShowLogin, phone}) => {
 
             <div className="bottomWrap">
                 <button
-                disabled={notAllow}
-                style={{ marginTop: "40px" }}
-                className="bottomButton"
-                onClick={onClickLogin}
-                >
-                    확인
+                    style={{ marginTop: "40px" }}
+                    className="bottomButton"
+                    onClick={() => {
+                        console.log("====clicked pw ====>> ", password);
+                        onClickRegister();
+                    }}
+                    >
+                        확인!!
                 </button>
 
                 <div className="registerLine">

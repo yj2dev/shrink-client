@@ -58,7 +58,7 @@ export const Container = styled.div`
     background-color: #0f62fe;
     border-radius: 64px;
     color: white;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
     cursor: pointer;
   }
 `;

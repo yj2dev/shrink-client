@@ -1,13 +1,17 @@
 import axios from "axios";
 import { useState } from "react";
+// import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal";
 import "./index.css";
 
 const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
+  
+  // const user = useSelector((state) => state.user);
+  
   const navigate = useNavigate();
-
-  const [phone, setPhone] = useState("");
+  
+  const [phone, setPhone] = useState(""); //(user.phone);
   const [code, setCode] = useState("");
   const [nickname, setNickname] = useState();
   const [authnumber, setAuthnumber] = useState("");
@@ -25,11 +29,12 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
   };
 
   const onClickPhone = (e) => {
-    
+    console.log("phone >> ", phone)
     axios
-      .post("/api/auth/code", {phone})
+      .post("/api/auth/code", {phone, withCredentials: true,})
       .then((res) => {
         console.log("res >> ", res);
+        // console.log("user phone >> ", user.phone, typeof user.phone)
         if (res.data.data.statusName === "success") {
           setPhoneValid(true);
 
@@ -39,11 +44,7 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
       })
       .catch((err) => {
         console.log("err >> ", err);
-        if (err.response.data.status === "fail") {
-          setPhoneValid(false);
-        } else {
-          setPhoneValid(true);
-        }
+        setPhoneValid(true);
       });
   };
 
@@ -62,18 +63,15 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
           setCodeValid(false);
         } else {
           setCodeValid(true);
-          console.log("phone >> ", {phone});
-          console.log("phone >> ", phone.phone);
-          onShowUserPassword({phone});
+          console.log("1. phone >> ", {phone});
+          console.log("2. phone >> ", phone);
+          console.log("3. phone type >> ", typeof phone)
+          onShowUserPassword(phone);
         }
       })
       .catch((err) => {
         console.log("err >> ", err);
-        if (err.response.data.statusName !== "success") {
-          setCodeValid(false);
-        } else {
-          setCodeValid(true);
-        }
+        setCodeValid(false);
       });
   };
 
@@ -91,7 +89,7 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
             type="text"
             value={phone}
             onChange={onChangePhone}
-            placeholder="phone"
+            placeholder="01012345678"
           />
         </div>
         <div className="errorMessageWrap">
