@@ -125,6 +125,7 @@ const Header = () => {
             onClose={onCloseModal}
             onShowRegister={onShowRegisterModal}
             onShowUserPassword={onShowUserPasswordModal}
+            onCloseOutside={false}
           />
           <RegisterModal
             show={showRegisterModal}
