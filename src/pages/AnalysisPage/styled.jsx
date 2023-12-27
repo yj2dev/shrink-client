@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const AnalysisResultMenu = styled.div`
   position: fixed;
-  width: 300px;
+  width: 400px;
+  right: -400px;
   height: 100%;
   z-index: 10;
-  right: -300px;
   top: 78px;
   background-color: rgb(250, 250, 250);
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
