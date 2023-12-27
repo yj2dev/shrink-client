@@ -96,7 +96,7 @@ const AnalysisPage = () => {
             console.log("click to cors test btn");
 
             axios
-              .get("/query")
+              .get("/api/query")
               .then((res) => {
                 console.log("query res >> ", res);
               })
