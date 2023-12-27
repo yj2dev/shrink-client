@@ -13,12 +13,31 @@ import { IoIosArrowBack } from "react-icons/io";
 const AnalysisPage = () => {
   const webcamRef = useRef(null);
 
+  const [cameras, setCameras] = useState([]);
+  const [selectedCamera, setSelectedCamera] = useState(null);
+
   const [isLoading, setIsLoading] = useState(false);
   const [alertStatus, setAlertStatus] = useState("");
 
   const [showResultMenu, setShowResultMenu] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [expandedItems, setExpandedItems] = useState({});
+
+  useEffect(() => {
+    navigator.mediaDevices.enumerateDevices().then((devices) => {
+      const videoDevices = devices.filter(
+        (device) => device.kind === "videoinput",
+      );
+      setCameras(videoDevices);
+      if (videoDevices.length > 0) {
+        setSelectedCamera(videoDevices[0].deviceId);
+      }
+    });
+  }, []);
+
+  const onChangeCamera = (e) => {
+    setSelectedCamera(e.target.value);
+  };
 
   const onSubmit = () => {
     if (webcamRef.current) {
@@ -105,8 +124,21 @@ const AnalysisPage = () => {
           </ul>
         </AnalysisResultMenu>
 
+        <select onChange={onChangeCamera} value={selectedCamera}>
+          {cameras.map((camera, index) => (
+            <option key={camera.deviceId} value={camera.deviceId}>
+              Camera {index + 1}
+            </option>
+          ))}
+        </select>
+
         <WebcamContainer>
-          <Webcam ref={webcamRef} />
+          <Webcam
+            ref={webcamRef}
+            videoConstraints={{
+              deviceId: selectedCamera ? { exact: selectedCamera } : undefined,
+            }}
+          />
           <button disabled={isLoading} onClick={onSubmit}>
             {!isLoading ? "상품 분석" : <ScaleLoader color="#fff" />}
           </button>

@@ -67,8 +67,8 @@ export default function CustomizedTables() {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                 <TableRow>
-                    <StyledTableCell>상품 (100g 당 가격)</StyledTableCell>
-                    <StyledTableCell align="right">최근 가격 변동 사항</StyledTableCell>
+                    <StyledTableCell sx={{ minWidth: 100 }}>상품 (100g 당 가격)</StyledTableCell>
+                    <StyledTableCell sx={{ minWidth: 50 }}align="center">최근 가격 변동 사항</StyledTableCell>
                     <StyledTableCell align="right">이번 주</StyledTableCell>
                     <StyledTableCell align="right">1달 전</StyledTableCell>
                     <StyledTableCell align="right">1년 전</StyledTableCell>
@@ -80,7 +80,7 @@ export default function CustomizedTables() {
                     <StyledTableCell component="th" scope="row">
                         {row.name}
                     </StyledTableCell>
-                    <StyledTableCell align="right">
+                    <StyledTableCell align="center">
                     <span className="status" style={makeStyle(row.change)}>{row.change}</span>
                     </StyledTableCell>
                     <StyledTableCell align="right">{row.week}</StyledTableCell>
