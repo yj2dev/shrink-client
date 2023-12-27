@@ -19,15 +19,6 @@ const Header = () => {
   const menuRef = useRef();
   const triggerRef = useRef();
 
-  axios
-    .get("/query")
-    .then((res) => {
-      console.log("query res >> ", res);
-    })
-    .catch((err) => {
-      console.log("query err >> ", err);
-    });
-
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (
