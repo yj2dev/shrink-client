@@ -16,10 +16,10 @@ const Header = () => {
    * 작성자: 이유진(a045058)
    * */
   // 서버 연결시
-  // const [user, setUser] = useState(localStorage.getItem("user") !== null);
+  const [user, setUser] = useState(localStorage.getItem("user") !== null);
 
   //   개별시 사용
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   // const [user, setUser] = useState({
   //   profile_url: "https://api.dicebear.com/7.x/pixel-art/svg?seed=$01097457550",
   //   nickname: "가리비공주",

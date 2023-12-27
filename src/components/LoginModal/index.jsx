@@ -57,6 +57,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           localStorage.setItem("token", JSON.stringify(data.token));
           localStorage.setItem("user", JSON.stringify(data.user));
           alert("로그인 성공");
+          console.log(user)
         }
         onClose();
       })
