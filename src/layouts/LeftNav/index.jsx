@@ -59,12 +59,12 @@ const LeftNav = () => {
               &nbsp;&nbsp;제품분석
             </NavLink>
           </li>
-          <li onClick={closeMenu}>
-            <NavLink to="/account" className={getClassName}>
-              <MdOutlineAccountBox />
-              &nbsp;&nbsp;계정정보
-            </NavLink>
-          </li>
+          {/*<li onClick={closeMenu}>*/}
+          {/*  <NavLink to="/account" className={getClassName}>*/}
+          {/*    <MdOutlineAccountBox />*/}
+          {/*    &nbsp;&nbsp;계정정보*/}
+          {/*  </NavLink>*/}
+          {/*</li>*/}
           <li onClick={closeMenu}>
             <NavLink to="/favorite" className={getClassName}>
               <FaRegHeart />

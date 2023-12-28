@@ -124,9 +124,10 @@ export const RightSection = styled.div`
     }
 
     .user-nickname {
+      padding: 0 4px;
       font-weight: 500;
       margin-bottom: 12px;
-      font-size: 24px;
+      font-size: 20px;
       white-space: nowrap;
     }
 
@@ -141,6 +142,7 @@ export const RightSection = styled.div`
       border-radius: 12px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       transition: 0.2s;
+      font-size: 16px;
     }
 
     button:hover {
@@ -185,8 +187,8 @@ export const RightSection = styled.div`
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      width: 90%;
       font-size: 0;
+      width: 90%;
       height: 0;
       line-height: 0;
       padding: 0;
@@ -198,7 +200,7 @@ export const RightSection = styled.div`
       padding: 18px 0;
       margin: 16px 0 0 0;
       font-weight: 800;
-      font-size: 12px;
+      font-size: 16px;
       line-height: 0;
       border: 1px solid #dee0e1;
     }

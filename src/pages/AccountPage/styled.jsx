@@ -1,181 +1,125 @@
 import styled from "styled-components";
 export const Container = styled.div`
-
-width: 80%;
-.account-wrap {
   display: flex;
   justify-content: center;
-  min-height: 100vh; 
-  align-items: center;
-  margin: 0px;
-}
+  width: 100%;
 
-@media (min-width: 650px) {
-    .account-info {
-        width:640px;
+  article {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 32px 42px;
+    margin: 28px;
+    border-radius: 12px;
+    width: 600px;
+    background-color: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 8px 28px 0;
+
+    section {
+      //border: 1px solid red;
     }
-}
 
-@media (max-width: 650px) {
-    .account-info {
-        width:90vw;
+    h1 {
+      margin: 0;
+      padding-bottom: 24px;
     }
-}
 
-.account-info {
-    background-color: white;
-    box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
-    min-height: 100vh;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-top: 20px;
-    border-radius: 15px;
+    h3 {
+      //float: left;
+      //width: 90%;
+      margin: 42px 0 4px 0;
+    }
 
-}
+    hr {
+      margin-bottom: 16px;
+      width: 100%;
+      border: 1px solid #eeeeee;
+    }
 
-img {
-    width: 80%;
-}
+    img {
+      width: 256px;
+      height: 256px;
+      border-radius: 50%;
+      border: 4px solid #eeeeee;
+      margin-bottom: 16px;
+      margin-top: 16px;
+    }
 
+    .nickname-section {
+      width: 90%;
+      float: left;
+      margin-bottom: 32px;
 
-.account-total {
-    width: 100%;
-    height: 100%;
-    // margin-bottom: 100px;
+      input {
+        margin-right: 12px;
+        background-color: #fff;
+        font-size: 16px;
+        padding: 10px 16px 10px 16px;
+        border-radius: 12px;
+        outline: none;
+        box-sizing: border-box;
+        border: 2px solid #fff;
+        font-weight: 600;
+        width: 200px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  
+        &:not(:disabled) {
+          border: 2px solid #eeeeee;
+          box-sizing: border-box;
+        }
 
-}
+        &:focus {
+          border: 2px solid #dddddd;
+        }
+      }
+    }
 
-.account-first {
-    width: 80%;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-    // text-align: center;
-    border-bottom: 1px solid #ccc;
-}
+    button {
+      font-size: 16px;
+      background-color: #f6f8fa;
+      border: 2px solid #eeeeee;
+      font-weight: 800;
+      padding: 10px 0;
+      cursor: pointer;
+      border-radius: 12px;
+      //box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: 0.2s;
+    }
 
-.profile-img-wrapper {
-    // border-top: 1px solid #ccc;
-    padding-top: 20px;
-    position: relative;
-    max-width: 250px;
-    width: 250px;
-}
+    .nickname-update-btn {
+      color: #1f883d;
+      width: 120px;
+    }
 
+    .nickname-update-btn:hover {
+      background-color: #1f883d;
+      color: #fff;
+    }
 
-.profile-img-wrapper input {
-    display: none;
-}
+    .password-update-btn {
+      margin-bottom: 16px;
+      color: #1f883d;
+      width: 256px;
+    }
 
-img {
-    border-radius:50%;
-}
+    .password-update-btn:hover {
+      background-color: #1f883d;
+      color: #fff;
+    }
 
-.menu-btn {
-    position:absolute;
-    right: 15px;
-    bottom: 10px;
-    background-color:white;
-    border: 1px solid;
-    border-radius: 5px;
-    cursor: pointer;
-}
+    .account-delete-btn {
+      margin-bottom: 16px;
+      color: #a40e26;
+      width: 256px;
+    }
 
-.menu {
-    width:170px;
-    position:absolute;  
-    right: -153px;
-    bottom: -40px;
-
-    flex-shrink: 1;
-    height: 115px;
-    //width: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-right: 5%;
-    
-}
-.menu::before {
-    content: "";
-    top: 50%;
-    left: 1em;
-    border: 1em solid transparent;
-    border-right: 1em solid #F2F2F2;
-    z-index: 0;
+    .account-delete-btn:hover {
+      background-color: #a40e26;
+      color: #fff;
+    }
+    @media (max-width: 768px) {
+      width: 100%;
+      margin: 0;
+      border-radius: 0;
+    }
   }
-
-
-.menu-msg {
-    display: flex;
-    position: relative;
-    width: 100%;
-    height: 60%;
-    justify-content: center;
-    align-items: center;
-    background: #F2F2F2;
-    border-radius: 15px;
-    // padding-left: 1.8em;
-    // padding-right: 1.8em;
-    flex-direction: column;
-    font-size:13px;
-  }
-
-  .name-descript {
-    background-color: #F2F2F2;
-    border-radius:5px;
-    height: 40px;
-    width: 250px;
-    margin-left: 20px;
-    border: none;
-    padding-left: 20px;
-  }
-
-  p {
-    //text-align: left;
-    //margin-left: 20px;
-    font-size: 15px;
-    margin-bottom: 15px;
-  }
-
-  .profile-descript {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-
-  .img-edit, .img-reset {
-    border: none;
-    backgroud: rgba(245,243,245, 0.9);
-    cursor: pointer; 
-  }
-
-  .pencil {
-    font-size: 12px;
-  }
-
-  .mod-btn {
-    border: none;
-    margin-top: 30px;
-    font-size: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-
-    background-color: #99CCFF;
-    color: white;
-
-    cursor: pointer;
-  
-  }
-
 `;

@@ -1,135 +1,104 @@
-import { useState } from "react";
 import { Container } from "./styled";
-import ProfileImgModal from "../../components/ProfileImgModal";
-import { GoPencil } from "react-icons/go";
+import { useRecoilState } from "recoil";
+import { userState } from "../../state/selectors/userSelectors";
+import { useState } from "react";
 import axios from "axios";
 
 const AccountPage = () => {
-  const [showMenu, setShowMenu] = useState(false);
-  const [nickname, setNickname] = useState("가리비공주");
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [showProfileImgModal, setShowProfileImgModal] = useState(false);
-  const [previewImage, setPreviewImage] = useState(null);
+  const [user, setUser] = useRecoilState(userState);
+  const [nickname, setNickname] = useState(user.nickname || null);
+  const [editNickname, setEditNickname] = useState(false);
 
-  const handleFileSelect = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setSelectedFile(file);
+  const onChangeNickname = (e) => {
+    if (2 <= e.target.value.length && e.target.value.length <= 12) {
+      setNickname(e.target.value);
     }
   };
 
-  const handleFileUpload = () => {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      setPreviewImage(event.target.result);
-    };
-    reader.readAsDataURL(selectedFile);
+  const onSubmitNicknameUpdate = () => {
+    if (nickname === user.nickname) {
+      setEditNickname(false);
+      return;
+    }
 
-    setShowProfileImgModal(false);
+    axios
+      .patch("/api/auth/user/nickname", { new_nickname: nickname })
+      .then((res) => {
+        console.log("res >> ", res);
+      })
+      .catch((err) => {
+        console.log("err >> ", err);
+      })
+      .finally(() => {
+        setEditNickname(false);
+      });
   };
 
-  const onShowProfileImgModal = () => {
-    setShowProfileImgModal(true);
-  };
+  const onSubmitPasswordUpdate = () => {};
 
-  const onCloseModal = () => {
-    setShowProfileImgModal(false);
-  };
-
-  const handleNameInputChange = (e) => {
-    setNickname(e.target.value);
-  };
+  const onSubmitAccountDelete = () => {};
 
   return (
     <Container>
-      <button
-        onClick={() => {
-          const payload = {
-            title: "오늘도 야근인가",
-            content:
-              "아까 먹다 남은 치킨을 버렸는데.. 인간의 존엄을 포기할지 고민이다",
-          };
-          axios
-            .post("/api/query/create", payload)
-            .then((res) => {
-              console.log("res >> ", res);
-            })
-            .catch((err) => {
-              console.log("err >> ", err);
-            });
-        }}
-      >
-        글 쓰기 test
-      </button>
+      <article>
+        <h1>내 계정정보</h1>
+        <hr />
+        <img src={user && user.profile_url} />
 
-      <div className="account-wrap">
-        <div className="account-info">
-          <section className="account-total">
-            <section className="account-first">
-              <h2>내 계정정보</h2>
-            </section>
-            <div className="profile-img-wrapper">
-              <p>프로필 이미지</p>
-              {previewImage ? (
-                <img
-                  src={previewImage}
-                  alt="미리 보기"
-                  style={{ maxWidth: "100%", marginTop: "20px" }}
-                />
-              ) : (
-                <img
-                  src="https://picpac.kr/common/img/default_profile.png"
-                  alt="basic-img"
-                />
-              )}
-
-              <button class="menu-btn" onClick={() => setShowMenu(!showMenu)}>
-                <GoPencil className="pencil" />
-                편집
-              </button>
-              {showMenu && (
-                <div class="menu">
-                  <div class="menu-msg">
-                    <button
-                      className="img-edit"
-                      onClick={onShowProfileImgModal}
-                    >
-                      프로필 이미지 변경
-                    </button>
-                    <button
-                      className="img-reset"
-                      onClick={() => {
-                        setPreviewImage(null);
-                      }}
-                    >
-                      프로필 초기화
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          </section>
-          <div className="profile-descript">
-            <p>닉네임</p>
+        <section>
+          <h3>닉네임</h3>
+          <hr />
+          <div className="nickname-section">
             <input
-              className="name-descript"
+              type="text"
+              disabled={!editNickname}
+              onChange={onChangeNickname}
               value={nickname}
-              onChange={handleNameInputChange}
             />
-            <p>휴대폰번호</p>
-            <input className="name-descript" value="01012345678" readOnly />
 
-            <button className="mod-btn">수정하기</button>
+            {editNickname ? (
+              <button
+                className="nickname-update-btn"
+                onClick={onSubmitNicknameUpdate}
+              >
+                변경 완료
+              </button>
+            ) : (
+              <button
+                className="nickname-update-btn"
+                onClick={() => {
+                  setEditNickname(true);
+                }}
+              >
+                닉네임 변경
+              </button>
+            )}
+
+            <h3>비밀번호 변경</h3>
+            <hr />
+
+            <input type="password" />
+            <input type="password" />
+            <input type="password" />
           </div>
-        </div>
-      </div>
 
-      <ProfileImgModal
-        onHandleFile={handleFileSelect}
-        onUploadFile={handleFileUpload}
-        show={showProfileImgModal}
-        onClose={onCloseModal}
-      />
+          <button
+            className="password-update-btn"
+            onClick={onSubmitPasswordUpdate}
+          >
+            비밀번호 변경
+          </button>
+
+          <h3>회원탈퇴</h3>
+          <hr />
+          <button
+            className="account-delete-btn"
+            onClick={onSubmitAccountDelete}
+          >
+            회원탈퇴
+          </button>
+        </section>
+      </article>
     </Container>
   );
 };
