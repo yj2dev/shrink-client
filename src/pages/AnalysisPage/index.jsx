@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import Webcam from "react-webcam";
 import {
   AlertContainer,
+  AlertContainerHidden,
   AnalysisResultMenu,
+  CameraSelectCotainer,
   Container,
   WebcamContainer,
 } from "./styled";
@@ -10,6 +12,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { ScaleLoader } from "react-spinners";
 import { IoIosArrowBack } from "react-icons/io";
+import {
+  IoCameraReverseOutline,
+  IoCloseOutline,
+  IoMenu,
+} from "react-icons/io5";
 const AnalysisPage = () => {
   const webcamRef = useRef(null);
 
@@ -22,6 +29,27 @@ const AnalysisPage = () => {
   const [showResultMenu, setShowResultMenu] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [expandedItems, setExpandedItems] = useState({});
+
+  const [showCameraList, setShowCameraList] = useState(false);
+
+  const cameraMenuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        cameraMenuRef.current &&
+        !cameraMenuRef.current.contains(event.target)
+      ) {
+        setShowCameraList(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     navigator.mediaDevices.enumerateDevices().then((devices) => {
@@ -90,9 +118,18 @@ const AnalysisPage = () => {
     }));
   };
 
+  const onRotateCamera = () => {
+    const currentIndex = cameras.findIndex(
+      (camera) => camera.deviceId === selectedCamera,
+    );
+    const nextIndex = (currentIndex + 1) % cameras.length;
+    setSelectedCamera(cameras[nextIndex].deviceId);
+  };
+
   return (
     <>
       <Container>
+        <AlertContainerHidden />
         <AlertContainer className={alertStatus}>
           {alertStatus === "noShrink" &&
             "최근 슈링크 발생 내역이 없는 상품입니다."}
@@ -126,22 +163,62 @@ const AnalysisPage = () => {
           </ul>
         </AnalysisResultMenu>
 
-        <select onChange={onChangeCamera} value={selectedCamera}>
-          {cameras.map((camera, index) => (
-            <option key={camera.deviceId} value={camera.deviceId}>
-              Camera {index + 1}
-            </option>
-          ))}
-        </select>
-
         <WebcamContainer>
+          <div className="camera-select-container">
+            <button
+              className={`camera-btn ${showCameraList ? "active" : ""}`}
+              onClick={() => {
+                setShowCameraList(!showCameraList);
+              }}
+            >
+              <div
+                className={`camera-menu ${showCameraList ? "active" : ""}`}
+                ref={cameraMenuRef}
+              >
+                <ul>
+                  {cameras &&
+                    cameras.map((camera, index) => (
+                      <li
+                        key={camera.deviceId}
+                        className={
+                          selectedCamera === camera.deviceId ? "active" : ""
+                        }
+                        onClick={() => {
+                          setSelectedCamera(camera.deviceId);
+                          setShowCameraList(false); // 카메라 선택 후 메뉴 닫기
+                        }}
+                      >
+                        {camera.label || `Camera ${index + 1}`}
+                      </li>
+                    ))}
+                </ul>
+              </div>
+              {showCameraList ? (
+                <>
+                  <IoCloseOutline />
+                </>
+              ) : (
+                <>
+                  <IoMenu />
+                </>
+              )}
+            </button>
+
+            <button className="camera-btn" onClick={onRotateCamera}>
+              <IoCameraReverseOutline />
+            </button>
+          </div>
           <Webcam
             ref={webcamRef}
             videoConstraints={{
               deviceId: selectedCamera ? { exact: selectedCamera } : undefined,
             }}
           />
-          <button disabled={isLoading} onClick={onSubmit}>
+          <button
+            className="product-analyse-btn"
+            disabled={isLoading}
+            onClick={onSubmit}
+          >
             {!isLoading ? "상품 분석" : <ScaleLoader color="#fff" />}
           </button>
         </WebcamContainer>

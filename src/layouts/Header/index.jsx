@@ -4,7 +4,13 @@ import LoginModal from "../../components/LoginModal";
 import RegisterModal from "../../components/RegisterModal";
 import UserPasswordModal from "../../components/UserPasswordModal";
 import logoImg from "./img/logo.png";
-import { Container, ContainerSpace, LeftSection, RightSection } from "./styled";
+import {
+  Container,
+  ContainerBlur,
+  ContainerSpace,
+  LeftSection,
+  RightSection,
+} from "./styled";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 import { userState } from "../../state/selectors/userSelectors";
@@ -35,6 +41,7 @@ const Header = () => {
         !triggerRef.current.contains(e.target)
       ) {
         setShowMenu(false);
+        setExtendLogoutSubmit(false);
       }
     };
 

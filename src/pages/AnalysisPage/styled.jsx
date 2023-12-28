@@ -5,11 +5,11 @@ export const AnalysisResultMenu = styled.div`
   width: 400px;
   right: -400px;
   height: 100%;
-  z-index: 10;
   top: 78px;
   background-color: rgb(250, 250, 250);
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transition: 0.4s ease;
+  z-index: 50;
 
   &.active {
     right: 0px;
@@ -97,9 +97,20 @@ export const AnalysisResultMenu = styled.div`
   }
 `;
 
+export const AlertContainerHidden = styled.div`
+  position: fixed;
+  width: 100%;
+  left: 0;
+  background-color: #f0f0f0;
+  top: 0;
+  z-index: 25;
+  height: 78px;
+`;
+
 export const AlertContainer = styled.div`
-  position: absolute;
-  top: -100px;
+  position: fixed;
+  //top: -64px;
+  top: 0;
   color: #fff;
   display: flex;
   font-size: 1.2em;
@@ -109,30 +120,30 @@ export const AlertContainer = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 100%;
   height: 55px;
-  z-index: 10;
-
+  z-index: 20;
   transition: 0.2s;
 
   &.noShrink {
     background-color: rgba(0, 100, 0, 1);
-    top: 0;
+    top: 78px;
   }
 
   &.shrinkOccurred {
     background-color: rgb(255, 146, 76);
-    top: 0;
+    top: 78px;
   }
 
   &.checkInternet {
     background-color: rgb(255, 89, 89);
-    top: 0;
+    top: 78px;
   }
 `;
+
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
-  overflow: hidden;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -146,7 +157,7 @@ export const WebcamContainer = styled.div`
   flex-direction: column;
   position: relative;
   video {
-    border-radius: 32px 32px 0 0;
+    border-radius: 12px 12px 0 0;
 
     width: 100%;
     height: auto;
@@ -157,12 +168,12 @@ export const WebcamContainer = styled.div`
     transform: scaleX(-1);
   }
 
-  button {
+  .product-analyse-btn {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 0 0 32px 32px;
+    border-radius: 0 0 12px 12px;
     transition: 0.4s ease;
     height: 84px;
     font-size: 1.5em;
@@ -181,12 +192,111 @@ export const WebcamContainer = styled.div`
       background-color: #aab4fe;
       color: #ddd;
       cursor: default;
+      border-radius: 0 0 0 0;
     }
 
     &:not(:disabled):hover {
       transition: 0.4s ease;
       border-radius: 0 0 0 0;
       background-position: top;
+    }
+  }
+
+  // ===============================================
+  //             Camera Select Container
+  // ===============================================
+  .camera-select-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    width: 100%;
+    padding: 24px 24px 0 24px;
+    box-sizing: border-box;
+
+    .camera-menu {
+      position: absolute;
+      top: 100px;
+      left: 24px;
+      background-color: #fff;
+      border-radius: 8px;
+      transform-origin: top;
+      transform: scaleY(0);
+      transition: transform 0.2s ease-out;
+      overflow: hidden;
+
+      &.active {
+        transform: scaleY(1);
+      }
+
+      ul {
+        width: 240px;
+        padding: 0;
+        margin: 0;
+      }
+
+      li {
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        padding: 12px 18px;
+        line-height: 24px;
+        //background-color: greenyellow;
+        margin: 8px;
+        color: #3f5dfe;
+        font-size: 15px;
+        font-weight: 600;
+        transition: 0.2s;
+      }
+
+      li:hover {
+        filter: brightness(90%);
+      }
+
+      li:not(.active):hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      li.active {
+        background-color: #3f5dfe;
+        color: #fff;
+      }
+    }
+
+    .camera-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      border: none;
+      font-size: 32px;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      border-radius: 50%;
+      width: 64px;
+      height: 64px;
+      transition: 0.2s;
+      box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+      background-color: #3f5dfe;
+      background-image: linear-gradient(to top, #3f5dfe 50%, #2245fd 50%);
+      background-size: 100% 200%;
+      background-position: bottom;
+
+      &.active {
+        background-position: top;
+      }
+
+      &:not(:disabled):hover {
+        transition: 0.4s ease;
+        background-position: top;
+      }
     }
   }
 `;

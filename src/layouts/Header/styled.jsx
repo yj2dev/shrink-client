@@ -7,7 +7,8 @@ export const Container = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
+  //background-color: #fff;
+  //background-color: rgba(255, 255, 255, 0.99);
   position: fixed;
   top: 0;
   left: 0;
@@ -16,6 +17,9 @@ export const Container = styled.header`
   padding: 16px 30px;
   box-sizing: border-box;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
 `;
 
 export const LeftSection = styled.div`
