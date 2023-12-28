@@ -35,7 +35,8 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
   const onClickLogin = (e) => {
     // 정규표현식 만족하는지 확인
     const phoneRegex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+    const passwordRegex =
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
 
     if (phoneRegex.test(phone)) {
       setPhoneValid(true);
@@ -52,7 +53,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
     } else {
       setPasswordValid(false);
     }
-    
+
     if (phoneValid && passwordValid) {
       const payload = {
         phone,
@@ -64,7 +65,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
         .then(({ data }) => {
           console.log("data >> ", data);
           if (data.status === "success") {
-            localStorage.setItem("token", JSON.stringify(data.token));
+            localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
             // setUser(JSON.stringify(data.user));
             setUser(data.user);
@@ -76,7 +77,6 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           console.log(err);
         });
     }
-    
   };
 
   return (
@@ -98,9 +98,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           />
         </div>
         <div className="errorMessageWrap">
-          {!phoneValid && (
-            <div>올바른 전화번호를 입력해주세요.</div>
-          )}
+          {!phoneValid && <div>올바른 전화번호를 입력해주세요.</div>}
         </div>
 
         <div style={{ marginTop: "20px" }} className="inputTitle">
@@ -126,12 +124,16 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
         <div className="existErrorMessage">
           <div>
             {!phoneExist && (
-              <div className="phoneExistErrorMessage">전화번호를 입력해주세요.</div>
+              <div className="phoneExistErrorMessage">
+                전화번호를 입력해주세요.
+              </div>
             )}
           </div>
           <div>
             {phoneExist && !passwordExist && (
-              <div className="passwordExistErrorMessage">비밀번호를 입력해주세요.</div>
+              <div className="passwordExistErrorMessage">
+                비밀번호를 입력해주세요.
+              </div>
             )}
           </div>
         </div>

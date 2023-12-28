@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Container } from "./styled";
 import ProfileImgModal from "../../components/ProfileImgModal";
 import { GoPencil } from "react-icons/go";
+import axios from "axios";
 
 const AccountPage = () => {
-
   const [showMenu, setShowMenu] = useState(false);
   const [nickname, setNickname] = useState("가리비공주");
   const [selectedFile, setSelectedFile] = useState(null);
@@ -26,11 +26,11 @@ const AccountPage = () => {
     reader.readAsDataURL(selectedFile);
 
     setShowProfileImgModal(false);
-  }
+  };
 
   const onShowProfileImgModal = () => {
     setShowProfileImgModal(true);
-  }
+  };
 
   const onCloseModal = () => {
     setShowProfileImgModal(false);
@@ -42,77 +42,94 @@ const AccountPage = () => {
 
   return (
     <Container>
+      <button
+        onClick={() => {
+          const payload = {
+            title: "오늘도 야근인가",
+            content:
+              "아까 먹다 남은 치킨을 버렸는데.. 인간의 존엄을 포기할지 고민이다",
+          };
+          axios
+            .post("/api/query/create", payload)
+            .then((res) => {
+              console.log("res >> ", res);
+            })
+            .catch((err) => {
+              console.log("err >> ", err);
+            });
+        }}
+      >
+        글 쓰기 test
+      </button>
+
       <div className="account-wrap">
         <div className="account-info">
-        <section className="account-total">
-          <section className="account-first">
-        <h2>내 계정정보</h2>
-        </section>
-        <div className="profile-img-wrapper">
-          <p>프로필 이미지</p>
-        {previewImage ? (
-          <img
-            src={previewImage}
-            alt="미리 보기"
-            style={{ maxWidth: '100%', marginTop: '20px' }}
-        />
-      ) : (
-          <img src="https://picpac.kr/common/img/default_profile.png" alt="basic-img"/>
-      )}
-          
-          
-          <button class='menu-btn' onClick={() => setShowMenu(!showMenu)}><GoPencil className="pencil"/>편집</button>  
-            {showMenu && (
-              <div class='menu'>  
-              <div class='menu-msg'>
-              
-              <button 
-              className="img-edit"
-              onClick={onShowProfileImgModal}
-              >
-                프로필 이미지 변경
-                </button>
-              <button className="img-reset"
-              onClick={()=> {
-                setPreviewImage(null);
-              }}
-              >
-                프로필 초기화
-                </button>
+          <section className="account-total">
+            <section className="account-first">
+              <h2>내 계정정보</h2>
+            </section>
+            <div className="profile-img-wrapper">
+              <p>프로필 이미지</p>
+              {previewImage ? (
+                <img
+                  src={previewImage}
+                  alt="미리 보기"
+                  style={{ maxWidth: "100%", marginTop: "20px" }}
+                />
+              ) : (
+                <img
+                  src="https://picpac.kr/common/img/default_profile.png"
+                  alt="basic-img"
+                />
+              )}
+
+              <button class="menu-btn" onClick={() => setShowMenu(!showMenu)}>
+                <GoPencil className="pencil" />
+                편집
+              </button>
+              {showMenu && (
+                <div class="menu">
+                  <div class="menu-msg">
+                    <button
+                      className="img-edit"
+                      onClick={onShowProfileImgModal}
+                    >
+                      프로필 이미지 변경
+                    </button>
+                    <button
+                      className="img-reset"
+                      onClick={() => {
+                        setPreviewImage(null);
+                      }}
+                    >
+                      프로필 초기화
+                    </button>
+                  </div>
                 </div>
-              </div>
-            )}
-            
-         
-        </div>
-        </section>
-        <div className="profile-descript">
+              )}
+            </div>
+          </section>
+          <div className="profile-descript">
             <p>닉네임</p>
-            <input 
-            className="name-descript" 
-            value={nickname}
-            onChange={handleNameInputChange}
+            <input
+              className="name-descript"
+              value={nickname}
+              onChange={handleNameInputChange}
             />
             <p>휴대폰번호</p>
-            <input 
-            className="name-descript" 
-            value="01012345678" 
-            readOnly/> 
+            <input className="name-descript" value="01012345678" readOnly />
 
             <button className="mod-btn">수정하기</button>
           </div>
-        
         </div>
-        
       </div>
 
-      <ProfileImgModal 
-      onHandleFile={handleFileSelect}
-      onUploadFile={handleFileUpload}
-      show={showProfileImgModal}
-      onClose={onCloseModal}
+      <ProfileImgModal
+        onHandleFile={handleFileSelect}
+        onUploadFile={handleFileUpload}
+        show={showProfileImgModal}
+        onClose={onCloseModal}
       />
-      
     </Container>
   );
 };

@@ -90,6 +90,7 @@ const Header = () => {
   return (
     <>
       <ContainerSpace />
+      <ContainerBlur />
       <Container>
         <LeftSection>
           <div className="logo-section" onClick={onClickLogo}>
@@ -98,12 +99,6 @@ const Header = () => {
           </div>
         </LeftSection>
         <RightSection>
-          <Modal
-            show={showLogoutModal}
-            onClose={() => setShowLogoutModal(false)}
-          >
-            로그아웃 하시겠습니까?
-          </Modal>
           {showMenu && (
             <nav className="user-menu" ref={menuRef}>
               {user && (
