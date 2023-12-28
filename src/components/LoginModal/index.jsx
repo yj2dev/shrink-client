@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal";
 import "./index.css";
+import { useSetRecoilState } from "recoil";
+import { userState } from "../../state/selectors/userSelectors";
 
 const LoginModal = ({ show, onClose, onShowRegister }) => {
   const navigate = useNavigate();
@@ -15,6 +17,8 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
   const [passwordValid, setPasswordValid] = useState(false);
   // const [notAllow, setNotAllow] = useState(true);
 
+  const setUser = useSetRecoilState(userState);
+
   const handlePhone = (e) => {
     setPhone(e.target.value);
     const regex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
@@ -26,20 +30,6 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
     // 정규표현식 만족하면 setPhoneValid == true 이외에는 false
   };
 
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-    const regex =
-      /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
-    if (regex.test(password)) {
-      setPasswordValid(true);
-    } else {
-      setPasswordValid(false);
-    }
-  };
-
-  const onChangePhone = (e) => {
-    setPhone(e.target.value);
-  };
   const onChangePassword = (e) => {
     setPassword(e.target.value);
   };
@@ -56,14 +46,14 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
         if (data.status === "success") {
           localStorage.setItem("token", JSON.stringify(data.token));
           localStorage.setItem("user", JSON.stringify(data.user));
-          alert("로그인 성공");
-          // console.log(user)
+          // setUser(JSON.stringify(data.user));
+          setUser(data.user);
+          // alert("로그인 성공");
         }
         onClose();
       })
       .catch((err) => {
-
-        console.log(err)
+        console.log(err);
       });
   };
 
@@ -109,7 +99,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           )}
         </div>
       </div>
-      
+
       <div className="bottomWrap">
         <button
           style={{ marginTop: "40px" }}
@@ -118,10 +108,13 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
         >
           확인
         </button>
-      
+
         <div className="registerLine">
-                        회원이 아니신가요? <button className="registerButton" onClick={onShowRegister}>회원가입</button>
-                      </div>
+          회원이 아니신가요?{" "}
+          <button className="registerButton" onClick={onShowRegister}>
+            회원가입
+          </button>
+        </div>
       </div>
     </Modal>
   );
