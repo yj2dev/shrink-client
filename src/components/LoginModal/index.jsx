@@ -14,49 +14,69 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
 
   // 버튼눌러서 형식 검사하기 전에는 올바른 상태로 인식
   const [phoneValid, setPhoneValid] = useState(true);
-  const [passwordValid, setPasswordValid] = useState(false);
+  const [passwordValid, setPasswordValid] = useState(true);
   // const [notAllow, setNotAllow] = useState(true);
+  const [phoneExist, setPhoneExist] = useState(true);
+  const [passwordExist, setPasswordExist] = useState(true);
 
   const setUser = useSetRecoilState(userState);
 
   const handlePhone = (e) => {
     setPhone(e.target.value);
+    setPhoneExist(true);
+    setPhoneValid(true);
   };
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
+    setPasswordExist(true);
+    setPasswordValid(true);
   };
   const onClickLogin = (e) => {
     // 정규표현식 만족하는지 확인
-    const regex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-    
-    if (regex.test(phone)) {
+    const phoneRegex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+
+    if (phoneRegex.test(phone)) {
       setPhoneValid(true);
+    } else if (phone.length === 0) {
+      setPhoneExist(false);
     } else {
       setPhoneValid(false);
     }
 
-    const payload = {
-      phone,
-      password,
-    };
-    // console.log(payload)
-    axios
-      .post("/api/auth/login", payload)
-      .then(({ data }) => {
-        console.log("data >> ", data);
-        if (data.status === "success") {
-          localStorage.setItem("token", JSON.stringify(data.token));
-          localStorage.setItem("user", JSON.stringify(data.user));
-          // setUser(JSON.stringify(data.user));
-          setUser(data.user);
-          // alert("로그인 성공");
-        }
-        onClose();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (passwordRegex.test(password)) {
+      setPasswordValid(true);
+    } else if (password.length === 0) {
+      setPasswordExist(false);
+    } else {
+      setPasswordValid(false);
+    }
+    
+    if (phoneValid && passwordValid) {
+      const payload = {
+        phone,
+        password,
+      };
+      // console.log(payload)
+      axios
+        .post("/api/auth/login", payload)
+        .then(({ data }) => {
+          console.log("data >> ", data);
+          if (data.status === "success") {
+            localStorage.setItem("token", JSON.stringify(data.token));
+            localStorage.setItem("user", JSON.stringify(data.user));
+            // setUser(JSON.stringify(data.user));
+            setUser(data.user);
+            // alert("로그인 성공");
+          }
+          onClose();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    
   };
 
   return (
@@ -74,7 +94,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
             value={phone}
             // onChange={onChangePhone}
             onChange={handlePhone}
-            placeholder="01012345678"
+            placeholder="010-0000-0000"
           />
         </div>
         <div className="errorMessageWrap">
@@ -103,6 +123,18 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
       </div>
 
       <div className="bottomWrap">
+        <div className="existErrorMessage">
+          <div>
+            {!phoneExist && (
+              <div className="phoneExistErrorMessage">전화번호를 입력해주세요.</div>
+            )}
+          </div>
+          <div>
+            {phoneExist && !passwordExist && (
+              <div className="passwordExistErrorMessage">비밀번호를 입력해주세요.</div>
+            )}
+          </div>
+        </div>
         <button
           style={{ marginTop: "40px" }}
           className="bottomButton"
