@@ -59,6 +59,8 @@ const AnalysisPage = () => {
           });
         })
         .then((res) => {
+          console.log("res >> ", res);
+
           if (res.data.isShrink) {
             setAlertStatus("shrinkOccurred");
           } else {
@@ -91,22 +93,6 @@ const AnalysisPage = () => {
   return (
     <>
       <Container>
-        <button
-          onClick={() => {
-            console.log("click to cors test btn");
-
-            axios
-              .get("/api/query")
-              .then((res) => {
-                console.log("query res >> ", res);
-              })
-              .catch((err) => {
-                console.log("query err >> ", err);
-              });
-          }}
-        >
-          cors test
-        </button>
         <AlertContainer className={alertStatus}>
           {alertStatus === "noShrink" &&
             "최근 슈링크 발생 내역이 없는 상품입니다."}

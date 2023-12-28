@@ -28,8 +28,17 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
     border: none;
     cursor: pointer;
+    transition: 0.2s;
+    width: 36px;
+    height: 36px;
+    padding: 4px;
+    border-radius: 50%;
+    //background-color: transparent;
+    background-color: #eee;
+  }
+
+  .close-btn:hover {
   }
 `;

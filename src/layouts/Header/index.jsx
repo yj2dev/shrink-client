@@ -8,6 +8,7 @@ import { Container, ContainerSpace, LeftSection, RightSection } from "./styled";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 import { userState } from "../../state/selectors/userSelectors";
+import Modal from "../../components/Modal";
 
 const Header = () => {
   // const [user, setUser] = useState(localStorage.getItem("user") !== null);
@@ -18,6 +19,9 @@ const Header = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showUserPasswordModal, setShowUserPasswordModal] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+  const [extendLogoutSubmit, setExtendLogoutSubmit] = useState(false);
 
   const navigate = useNavigate();
   const menuRef = useRef();
@@ -87,6 +91,12 @@ const Header = () => {
           </div>
         </LeftSection>
         <RightSection>
+          <Modal
+            show={showLogoutModal}
+            onClose={() => setShowLogoutModal(false)}
+          >
+            로그아웃 하시겠습니까?
+          </Modal>
           {showMenu && (
             <nav className="user-menu" ref={menuRef}>
               {user && (
@@ -115,21 +125,41 @@ const Header = () => {
                 계정관리
               </button>
 
-              <button className="logout-btn" onClick={onClickLogout}>
-                로그아웃
+              <button
+                className={`logout-btn ${extendLogoutSubmit ? "active" : ""}`}
+                onClick={() => {
+                  // setShowMenu(false);
+                  setExtendLogoutSubmit(!extendLogoutSubmit);
+                  // setShowLogoutModal(true);
+                }}
+              >
+                {extendLogoutSubmit ? "로그아웃 하시겠습니까?" : "로그아웃"}
+                <button
+                  className={`logout-submit-btn ${
+                    extendLogoutSubmit ? "active" : ""
+                  }`}
+                  onClick={onClickLogout}
+                >
+                  로그아웃
+                </button>
               </button>
             </nav>
           )}
 
           {user ? (
-            <img
-              src={user.profile_url}
+            <button
+              disabled={showMenu}
+              className="show-menu-btn"
               onClick={() => {
-                setShowMenu(!showMenu);
+                setShowMenu(true);
               }}
-              className={`profile-img ${showMenu ? "active" : ""}`}
-              ref={triggerRef}
-            />
+            >
+              <img
+                src={user.profile_url}
+                className={`profile-img ${showMenu ? "active" : ""}`}
+                ref={triggerRef}
+              />
+            </button>
           ) : (
             <button
               onClick={() => {

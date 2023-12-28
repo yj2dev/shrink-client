@@ -53,10 +53,18 @@ export const RightSection = styled.div`
   justify-content: center;
   align-items: center;
 
+  .show-menu-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+  }
+
   .profile-img {
     cursor: pointer;
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     border: 2px solid #ccc;
     transition: 0.2s;
@@ -86,8 +94,7 @@ export const RightSection = styled.div`
     top: 68px;
     right: 28px;
 
-    box-shadow:
-      // 아래쪽
+    box-shadow: // 아래쪽
       0 4px 8px rgba(0, 0, 0, 0.1),
       // 오른쪽
       4px 0 8px rgba(0, 0, 0, 0.1),
@@ -97,8 +104,8 @@ export const RightSection = styled.div`
       0 -4px 8px rgba(0, 0, 0, 0.1);
 
     .user-menu-profile-img {
-      width: 72px;
-      height: 72px;
+      width: 84px;
+      height: 84px;
       border-radius: 50%;
       border: 1px solid #ccc;
       margin-bottom: 12px;
@@ -108,16 +115,18 @@ export const RightSection = styled.div`
       font-weight: 500;
       margin-bottom: 12px;
       font-size: 24px;
+      white-space: nowrap;
     }
 
     button {
+      background-color: #f6f8fa;
+      border: 1px solid #dee0e1;
+      width: 100%;
       margin: 12px 0 0 0;
       font-weight: 800;
-      border: none;
-      width: 90%;
       padding: 10px 0;
       cursor: pointer;
-      border-radius: 25px;
+      border-radius: 12px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       transition: 0.2s;
     }
@@ -133,11 +142,62 @@ export const RightSection = styled.div`
     .move-account-btn {
     }
 
+    .move-account-btn:hover {
+      background-color: #eaecee;
+    }
+
     .logout-btn {
+      color: #a40e26;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: 0.2s;
+    }
+
+    .logout-btn.active {
+      color: #000;
+    }
+
+    .logout-btn.active:hover {
+      background-color: #f6f8fa;
+      color: #000;
+      cursor: default;
+    }
+
+    .logout-submit-btn {
+      overflow: hidden;
+      color: #a40e26;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 90%;
+      font-size: 0;
+      height: 0;
+      line-height: 0;
+      padding: 0;
+      margin: 0;
+      border: none;
+    }
+
+    .logout-submit-btn.active {
+      padding: 18px 0;
+      margin: 12px 0 0 0;
+      font-weight: 800;
+      font-size: 12px;
+      line-height: 0;
+      border: 1px solid #dee0e1;
+    }
+
+    .logout-submit-btn:hover {
+      width: 90%;
+      background-color: rgba(164, 14, 38, 0.8);
+      color: #fff;
     }
 
     .logout-btn:hover {
-      background-color: rgba(255, 0, 0, 0.5);
+      background-color: rgba(164, 14, 38, 0.8);
       color: #fff;
     }
   }
