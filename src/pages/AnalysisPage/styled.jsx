@@ -156,19 +156,32 @@ export const WebcamContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  video {
-    border-radius: 12px 12px 0 0;
 
+  video,
+  img {
+    position: absolute;
+    border-radius: 12px 12px 0 0;
     width: 100%;
     height: auto;
-    //height: 450px;
     min-height: 500px;
-
     object-fit: cover;
     transform: scaleX(-1);
   }
 
   .product-analyse-btn {
+    @media (max-width: 768px) {
+      margin: 0 32px;
+    }
+
+    left: 0;
+    right: 0;
+
+    position: fixed;
+    bottom: 32px;
+
+    margin: 0 32px 0 232px;
+    z-index: 3;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -181,7 +194,6 @@ export const WebcamContainer = styled.div`
     color: #fff;
     cursor: pointer;
     outline: none;
-    width: 100%;
 
     background-color: #3f5dfe;
     background-image: linear-gradient(to top, #3f5dfe 50%, #2245fd 50%);

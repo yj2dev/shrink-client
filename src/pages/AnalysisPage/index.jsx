@@ -17,6 +17,10 @@ import {
   IoCloseOutline,
   IoMenu,
 } from "react-icons/io5";
+
+import defaultCameraImg1 from "./img/default-camera.jpg";
+import defaultCameraImg2 from "./img/default-camera.gif";
+
 const AnalysisPage = () => {
   const webcamRef = useRef(null);
 
@@ -33,6 +37,14 @@ const AnalysisPage = () => {
   const [showCameraList, setShowCameraList] = useState(false);
 
   const cameraMenuRef = useRef(null);
+
+  const [randomCameraImg, setRandomCameraImg] = useState(null);
+
+  useEffect(() => {
+    const images = [defaultCameraImg1, defaultCameraImg2];
+    const selectedImage = images[Math.floor(Math.random() * images.length)];
+    setRandomCameraImg(selectedImage);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -185,7 +197,7 @@ const AnalysisPage = () => {
                         }
                         onClick={() => {
                           setSelectedCamera(camera.deviceId);
-                          setShowCameraList(false); // 카메라 선택 후 메뉴 닫기
+                          setShowCameraList(false);
                         }}
                       >
                         {camera.label || `Camera ${index + 1}`}
@@ -208,12 +220,14 @@ const AnalysisPage = () => {
               <IoCameraReverseOutline />
             </button>
           </div>
+          <img src={randomCameraImg} />
           <Webcam
             ref={webcamRef}
             videoConstraints={{
               deviceId: selectedCamera ? { exact: selectedCamera } : undefined,
             }}
           />
+
           <button
             className="product-analyse-btn"
             disabled={isLoading}
