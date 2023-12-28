@@ -23,23 +23,23 @@ const Header = () => {
   const menuRef = useRef();
   const triggerRef = useRef();
 
-  // useEffect(() => {
-  //   const handleClickOutside = (e) => {
-  //     if (
-  //       menuRef.current &&
-  //       !menuRef.current.contains(e.target) &&
-  //       !triggerRef.current.contains(e.target)
-  //     ) {
-  //       setShowMenu(false);
-  //     }
-  //   };
-  //
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, []);
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(e.target) &&
+        !triggerRef.current.contains(e.target)
+      ) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const onClickLogout = () => {
     localStorage.removeItem("token");
@@ -89,9 +89,35 @@ const Header = () => {
         <RightSection>
           {showMenu && (
             <nav className="user-menu" ref={menuRef}>
-              {user && <div>{user.nickname}</div>}
+              {user && (
+                <img
+                  src={user.profile_url}
+                  onClick={() => {
+                    setShowMenu(!showMenu);
+                  }}
+                  className="user-menu-profile-img"
+                  ref={triggerRef}
+                />
+              )}
+              {user && (
+                <div className="user-nickname">
+                  안녕하세요, {user.nickname}님
+                </div>
+              )}
 
-              <button onClick={onClickLogout}>로그아웃</button>
+              <button
+                className="move-account-btn"
+                onClick={() => {
+                  navigate("/account");
+                  setShowMenu(false);
+                }}
+              >
+                계정관리
+              </button>
+
+              <button className="logout-btn" onClick={onClickLogout}>
+                로그아웃
+              </button>
             </nav>
           )}
 
@@ -101,7 +127,7 @@ const Header = () => {
               onClick={() => {
                 setShowMenu(!showMenu);
               }}
-              className="profile-img"
+              className={`profile-img ${showMenu ? "active" : ""}`}
               ref={triggerRef}
             />
           ) : (
