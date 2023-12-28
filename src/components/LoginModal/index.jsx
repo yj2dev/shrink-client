@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "../Modal";
-import "./index.css";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../../state/selectors/userSelectors";
+import Modal from "../Modal";
+import "./index.css";
 
 const LoginModal = ({ show, onClose, onShowRegister }) => {
   const navigate = useNavigate();
@@ -12,8 +12,8 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
 
-  // 전화번호 유효성 검사 정규표현식 이용
-  const [phoneValid, setPhoneValid] = useState(false);
+  // 버튼눌러서 형식 검사하기 전에는 올바른 상태로 인식
+  const [phoneValid, setPhoneValid] = useState(true);
   const [passwordValid, setPasswordValid] = useState(false);
   // const [notAllow, setNotAllow] = useState(true);
 
@@ -21,19 +21,21 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
 
   const handlePhone = (e) => {
     setPhone(e.target.value);
-    const regex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-    if (regex.test(phone)) {
-      setPhoneValid(true);
-    } else {
-      setPhoneValid(false);
-    }
-    // 정규표현식 만족하면 setPhoneValid == true 이외에는 false
   };
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
   };
   const onClickLogin = (e) => {
+    // 정규표현식 만족하는지 확인
+    const regex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+    
+    if (regex.test(phone)) {
+      setPhoneValid(true);
+    } else {
+      setPhoneValid(false);
+    }
+
     const payload = {
       phone,
       password,
@@ -76,7 +78,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           />
         </div>
         <div className="errorMessageWrap">
-          {!phoneValid && phone.length !== 11 && phone.length > 0 && (
+          {!phoneValid && (
             <div>올바른 전화번호를 입력해주세요.</div>
           )}
         </div>
