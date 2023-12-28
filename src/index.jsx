@@ -5,10 +5,8 @@ import App from "./App";
 import axios from "axios";
 import { RecoilRoot } from "recoil";
 
-// axios.defaults.baseURL =
-//   process.env.REACT_APP_API_BASE_URL || "http://localhost:8000";
-
-axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.baseURL =
+  process.env.REACT_APP_API_BASE_URL || "http://localhost:8000";
 
 axios.interceptors.request.use(function (config) {
   const token = localStorage.getItem("token");
