@@ -6,9 +6,13 @@ import UserPasswordModal from "../../components/UserPasswordModal";
 import logoImg from "./img/logo.png";
 import { Container, ContainerSpace, LeftSection, RightSection } from "./styled";
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { userState } from "../../state/selectors/userSelectors";
 
 const Header = () => {
-  const [user, setUser] = useState(localStorage.getItem("user") !== null);
+  // const [user, setUser] = useState(localStorage.getItem("user") !== null);
+
+  const [user, setUser] = useRecoilState(userState);
 
   const [showMenu, setShowMenu] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -19,27 +23,30 @@ const Header = () => {
   const menuRef = useRef();
   const triggerRef = useRef();
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(e.target) &&
-        !triggerRef.current.contains(e.target)
-      ) {
-        setShowMenu(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (e) => {
+  //     if (
+  //       menuRef.current &&
+  //       !menuRef.current.contains(e.target) &&
+  //       !triggerRef.current.contains(e.target)
+  //     ) {
+  //       setShowMenu(false);
+  //     }
+  //   };
+  //
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
 
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
   const onClickLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
+
+    setShowMenu(false);
   };
 
   const onShowLoginModal = () => {
@@ -82,9 +89,12 @@ const Header = () => {
         <RightSection>
           {showMenu && (
             <nav className="user-menu" ref={menuRef}>
+              {user && <div>{user.nickname}</div>}
+
               <button onClick={onClickLogout}>로그아웃</button>
             </nav>
           )}
+
           {user ? (
             <img
               src={user.profile_url}
