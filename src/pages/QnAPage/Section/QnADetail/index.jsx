@@ -1,20 +1,29 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { Container } from "./styled";
 import { useContext, useEffect, useState } from "react";
-import { PostDispatchContext, PostStateContext } from "../../../../App";
+import { PostDispatchContext } from "../../../../App";
 import { CiViewList } from "react-icons/ci";
+import axios from 'axios';
 
 const QnADetail = () => {
 
     const {id} = useParams();
-    const postList = useContext(PostStateContext);
     const navigate = useNavigate();
     const [data, setData] = useState();
     const {onRemove} = useContext(PostDispatchContext);
 
-    const handleRemove = () => {
+    const handleRemove = async(e) => {
+        e.preventDefault();
+        
         if(window.confirm('해당 게시글을 삭제하시겠습니까?')){
-            onRemove(data.id);
+            try {
+                const response = await axios.delete(`/api/query/delete/${id}`);
+                console.log('deleted successfully:', response.data);
+                onRemove(id);
+            } catch (error) {
+                console.error('Error deleting post:', error.message);
+            }
+            navigate("/question");
         }
     };
 
@@ -25,24 +34,21 @@ const QnADetail = () => {
     const handleList = () => {
         navigate("/question");
     }
-    
+
     useEffect(() => {
-        if(postList.length >= 1) {
-            const targetPost = postList.find(
-                (it) => parseInt(it.id) === parseInt(id)
-            );
-            //console.log(targetPost);
-            if(targetPost) {
-                // 해당 게시글이 있을 때
-                setData(targetPost);
-            }else {
-                // 해당 게시글이 없을 때
-                alert('존재하지 않는 게시글입니다.');
-                navigate('/question', {replace:true});
+        const fetchPostDetail = async () => {
+            try {
+              const response = await axios.get(`/api/query/detail/${id}`);
+              const postData = response.data;
+              console.log("post >>",postData);
+              setData(postData);
+            } catch (error) {
+              console.error('Error post detail:', error.message);
             }
-        }
-        
-    }, [id, postList]);
+        };
+
+        fetchPostDetail();
+    }, [id]);
 
    if(!data){
     return <div className="QnADetail">로딩중입니다...</div>;
@@ -60,7 +66,7 @@ const QnADetail = () => {
                 <div class="container">
                     <div class="detail-window">
                             <div className="detail-title">
-                                <p>{data.title}</p>
+                                <p>{data.post.title}</p>
                             </div>
                     </div>
                 </div>
@@ -69,10 +75,10 @@ const QnADetail = () => {
                 <div class="container">
                     <table class="board-content">
                     <tr className="detail-plus">
-                        <p>작성일 : {new Date(data.date).toLocaleString()}</p>
+                        <pre>작성일 : {new Date(data.post.created_at).toLocaleString()}  작성자 : {data.post.writer.nickname}</pre>
                     </tr>
                     <tr className="detail-content">
-                        <p>{data.content}</p>
+                        <p>{data.post.content}</p>
                     </tr>
                     </table>
                 </div>

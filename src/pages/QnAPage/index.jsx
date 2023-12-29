@@ -1,44 +1,60 @@
-import { useContext, useState} from "react";
+import { useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Container } from "./styled";
 import { FaSearch } from "react-icons/fa";
-import { PostStateContext } from "../../App";
 import Pagination from "react-js-pagination";
+import axios from 'axios';
 
 const QnAPage = () => {
 
-  const postList = useContext(PostStateContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5; // 페이지당 표시할 항목 수
   const [searchResults, setSearchResults] = useState([]);
+  const [data, setData] = useState([]);
 
   // 현재 페이지에 표시할 항목들을 계산
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = postList.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/query');
+        const responseData = response.data.post_list;
+
+        setData(responseData);
+        
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+      }
+    };
+
+    fetchData();
+    
+  }, []);
+  
   // 페이지 개수 동적 계산
   const calculatePageRange = () => {
-    const pageCount = Math.ceil(postList / currentItems);
+    const pageCount = Math.ceil(data / currentItems);
     return Math.min(pageCount, 5); 
   };
 
   const handleSearchInputChange = (e) => {
-    setSearchResults(postList);
+    setSearchResults(data);
     setSearchTerm(e.target.value);
   };
 
   const handleSearch = (e) => {
-    // 현재는 더미데이터에 검색되도록
-    // API 요청을 통해 서버에서 검색 수행해야 함
     e.preventDefault();
     const results = onSearch(searchTerm);
     setSearchResults(results);
   }
   
   const onSearch = (searchTerm) => {
-    return postList.filter((post) => post.title.toLowerCase().includes(searchTerm.toLowerCase()));
+    return data.filter((post) => post.title.toLowerCase().includes(searchTerm.toLowerCase()));
   }
   
     const handlePageChange = (page) => {
@@ -49,7 +65,6 @@ const QnAPage = () => {
     const handleWriteButtonClick = () => {
         navigate('/question/create');
     };
-    // console.log(postList);
     
 
   return (
@@ -65,7 +80,7 @@ const QnAPage = () => {
         <div id="board-search">
                 <div class="container">
                 <div className="write-wrap">
-                <p>총 <span>{postList.length}</span>개의 게시물이 있습니다.</p>
+                <p>총 <span>{data.length}</span>개의 게시물이 있습니다.</p>
                     <button class="btn write-btn" onClick={handleWriteButtonClick}>글쓰기</button>
                 </div>
                     <div class="search-window">
@@ -94,15 +109,15 @@ const QnAPage = () => {
                           <tr key={it.id}>
                             <td>{it.id}</td>
                             <th><Link to={`/question/${it.id}`}>{it.title}</Link></th>
-                            <td>{new Date(it.date).toLocaleString()}</td>
+                            <td>{new Date(it.created_at).toLocaleString()}</td>
                           </tr>
                         ))
                         :
-                         currentItems.map((it)=> (
+                        currentItems.map((it)=> (
                             <tr key={it.id}>
                                 <td>{it.id}</td>
                                 <th><Link to={`/question/${it.id}`}>{it.title}</Link></th>
-                                <td>{new Date(it.date).toLocaleString()}</td>
+                                <td>{new Date(it.created_at).toLocaleString()}</td>
                             </tr>
                         ))}
                         </tbody>
@@ -115,7 +130,7 @@ const QnAPage = () => {
     <Pagination
       activePage={currentPage}
       itemsCountPerPage={itemsPerPage}
-      totalItemsCount={postList.length}
+      totalItemsCount={data.length}
       pageRangeDisplayed={calculatePageRange()}
       prevPageText={"‹"}
       nextPageText={"›"}
@@ -124,10 +139,6 @@ const QnAPage = () => {
     </div>
     </Container>
   );
-};
-
-QnAPage.defaultProps = {
-    diaryList:[],
 };
 
 export default QnAPage;

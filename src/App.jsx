@@ -10,11 +10,12 @@ import QnAPage from "./pages/QnAPage";
 import ReportPage from "./pages/ReportPage";
 import AccountPage from "./pages/AccountPage";
 import LandingPage from "./pages/LandingPage";
-import React, { useMemo, useReducer, useRef } from "react";
+import React, { useEffect, useMemo, useReducer } from "react";
 import QnACreate from "./pages/QnAPage/Section/QnACreate";
 import QnADetail from "./pages/QnAPage/Section/QnADetail";
 import QnAEdit from "./pages/QnAPage/Section/QnAEdit";
 import AnalysisPage from "./pages/AnalysisPage";
+import axios from 'axios';
 
 const reducer = (state, action) => {
   let newState = [];
@@ -45,57 +46,37 @@ const reducer = (state, action) => {
 export const PostStateContext = React.createContext();
 export const PostDispatchContext = React.createContext();
 
-// 더미데이터 사용
-const dummyList = [
-  {
-    id: 1,
-    title: "title1",
-    date: new Date().getTime(),
-    content: "content1",
-  },
-  {
-    id: 2,
-    title: "title2",
-    date: new Date().getTime(),
-    content: "content2",
-  },
-  {
-    id: 3,
-    title: "title3",
-    date: new Date().getTime(),
-    content: "content3",
-  },
-  {
-    id: 4,
-    title: "title4",
-    date: new Date().getTime(),
-    content: "content4",
-  },
-  {
-    id: 5,
-    title: "title5",
-    date: new Date().getTime(),
-    content: "content5",
-  },
-];
-
 function App() {
-  const [data, dispatch] = useReducer(reducer, dummyList);
 
-  const dataId = useRef(6); // 새로 추가되는 데이터 아이디
+  const [data, dispatch] = useReducer(reducer, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/query');
+        const responseData = response.data.post_list;
+
+        dispatch({ type: 'INIT', data: responseData });
+        
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+      }
+    };
+
+    fetchData();
+    
+  }, []);
 
   const onCreate = (title, content) => {
     const current_date = new Date().getTime();
     dispatch({
       type: "CREATE",
       data: {
-        id: dataId.current,
         date: current_date,
         title,
         content,
       },
     });
-    dataId.current += 1;
   };
 
   const onRemove = (targetId) => {

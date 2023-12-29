@@ -177,7 +177,7 @@ export const Container = styled.div`
         line-height: 150px; 
     }
 
-    .detail-plus p {
+    .detail-plus pre {
         text-align: center;
         font-size: 13px;
         padding-top: 5px;

@@ -113,13 +113,13 @@ export const AlertContainer = styled.div`
   top: 0;
   color: #fff;
   display: flex;
-  font-size: 1.2em;
+  font-size: 1.4em;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 100%;
-  height: 55px;
+  height: 78px;
   z-index: 20;
   transition: 0.2s;
 
@@ -141,7 +141,6 @@ export const AlertContainer = styled.div`
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -152,7 +151,6 @@ export const Container = styled.div`
 
 export const WebcamContainer = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -167,34 +165,41 @@ export const WebcamContainer = styled.div`
     object-fit: cover;
     transform: scaleX(-1);
   }
-
-  .product-analyse-btn {
+  .product-analyse-btn-wrapper {
     @media (max-width: 768px) {
-      margin: 0 32px;
+      //margin: 0 32px;
+      margin: 0;
     }
 
     left: 0;
     right: 0;
 
     position: fixed;
-    bottom: 32px;
+    bottom: 0;
 
-    margin: 0 32px 0 232px;
+    //margin: 0 32px 0 232px;
+    margin: 0 0 0 200px;
     z-index: 3;
+
+    height: 128px;
+
+    background-color: #f0f0f0;
 
     display: flex;
     align-items: center;
     justify-content: center;
-
+  }
+  .product-analyse-btn {
     border-radius: 0 0 12px 12px;
     transition: 0.4s ease;
+    width: 100%;
+    margin: 0 32px;
     height: 84px;
     font-size: 1.5em;
     border: none;
     color: #fff;
     cursor: pointer;
     outline: none;
-
     background-color: #3f5dfe;
     background-image: linear-gradient(to top, #3f5dfe 50%, #2245fd 50%);
     background-size: 100% 200%;
