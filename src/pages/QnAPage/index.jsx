@@ -38,7 +38,7 @@ const QnAPage = () => {
   
   // 페이지 개수 동적 계산
   const calculatePageRange = () => {
-    const pageCount = Math.ceil(data.length / currentItems);
+    const pageCount = Math.ceil(data / currentItems);
     return Math.min(pageCount, 5); 
   };
 
@@ -113,7 +113,7 @@ const QnAPage = () => {
                           </tr>
                         ))
                         :
-                        data.map((it)=> (
+                        currentItems.map((it)=> (
                             <tr key={it.id}>
                                 <td>{it.id}</td>
                                 <th><Link to={`/question/${it.id}`}>{it.title}</Link></th>
