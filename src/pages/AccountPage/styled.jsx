@@ -15,8 +15,65 @@ export const Container = styled.div`
     background-color: #fff;
     box-shadow: rgba(100, 100, 111, 0.2) 0 8px 28px 0;
 
-    section {
-      //border: 1px solid red;
+    section.etc-setting {
+      width: 520px;
+    }
+
+    .profile-img-setting {
+      position: relative;
+    }
+
+    .profile-edit-btn {
+      position: absolute;
+      bottom: 44px;
+      left: 10px;
+      width: 74px;
+      height: 36px;
+      display: flex;
+      border-radius: 4px;
+      border: 2px solid #eeeeee;
+      background-color: #fff;
+      justify-content: center;
+      align-items: center;
+      font-weight: 400;
+    }
+
+    .profile-menu {
+      position: absolute;
+      top: 264px;
+      left: 10px;
+      box-shadow: 4px 0 16px -4px rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: 0.2s;
+      height: 0;
+      background-color: transparent;
+      border: 2px solid transparent;
+      z-index: 10;
+
+      &.active {
+        background-color: #fff;
+        border: 2px solid #eeeeee;
+        height: 84px;
+      }
+
+      ul {
+        padding: 6px 0;
+        margin: 0;
+      }
+
+      li {
+        list-style: none;
+        padding: 6px 16px;
+        margin: 0;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      li:hover {
+        background-color: #3f5dfe;
+        color: #fff;
+      }
     }
 
     h1 {
@@ -25,8 +82,6 @@ export const Container = styled.div`
     }
 
     h3 {
-      //float: left;
-      //width: 90%;
       margin: 42px 0 4px 0;
     }
 
@@ -45,31 +100,41 @@ export const Container = styled.div`
       margin-top: 16px;
     }
 
-    .nickname-section {
-      width: 90%;
-      float: left;
-      margin-bottom: 32px;
+    input {
+      margin-right: 12px;
+      background-color: #fff;
+      font-size: 16px;
+      padding: 10px 16px 10px 16px;
+      border-radius: 12px;
+      outline: none;
+      box-sizing: border-box;
+      border: 2px solid #fff;
+      font-weight: 600;
+      width: 200px;
 
-      input {
-        margin-right: 12px;
-        background-color: #fff;
-        font-size: 16px;
-        padding: 10px 16px 10px 16px;
-        border-radius: 12px;
-        outline: none;
+      &:not(:disabled) {
+        border: 2px solid #eeeeee;
         box-sizing: border-box;
-        border: 2px solid #fff;
+      }
+
+      &:focus {
+        border: 2px solid #dddddd;
+      }
+    }
+
+    section.password-update {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin: 8px 0 4px 0;
+        font-size: 14px;
         font-weight: 600;
-        width: 200px;
-
-        &:not(:disabled) {
-          border: 2px solid #eeeeee;
-          box-sizing: border-box;
-        }
-
-        &:focus {
-          border: 2px solid #dddddd;
-        }
+      }
+      input[type="password"] {
+        width: 420px;
+        font: small-caption;
+        margin: 4px 0 16px 0;
       }
     }
 

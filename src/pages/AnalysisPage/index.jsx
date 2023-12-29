@@ -228,13 +228,15 @@ const AnalysisPage = () => {
             }}
           />
 
-          <button
-            className="product-analyse-btn"
-            disabled={isLoading}
-            onClick={onSubmit}
-          >
-            {!isLoading ? "상품 분석" : <ScaleLoader color="#fff" />}
-          </button>
+          <div className="product-analyse-btn-wrapper">
+            <button
+              className="product-analyse-btn"
+              disabled={isLoading}
+              onClick={onSubmit}
+            >
+              {!isLoading ? "상품 분석" : <ScaleLoader color="#fff" />}
+            </button>
+          </div>
         </WebcamContainer>
       </Container>
     </>
