@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { MdOutlineEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
 const AccountPage = () => {
   const navigate = useNavigate();
@@ -23,9 +24,37 @@ const AccountPage = () => {
     changeless: false,
   });
 
+  const [statusPassword, setStatusPassword] = useState({
+    validation: false,
+    success: false,
+    message: "",
+  });
+
   const [showEditMenu, setShowEditMenu] = useState(false);
 
   const editMenuRef = useRef();
+
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordCheck, setNewPasswordCheck] = useState("");
+
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showNewPasswordCheck, setShowNewPasswordCheck] = useState(false);
+
+  const [logoutCountdown, setLogoutCountdown] = useState(null);
+
+  const toggleCurrentPasswordVisibility = () => {
+    setShowCurrentPassword(!showCurrentPassword);
+  };
+
+  const toggleNewPasswordVisibility = () => {
+    setShowNewPassword(!showNewPassword);
+  };
+
+  const toggleNewPasswordCheckVisibility = () => {
+    setShowNewPasswordCheck(!showNewPasswordCheck);
+  };
 
   const initUserInfo = async () => {
     if (localStorage.getItem("token")) {
@@ -148,6 +177,16 @@ const AccountPage = () => {
       .patch("/api/auth/user/nickname", { new_nickname: nickname })
       .then((res) => {
         initUserInfo();
+
+        setStatusNickname({
+          ...statusNickname,
+          validation: true,
+          success: true,
+        });
+
+        setTimeout(() => {
+          setStatusNickname({ ...statusNickname, success: false });
+        }, 5000);
       })
       .catch((err) => {})
       .finally(() => {
@@ -155,7 +194,90 @@ const AccountPage = () => {
       });
   };
 
-  const onClickPasswordUpdate = () => {};
+  const passwordValidation = () => {
+    const minLength = newPassword.length >= 8;
+    const containsChar = /[A-Za-z]/.test(newPassword);
+    const containsNum = /\d/.test(newPassword);
+    const containsSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(newPassword);
+    const noSpaces = !/\s/.test(newPassword);
+
+    if (
+      minLength &&
+      containsChar &&
+      containsNum &&
+      containsSpecial &&
+      noSpaces
+    ) {
+      setStatusPassword({
+        validation: true,
+        success: false,
+        message: "",
+      });
+      return true;
+    } else {
+      let errorMessage =
+        "비밀번호는 최소 8자리 이상이며, 문자, 숫자, 특수문자를 각각 하나 이상 포함해야 하며, 공백을 포함할 수 없습니다.";
+      setStatusPassword({
+        validation: false,
+        success: false,
+        message: errorMessage,
+      });
+      return false;
+    }
+  };
+
+  const onClickPasswordUpdate = () => {
+    if (!passwordValidation()) {
+      return;
+    }
+
+    if (newPassword !== newPasswordCheck) {
+      setStatusPassword({
+        validation: false,
+        success: false,
+        message: "새 비밀번호와 비밀번호 확인이 일치하지 않습니다.",
+      });
+      return;
+    }
+
+    axios
+      .patch("/api/auth/user/password", {
+        current_password: currentPassword,
+        new_password: newPassword,
+      })
+      .then((res) => {
+        setStatusPassword({
+          validation: true,
+          success: true,
+          message: "비밀번호가 성공적으로 변경되었습니다.",
+        });
+
+        setLogoutCountdown(5);
+        let countdownInterval = setInterval(() => {
+          setLogoutCountdown((prevCount) => {
+            if (prevCount <= 1) {
+              clearInterval(countdownInterval);
+              localStorage.removeItem("user");
+              localStorage.removeItem("token");
+              setUser(null);
+              navigate("/");
+              return null;
+            }
+            return prevCount - 1;
+          });
+        }, 1000);
+      })
+      .catch((err) => {
+        if (err.response.data.status === "fail") {
+          let errorMessage = err.response.data.message;
+          setStatusPassword({
+            validation: false,
+            success: false,
+            message: errorMessage,
+          });
+        }
+      });
+  };
 
   const onClickAccountDelete = () => {};
 
@@ -259,21 +381,83 @@ const AccountPage = () => {
             <hr />
 
             <label htmlFor="current-password">현재 비밀번호</label>
-            <input type="password" id="current-password" />
+            <div className="password-input">
+              <input
+                type={showCurrentPassword ? "text" : "password"}
+                id="current-password"
+                value={currentPassword}
+                onChange={(e) => {
+                  setCurrentPassword(e.target.value);
+                }}
+              />
+              <button
+                className="toggle-password"
+                onClick={toggleCurrentPasswordVisibility}
+              >
+                {showCurrentPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
+              </button>
+            </div>
 
             <label htmlFor="new-password">새로운 비밀번호</label>
-            <input type="password" id="new-password" />
+            <div className="password-input">
+              <input
+                type={showNewPassword ? "text" : "password"}
+                id="new-password"
+                value={newPassword}
+                onChange={(e) => {
+                  setNewPassword(e.target.value);
+                }}
+              />
+              <button
+                className="toggle-password"
+                onClick={toggleNewPasswordVisibility}
+              >
+                {showNewPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
+              </button>
+            </div>
 
             <label htmlFor="new-password-check">새로운 비밀번호 확인</label>
-            <input type="password" id="new-password-check" />
-          </section>
+            <div className="password-input">
+              <input
+                type={showNewPasswordCheck ? "text" : "password"}
+                id="new-password-check"
+                value={newPasswordCheck}
+                onChange={(e) => {
+                  setNewPasswordCheck(e.target.value);
+                }}
+              />
+              <button
+                className="toggle-password"
+                onClick={toggleNewPasswordCheckVisibility}
+              >
+                {showNewPasswordCheck ? <IoEyeOffOutline /> : <IoEyeOutline />}
+              </button>
+            </div>
 
-          <button
-            className="password-update-btn"
-            onClick={onClickPasswordUpdate}
-          >
-            비밀번호 변경
-          </button>
+            {!statusPassword.success && !statusPassword.valid && (
+              <Message style={{ color: "#e74c3c" }}>
+                {statusPassword.message}
+              </Message>
+            )}
+
+            {statusPassword.success && (
+              <Message style={{ color: "#009432" }}>
+                비밀번호가 성공적으로 변경되었습니다.
+                <strong style={{ fontSize: "16px" }}>
+                  {logoutCountdown}초
+                </strong>
+                &nbsp;후에 로그아웃되어 메인 페이지로 이동합니다. 재로그인
+                해주세요.
+              </Message>
+            )}
+
+            <button
+              className="password-update-btn"
+              onClick={onClickPasswordUpdate}
+            >
+              비밀번호 변경
+            </button>
+          </section>
 
           <h3>회원탈퇴</h3>
           <hr />

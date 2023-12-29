@@ -132,15 +132,35 @@ export const Container = styled.div`
       display: flex;
       flex-direction: column;
 
+      .password-input {
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+
       label {
         margin: 8px 0 4px 0;
         font-size: 14px;
         font-weight: 600;
       }
-      input[type="password"] {
-        width: 420px;
+
+      //input[type="password"] {
+      input {
+        width: 400px;
         font: small-caption;
-        margin: 4px 0 16px 0;
+        padding-right: 48px;
+        margin: 4px 8px 16px 0;
+      }
+
+      .toggle-password {
+        background: none;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        right: 140px;
+        top: 2px;
+        font-size: 18px;
+        color: #6a6a6a;
       }
     }
 
@@ -158,7 +178,7 @@ export const Container = styled.div`
 
     .nickname-update-btn {
       color: #1f883d;
-      width: 120px;
+      width: 144px;
     }
 
     .nickname-update-btn:hover {
@@ -167,9 +187,10 @@ export const Container = styled.div`
     }
 
     .password-update-btn {
+      margin-top: 24px;
       margin-bottom: 16px;
       color: #1f883d;
-      width: 256px;
+      width: 144px;
     }
 
     .password-update-btn:hover {
@@ -180,7 +201,7 @@ export const Container = styled.div`
     .account-delete-btn {
       margin-bottom: 16px;
       color: #a40e26;
-      width: 256px;
+      width: 144px;
     }
 
     .account-delete-btn:hover {
