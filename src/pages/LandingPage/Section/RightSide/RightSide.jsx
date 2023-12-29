@@ -58,12 +58,18 @@ const RightSide = () => {
       return (
       
       <div className="ProductGraph">
+          <div className="Product">
             <h2>00상품 가격 변동</h2>
             <Chart options={data.options} series={data.series} type="area" />
+          </div>
+          <div className="Product">
             <h2>00상품 가격 변동</h2>
             <Chart options={data.options} series={data.series} type="area" />
+          </div>
+          <div className="Product">
             <h2>00상품 가격 변동</h2>
             <Chart options={data.options} series={data.series} type="area" />
+          </div>
       </div>
       
       );

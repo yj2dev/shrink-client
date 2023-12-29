@@ -144,7 +144,10 @@
         font-size: 17px;
         font-weight: bold;
     }
-    
+    .xbtn > svg {
+        width: 25px;
+        height: 25px;
+    }
     
     .detail > span:nth-child(2) {
         font-size: 20px;
@@ -163,8 +166,8 @@
     }
     .ExpandedCard {
       top: 8rem;
-      height: 40%;
-      left: 25px;
+      height: 20%;
+      left: 10px;
       width: 80%;
     }
     .ExpandedCard>span:nth-of-type(1) {

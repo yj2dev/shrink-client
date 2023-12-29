@@ -51,9 +51,10 @@
       flex-direction: column;
       align-items: center;
       width: 95%;
-      margin-top: 0rem;
+      margin-top: 1rem;
+      
     }
     .Table1 h1{
-      font-size: 30px;
+      font-size: 20px;
     }
   }

@@ -1,0 +1,40 @@
+
+.Product {
+    width: 23rem;
+    height: 15rem;
+    margin: 2rem;
+    padding: 1rem;
+    
+}
+
+@media screen and (max-width: 1200px)
+{   
+    .Product h2 {
+        font-size: 20px;      
+
+    }
+    .Product {
+        width: 19rem;
+        height: 14rem;
+        margin: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 768px)
+{   
+    .Product h2 {
+        font-size: 20px;      
+
+    }
+    .Product {
+        width: 19rem;
+        height: 14rem;
+        margin: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
