@@ -16,7 +16,7 @@ const QnAEdit = () => {
             const targetPost = postList.find(
                 (it) => parseInt(it.id) === parseInt(id)
             );
-            console.log(targetPost);
+            console.log("target >> ", targetPost);
 
             if(targetPost){
                 setOriginData(targetPost);
