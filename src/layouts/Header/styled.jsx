@@ -95,6 +95,7 @@ export const RightSection = styled.div`
 
   .user-menu {
     padding: 32px 36px;
+    min-width: 240px;
     z-index: 100;
     background-color: #ffffff;
     border-radius: 12px;

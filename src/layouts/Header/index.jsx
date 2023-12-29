@@ -52,12 +52,25 @@ const Header = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      axios.get("/api/auth/user/info").then(({ data }) => {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        setUser(data.user);
+
+        console.log("token 보냄 user > ", data.user);
+      });
+    }
+  }, []);
+
   const onClickLogout = () => {
-    localStorage.removeItem("token");
+    navigate("/");
+
     localStorage.removeItem("user");
-    setUser(null);
+    localStorage.removeItem("token");
 
     setShowMenu(false);
+    setUser(null);
   };
 
   const onShowLoginModal = () => {
