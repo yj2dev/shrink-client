@@ -1,31 +1,50 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    .QnACreate {
-        // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        // border: 1px solid #ddd;
-        text-align: center;
-        padding : 20px;
-        margin-left: 265px;
+
+    article{
+        width: 70%;
+        max-width: 800px;
+        min-width: 360px;
+        border: 1px solid #d5d5d5;
+        border-radius: 10px;
+        margin: 50px auto;
+        padding: 40px;
+        margin-left: 300px;
     }
 
-    .QnACreate input,
-    textarea {
+    input[type=text]{
+        width: 100%;
+        height: 40px;
+        
+        padding: 10px;
         margin-bottom: 20px;
-        width: 500px;
-        padding: 20px 20px 20px 20px;
-        height: 30px;
-        // box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-        // border:5px outset;
+        background-color: #f0f0f0;
         border: none;
+        border-bottom: 1px solid #d5d5d5;
+    }
+    
+    textarea{
+        width: 100%;
+        height: 300px;
+        border: 1px solid #d5d5d5;
         border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 20px;
+        background-color: #f0f0f0;
+        font-family: 'Noto Sans KR', sans-serif;
     }
 
-    .QnACreate textarea {
-        height: 200px;
+    textarea:focus{
+        border: #252525
     }
 
-    .QnACreate button {
+    div{
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+    button {
         width: 25%;
         padding: 10px;
         cursor: pointer;
@@ -40,16 +59,12 @@ export const Container = styled.div`
         justify-content: space-between;
     }
 
-    .QnACreate button:hover,
-    .QnACreate button:focus {
+    button:hover,
+    button:focus {
         background: #0F62FE; 
         border:none;
         color: #fff;
     }
 
-    .QnACreate div p {
-        margin: 0;
-        // margin-left: 0;
-        text-align: left;
-      }
+
 `;

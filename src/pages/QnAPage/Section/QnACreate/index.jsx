@@ -76,35 +76,41 @@ const QnACreate = ({isEdit, originData}) => {
 
     return (
         <Container>
-            <div className="QnACreate">
-                <h2>{isEdit ? "질문 수정하기" :"무엇이 궁금한가요?"}</h2>
-                    <div>
-                        <div><p>제목</p></div>
-                        <input 
-                        ref={titleInput}
-                        name="title" 
-                        value={formData.title}
-                        placeholder="제목을 입력해주세요"
-                        onChange={handleChangeState}/>
-                    </div>
-                    <div>
-                        <div><p>내용</p></div>
-                        <textarea 
-                        ref={contentInput}
-                        name="content"
-                        value={formData.content}
-                        placeholder="내용을 입력해주세요"
-                        onChange={handleChangeState}/>
-                    </div>
-                    <div className="btn-container">
-                        <button onClick={handleList}>
-                            <CiViewList/> 목록
-                        </button>
-                        <button onClick={handleSubmit}>
-                            등록하기
-                        </button>
-                    </div>
+            <article class="QnACreate">
+            <h3>{isEdit ? "질문 수정하기" :"질문 작성하기"}</h3>
+
+            <input 
+                type="text"
+                ref={titleInput}
+                value={formData.title}
+                name="title" 
+                id="titleInPut" 
+                placeholder="제목을 입력하세요"
+                onChange={handleChangeState}
+            />
+            <textarea
+                ref={contentInput}
+                value={formData.content}
+                onChange={handleChangeState}
+                name="content" 
+                id="textInPut" 
+                cols="30" 
+                rows="10" 
+                placeholder="내용을 입력하세요"
+            ></textarea>
+
+            {/* <div>
+                <div class="filebox">
+                    <label for="ex_file">+</label>
+                    <input type="file" id="ex_file"/>
+                </div>
+            </div> */}
+
+            <div className="btn-container">
+                <button onClick={handleList}> <CiViewList/> 목록 </button>
+                <button onClick={handleSubmit}>등록하기</button>
             </div>
+        </article>
         
         </Container>
     );
