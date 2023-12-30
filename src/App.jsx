@@ -43,7 +43,6 @@ const reducer = (state, action) => {
   return newState;
 };
 
-export const PostStateContext = React.createContext();
 export const PostDispatchContext = React.createContext();
 
 function App() {
@@ -103,7 +102,6 @@ function App() {
   }, []);
 
   return (
-    <PostStateContext.Provider value={data}>
       <PostDispatchContext.Provider value={memoizedDispatches}>
         <div className="App">
           <BrowserRouter>
@@ -126,7 +124,6 @@ function App() {
           </BrowserRouter>
         </div>
       </PostDispatchContext.Provider>
-    </PostStateContext.Provider>
   );
 }
 

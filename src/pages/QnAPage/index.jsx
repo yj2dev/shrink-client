@@ -4,6 +4,8 @@ import { Container } from "./styled";
 import { FaSearch } from "react-icons/fa";
 import Pagination from "react-js-pagination";
 import axios from 'axios';
+import { userState } from "../../state/selectors/userSelectors";
+import { useRecoilState } from "recoil";
 
 const QnAPage = () => {
 
@@ -12,6 +14,7 @@ const QnAPage = () => {
   const itemsPerPage = 5; // 페이지당 표시할 항목 수
   const [searchResults, setSearchResults] = useState([]);
   const [data, setData] = useState([]);
+  const [user, setUser] = useRecoilState(userState);
 
   // 현재 페이지에 표시할 항목들을 계산
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -43,7 +46,7 @@ const QnAPage = () => {
   };
 
   const handleSearchInputChange = (e) => {
-    setSearchResults(data);
+    setSearchResults(currentItems);
     setSearchTerm(e.target.value);
   };
 
@@ -81,7 +84,7 @@ const QnAPage = () => {
                 <div class="container">
                 <div className="write-wrap">
                 <p>총 <span>{data.length}</span>개의 게시물이 있습니다.</p>
-                    <button class="btn write-btn" onClick={handleWriteButtonClick}>글쓰기</button>
+                    {user && <button class="btn write-btn" onClick={handleWriteButtonClick}>글쓰기</button>}
                 </div>
                     <div class="search-window">
                         <form action="">

@@ -174,7 +174,7 @@ export const Container = styled.div`
     .detail-content p {
         text-align: center;
         font-size: 16px;
-        line-height: 150px; 
+        line-height: 20px; 
     }
 
     .detail-plus pre {
@@ -185,6 +185,13 @@ export const Container = styled.div`
 
     .detail-content {
         height: 270px;
+        white-space: pre-wrap;
+    }
+
+    .like-wrap {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
     }
    
 `;

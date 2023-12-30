@@ -3,6 +3,8 @@ import { Container } from "./styled";
 import { useContext, useEffect, useState } from "react";
 import { PostDispatchContext } from "../../../../App";
 import { CiViewList } from "react-icons/ci";
+import { FaRegThumbsUp } from "react-icons/fa6";
+import { FaRegThumbsDown } from "react-icons/fa6";
 import axios from 'axios';
 
 const QnADetail = () => {
@@ -35,19 +37,47 @@ const QnADetail = () => {
         navigate("/question");
     }
 
-    useEffect(() => {
-        const fetchPostDetail = async () => {
-            try {
-              const response = await axios.get(`/api/query/detail/${id}`);
-              const postData = response.data;
-              console.log("post >>",postData);
-              setData(postData);
-            } catch (error) {
-              console.error('Error post detail:', error.message);
-            }
-        };
+    const fetchPostDetail = async () => {
+        try {
+          const response = await axios.get(`/api/query/detail/${id}`);
+          const postData = response.data;
+          //console.log("post >>",postData);
+          setData(postData);
+        } catch (error) {
+          console.error('Error post detail:', error.message);
+        }
+    };
 
+    const boardLike = async() => {
+        try {
+            await axios.post(`/api/query/like/${id}`);
+            fetchPostDetail();
+        } catch (error) {
+            console.error('Error liking post:', error.message);
+        }
+    }
+
+    const boardDislike = async() => {
+        try {
+            await axios.post(`/api/query/dislike/${id}`);
+            fetchPostDetail();
+        } catch (error) {
+            console.error('Error disliking post:', error.message);
+        }
+    }
+
+    useEffect(() => {
+        const incrementViews = async() => {
+            try {
+                await axios.post(`/api/query/increase_view/${id}`);
+            } catch (error) {
+                console.error('Error increase_view:', error.message);
+            }
+        }
+    
         fetchPostDetail();
+        incrementViews();
+
     }, [id]);
 
    if(!data){
@@ -64,6 +94,11 @@ const QnADetail = () => {
 
             <div id="board-detail">
                 <div class="container">
+                    <div className="like-wrap">
+                    <div onClick={boardLike}><FaRegThumbsUp/>{data.post.like}</div>
+                    <div onClick={boardDislike}><FaRegThumbsDown/>{data.post.dislike}</div>
+                    </div>
+                    
                     <div class="detail-window">
                             <div className="detail-title">
                                 <p>{data.post.title}</p>
@@ -75,10 +110,12 @@ const QnADetail = () => {
                 <div class="container">
                     <table class="board-content">
                     <tr className="detail-plus">
-                        <pre>작성일 : {new Date(data.post.created_at).toLocaleString()}  작성자 : {data.post.writer.nickname}</pre>
+                        <pre>작성일 : {new Date(data.post.created_at).toLocaleString()}  작성자 : {data.post.writer.nickname}  조회수 : {data.post.view}</pre>
                     </tr>
                     <tr className="detail-content">
+                        <td>
                         <p>{data.post.content}</p>
+                        </td>
                     </tr>
                     </table>
                 </div>
