@@ -5,6 +5,7 @@ import { PostDispatchContext } from "../../../../App";
 import { CiViewList } from "react-icons/ci";
 import { FaRegThumbsUp } from "react-icons/fa6";
 import { FaRegThumbsDown } from "react-icons/fa6";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import axios from 'axios';
 
 const QnADetail = () => {
@@ -85,58 +86,78 @@ const QnADetail = () => {
    }else {
     return (
         <Container>
-            <section class="notice">
-                <div class="page-title">
-                    <div class="container">
-                    <h3>상세 페이지</h3>
+            <article class="readPosting">
+                <h3>게시글 보기</h3>
+                <div>
+                    <h2>{data.post.title}</h2>
+
+                    <div class="dates">
+                        <p>{new Date(data.post.created_at).toLocaleString()}</p>
+                        <p>{data.post.writer.nickname}</p>
+                        <div>
+                            <p><b>조회수</b>{data.post.view}</p>
+                            <p><b>좋아요</b>{data.post.like}</p>
+                            <p><b>싫어요</b>{data.post.dislike}</p>
+                        </div>
                     </div>
                 </div>
 
-            <div id="board-detail">
-                <div class="container">
-                    <div className="like-wrap">
-                    <div onClick={boardLike}><FaRegThumbsUp/>{data.post.like}</div>
-                    <div onClick={boardDislike}><FaRegThumbsDown/>{data.post.dislike}</div>
+                <div class="contents">
+                    <p>{data.post.content}</p>
+
+                    {/* <div class="btns">
+                        <button><img src="https://super.so/icon/light/heart.svg" alt="heart"/></button>
+                    </div> */}
+
+                    <div className="btn-container">
+                        <button className="left-btn" onClick={handleList}>
+                            <CiViewList/> 목록
+                        </button>
+                        <div className="right-btns">
+                            <button onClick={handleEdit}>
+                                수정하기
+                            </button>
+                            <button onClick={handleRemove}>
+                                삭제하기
+                            </button>
+                        </div>
                     </div>
+                </div>
+
+                <div class="commentsz">
+                    <p>댓글 몇개</p>
+
+                    <section class="readPost">
+                        <div>
+                            {/* <div>계정 프로필 이미지</div> */}
+                            <span>
+                                <p><b>계정 이름</b></p>
+                                <p>댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용</p>
+                                <small>댓글 시간</small>
+                            </span>
+                        </div>
+                        <BsThreeDotsVertical/>
+                    </section>
+                    <section class="readPost">
+                        <div>
+                            {/* <div>계정 프로필 이미지</div> */}
+                            <span>
+                                <p><b>계정 이름</b></p>
+                                <p>댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용</p>
+                                <small>댓글 시간</small>
+                            </span>
+                        </div>
+                        <BsThreeDotsVertical/>
+                    </section>
+
+                    <textarea name="" id="" cols="10" rows="5" placeholder="댓글을 입력하세요"></textarea>
                     
-                    <div class="detail-window">
-                            <div className="detail-title">
-                                <p>{data.post.title}</p>
-                            </div>
-                    </div>
                 </div>
-            </div>
-            <div id="board-list">
-                <div class="container">
-                    <table class="board-content">
-                    <tr className="detail-plus">
-                        <pre>작성일 : {new Date(data.post.created_at).toLocaleString()}  작성자 : {data.post.writer.nickname}  조회수 : {data.post.view}</pre>
-                    </tr>
-                    <tr className="detail-content">
-                        <td>
-                        <p>{data.post.content}</p>
-                        </td>
-                    </tr>
-                    </table>
+                <div className="active-btn">
+                        <button>등록하기</button>
                 </div>
-        </div>
 
-        <div className="btn-container">
-                <button className="left-btn" onClick={handleList}>
-                    <CiViewList/> 목록
-                </button>
-                <div className="right-btns">
-                <button onClick={handleEdit}>
-                    수정하기
-                </button>
-                <button onClick={handleRemove}>
-                    삭제하기
-                </button>
-                </div>
-                
-            </div>
-
-    </section>
+            </article>
     
     </Container>
   );

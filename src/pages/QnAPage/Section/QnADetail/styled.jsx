@@ -3,195 +3,180 @@ import styled from "styled-components";
 export const Container = styled.div`
 
     max-width: 80%;
-    button {
-        width: 20%;
-        padding: 10px;
-        cursor: pointer;
-        background: #99CCFF; 
-        color: #fff;
-        border-radius:5px;
-        border-color: #99CCFF;
+
+    article{
+      width: 70%;
+      max-width: 800px;
+      min-width: 360px;
+      border: 1px solid #d5d5d5;
+      border-radius: 10px;
+      margin: 50px auto;
+      padding: 40px;
+      margin-left: 230px;
     }
+
+    .readPosting{
+      text-align: center;
+    }
+    .readPosting div h5{
+     margin: 20px 0 30px;
+      color: #999;
+      font-weight: 400;
+    }
+    
+    .dates{
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-top: 2px solid #d5d5d5;
+      border-bottom: 1px solid #d5d5d5;
+      margin: 20px 0;
+      font-size: .8rem;
+      color: #999;
+    }
+    
+    .dates div{
+      display: flex;
+    }
+    .dates div p{
+      padding: 3px;
+    }
+    .dates div p b{
+      color: #222;
+      padding: 5px;
+    }
+    .contents {
+    border-bottom: 2px solid #d5d5d5;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    }
+    .contents img{
+      width: 100%;
+      margin-bottom:10px;
+    }
+    
+    .contents p{
+      margin: 20px 0;
+      white-space: pre-line;
+    }
+    .contents<div{
+      padding: 0 280px;
+      display: flex;
+    }
+    // .contents div button{
+    //   width: 60px;
+    //   height: 60px;
+    //   border-radius: 50%;
+    //   background-color: #999;
+    //   font-size: 0;
+    // }
+    // .contents div button:hover{
+    //   background-color: #0F62FE;
+    // }
+    // .contents div button img{
+    //   max-width: 50%;
+    //   height: 50%;
+    // }
+    
+    // .btns {
+    //   display: flex;
+    //   justify-content: space-around;
+    // }
+    // .btns < button{
+    //   padding:20px;
+    // }
+    
+    .commentsz {
+      text-align: start;
+      margin-bottom: 20px;
+    }
+    .commentsz section{
+      display: flex;
+      font-size: .8rem;
+      margin: 15px 0;
+    }
+    
+    .readPost {
+      display: flex;
+      justify-content: space-between;
+    }
+    .readPost span{
+      padding-left: 10px;
+      height: 80px;
+      overflow: hidden;
+      text-overflow:clip;
+    }
+    .readPost div{
+      display: flex;
+      padding: 10px;
+      width: 95%;
+    }
+    .readPost div img{
+      padding-left: 0;
+    }
+    
+    .commentsz textarea{
+      height: 80px;
+      width: 760px;
+      background-color: #f0f0f0;
+      font-family: 'Noto Sans KR', sans-serif;
+      border-radius: 5px;
+      padding: 10px;
+    }
+    .commentsz div{
+      display: flex;
+      justify-content: space-between;
+    }
+    .commentsz div label{
+      line-height: 3rem;
+    }
+    // .commentsz div button{
+    //   width: 30%;
+    //   max-width: 150px;
+    // }
 
     .btn-container {
         display: flex;
         justify-content: space-between;
         padding-top: 15px;
     }
-
+    
     .left-btn {
         margin-right: auto; 
         width: 10%;
     }
-      
+          
     .right-btns {
         display: flex;
     }
-      
+          
     .right-btns button {
-        margin-left: 10px;
-        white-space: nowrap;
-        width:42%;
+      //margin-right: 10px;
+      margin-left: 15px;
+      white-space: nowrap;
+      width:100%;
     }
-
+    
     button:hover,
     button:focus {
-        background: #0F62FE; 
-        border: none;
-        color: #fff;
+      background: #0F62FE; 
+      border: none;
+      color: #fff;
     }
 
-    // table {
-    //     border-collapse: collapse;
-    //     border-spacing: 0;
-    // }
-     section.notice {
-        padding: 50px 0;
-        margin-left: 100px;
+    button {
+      // width: 50%;
+      padding: 10px;
+      cursor: pointer;
+      background: #99CCFF; 
+      color: #fff;
+      border-radius:5px;
+      border-color: #99CCFF;
     }
-    .page-title {
-        margin-bottom: 40px;
-    }
-     .page-title h3 {
-        font-size: 28px;
-        color: #333333;
-        font-weight: 400;
-        text-align: center;
+
+    .active-btn {
+      text-align: right;
     }
   
-    #board-detail .detail-window {
-        padding: 15px 0;
-        background-color: #f9f7f9;
-    }
-    
-  
-    .board-content {
-        font-size: 13px;
-        width: 100%;
-        height: 300px;
-        border-top: 1px solid #ccc;
-        border-bottom: 1px solid #ccc;
-    }
-
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    tr {
-        border-top: 1px solid #ccc;
-        border-bottom: 1px solid #ccc;
-    }
-
-  
-  /* reset */
-  
-    * {
-        list-style: none;
-        text-decoration: none;
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
-    .clearfix:after {
-        content: '';
-        display: block;
-        clear: both;
-    }
-    .container {
-        width: 1100px;
-        margin: 0 auto;
-    }
-    .blind {
-        position: absolute;
-        overflow: hidden;
-        clip: rect(0 0 0 0);
-        margin: -1px;
-        width: 1px;
-        height: 1px;
-    }
-
-    .pagination {
-        display: flex;
-        justify-content: center;
-        margin-top: 15px;
-      }
-      
-      ul {
-        list-style: none;
-        padding: 0;
-      }
-      
-      ul.pagination li {
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        border: 1px solid #e2e2e2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1rem;
-      }
-    
-      ul.pagination li:first-child{
-        border-radius: 5px 0 0 5px;
-      }
-    
-      ul.pagination li:last-child{
-        border-radius: 0 5px 5px 0;
-      }
-      
-      ul.pagination li a {
-        text-decoration: none;
-        color: #337ab7;
-        font-size: 1rem;
-      }
-      
-      ul.pagination li.active a {
-        color: white;
-      }
-    
-      ul.pagination li.active {
-        background-color: #337ab7;
-      }
-      
-      ul.pagination li a:hover,
-      ul.pagination li a.active {
-        color: blue;
-      }
-      
-      .page-selection {
-        width: 48px;
-        height: 30px;
-        color: #337ab7;
-      }
-
-    .detail-title p {
-        text-align: center;
-        font-size: 20px;
-    }
-
-    .detail-content p {
-        text-align: center;
-        font-size: 16px;
-        line-height: 20px; 
-    }
-
-    .detail-plus pre {
-        text-align: center;
-        font-size: 13px;
-        padding-top: 5px;
-    }
-
-    .detail-content {
-        height: 270px;
-        white-space: pre-wrap;
-    }
-
-    .like-wrap {
-      display: flex;
-      gap: 10px;
-      justify-content: flex-end;
-    }
    
 `;
