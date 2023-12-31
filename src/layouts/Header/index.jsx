@@ -57,8 +57,6 @@ const Header = () => {
       axios.get("/api/auth/user/info").then(({ data }) => {
         localStorage.setItem("user", JSON.stringify(data.user));
         setUser(data.user);
-
-        console.log("token 보냄 user > ", data.user);
       });
     }
   }, []);

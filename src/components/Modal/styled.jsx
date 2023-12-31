@@ -16,9 +16,8 @@ export const Container = styled.div`
     position: relative;
     background: white;
     width: 300px;
-    // height: 450px;
     padding: 20px;
-    border-radius: 30px;
+    border-radius: 12px;
   }
   .close-btn {
     position: absolute;
@@ -35,10 +34,10 @@ export const Container = styled.div`
     height: 36px;
     padding: 4px;
     border-radius: 50%;
-    //background-color: transparent;
-    background-color: #eee;
+    background-color: transparent;
   }
 
   .close-btn:hover {
+    background-color: #eee;
   }
 `;

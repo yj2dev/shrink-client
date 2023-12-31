@@ -1,4 +1,4 @@
-import { Container, Message } from "./styled";
+import { Container, Message, NotDelCheckContainer } from "./styled";
 import { useRecoilState } from "recoil";
 import { userState } from "../../state/selectors/userSelectors";
 import { useEffect, useRef, useState } from "react";
@@ -6,6 +6,8 @@ import axios from "axios";
 import { MdOutlineEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import ProfileImageCropModal from "../../components/ProfileImageCropModal";
+import AlertModal from "../../components/AlertModal";
 
 const AccountPage = () => {
   const navigate = useNavigate();
@@ -43,6 +45,17 @@ const AccountPage = () => {
   const [showNewPasswordCheck, setShowNewPasswordCheck] = useState(false);
 
   const [logoutCountdown, setLogoutCountdown] = useState(null);
+
+  const [showImageCropModal, setShowImageCropModal] = useState(false);
+
+  const [showResetProfileModal, setShowResetProfileModal] = useState(false);
+  const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
+
+  const [checkDeleteAccount, setCheckDeleteAccount] = useState(false);
+
+  const [deleteAccountNickname, setDeleteAccountNickname] = useState("");
+  const [deleteAccountPhone, setDeleteAccountPhone] = useState("");
+  const [deleteAccountState, setDeleteAccountState] = useState(null);
 
   const toggleCurrentPasswordVisibility = () => {
     setShowCurrentPassword(!showCurrentPassword);
@@ -143,9 +156,6 @@ const AccountPage = () => {
     }
   };
 
-  const onClickResetProfileImg = (e) => {};
-
-  const onClickUpdateProfileImg = (e) => {};
   const onChangeNickname = (e) => {
     if (e.target.value.length <= 12) {
       setNickname(e.target.value);
@@ -279,194 +289,353 @@ const AccountPage = () => {
       });
   };
 
-  const onClickAccountDelete = () => {};
+  const onClickDeleteAccount = () => {
+    const payload = {
+      phone: deleteAccountPhone,
+      nickname: deleteAccountNickname,
+    };
+
+    axios
+      .delete("/api/auth/user/delete", {
+        data: payload,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        console.log("res >> ", res);
+        setDeleteAccountState(true);
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        setUser(null);
+        navigate("/");
+      })
+      .catch((err) => {
+        if (err.response.data.status === "fail") {
+          setDeleteAccountState(false);
+        }
+        console.log("err >> ", err);
+      });
+  };
+
+  const onClickResetProfileImg = (e) => {
+    setShowEditMenu(false);
+
+    const fd = new FormData();
+    fd.append("image", null);
+
+    axios
+      .patch("/api/auth/user/profile-image", fd)
+      .then((res) => {
+        console.log("res img >> ", res);
+        if (res.data.status === "success") {
+          initUserInfo();
+        }
+      })
+      .catch((err) => {});
+  };
+
+  const onClickUpdateProfileImg = () => {
+    setShowImageCropModal(true);
+  };
 
   return (
-    <Container>
-      <article>
-        <h1>내 계정정보</h1>
-        <hr />
-        <section className="profile-img-setting">
-          <img src={user && user.profile_url} />
-          <button
-            disabled={showEditMenu}
-            className="profile-edit-btn"
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowEditMenu((prevShowEditMenu) => !prevShowEditMenu);
-            }}
-          >
-            <MdOutlineEdit />
-            &nbsp;변경
-          </button>
-          <div
-            className={`profile-menu ${showEditMenu && "active"}`}
-            ref={editMenuRef}
-          >
-            <ul>
-              <li onClick={onClickResetProfileImg}>프로필 이미지 초기화</li>
-              <li onClick={onClickUpdateProfileImg}>프로필 이미지 변경</li>
-            </ul>
-          </div>
-        </section>
+    <>
+      <ProfileImageCropModal
+        show={showImageCropModal}
+        close={() => setShowImageCropModal(false)}
+        initUserInfo={initUserInfo}
+      ></ProfileImageCropModal>
 
-        <section className="etc-setting">
-          <h3>닉네임</h3>
-          <hr />
+      <AlertModal
+        show={showResetProfileModal}
+        close={() => setShowResetProfileModal(false)}
+        confirm={onClickResetProfileImg}
+        hidden={{ close: true }}
+        type={1}
+      >
+        <span style={{ fontWeight: 800 }}>
+          프로필 이미지를 정말로 초기화 하시겠습니까?
+        </span>
+        <span style={{ fontSize: "16px", marginTop: "18px" }}>
+          회원가입시 생성된 프로필로 변경됩니다.
+        </span>
+      </AlertModal>
 
-          <input
-            type="text"
-            disabled={!editNickname}
-            onChange={onChangeNickname}
-            value={nickname}
-          />
-
-          {editNickname ? (
+      <AlertModal
+        show={showDeleteAccountModal}
+        close={() => {
+          setShowDeleteAccountModal(false);
+          setCheckDeleteAccount(false);
+          setDeleteAccountPhone("");
+          setDeleteAccountNickname("");
+          setDeleteAccountState(null);
+        }}
+        closeOutside={false}
+        confirm={onClickDeleteAccount}
+        hidden={{ close: true, confirm: !checkDeleteAccount }}
+        type={4}
+        customText={{ confirm: "계정 삭제", cancel: "취소" }}
+      >
+        <span style={{ fontWeight: 800 }}>계정을 정말로 삭제하시겠습니까?</span>
+        <span style={{ fontSize: "16px", marginTop: "18px" }}>
+          계정을 삭제하면 게시글, 댓글, 분석 기록등 모든 정보가 <br />
+          영구적으로 삭제되며,&nbsp;
+          <span style={{ color: "#009432", fontWeight: 800 }}>
+            복구할 수 없습니다.
+            <br />
+            <br />
+          </span>
+          <NotDelCheckContainer>
             <button
-              className="nickname-update-btn"
-              onClick={onClickNicknameUpdate}
+              onClick={() => setCheckDeleteAccount(!checkDeleteAccount)}
+              className={checkDeleteAccount ? "active" : ""}
             >
-              변경 완료
+              복구할 수 없습니다
             </button>
-          ) : (
+            <br />
+
+            <div
+              className={`delete-account-input ${
+                checkDeleteAccount && "active"
+              }`}
+            >
+              <div>
+                계정을 삭제하시려면&nbsp;
+                <b>
+                  휴대번호와 닉네임(
+                  <u style={{ color: "#009432" }}>{nickname}</u>)
+                </b>
+                을
+                <br />
+                입력해주세요.
+              </div>
+
+              <label>휴대번호</label>
+              <input
+                type="text"
+                value={deleteAccountPhone}
+                onChange={(e) => setDeleteAccountPhone(e.target.value)}
+              />
+              <label>닉네임</label>
+              <input
+                type="text"
+                value={deleteAccountNickname}
+                onChange={(e) => setDeleteAccountNickname(e.target.value)}
+              />
+            </div>
+
+            {deleteAccountState === false && (
+              <div
+                style={{
+                  fontWeight: 800,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  color: "#a40e26",
+                }}
+              >
+                유저 정보가 일치하지 않습니다.
+              </div>
+            )}
+          </NotDelCheckContainer>
+        </span>
+      </AlertModal>
+
+      <Container>
+        <article>
+          <h1>내 계정정보</h1>
+          <hr />
+          <section className="profile-img-setting">
+            <img src={user ? user.profile_url : ""} />
             <button
-              className="nickname-update-btn"
-              onClick={() => {
-                setEditNickname(true);
+              disabled={showEditMenu}
+              className="profile-edit-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowEditMenu((prevShowEditMenu) => !prevShowEditMenu);
               }}
             >
-              닉네임 변경
+              <MdOutlineEdit />
+              &nbsp;변경
             </button>
-          )}
-
-          <Message>
-            닉네임은 12글자 이하로 입력가능하며 공백은 허용하지 않습니다.
-          </Message>
-          {statusNickname && statusNickname.changeless && (
-            <Message style={{ color: "#009432" }}>
-              닉네임 변동사항이 없습니다.
-            </Message>
-          )}
-          {statusNickname && statusNickname.void && (
-            <Message style={{ color: "#e74c3c" }}>
-              닉네임이 입력되지 않았습니다.
-            </Message>
-          )}
-          {statusNickname && statusNickname.trim && (
-            <Message style={{ color: "#e74c3c" }}>
-              닉네임에 공백이 포함되어 있습니다. <br />
-              공백을 제거 후 다시 시도하세요
-            </Message>
-          )}
-          {statusNickname && statusNickname.leng && (
-            <Message style={{ color: "#e74c3c" }}>
-              닉네임이 입력 최대범위를 초과했습니다 <br />
-              12글자 이하로 입력해주세요
-            </Message>
-          )}
-          {statusNickname && statusNickname.special && (
-            <Message style={{ color: "#e74c3c" }}>
-              특수문자가 포함되어 있습니다 <br />
-              제거 후 다시 시도하세요.
-            </Message>
-          )}
-          {statusNickname && statusNickname.success && (
-            <Message style={{ color: "#009432" }}>
-              닉네임이 성공적으로 변경되었습니다.
-            </Message>
-          )}
-
-          <section className="password-update">
-            <h3>비밀번호 변경</h3>
+            <div
+              className={`profile-menu ${showEditMenu && "active"}`}
+              ref={editMenuRef}
+            >
+              <ul>
+                <li onClick={() => setShowResetProfileModal(true)}>
+                  프로필 이미지 초기화
+                </li>
+                <li onClick={onClickUpdateProfileImg}>프로필 이미지 변경</li>
+              </ul>
+            </div>
+          </section>
+          <section className="etc-setting">
+            <h3>닉네임</h3>
             <hr />
 
-            <label htmlFor="current-password">현재 비밀번호</label>
-            <div className="password-input">
-              <input
-                type={showCurrentPassword ? "text" : "password"}
-                id="current-password"
-                value={currentPassword}
-                onChange={(e) => {
-                  setCurrentPassword(e.target.value);
-                }}
-              />
-              <button
-                className="toggle-password"
-                onClick={toggleCurrentPasswordVisibility}
-              >
-                {showCurrentPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
-              </button>
-            </div>
+            <input
+              type="text"
+              disabled={!editNickname}
+              onChange={onChangeNickname}
+              value={nickname}
+            />
 
-            <label htmlFor="new-password">새로운 비밀번호</label>
-            <div className="password-input">
-              <input
-                type={showNewPassword ? "text" : "password"}
-                id="new-password"
-                value={newPassword}
-                onChange={(e) => {
-                  setNewPassword(e.target.value);
-                }}
-              />
+            {editNickname ? (
               <button
-                className="toggle-password"
-                onClick={toggleNewPasswordVisibility}
+                className="nickname-update-btn"
+                onClick={onClickNicknameUpdate}
               >
-                {showNewPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
+                변경 완료
               </button>
-            </div>
-
-            <label htmlFor="new-password-check">새로운 비밀번호 확인</label>
-            <div className="password-input">
-              <input
-                type={showNewPasswordCheck ? "text" : "password"}
-                id="new-password-check"
-                value={newPasswordCheck}
-                onChange={(e) => {
-                  setNewPasswordCheck(e.target.value);
-                }}
-              />
+            ) : (
               <button
-                className="toggle-password"
-                onClick={toggleNewPasswordCheckVisibility}
+                className="nickname-update-btn"
+                onClick={() => {
+                  setEditNickname(true);
+                }}
               >
-                {showNewPasswordCheck ? <IoEyeOffOutline /> : <IoEyeOutline />}
+                닉네임 변경
               </button>
-            </div>
-
-            {!statusPassword.success && !statusPassword.valid && (
-              <Message style={{ color: "#e74c3c" }}>
-                {statusPassword.message}
-              </Message>
             )}
 
-            {statusPassword.success && (
+            <Message>
+              닉네임은 12글자 이하로 입력가능하며 공백은 허용하지 않습니다.
+            </Message>
+            {statusNickname && statusNickname.changeless && (
               <Message style={{ color: "#009432" }}>
-                비밀번호가 성공적으로 변경되었습니다.
-                <strong style={{ fontSize: "16px" }}>
-                  {logoutCountdown}초
-                </strong>
-                &nbsp;후에 로그아웃되어 메인 페이지로 이동합니다. 재로그인
-                해주세요.
+                닉네임 변동사항이 없습니다.
+              </Message>
+            )}
+            {statusNickname && statusNickname.void && (
+              <Message style={{ color: "#e74c3c" }}>
+                닉네임이 입력되지 않았습니다.
+              </Message>
+            )}
+            {statusNickname && statusNickname.trim && (
+              <Message style={{ color: "#e74c3c" }}>
+                닉네임에 공백이 포함되어 있습니다. <br />
+                공백을 제거 후 다시 시도하세요
+              </Message>
+            )}
+            {statusNickname && statusNickname.leng && (
+              <Message style={{ color: "#e74c3c" }}>
+                닉네임이 입력 최대범위를 초과했습니다 <br />
+                12글자 이하로 입력해주세요
+              </Message>
+            )}
+            {statusNickname && statusNickname.special && (
+              <Message style={{ color: "#e74c3c" }}>
+                특수문자가 포함되어 있습니다 <br />
+                제거 후 다시 시도하세요.
+              </Message>
+            )}
+            {statusNickname && statusNickname.success && (
+              <Message style={{ color: "#009432" }}>
+                닉네임이 성공적으로 변경되었습니다.
               </Message>
             )}
 
+            <section className="password-update">
+              <h3>비밀번호 변경</h3>
+              <hr />
+
+              <label htmlFor="current-password">현재 비밀번호</label>
+              <div className="password-input">
+                <input
+                  type={showCurrentPassword ? "text" : "password"}
+                  id="current-password"
+                  value={currentPassword}
+                  onChange={(e) => {
+                    setCurrentPassword(e.target.value);
+                  }}
+                />
+                <button
+                  className="toggle-password"
+                  onClick={toggleCurrentPasswordVisibility}
+                >
+                  {showCurrentPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
+                </button>
+              </div>
+
+              <label htmlFor="new-password">새로운 비밀번호</label>
+              <div className="password-input">
+                <input
+                  type={showNewPassword ? "text" : "password"}
+                  id="new-password"
+                  value={newPassword}
+                  onChange={(e) => {
+                    setNewPassword(e.target.value);
+                  }}
+                />
+                <button
+                  className="toggle-password"
+                  onClick={toggleNewPasswordVisibility}
+                >
+                  {showNewPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
+                </button>
+              </div>
+
+              <label htmlFor="new-password-check">새로운 비밀번호 확인</label>
+              <div className="password-input">
+                <input
+                  type={showNewPasswordCheck ? "text" : "password"}
+                  id="new-password-check"
+                  value={newPasswordCheck}
+                  onChange={(e) => {
+                    setNewPasswordCheck(e.target.value);
+                  }}
+                />
+                <button
+                  className="toggle-password"
+                  onClick={toggleNewPasswordCheckVisibility}
+                >
+                  {showNewPasswordCheck ? (
+                    <IoEyeOutline />
+                  ) : (
+                    <IoEyeOffOutline />
+                  )}
+                </button>
+              </div>
+
+              {!statusPassword.success && !statusPassword.valid && (
+                <Message style={{ color: "#e74c3c" }}>
+                  {statusPassword.message}
+                </Message>
+              )}
+
+              {statusPassword.success && (
+                <Message style={{ color: "#009432" }}>
+                  비밀번호가 성공적으로 변경되었습니다.
+                  <strong style={{ fontSize: "16px" }}>
+                    {logoutCountdown}초
+                  </strong>
+                  &nbsp;후에 로그아웃되어 메인 페이지로 이동합니다. 재로그인
+                  해주세요.
+                </Message>
+              )}
+
+              <button
+                className="password-update-btn"
+                onClick={onClickPasswordUpdate}
+              >
+                비밀번호 변경
+              </button>
+            </section>
+
+            <h3>회원탈퇴</h3>
+            <hr />
             <button
-              className="password-update-btn"
-              onClick={onClickPasswordUpdate}
+              className="account-delete-btn"
+              onClick={() => setShowDeleteAccountModal(true)}
             >
-              비밀번호 변경
+              회원탈퇴
             </button>
           </section>
-
-          <h3>회원탈퇴</h3>
-          <hr />
-          <button className="account-delete-btn" onClick={onClickAccountDelete}>
-            회원탈퇴
-          </button>
-        </section>
-      </article>
-    </Container>
+        </article>
+      </Container>
+    </>
   );
 };
 

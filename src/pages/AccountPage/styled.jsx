@@ -1,5 +1,81 @@
 import styled from "styled-components";
 
+export const NotDelCheckContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  .delete-account-input {
+    display: flex;
+    flex-direction: column;
+
+    height: 0;
+    overflow: hidden;
+    transition: 0.5s;
+
+    &.active {
+      height: 280px;
+    }
+
+    label {
+      margin: 8px 0 4px 0;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    input {
+      margin-right: 12px;
+      background-color: #fff;
+      font-size: 16px;
+      padding: 10px 16px 10px 16px;
+      border-radius: 12px;
+      outline: none;
+      box-sizing: border-box;
+      border: 2px solid #fff;
+      font-weight: 600;
+      width: 100%;
+
+      &:not(:disabled) {
+        border: 2px solid #eeeeee;
+        box-sizing: border-box;
+      }
+
+      &:focus {
+        border: 2px solid #dddddd;
+      }
+    }
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 44px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    background-color: #f6f8fa;
+    border: 2px solid #eeeeee;
+    color: #009432;
+    font-size: 18px;
+    font-weight: 800;
+
+    &.active {
+      opacity: 1;
+      background-color: #009432;
+      border: 2px solid #009432;
+      color: #ffffff;
+    }
+
+    &:not(.active):hover {
+      opacity: 0.7;
+      background-color: #009432;
+      border: 2px solid #009432;
+      color: #ffffff;
+    }
+  }
+`;
+
 export const Message = styled.div`
   font-size: 14px;
   margin-top: 16px;
@@ -27,6 +103,7 @@ export const Container = styled.div`
 
     .profile-img-setting {
       position: relative;
+      user-select: none;
     }
 
     .profile-edit-btn {
