@@ -3,10 +3,11 @@ import { Container } from "./styled";
 import { useContext, useEffect, useRef, useState } from "react";
 import { PostDispatchContext } from "../../../../App";
 import { CiViewList } from "react-icons/ci";
-import { FaRegThumbsUp } from "react-icons/fa6";
-import { FaRegThumbsDown } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import axios from 'axios';
+import { useRecoilState } from "recoil";
+import { userState } from "../../../../state/selectors/userSelectors";
+import { FaRegThumbsUp } from "react-icons/fa";
 
 const QnADetail = () => {
 
@@ -20,6 +21,7 @@ const QnADetail = () => {
     const [editingCommentId, setEditingCommentId] = useState(null); 
     const [editingCommentContent, setEditingCommentContent] = useState(""); 
     const {onRemove} = useContext(PostDispatchContext);
+    const [user, setUser] = useRecoilState(userState);
 
     const handelCommentChange = (e) => {
         setComment(e.target.value);
@@ -96,9 +98,10 @@ const QnADetail = () => {
         try {
           const response = await axios.get(`/api/query/detail/${id}`);
           const postData = response.data;
-          //console.log("post >>",postData.post.comments);
+          //console.log("post >>",postData.post.writer.nickname);
           setData(postData);
           //console.log("data>>",data.post.comments);
+          //console.log("data >>", data.post.writer.nickname);
         } catch (error) {
           console.error('Error post detail:', error.message);
         }
@@ -168,7 +171,8 @@ const QnADetail = () => {
                         <button className="left-btn" onClick={handleList}>
                             <CiViewList/> 목록
                         </button>
-                        <div className="right-btns">
+                        {data.post.writer.nickname === user.nickname ? (
+                            <div className="right-btns">
                             <button onClick={handleEdit}>
                                 수정하기
                             </button>
@@ -176,6 +180,10 @@ const QnADetail = () => {
                                 삭제하기
                             </button>
                         </div>
+                        ) : (
+                            <></>
+                        )}
+                        
                     </div>
                 </div>
 
@@ -205,11 +213,16 @@ const QnADetail = () => {
                         </div>
                         <div className="right-wrap">
                         <div className="editmenu-wrap">
-                        <BsThreeDotsVertical 
+                        {it.writer.nickname === user.nickname ? (
+                            <BsThreeDotsVertical
+                            className="threedot" 
                             onClick={()=> {
                             setShowEditMenu(!showEditMenu);
                             setSelectedCommentId(it.id);
                         }}/>
+                        ) : (
+                            <></>
+                        )}
                         
                         {showEditMenu && selectedCommentId === it.id && (
                                 <div className="editmenu">

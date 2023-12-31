@@ -29,7 +29,6 @@ const QnAPage = () => {
         const responseData = response.data.post_list;
 
         setData(responseData);
-        
       } catch (error) {
         console.error('Error fetching data:', error.message);
       }

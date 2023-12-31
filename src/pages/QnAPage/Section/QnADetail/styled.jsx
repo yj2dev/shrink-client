@@ -151,6 +151,10 @@ export const Container = styled.div`
       height: auto;
       width:600px;
     }
+
+    .threedot {
+      cursor: pointer;
+    }
     .commentsz div{
       display: flex;
       // justify-content: space-between;
@@ -168,6 +172,7 @@ export const Container = styled.div`
     .left-btn {
         margin-right: auto; 
         width: 10%;
+        white-space: nowrap;
     }
           
     .right-btns {
