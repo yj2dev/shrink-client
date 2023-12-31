@@ -15,6 +15,10 @@ const QnADetail = () => {
     const [data, setData] = useState();
     const [comment, setComment] = useState("");
     const commentInput = useRef();
+    const [showEditMenu, setShowEditMenu] = useState(false);
+    const [selectedCommentId, setSelectedCommentId] = useState(null);
+    const [editingCommentId, setEditingCommentId] = useState(null); 
+    const [editingCommentContent, setEditingCommentContent] = useState(""); 
     const {onRemove} = useContext(PostDispatchContext);
 
     const handelCommentChange = (e) => {
@@ -27,14 +31,42 @@ const QnADetail = () => {
                 commentInput.current.focus();
                 return;
             }
-
             await axios.post(`/api/query/comment/create/${id}`, {
                 content: comment,
             });
-            fetchPostDetail();
             setComment('');
+            fetchPostDetail();
+            setSelectedCommentId(null);
         }catch(error){
             console.error('comment error:', error.message);
+        }
+    };
+
+    const handleEditComment = async(commentId, content) => {
+        setEditingCommentId(commentId);
+        setEditingCommentContent(content);
+
+        if(editingCommentId) {
+        const response = await axios.put(`/api/query/comment/update/${editingCommentId}`, {
+            content : editingCommentContent,
+        });
+        console.log("comment edit>>",response.data);
+        fetchPostDetail();
+        setEditingCommentId(null);
+        setEditingCommentContent("");
+        setShowEditMenu(!showEditMenu);
+        }
+        
+    }
+
+    const handleRemoveComment = async (commentId) => {
+        if (window.confirm('해당 댓글을 삭제하시겠습니까?')) {
+            try {
+                await axios.delete(`/api/query/comment/delete/${commentId}`);
+                fetchPostDetail();
+            } catch (error) {
+                console.error('Error deleting comment:', error.message);
+            }
         }
     };
 
@@ -116,7 +148,7 @@ const QnADetail = () => {
 
                     <div class="dates">
                         <p>{new Date(data.post.created_at).toLocaleString()}</p>
-                        <p>{data.post.writer.nickname}</p>
+                        <p style={{marginLeft: '20px'}}>{data.post.writer.nickname}</p>
                         <div>
                             <p><b>조회수</b>{data.post.view}</p>
                             <p><b>좋아요</b>{data.post.like}</p>
@@ -152,21 +184,46 @@ const QnADetail = () => {
 
                     {data.post.comments.map((it) => (
                         <section class="readPost" key={it.id}>
-                        <div>
-                            <img src={it.writer.profile_url}/>
+                        <div className="readdiv">
+                            <img src={it.writer.profile_url} alt="profile-img"/>
                             <span>
                                 <p><b>{it.writer.nickname}</b></p>
-                                <p>{it.content}</p>
-                                <small>{new Date(it.created_at).toLocaleString()}</small>
+                                {editingCommentId === it.id ? (
+                                    <textarea
+                                        id="edit-area"
+                                        onChange={(e)=> setEditingCommentContent(e.target.value)}
+                                        value={editingCommentContent}
+                                    />
+                                ) : (
+                                    <p>
+                                    <p>{it.content}</p>
+                                    <small>{new Date(it.created_at).toLocaleString()}</small>
+                                    </p>
+                                )}
+                                
                             </span>
                         </div>
-                        <BsThreeDotsVertical/>
+                        <div className="right-wrap">
+                        <div className="editmenu-wrap">
+                        <BsThreeDotsVertical 
+                            onClick={()=> {
+                            setShowEditMenu(!showEditMenu);
+                            setSelectedCommentId(it.id);
+                        }}/>
+                        
+                        {showEditMenu && selectedCommentId === it.id && (
+                                <div className="editmenu">
+                                    <button onClick={() => handleEditComment(it.id, it.content)}>{editingCommentId ? "등록" : "수정"}</button>
+                                    <button onClick={() => handleRemoveComment(it.id)}>삭제</button>
+                                </div>
+                        )}
+                        </div>
+                        </div>
                     </section>
                     ))}
                     
-                    
-
-                    <textarea 
+                    <textarea
+                        id="comment-area" 
                         name=""
                         onChange={handelCommentChange}
                         value={comment}
@@ -175,7 +232,6 @@ const QnADetail = () => {
                         rows="5" 
                         placeholder="댓글을 입력하세요">
                     </textarea>
-                    
                 </div>
                 <div className="active-btn">
                         <button onClick={handleCommentSubmit}>등록하기</button>

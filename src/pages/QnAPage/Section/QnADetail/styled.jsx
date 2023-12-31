@@ -63,28 +63,6 @@ export const Container = styled.div`
       padding: 0 280px;
       display: flex;
     }
-    // .contents div button{
-    //   width: 60px;
-    //   height: 60px;
-    //   border-radius: 50%;
-    //   background-color: #999;
-    //   font-size: 0;
-    // }
-    // .contents div button:hover{
-    //   background-color: #0F62FE;
-    // }
-    // .contents div button img{
-    //   max-width: 50%;
-    //   height: 50%;
-    // }
-    
-    // .btns {
-    //   display: flex;
-    //   justify-content: space-around;
-    // }
-    // .btns < button{
-    //   padding:20px;
-    // }
     
     .commentsz {
       text-align: start;
@@ -102,26 +80,76 @@ export const Container = styled.div`
     }
     .readPost span{
       padding-left: 10px;
-      height: 80px;
+      height: auto;
       overflow: hidden;
       text-overflow:clip;
     }
     .readPost div{
       display: flex;
+      // padding: 10px;
+      //width: 95%;
+    }
+    .readdiv {
       padding: 10px;
-      width: 95%;
     }
     .readPost div img{
       padding-left: 0;
     }
-    
-    .commentsz textarea{
-      height: 80px;
-      width: 760px;
+
+    .right-wrap {
+      position: absolute;
+      margin-left: 400px;
+    }
+    .editmenu-wrap {
+      position:relative;
+      margin-left:320px;
+      padding: 0px;
+      border-radius: 5px;
+    }
+
+   .editmenu {
+      position:absolute;
+      right: 40px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid white;
+      padding: 0px;
+      border-radius: 5px;
+      width:50px; 
+      left: 15px;
+      overflow: hidden;
+   }
+
+   .editmenu button {
+      border: none;
+      background-color: white;
+      cursor: pointer;
+   }
+
+   .editmenu button:hover {
+    text-decoration: underline;
+  }
+
+  .right-wrap {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+    #comment-area {
+        height: 80px;
+        width: 760px;
+        background-color: #f0f0f0;
+        font-family: 'Noto Sans KR', sans-serif;
+        border-radius: 5px;
+        padding: 10px;
+    }
+    #edit-area {
       background-color: #f0f0f0;
       font-family: 'Noto Sans KR', sans-serif;
       border-radius: 5px;
       padding: 10px;
+      height: auto;
+      width:600px;
     }
     .commentsz div{
       display: flex;
@@ -130,10 +158,6 @@ export const Container = styled.div`
     .commentsz div label{
       line-height: 3rem;
     }
-    // .commentsz div button{
-    //   width: 30%;
-    //   max-width: 150px;
-    // }
 
     .btn-container {
         display: flex;
@@ -156,15 +180,18 @@ export const Container = styled.div`
       white-space: nowrap;
       width:100%;
     }
-    
-    button:hover,
-    button:focus {
+
+    .btn-container button:hover,
+    .active-btn button:hover,
+    .active-btn button:focus,
+    .btn-container button:focus {
       background: #0F62FE; 
       border: none;
       color: #fff;
     }
 
-    button {
+    .btn-container button,
+    .active-btn button {
       // width: 50%;
       padding: 10px;
       cursor: pointer;
@@ -176,6 +203,11 @@ export const Container = styled.div`
 
     .active-btn {
       text-align: right;
+    }
+
+    .active-btn button {
+      margin-top: -10px;
+      margin-right: -10px;
     }
     
     .commentsz img {
