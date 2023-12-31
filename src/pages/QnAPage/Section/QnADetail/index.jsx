@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { Container } from "./styled";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { PostDispatchContext } from "../../../../App";
 import { CiViewList } from "react-icons/ci";
 import { FaRegThumbsUp } from "react-icons/fa6";
@@ -13,15 +13,37 @@ const QnADetail = () => {
     const {id} = useParams();
     const navigate = useNavigate();
     const [data, setData] = useState();
+    const [comment, setComment] = useState("");
+    const commentInput = useRef();
     const {onRemove} = useContext(PostDispatchContext);
+
+    const handelCommentChange = (e) => {
+        setComment(e.target.value);
+    };
+
+    const handleCommentSubmit = async() => {
+        try{
+            if(comment.length < 1){ // 댓글 최소 1글자 이상
+                commentInput.current.focus();
+                return;
+            }
+
+            await axios.post(`/api/query/comment/create/${id}`, {
+                content: comment,
+            });
+            fetchPostDetail();
+            setComment('');
+        }catch(error){
+            console.error('comment error:', error.message);
+        }
+    };
 
     const handleRemove = async(e) => {
         e.preventDefault();
         
         if(window.confirm('해당 게시글을 삭제하시겠습니까?')){
             try {
-                const response = await axios.delete(`/api/query/delete/${id}`);
-                console.log('deleted successfully:', response.data);
+                await axios.delete(`/api/query/delete/${id}`);
                 onRemove(id);
             } catch (error) {
                 console.error('Error deleting post:', error.message);
@@ -42,8 +64,9 @@ const QnADetail = () => {
         try {
           const response = await axios.get(`/api/query/detail/${id}`);
           const postData = response.data;
-          //console.log("post >>",postData);
+          //console.log("post >>",postData.post.comments);
           setData(postData);
+          //console.log("data>>",data.post.comments);
         } catch (error) {
           console.error('Error post detail:', error.message);
         }
@@ -125,36 +148,37 @@ const QnADetail = () => {
                 </div>
 
                 <div class="commentsz">
-                    <p>댓글 몇개</p>
+                    <p>댓글 {data.post.comments.length}개</p>
 
-                    <section class="readPost">
+                    {data.post.comments.map((it) => (
+                        <section class="readPost" key={it.id}>
                         <div>
-                            {/* <div>계정 프로필 이미지</div> */}
+                            <img src={it.writer.profile_url}/>
                             <span>
-                                <p><b>계정 이름</b></p>
-                                <p>댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용</p>
-                                <small>댓글 시간</small>
+                                <p><b>{it.writer.nickname}</b></p>
+                                <p>{it.content}</p>
+                                <small>{new Date(it.created_at).toLocaleString()}</small>
                             </span>
                         </div>
                         <BsThreeDotsVertical/>
                     </section>
-                    <section class="readPost">
-                        <div>
-                            {/* <div>계정 프로필 이미지</div> */}
-                            <span>
-                                <p><b>계정 이름</b></p>
-                                <p>댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용</p>
-                                <small>댓글 시간</small>
-                            </span>
-                        </div>
-                        <BsThreeDotsVertical/>
-                    </section>
+                    ))}
+                    
+                    
 
-                    <textarea name="" id="" cols="10" rows="5" placeholder="댓글을 입력하세요"></textarea>
+                    <textarea 
+                        name=""
+                        onChange={handelCommentChange}
+                        value={comment}
+                        ref={commentInput}
+                        cols="10"
+                        rows="5" 
+                        placeholder="댓글을 입력하세요">
+                    </textarea>
                     
                 </div>
                 <div className="active-btn">
-                        <button>등록하기</button>
+                        <button onClick={handleCommentSubmit}>등록하기</button>
                 </div>
 
             </article>

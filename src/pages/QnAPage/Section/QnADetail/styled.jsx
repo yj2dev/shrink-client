@@ -125,7 +125,7 @@ export const Container = styled.div`
     }
     .commentsz div{
       display: flex;
-      justify-content: space-between;
+      // justify-content: space-between;
     }
     .commentsz div label{
       line-height: 3rem;
@@ -177,6 +177,15 @@ export const Container = styled.div`
     .active-btn {
       text-align: right;
     }
-  
+    
+    .commentsz img {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 2px solid #ccc;
+        transition: 0.2s;
+        box-sizing: border-box;
+        padding: 2px;
+    }
    
 `;
