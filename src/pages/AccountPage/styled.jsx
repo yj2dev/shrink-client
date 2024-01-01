@@ -97,8 +97,16 @@ export const Container = styled.div`
     background-color: #fff;
     box-shadow: rgba(100, 100, 111, 0.2) 0 8px 28px 0;
 
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+
     section.etc-setting {
       width: 520px;
+
+      @media (max-width: 768px) {
+        width: 100%;
+      }
     }
 
     .profile-img-setting {
@@ -234,7 +242,8 @@ export const Container = styled.div`
         border: none;
         cursor: pointer;
         position: absolute;
-        right: 140px;
+        //right: 140px;
+        left: 368px;
         top: 2px;
         font-size: 18px;
         color: #6a6a6a;
