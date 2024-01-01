@@ -11,6 +11,7 @@ export const Container = styled.div`
         margin: 50px auto;
         padding: 40px;
         margin-left: 300px;
+        background-color: white;
     }
 
     input[type=text]{
@@ -22,6 +23,7 @@ export const Container = styled.div`
         background-color: #f0f0f0;
         border: none;
         border-bottom: 1px solid #d5d5d5;
+        background-color: white;
     }
     
     textarea{
@@ -33,6 +35,7 @@ export const Container = styled.div`
         margin-bottom: 20px;
         background-color: #f0f0f0;
         font-family: 'Noto Sans KR', sans-serif;
+        background-color: white;
     }
 
     textarea:focus{
