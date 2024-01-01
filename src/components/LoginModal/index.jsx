@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../../state/selectors/userSelectors";
@@ -11,6 +11,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
 
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [wrongLogin, setWrongLogin] = useState("");
 
   // 버튼눌러서 형식 검사하기 전에는 올바른 상태로 인식
   const [phoneValid, setPhoneValid] = useState(true);
@@ -24,15 +25,16 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
   const handlePhone = (e) => {
     setPhone(e.target.value);
     setPhoneExist(true);
-    setPhoneValid(true);
+    // setPhoneValid(true);
   };
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
     setPasswordExist(true);
-    setPasswordValid(true);
+    // setPasswordValid(true);
   };
   const onClickLogin = (e) => {
+    setWrongLogin("");
     // 정규표현식 만족하는지 확인
     const phoneRegex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
     const passwordRegex =
@@ -40,10 +42,12 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
 
     if (phoneRegex.test(phone)) {
       setPhoneValid(true);
+      console.log("phonevalid changed to true");
     } else if (phone.length === 0) {
       setPhoneExist(false);
     } else {
       setPhoneValid(false);
+      console.log("phonevalid changed to false", phoneValid);
     }
 
     if (passwordRegex.test(password)) {
@@ -74,9 +78,22 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           onClose();
         })
         .catch((err) => {
-          console.log(err);
+          console.log("err >> ", err);
+          if (err.response.data.message === "사용자가 존재하지 않습니다.") {
+            setWrongLogin("phonePB");
+            setPhone("");
+            setPassword("");
+          } else if (err.response.data.message === "비밀번호가 일치하지 않습니다.") {
+            setWrongLogin("passwordPB");
+            setPassword("");
+          } else {
+            setWrongLogin("");
+          }
         });
     }
+    console.log("phoneValid >> ", phoneValid
+              , "passwordValid >> ", passwordValid
+              , "wrongLogin >> ", wrongLogin);
   };
 
   return (
@@ -98,7 +115,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           />
         </div>
         <div className="errorMessageWrap">
-          {!phoneValid && <div>올바른 전화번호를 입력해주세요.</div>}
+          {!phoneValid && (<div>올바른 전화번호를 입력해주세요.</div>)}
         </div>
 
         <div style={{ marginTop: "20px" }} className="inputTitle">
@@ -124,16 +141,22 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
         <div className="existErrorMessage">
           <div>
             {!phoneExist && (
-              <div className="phoneExistErrorMessage">
-                전화번호를 입력해주세요.
-              </div>
+              <div className="phoneExistErrorMessage">전화번호를 입력해주세요.</div>
             )}
           </div>
           <div>
             {phoneExist && !passwordExist && (
-              <div className="passwordExistErrorMessage">
-                비밀번호를 입력해주세요.
-              </div>
+              <div className="passwordExistErrorMessage">비밀번호를 입력해주세요.</div>
+            )}
+          </div>
+          <div>
+            {wrongLogin === "phonePB" && (
+              <div className="loginPBMessage">전화번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</div>
+            )}
+          </div>
+          <div>
+            {wrongLogin === "passwordPB" && (
+              <div className="loginPBMessage">비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</div>
             )}
           </div>
         </div>
