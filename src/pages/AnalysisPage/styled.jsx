@@ -2,17 +2,17 @@ import styled from "styled-components";
 
 export const AnalysisResultMenu = styled.div`
   position: fixed;
-  width: 400px;
-  right: -400px;
+  width: 320px;
+  right: -320px;
   height: 100%;
   top: 78px;
   background-color: rgb(250, 250, 250);
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  transition: 0.4s ease;
+  transition: 0.2s ease all;
   z-index: 50;
 
   &.active {
-    right: 0px;
+    right: 0;
   }
   .item-details {
     background-color: #f8f8f8;

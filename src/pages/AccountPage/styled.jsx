@@ -4,6 +4,67 @@ export const NotDelCheckContainer = styled.div`
   display: flex;
   flex-direction: column;
 
+  .check-delete-account-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    input[type="checkbox"] {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      height: 20px;
+      width: 20px;
+      border-radius: 100%;
+      border: 3px solid #c3c2cc;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      position: relative;
+    }
+
+    input[type="checkbox"]::after {
+      content: "";
+      width: 6px;
+      height: 3px;
+      top: 3px;
+      left: 2px;
+      border-bottom: 3px solid #c3c2cc;
+      border-left: 3px solid #c3c2cc;
+      position: absolute;
+      transform: rotate(-45deg);
+    }
+
+    input[type="checkbox"]:hover::before {
+      cursor: pointer;
+      content: "";
+      width: 30px;
+      height: 30px;
+      background-color: black;
+      position: absolute;
+      border-radius: 100%;
+      opacity: 0.1;
+      top: -8px;
+      left: -8px;
+    }
+
+    input[type="checkbox"]:checked {
+      border: 3px solid #009432;
+      background-color: #009432;
+    }
+
+    input[type="checkbox"]:checked::after {
+      border-bottom: 3px solid #ffffff;
+      border-left: 3px solid #ffffff;
+    }
+
+    label {
+      margin-left: 8px;
+    }
+    label:hover {
+      cursor: pointer;
+    }
+  }
+
   .delete-account-input {
     display: flex;
     flex-direction: column;
