@@ -40,11 +40,24 @@ export const LeftSection = styled.div`
     display: flex;
     align-items: center;
     cursor: pointer;
+
+    @media (max-width: 768px) {
+      position: fixed;
+      height: 78px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      //top: 0;
+    }
   }
 
   .logo-img {
     //width: 32px;
     //height: 32px
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+
     height: 78px;
     margin-right: 10px;
   }
@@ -84,11 +97,11 @@ export const LeftSection = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
-    order: -1;
-    flex-grow: 1;
-    justify-content: center;
-  }
+  //@media (max-width: 768px) {
+  //order: -1;
+  //flex-grow: 1;
+  //justify-content: center;
+  //}
 `;
 
 export const RightSection = styled.div`

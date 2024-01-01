@@ -292,7 +292,7 @@ export const Container = styled.div`
 
       //input[type="password"] {
       input {
-        width: 400px;
+        width: 350px;
         font: small-caption;
         padding-right: 48px;
         margin: 4px 8px 16px 0;
@@ -304,7 +304,7 @@ export const Container = styled.div`
         cursor: pointer;
         position: absolute;
         //right: 140px;
-        left: 368px;
+        left: 310px;
         top: 2px;
         font-size: 18px;
         color: #6a6a6a;
