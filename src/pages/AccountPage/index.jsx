@@ -387,12 +387,22 @@ const AccountPage = () => {
             <br />
           </span>
           <NotDelCheckContainer>
-            <button
-              onClick={() => setCheckDeleteAccount(!checkDeleteAccount)}
-              className={checkDeleteAccount ? "active" : ""}
-            >
-              복구할 수 없습니다
-            </button>
+            <div className="check-delete-account-wrapper">
+              <input
+                type="checkbox"
+                id="check-delete-account"
+                checked={checkDeleteAccount}
+                onClick={() => setCheckDeleteAccount(!checkDeleteAccount)}
+              />
+              <label htmlFor="check-delete-account">복구할 수 없습니다</label>
+            </div>
+
+            {/*<button*/}
+            {/*  onClick={() => setCheckDeleteAccount(!checkDeleteAccount)}*/}
+            {/*  className={checkDeleteAccount ? "active" : ""}*/}
+            {/*>*/}
+            {/*  복구할 수 없습니다*/}
+            {/*</button>*/}
             <br />
 
             <div
@@ -508,29 +518,37 @@ const AccountPage = () => {
                 닉네임 변동사항이 없습니다.
               </Message>
             )}
-            {statusNickname && statusNickname.void && (
-              <Message style={{ color: "#e74c3c" }}>
-                닉네임이 입력되지 않았습니다.
-              </Message>
-            )}
-            {statusNickname && statusNickname.trim && (
-              <Message style={{ color: "#e74c3c" }}>
-                닉네임에 공백이 포함되어 있습니다. <br />
-                공백을 제거 후 다시 시도하세요
-              </Message>
-            )}
-            {statusNickname && statusNickname.leng && (
-              <Message style={{ color: "#e74c3c" }}>
-                닉네임이 입력 최대범위를 초과했습니다 <br />
-                12글자 이하로 입력해주세요
-              </Message>
-            )}
-            {statusNickname && statusNickname.special && (
-              <Message style={{ color: "#e74c3c" }}>
-                특수문자가 포함되어 있습니다 <br />
-                제거 후 다시 시도하세요.
-              </Message>
-            )}
+            {statusNickname &&
+              !statusNickname.success &&
+              statusNickname.void && (
+                <Message style={{ color: "#e74c3c" }}>
+                  닉네임이 입력되지 않았습니다.
+                </Message>
+              )}
+            {statusNickname &&
+              !statusNickname.success &&
+              statusNickname.trim && (
+                <Message style={{ color: "#e74c3c" }}>
+                  닉네임에 공백이 포함되어 있습니다. <br />
+                  공백을 제거 후 다시 시도하세요
+                </Message>
+              )}
+            {statusNickname &&
+              !statusNickname.success &&
+              statusNickname.leng && (
+                <Message style={{ color: "#e74c3c" }}>
+                  닉네임이 입력 최대범위를 초과했습니다 <br />
+                  12글자 이하로 입력해주세요
+                </Message>
+              )}
+            {statusNickname &&
+              !statusNickname.success &&
+              statusNickname.special && (
+                <Message style={{ color: "#e74c3c" }}>
+                  특수문자가 포함되어 있습니다 <br />
+                  제거 후 다시 시도하세요.
+                </Message>
+              )}
             {statusNickname && statusNickname.success && (
               <Message style={{ color: "#009432" }}>
                 닉네임이 성공적으로 변경되었습니다.

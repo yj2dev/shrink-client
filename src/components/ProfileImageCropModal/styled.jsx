@@ -37,17 +37,22 @@ export const Container = styled.div`
       overflow: hidden;
       width: 0;
       display: none;
-      margin-top: 0;
+      //margin-top: 0;
 
       &:not(:disabled) {
         margin-top: 16px;
         display: block;
         width: 100%;
       }
+
+      //.hidden 사용안함
     }
 
     button.cancel {
       color: #ff5058;
+    }
+    button.cancel.active {
+      margin-top: 16px;
     }
     button.submit:hover {
       background-color: #009432;

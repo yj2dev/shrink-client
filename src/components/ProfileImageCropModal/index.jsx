@@ -229,7 +229,12 @@ const ProfileImageCropModal = ({ show, close, initUserInfo }) => {
           >
             변경
           </button>
-          <button className="cancel" onClick={handleClose}>
+          <button
+            className={`cancel ${
+              !imgRef.current || !completedCrop ? "" : "active"
+            }`}
+            onClick={handleClose}
+          >
             취소
           </button>
         </section>

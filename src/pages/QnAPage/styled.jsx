@@ -59,8 +59,11 @@ export const Container = styled.div`
     .board-table {
         font-size: 13px;
         width: 100%;
+        // border-collapse: separate;
+        // border-spacing: 0;
         border-top: 1px solid #ccc;
         border-bottom: 1px solid #ccc;
+        
     }
   
     .board-table a {
@@ -73,9 +76,9 @@ export const Container = styled.div`
     .board-table a:hover {
         text-decoration: underline;
     }
-    .board-table th {
-        text-align: center;
-    }
+    // .board-table th {
+    //     text-align: center;
+    // }
   
     .board-table .th-num {
         width: 100px;

@@ -17,7 +17,15 @@ import { userState } from "../../state/selectors/userSelectors";
 import Modal from "../../components/Modal";
 
 const Header = () => {
-  // const [user, setUser] = useState(localStorage.getItem("user") !== null);
+  const [isLogoHover, setIsLogoHover] = useState(false);
+
+  const handleLogoEnter = () => {
+    setIsLogoHover(true);
+  };
+
+  const handleLogoLeave = () => {
+    setIsLogoHover(false);
+  };
 
   const [user, setUser] = useRecoilState(userState);
 
@@ -104,9 +112,19 @@ const Header = () => {
       <ContainerBlur />
       <Container>
         <LeftSection>
-          <div className="logo-section" onClick={onClickLogo}>
+          <div
+            onClick={onClickLogo}
+            className="logo-section"
+            onMouseEnter={handleLogoEnter}
+            onMouseLeave={handleLogoLeave}
+          >
             <img src={logoImg} alt="logo" className="logo-img" />
-            <h1>줄었슈링크</h1>
+            <div className="content">
+              <h1 className={isLogoHover ? "active" : ""}>줄었슈링크</h1>
+              <h3 className={isLogoHover ? "active" : ""}>
+                가격 변동 없는 상품도 다시 보자
+              </h3>
+            </div>
           </div>
         </LeftSection>
         <RightSection>
