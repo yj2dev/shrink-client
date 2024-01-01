@@ -7,7 +7,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import axios from 'axios';
 import { useRecoilState } from "recoil";
 import { userState } from "../../../../state/selectors/userSelectors";
-import { FaRegThumbsUp, FaRegThumbsDown, FaThumbsUp, FaThumbsDown } from "react-icons/fa";
+import { FaRegThumbsUp, FaRegThumbsDown} from "react-icons/fa";
 
 
 const QnADetail = () => {
@@ -23,8 +23,6 @@ const QnADetail = () => {
     const [editingCommentContent, setEditingCommentContent] = useState(""); 
     const {onRemove} = useContext(PostDispatchContext);
     const [user, setUser] = useRecoilState(userState);
-    const [isLike, setIsLike] = useState(0);
-    const [isDislike, setIsDislike] = useState(0);
 
     const handelCommentChange = (e) => {
         setComment(e.target.value);
@@ -32,6 +30,11 @@ const QnADetail = () => {
 
     const handleCommentSubmit = async() => {
         try{
+            if(!user){
+                window.confirm("로그인 후 이용해주세요.");
+                window.location.reload();
+                return;
+            }
             if(comment.length < 1){ // 댓글 최소 1글자 이상
                 commentInput.current.focus();
                 return;
@@ -101,11 +104,8 @@ const QnADetail = () => {
         try {
           const response = await axios.get(`/api/query/detail/${id}`);
           const postData = response.data;
-          console.log("post >>",postData);
+          //console.log("post >>",postData);
           setData(postData);
-          setIsLike(postData.post.like);
-          setIsDislike(postData.post.dislike);
-          //console.log("data>>",isLike);
           //console.log("data >>", data.post.writer.nickname);
         } catch (error) {
           console.error('Error post detail:', error.message);
@@ -119,7 +119,6 @@ const QnADetail = () => {
                 return;
             } 
             await axios.post(`/api/query/like/${id}`);
-            setIsLike(!isLike);
             fetchPostDetail();
         } catch (error) {
             console.error('Error liking post:', error.message);
@@ -133,10 +132,35 @@ const QnADetail = () => {
                 return;
             } 
             await axios.post(`/api/query/dislike/${id}`);
-            setIsDislike(!isDislike);
             fetchPostDetail();
         } catch (error) {
             console.error('Error disliking post:', error.message);
+        }
+    }
+
+    const commentLike = async(commentId) => {
+        try {
+            if(!user){
+                window.confirm("로그인 후 이용해주세요.");
+                return;
+            } 
+            await axios.post(`/api/query/comment/like/${commentId}`);
+            fetchPostDetail();
+        } catch (error) {
+            console.error('Error liking comment:', error.message);
+        }
+    }
+
+    const commentDislike = async(commentId) => {
+        try {
+            if(!user){
+                window.confirm("로그인 후 이용해주세요.");
+                return;
+            } 
+            await axios.post(`/api/query/comment/dislike/${commentId}`);
+            fetchPostDetail();
+        } catch (error) {
+            console.error('Error disliking comment:', error.message);
         }
     }
 
@@ -166,11 +190,12 @@ const QnADetail = () => {
 
                     <div class="dates">
                         <p>{new Date(data.post.created_at).toLocaleString()}</p>
-                        <p style={{marginRight: '70px'}}>{data.post.writer.nickname}</p>
+                        <p id="postuser">
+                            <img src={data.post.writer.profile_url} alt="profile-img"/>
+                            <span style={{marginLeft: '5px'}}>{data.post.writer.nickname}</span>
+                        </p>
                         <div>
                             <p><b>조회수</b>{data.post.view}</p>
-                            {/* <p><b>좋아요</b>{data.post.like}</p>
-                            <p><b>싫어요</b>{data.post.dislike}</p> */}
                         </div>
                     </div>
                 </div>
@@ -188,22 +213,22 @@ const QnADetail = () => {
                         </button>
 
                         <div className="like-container">
-                            <div class="wrapper">
+                                <div class="wrapper">
                                         <div class="action" onClick={boardLike}>
-                                            {isLike && user && data.post.writer.nickname === user.nickname ? <FaThumbsUp/> : <FaRegThumbsUp/>}
+                                            <FaRegThumbsUp/>
                                             <div class="count">
                                                 {data.post.like}
                                             </div>
                                         </div>
                                         <div class="separator"></div>
                                         <div class="action" onClick={boardDislike}>
-                                            {isDislike && user && data.post.writer.nickname === user.nickname? <FaThumbsDown/> : <FaRegThumbsDown/>}
+                                            <FaRegThumbsDown/>
                                             <div class="count">
                                                 {data.post.dislike}
                                             </div>
                                         </div>
                                 </div>
-                            </div>
+                        </div>
  
 
                         {user && data.post.writer.nickname === user.nickname ? (
@@ -242,10 +267,29 @@ const QnADetail = () => {
                                     <p>{it.content}</p>
                                     <small>{new Date(it.created_at).toLocaleString()}</small>
                                     </p>
+                                    
                                 )}
-                                
                             </span>
                         </div>
+                        {editingCommentId === it.id ? (<></>) : (
+                                <div className="like-container" id="commentlike-container">
+                                    <div class="wrapper">
+                                            <div class="action" onClick={() => commentLike(it.id)}>
+                                                <FaRegThumbsUp/>
+                                                <div class="count">
+                                                    {it.likes_count}
+                                                </div>
+                                            </div>
+                                            <div class="separator"></div>
+                                            <div class="action" onClick={() => commentDislike(it.id)}>
+                                                <FaRegThumbsDown/>
+                                                <div class="count">
+                                                    {it.dislikes_count}
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>                              
+                        )}
                         <div className="right-wrap">
                         <div className="editmenu-wrap">
                         {user && it.writer.nickname === user.nickname ? (

@@ -220,7 +220,8 @@ export const Container = styled.div`
       margin-right: -10px;
     }
     
-    .commentsz img {
+    .commentsz img,
+    .dates img {
         width: 42px;
         height: 42px;
         border-radius: 50%;
@@ -228,6 +229,20 @@ export const Container = styled.div`
         transition: 0.2s;
         box-sizing: border-box;
         padding: 2px;
+    }
+
+    #postuser {
+      margin-right:70px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+    }
+
+    #commentlike-container {
+      height:30px;
+      margin-top: 70px;
     }
 
     .like-container {
