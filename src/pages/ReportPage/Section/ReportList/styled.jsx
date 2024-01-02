@@ -29,13 +29,17 @@ export const Container = styled.div`
     }
 
     img {
-      //height: 100%;
+      //box-shadow: 4px 0 4px -8px rgba(0, 0, 0, 0.2);
+      //border: 2px dashed #ddd;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      box-sizing: border-box;
       height: 148px;
       width: 148px;
 
       @media (max-width: 768px) {
-        //height: 120px;
-        //width: 120px;
+        height: 90px;
+        width: 90px;
       }
     }
 
@@ -53,16 +57,18 @@ export const LeftArticle = styled.article`
   height: 100%;
 
   .undefined-image {
-    background-color: rgba(0, 0, 0, 0.1);
-    //border-radius: 8px 0 0 8px;
+    border: 2px dashed #ddd;
     border-radius: 8px;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.04);
+    //border-radius: 8px 0 0 8px;
     width: 148px;
     height: 148px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 72px;
-    color: #bcbcbc;
+    color: rgba(0, 0, 0, 0.1);
 
     @media (max-width: 768px) {
       height: 90px;
@@ -151,11 +157,13 @@ export const RightArticle = styled.article`
     const status = props.type;
 
     switch (status) {
-      case "보류":
+      case "등록":
+        return "#009432";
+      case "저위험":
         return "#FF9C08";
-      case "의심":
+      case "중위험":
         return "#fd6202";
-      case "슈링크":
+      case "고위험":
         return "#ff5058";
       default:
         return "#009432";

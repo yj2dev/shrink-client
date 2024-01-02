@@ -1,4 +1,4 @@
-import { Container, ReportListSection, ReportWriteSection } from "./styled";
+import { Container, ReportWriteSection } from "./styled";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ReportList from "./Section/ReportList";
@@ -13,9 +13,45 @@ const ReportPage = () => {
   const [showWrite, setShowWrite] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
 
-  const getMoreReports = () => {
-    console.log("contentCnt >> ", contentCnt);
+  const [productName, setProductName] = useState("");
+  const [productWeight, setProductWeight] = useState(1);
+  const [productPrice, setProductPrice] = useState(100);
+  const [productContent, setProductContent] = useState("");
+  const [unit, setUnit] = useState("g");
+  const [customUnit, setCustomUnit] = useState("");
 
+  const handleUnitChange = (e) => {
+    const selectedUnit = e.target.value;
+    setUnit(selectedUnit);
+  };
+
+  const renderCustomUnitInput = () => {
+    if (unit === "custom") {
+      return (
+        <>
+          <label>
+            사용자 단위 입력<span className="require-label">*</span>
+          </label>
+          <input
+            minLength={1}
+            maxLength={12}
+            type="text"
+            placeholder="단위 입력"
+            value={customUnit}
+            onChange={(e) => setCustomUnit(e.target.value)}
+          />
+        </>
+      );
+    }
+    return null;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmitReport();
+  };
+
+  const getMoreReports = () => {
     if (isLoading || !hasMore) return;
 
     setIsLoading(true);
@@ -48,6 +84,21 @@ const ReportPage = () => {
     getReportList();
   }, []);
 
+  const handleScroll = () => {
+    const scrollPosition =
+      window.innerHeight + document.documentElement.scrollTop;
+    const bottomPosition = document.documentElement.offsetHeight * 0.8;
+
+    if (scrollPosition >= bottomPosition && !isLoading && hasMore) {
+      getMoreReports();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [contentCnt, isLoading, hasMore]);
+
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -61,7 +112,7 @@ const ReportPage = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [contentCnt]);
+  }, []);
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
@@ -111,16 +162,10 @@ const ReportPage = () => {
       weight: productWeight,
       price: productPrice,
       content: productContent,
+      unit,
     });
 
-    console.log("selectedFiles >> ", selectedFiles);
-
-    // fd.append("image", selectedFiles);
-
-    // FormData는 Key를 중복으로 넣을 수 있다.
     selectedFiles.forEach((file) => {
-      console.log("file >> ", file);
-
       fd.append("image", file);
     });
 
@@ -133,18 +178,10 @@ const ReportPage = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         getReportList();
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
-
-  const [productName, setProductName] = useState("");
-  const [productWeight, setProductWeight] = useState(0);
-  const [productPrice, setProductPrice] = useState(0);
-  const [productContent, setProductContent] = useState("");
 
   const onChangeProductName = (e) => {
     setProductName(e.target.value);
@@ -163,45 +200,93 @@ const ReportPage = () => {
   return (
     <Container>
       <div className="report-wrapper">
-        <h1>슈링크플레이션으로 의심가는 제품을 신고해주세요!!</h1>
-        <button onClick={() => setShowWrite(!showWrite)}>신고 작성</button>
-        <ReportWriteSection>
-          {showWrite && (
-            <>
-              <input
-                type="file"
-                multiple
-                onChange={handleFileChange}
-                accept="image/*"
-              />
+        <h1>
+          가격 변동 없는 <br />
+          상품도 다시 보자
+        </h1>
 
-              <input
-                type="text"
-                onChange={onChangeProductName}
-                value={productName}
-                placeholder="상품명"
-              />
-              <input
-                type="text"
-                onChange={onChangeProductWeight}
-                value={productWeight}
-                placeholder="중량"
-              />
-              <input
-                type="text"
-                onChange={onChangeProductPrice}
-                value={productPrice}
-                placeholder="가격"
-              />
-              <input
-                type="text"
-                onChange={onChangeProductContent}
-                value={productContent}
-                placeholder="내용"
-              />
-              <button onClick={onSubmitReport}>신고하기</button>
-            </>
-          )}
+        <button
+          className={`report-write-btn ${showWrite && "active"}`}
+          onClick={() => setShowWrite(!showWrite)}
+        >
+          슈링크 제품 신고하기
+        </button>
+
+        <ReportWriteSection className={showWrite && "active"}>
+          <form onSubmit={handleSubmit}>
+            <label>
+              상품명<span className="require-label">*</span>
+            </label>
+            <input
+              type="text"
+              maxLength="32"
+              value={productName}
+              onChange={onChangeProductName}
+              placeholder="상품명"
+              required
+            />
+
+            <div className="weight-wrapper">
+              <div className="weight-item">
+                <label>
+                  중량<span className="require-label">*</span>
+                </label>
+                <input
+                  type="number"
+                  value={productWeight}
+                  onChange={onChangeProductWeight}
+                  min={0}
+                  placeholder="중량"
+                  required
+                />
+              </div>
+
+              <div className="weight-item">
+                <label>
+                  단위<span className="require-label">*</span>
+                </label>
+                <select value={unit} onChange={handleUnitChange} required>
+                  <option value="g">g</option>
+                  <option value="kg">kg</option>
+                  <option value="ml">ml</option>
+                  <option value="개">개</option>
+                  <option value="custom">사용자 입력</option>
+                </select>
+              </div>
+              <div className="weight-item">{renderCustomUnitInput()}</div>
+            </div>
+
+            <label>
+              가격<span className="require-label">*</span>
+            </label>
+            <input
+              type="number"
+              value={productPrice}
+              min={100}
+              max={99999999}
+              onChange={onChangeProductPrice}
+              placeholder="가격"
+              required
+            />
+
+            <label>신고 내용</label>
+            <textarea
+              maxLength="1000"
+              value={productContent}
+              onChange={onChangeProductContent}
+              placeholder="내용"
+            />
+
+            <label>사진</label>
+            <input
+              type="file"
+              multiple
+              onChange={handleFileChange}
+              accept="image/*"
+            />
+
+            <button type="submit">신고하기</button>
+          </form>
         </ReportWriteSection>
 
         <ReportList reports={reportList} />
