@@ -1,6 +1,7 @@
 import { Container, ReportListSection, ReportWriteSection } from "./styled";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import ReportList from "./Section/ReportList";
 
 const ReportPage = () => {
   const [reportList, setReportList] = useState([]);
@@ -15,6 +16,8 @@ const ReportPage = () => {
       .get("/api/report/selectall")
       .then(({ data }) => {
         if (data.status === "success") {
+          console.log(data.response);
+
           setReportList(data.response);
         }
       })
@@ -102,17 +105,7 @@ const ReportPage = () => {
         )}
       </ReportWriteSection>
 
-      <ReportListSection>
-        {reportList.map((report) => (
-          <div className="item" key={report.id}>
-            <div>{report.product}</div>
-            <div>{report.weight}</div>
-            <div>{report.price}</div>
-            <div>{report.content}</div>
-            <div>{report.created_at}</div>
-          </div>
-        ))}
-      </ReportListSection>
+      <ReportList reports={reportList} />
     </Container>
   );
 };

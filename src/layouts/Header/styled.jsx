@@ -73,7 +73,7 @@ export const LeftSection = styled.div`
       //font-size: 2rem;
       padding: 0;
       margin: 0;
-      transition: 0.5s ease all;
+      transition: 0.4s ease all;
     }
 
     h1.active {
@@ -86,7 +86,7 @@ export const LeftSection = styled.div`
       padding: 0;
       font-size: 0.75rem;
       height: 0;
-      transition: 0.5s ease all;
+      transition: 0.4s ease all;
     }
 
     h3.active {
