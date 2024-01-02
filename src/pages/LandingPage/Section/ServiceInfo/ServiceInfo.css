@@ -34,7 +34,7 @@
     flex-direction: column; /* 주축 방향을 세로로 변경 */
     align-items: center;
     font-weight: 700;
-    color: #4c67ff;
+    color: #0F62FE;
     font-size: 50px;
     margin: 1rem;
   }
@@ -68,9 +68,9 @@
     .ServiceInfo-subheading {
         font-size: 3.6111vw;
     }
-      .ServiceInfo-subheading > span {
+    .ServiceInfo-subheading > span {
         margin-top: 1.6667vw;
-        font-size: 1.9800vw; 
+        font-size: 1.9800vw;
     }
     .ServiceInfo-heading{
         max-width: 900px;
