@@ -24,10 +24,19 @@ export const Container = styled.div`
     height: 180px;
     position: relative;
 
+    @media (max-width: 768px) {
+      height: 120px;
+    }
+
     img {
       //height: 100%;
       height: 148px;
       width: 148px;
+
+      @media (max-width: 768px) {
+        //height: 120px;
+        //width: 120px;
+      }
     }
 
     article {
@@ -54,11 +63,20 @@ export const LeftArticle = styled.article`
     align-items: center;
     font-size: 72px;
     color: #bcbcbc;
+
+    @media (max-width: 768px) {
+      height: 90px;
+      width: 90px;
+    }
   }
 `;
 export const MiddleArticle = styled.article`
   width: 100%;
   padding: 0 16px;
+
+  @media (max-width: 768px) {
+    padding: 0 8px;
+  }
 
   //border: 1px dashed red;
 
@@ -67,6 +85,11 @@ export const MiddleArticle = styled.article`
   .name {
     border-bottom: 2px solid #ddd;
     padding: 8px 0;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+      padding: 4px 0;
+    }
   }
   .price {
     font-size: 54px;
@@ -74,12 +97,23 @@ export const MiddleArticle = styled.article`
     position: absolute;
     bottom: 0;
     right: 16px;
+
+    @media (max-width: 768px) {
+      font-size: 28px;
+      right: 8px;
+    }
   }
 
   .weight {
     position: absolute;
     right: 16px;
     top: 50px;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+      right: 8px;
+      top: 30px;
+    }
   }
   .content {
   }
@@ -87,6 +121,12 @@ export const MiddleArticle = styled.article`
     position: absolute;
     top: 50px;
     left: 16px;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+      left: 8px;
+      top: 30px;
+    }
   }
 `;
 
@@ -102,16 +142,21 @@ export const RightArticle = styled.article`
   font-size: 24px;
   border-radius: 0 8px 8px 0;
 
+  @media (max-width: 768px) {
+    font-size: 14px;
+    width: 58px;
+  }
+
   background-color: ${(props) => {
     const status = props.type;
 
     switch (status) {
-      case "접수":
+      case "보류":
         return "#FF9C08";
-      case "처리중":
+      case "의심":
         return "#fd6202";
-      case "완료":
-        return "#009432";
+      case "슈링크":
+        return "#ff5058";
       default:
         return "#009432";
     }

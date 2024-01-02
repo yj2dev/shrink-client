@@ -46,7 +46,8 @@ const ReportItem = ({ report }) => {
         <div className="price">{intOfKr(report.price)}</div>
         {/*<div className="content">{report.content}</div>*/}
       </MiddleArticle>
-      <RightArticle type={report.status}>{report.status}</RightArticle>
+      {/*<RightArticle type={report.status}>{report.status}</RightArticle>*/}
+      <RightArticle type={report.status}>슈링크</RightArticle>
     </div>
   );
 };
