@@ -8,6 +8,9 @@ const ReportItem = ({ report }) => {
   const [timeText, setTimeText] = useState(timeAgo(report.created_at));
 
   useEffect(() => {
+    // 신고가 추가될 때마다 즉시 시간 텍스트를 업데이트
+    setTimeText(timeAgo(report.created_at));
+
     const intervalTime = setInterval(() => {
       setTimeText(timeAgo(report.created_at));
     }, 1000);
@@ -15,7 +18,7 @@ const ReportItem = ({ report }) => {
     return () => {
       clearInterval(intervalTime);
     };
-  }, []);
+  }, [report.created_at]); // report.created_at이 변경될 때마다 useEffect 실행
 
   return (
     <div className="item">
