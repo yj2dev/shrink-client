@@ -260,6 +260,7 @@ const ReportPage = () => {
               가격<span className="require-label">*</span>
             </label>
             <input
+              className="price-input"
               type="number"
               value={productPrice}
               min={100}

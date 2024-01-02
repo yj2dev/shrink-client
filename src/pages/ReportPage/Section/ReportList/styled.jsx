@@ -36,6 +36,7 @@ export const Container = styled.div`
       box-sizing: border-box;
       height: 148px;
       width: 148px;
+      object-fit: contain;
 
       @media (max-width: 768px) {
         height: 90px;

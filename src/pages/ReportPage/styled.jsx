@@ -98,7 +98,7 @@ export const ReportWriteSection = styled.section`
     box-sizing: border-box;
 
     margin: 0 auto;
-    padding: 40px 80px;
+    padding: 40px 40px;
 
     label {
       font-size: 1.2em;
@@ -120,7 +120,7 @@ export const ReportWriteSection = styled.section`
       gap: 10px;
 
       input {
-        width: 138px;
+        width: 100px;
       }
 
       .weight-item {
@@ -128,6 +128,11 @@ export const ReportWriteSection = styled.section`
         flex-direction: column;
       }
     }
+
+    .price-input {
+      width: 50%;
+    }
+
     input,
     select,
     textarea,
