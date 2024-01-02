@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "./styled";
 import { useNavigate, useParams } from "react-router";
 import QnACreate from "../QnACreate";

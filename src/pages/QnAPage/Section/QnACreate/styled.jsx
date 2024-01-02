@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
 
     article{
-        width: 70%;
-        max-width: 800px;
+        width: 100%;
+        max-width: 600px;
         min-width: 360px;
         border: 1px solid #d5d5d5;
         border-radius: 10px;
@@ -15,21 +15,50 @@ export const Container = styled.div`
 
 
         @media (max-width: 1200px) {
-           margin-left: 200px;
+           margin-left: 180px;
         }
 
-        @media (max-width: 840px) {
-            margin-left: 150px;
+        @media (max-width: 900px) {
+            width:80%;
+            margin-left: 100px;
           }
 
         @media (max-width: 768px) {
-            margin-left: 120px;
+            margin-left: 40px;
          }
 
          @media (max-width: 576px) {
-            margin-left: 30px;
+            margin-left: 10px;
          }
     }
+
+    .quill {
+        display: flex;
+        flex-direction: column;
+        max-width: 600px;
+    }
+
+    .ql-editor {
+        max-width: 600px;
+        flex-direction: column;
+    }
+
+    .ql-toolbar {
+        margin-bottom: 0px;
+    }
+
+    .ql-container {
+        word-wrap: break-word; 
+        overflow-wrap: break-word;
+        cursor: text;
+        height: 300px;
+    }
+
+    .ql-container:focus{
+        border: #252525
+    }
+
+
 
     input[type=text]{
         width: 100%;
@@ -43,21 +72,21 @@ export const Container = styled.div`
         background-color: white;
     }
     
-    textarea{
-        width: 100%;
-        height: 300px;
-        border: 1px solid #d5d5d5;
-        border-radius: 5px;
-        padding: 10px;
-        margin-bottom: 20px;
-        background-color: #f0f0f0;
-        font-family: 'Noto Sans KR', sans-serif;
-        background-color: white;
-    }
+    // textarea{
+    //     width: 100%;
+    //     height: 300px;
+    //     border: 1px solid #d5d5d5;
+    //     border-radius: 5px;
+    //     padding: 10px;
+    //     margin-bottom: 20px;
+    //     background-color: #f0f0f0;
+    //     font-family: 'Noto Sans KR', sans-serif;
+    //     background-color: white;
+    // }
 
-    textarea:focus{
-        border: #252525
-    }
+    // textarea:focus{
+    //     border: #252525
+    // }
 
     div{
         display: flex;
@@ -85,6 +114,4 @@ export const Container = styled.div`
         border:none;
         color: #fff;
     }
-
-
 `;
