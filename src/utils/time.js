@@ -5,6 +5,10 @@ export const timeAgo = (dateString) => {
 
   let interval = Math.floor(secondsAgo / 31536000);
 
+  if (secondsAgo < 1) {
+    return "방금 전";
+  }
+
   if (interval >= 1) {
     return `${interval}년 전`;
   }

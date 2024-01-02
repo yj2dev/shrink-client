@@ -103,7 +103,7 @@ const QnAPage = () => {
                         <tr>
                             <th scope="col" class="th-num">번호</th>
                             <th scope="col" class="th-title">제목</th>
-                            <th scope="col" class="th-date">등록일</th>
+                            <th scope="col" class="th-date">작성일</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -111,7 +111,7 @@ const QnAPage = () => {
                           <tr key={it.id}>
                             <td>{it.id}</td>
                             <th><Link to={`/question/${it.id}`}>{it.title}</Link></th>
-                            <td>{new Date(it.created_at).toLocaleString()}</td>
+                            <td>{new Date(it.created_at).toLocaleDateString()}</td>
                           </tr>
                         ))
                         :
@@ -119,7 +119,7 @@ const QnAPage = () => {
                             <tr key={it.id}>
                                 <td>{it.id}</td>
                                 <th><Link to={`/question/${it.id}`}>{it.title}</Link></th>
-                                <td>{new Date(it.created_at).toLocaleString()}</td>
+                                <td>{new Date(it.created_at).toLocaleDateString()}</td>
                             </tr>
                         ))}
                         </tbody>

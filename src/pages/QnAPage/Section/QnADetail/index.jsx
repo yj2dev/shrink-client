@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useRecoilState } from "recoil";
 import { userState } from "../../../../state/selectors/userSelectors";
 import { FaRegThumbsUp, FaRegThumbsDown} from "react-icons/fa";
+import { timeAgo } from "../../../../utils/time";
 
 
 const QnADetail = () => {
@@ -104,7 +105,10 @@ const QnADetail = () => {
         try {
           const response = await axios.get(`/api/query/detail/${id}`);
           const postData = response.data;
-          //console.log("post >>",postData);
+          postData.post.comments.sort((a, b) => {
+            return b.likes_count - a.likes_count;
+          });
+          //console.log("sortedcomments >>",sortedComments);
           setData(postData);
           //console.log("data >>", data.post.writer.nickname);
         } catch (error) {
@@ -201,7 +205,7 @@ const QnADetail = () => {
                 </div>
 
                 <div class="contents">
-                    <p>{data.post.content}</p>
+                    <p className="editorcontents" dangerouslySetInnerHTML={{ __html: data.post.content }}></p>
 
                     {/* <div class="btns">
                         <button><img src="https://super.so/icon/light/heart.svg" alt="heart"/></button>
@@ -267,7 +271,7 @@ const QnADetail = () => {
                                     
                                     <p id="commentc">{it.content}</p>
                                     
-                                    <small>{new Date(it.created_at).toLocaleString()}</small>
+                                    <small>{timeAgo(it.created_at)}</small>
                                     </p>
                                     
                                 )}
