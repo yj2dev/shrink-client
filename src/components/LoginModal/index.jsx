@@ -24,13 +24,13 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
 
   const handlePhone = (e) => {
     setPhone(e.target.value);
-    setPhoneExist(true);
+    // setPhoneExist(true);
     // setPhoneValid(true);
   };
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
-    setPasswordExist(true);
+    // setPasswordExist(true);
     // setPasswordValid(true);
   };
   const onClickLogin = (e) => {
@@ -42,13 +42,15 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
 
     if (phoneRegex.test(phone)) {
       setPhoneValid(true);
-      console.log("phonevalid changed to true");
+      console.log("phone Valid true", {phoneValid});
     } else if (phone.length === 0) {
       setPhoneExist(false);
+      setPhoneValid(false);
+      console.log("no phone num", {phoneExist}, {phoneValid}, {phone});
     } else {
       setPhoneValid(false);
-      console.log("phonevalid changed to false", phoneValid);
-    }
+      console.log("phone Valid false", {phoneValid});
+    };
 
     if (passwordRegex.test(password)) {
       setPasswordValid(true);
@@ -92,12 +94,12 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
         });
     }
     console.log("phoneValid >> ", phoneValid
-              , "passwordValid >> ", passwordValid
-              , "wrongLogin >> ", wrongLogin);
+              , "  passwordValid >> ", passwordValid
+              , "  wrongLogin >> ", wrongLogin);
   };
 
   return (
-    <Modal show={show} onClose={onClose}>
+    <Modal show={show} onClose={onClose} onCloseOutside={false}>
       <div className="titleWrap">
         <h2>로그인</h2>
       </div>
@@ -115,7 +117,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           />
         </div>
         <div className="errorMessageWrap">
-          {!phoneValid && (<div>올바른 전화번호를 입력해주세요.</div>)}
+          {!phoneValid && phoneExist && passwordExist && (<div>올바른 전화번호를 입력해주세요.</div>)}
         </div>
 
         <div style={{ marginTop: "20px" }} className="inputTitle">
@@ -131,7 +133,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           />
         </div>
         <div className="errorMessageWrap">
-          {!passwordValid && password.length > 0 && (
+          {!passwordValid && phoneValid && (
             <div>영문, 숫자 포함 8자 이상 입력해주세요.</div>
           )}
         </div>
