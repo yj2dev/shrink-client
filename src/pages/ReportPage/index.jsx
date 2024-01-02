@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ReportList from "./Section/ReportList";
 
 const ReportPage = () => {
+  const [contentPrevCnt, setContentPrevCnt] = useState(0);
   const [contentCnt, setContentCnt] = useState(10);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
@@ -94,7 +95,7 @@ const ReportPage = () => {
         if (data.status === "success") {
           console.log(data.response);
 
-          setReportList(data.response);
+          setReportList([...data.response]);
         }
       })
       .catch((err) => {
