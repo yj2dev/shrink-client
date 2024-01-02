@@ -389,5 +389,17 @@ export const Container = styled.div`
 
 
 }
+
+.ql-size-small {
+  font-size: .7rem;
+}
+
+.ql-size-large {
+  font-size: 1.5rem;
+}
+
+.ql-size-huge {
+  font-size: 2.5rem;
+}
    
 `;

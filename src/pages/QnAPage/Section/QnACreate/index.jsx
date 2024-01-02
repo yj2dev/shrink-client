@@ -1,9 +1,34 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState, useMemo } from "react";
+import 'react-quill/dist/quill.snow.css';
 import { Container } from "./styled";
 import { useNavigate } from "react-router";
 import { PostDispatchContext } from "../../../../App";
 import { CiViewList } from "react-icons/ci";
 import axios from 'axios';
+import ReactQuill from 'react-quill';
+
+
+
+const formats = [
+    'font',
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+    'align',
+    'color',
+    'background',
+    'size',
+    'h1',
+  ];
+
+  
 
 const QnACreate = ({isEdit, originData}) => {
 
@@ -11,16 +36,44 @@ const QnACreate = ({isEdit, originData}) => {
     const contentInput = useRef();
     const navigate = useNavigate();
     const {onCreate, onEdit} = useContext(PostDispatchContext);
-
     const [formData, setformData] = useState({
-       title: "",
-       content: "", 
-    });
+        title: "",
+        content: "", 
+     });
+
+    const modules = useMemo(() => {
+        return {
+            toolbar: {
+                container: [
+                  [{ 'size': ['small', false, 'large', 'huge'] }],
+                  [{ 'align': [] }],
+                  ['bold', 'italic', 'underline', 'strike'],
+                  [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                  [
+                    {
+                      'color': [],
+                    },
+                    { 'background': [] },
+                  ],
+                ],
+            },
+            
+        };
+      }, []);
+
+
 
     const handleChangeState = (e) => {
         setformData({
             ...formData,
-            [e.target.name] : e.target.value,
+            title : e.target.value,
+        });
+    }
+
+    const handleChangeEditor = (value) => {
+        setformData({
+            ...formData,
+            content : value,
         });
     }
 
@@ -71,6 +124,7 @@ const QnACreate = ({isEdit, originData}) => {
     useEffect(()=> {
         if(isEdit){ // 수정 페이지
             setformData(originData);
+            console.log("origin>>",originData);
         }
     }, [isEdit, originData]);
 
@@ -88,23 +142,17 @@ const QnACreate = ({isEdit, originData}) => {
                 placeholder="제목을 입력하세요"
                 onChange={handleChangeState}
             />
-            <textarea
+             <ReactQuill
                 ref={contentInput}
                 value={formData.content}
-                onChange={handleChangeState}
-                name="content" 
+                onChange={handleChangeEditor}
+                name="content"
                 id="textInPut" 
-                cols="30" 
-                rows="10" 
+                theme="snow"
+                modules={modules}
+                formats={formats}
                 placeholder="내용을 입력하세요"
-            ></textarea>
-
-            {/* <div>
-                <div class="filebox">
-                    <label for="ex_file">+</label>
-                    <input type="file" id="ex_file"/>
-                </div>
-            </div> */}
+        />
 
             <div className="btn-container">
                 <button onClick={handleList}> <CiViewList/> 목록 </button>
