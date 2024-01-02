@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
-    max-width: 80%;
+    width: 80%;
 
     table {
         border-collapse: collapse;
@@ -25,7 +25,7 @@ export const Container = styled.div`
   
     #board-search .search-window {
         padding: 15px 0;
-        background-color: #f9f7f9;
+        background-color: #F0F0F0;
     }
     #board-search .search-window .search-wrap {
         position: relative;
@@ -40,6 +40,7 @@ export const Container = styled.div`
         font-size: 14px;
         padding: 7px 14px;
         border: 1px solid #ccc;
+        border-radius: 10px;
     }
     #board-search .search-window .search-wrap input:focus {
         border-color: #333;
@@ -145,6 +146,8 @@ export const Container = styled.div`
         background: #99CCFF; 
         color: #fff;
         transition: background 0.3s, color 0.3s; 
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
     }
     
     .search-btn:hover,
@@ -270,5 +273,75 @@ export const Container = styled.div`
         color: #0F62FE;
         font-weight: bold;
       }
+
+
+      @media (max-width: 1200px) {
+        // .board-table,
+        // .search-window {
+        //   width: 70%; 
+        //   //overflow-x: auto; 
+        // }
+      
+        .board-table th,
+        .board-table td {
+          padding: 7px; 
+        }
+
+        section.notice {
+            margin-left: 50px;
+        }
+
+        .page-title h3 {
+            font-size: 24px;
+        }
+
+        .container {
+            width:90%
+        }
+
+        section th,td,tr {
+            font-size: 15px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .board-table th,
+        .board-table td {
+          padding: 5px; 
+        }
+
+        section.notice {
+            margin-left: 0px;
+        }
+
+        .page-title h3 {
+            font-size: 22px;
+        }
+        .container {
+            width:125%
+        }
+
+        section th,td,tr {
+            font-size: 15px;
+        }
+
+        .pagination {
+            margin-left:140px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .container {
+            width:130%;
+        }
+
+
+        section th,td,tr {
+            font-size: 13px;
+        }
+
+        
+      }
+
   
 `;
