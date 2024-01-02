@@ -20,7 +20,7 @@ const ReportItem = ({ report }) => {
   return (
     <div className="item">
       <LeftArticle>
-        {/*<img src="http://placehold.it/320x320" alt="신고상품 이미지" />*/}
+        {/*<img src="http://placehold.it/148x148" alt="신고상품 이미지" />*/}
         {report.thumbnail ? (
           <img
             src={`${process.env.REACT_APP_API_BASE_URL}/api/report/select/image/${report.thumbnail}`}
@@ -36,7 +36,10 @@ const ReportItem = ({ report }) => {
       <MiddleArticle>
         <div className="name">{report.product_name}</div>
         <div className="time-ago">{timeText}</div>
-        <div className="weight">{report.weight}</div>
+        <div className="weight">
+          {report.weight}
+          {report?.unit || "g"}
+        </div>
         <div className="price">{intOfKr(report.price)}</div>
         {/*<div className="content">{report.content}</div>*/}
       </MiddleArticle>

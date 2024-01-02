@@ -4,13 +4,63 @@ import { useEffect, useState } from "react";
 import ReportList from "./Section/ReportList";
 
 const ReportPage = () => {
+  const [contentCnt, setContentCnt] = useState(10);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+
   const [reportList, setReportList] = useState([]);
   const [showWrite, setShowWrite] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
 
+  const getMoreReports = () => {
+    console.log("contentCnt >> ", contentCnt);
+
+    if (isLoading || !hasMore) return;
+
+    setIsLoading(true);
+    axios
+      .get("/api/report/selectall", {
+        params: {
+          per_page: contentCnt + 10,
+        },
+      })
+      .then(({ data }) => {
+        if (data.status === "success") {
+          // setReportList((prev) => [...prev, ...data.response]);
+          setReportList([...data.response]);
+
+          setContentCnt((prev) => prev + 10);
+          if (data.response.length === 0) {
+            setHasMore(false);
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   useEffect(() => {
     getReportList();
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight
+      )
+        return;
+
+      getMoreReports();
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [contentCnt]);
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
@@ -112,7 +162,7 @@ const ReportPage = () => {
   return (
     <Container>
       <div className="report-wrapper">
-        <h1>ReportPage</h1>
+        <h1>슈링크플레이션으로 의심가는 제품을 신고해주세요!!</h1>
         <button onClick={() => setShowWrite(!showWrite)}>신고 작성</button>
         <ReportWriteSection>
           {showWrite && (
