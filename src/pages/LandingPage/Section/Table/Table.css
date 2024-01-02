@@ -7,7 +7,7 @@
     font-weight: bold !important;
   }
   .Table tr, th,td {
-    font-size: 17px !important;
+    font-size: 17px;
     font-family: 'Black Han Sans', sans-serif !important;
     font-family: 'Inter', sans-serif !important;
     font-family: 'Noto Sans KR', sans-serif !important;
@@ -15,7 +15,7 @@
 
   .Table td,
   th {
-    border: none !important;
+    border: none;
   }
   
   .Table:first-child {

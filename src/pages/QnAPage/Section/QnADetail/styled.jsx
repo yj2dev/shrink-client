@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
-    max-width: 80%;
+    width: 80%;
 
-    article{
+    .readPosting {
       width: 70%;
       max-width: 800px;
       min-width: 360px;
@@ -14,10 +14,102 @@ export const Container = styled.div`
       padding: 40px;
       margin-left: 230px;
       background-color: white;
+      text-align: center;
+
+      @media (max-width: 1300px) {
+          margin-left: 70px;
+
+          #comment-area {
+            width:100%;
+          }
+          .left-btn {
+            width:70px;
+          }
+          .editmenu-wrap {
+            margin-left: 150px;
+          }
+          #commentc {
+            width:500px;
+          }
+          #edit-area {
+            width:500px;
+          }
+      }
+
+      @media (max-width: 1000px) {
+        .editmenu-wrap {
+          right: 100px;
+        };
+
+        .wrapper {
+          left: 700px;
+        }
+        #commentc {
+          width:300px;
+        }
+        #edit-area {
+          width:350px;
+        }
+      }
+
+      @media (max-width: 840px) {
+        .editmenu-wrap {
+          right: 140px;
+        };
+        .wrapper {
+          left: 650px;
+        }
+        #commentc {
+          width:250px;
+        }
+        #edit-area {
+          width:300px;
+        }
+      }
+
+      @media (max-width: 768px) {
+          margin-left: 120px;
+
+          .left-btn {
+            width:55px;
+          }
+          .dates {
+            font-size: .7rem;
+          }
+          .editmenu-wrap {
+            margin-left: 100px;
+          }
+          .wrapper {
+            left: 450px;
+          }
+          #commentc {
+            width:200px;
+          }
+      }
+
+      @media (max-width: 680px) {
+        margin-left: 30px;
+        #postdate {
+          margin-right: 30px;
+            right: 50px;
+            margin-left: 0px;
+          }
+          .wrapper {
+            left: 300px;
+          }
+          #commentc {
+            width:150px;
+          }
+          #edit-area {
+            width:250px;
+          }
+      }
     }
 
-    .readPosting{
-      text-align: center;
+    #commentc {
+      width:550px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
     .readPosting div h5{
      margin: 20px 0 30px;
@@ -238,6 +330,7 @@ export const Container = styled.div`
       align-items: center;
       justify-content: center;
       display: flex;
+      white-space: nowrap;
     }
 
     #commentlike-container {
@@ -251,12 +344,14 @@ export const Container = styled.div`
       justify-content: right;
     }
 
-  .wrapper {
+  .wrapper,
+  .wrapper2 {
     display: inline-flex;
     background: #f2f2f2;
     width: content;
     border-radius: 20px;
     overflow: hidden;
+    position: absolute;
   .separator {
     width: 1px;
     background: #262626;
@@ -291,6 +386,8 @@ export const Container = styled.div`
     background: #e5e5e5;
   }
   }
+
+
 }
    
 `;

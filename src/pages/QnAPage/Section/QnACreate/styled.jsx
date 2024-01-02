@@ -12,6 +12,23 @@ export const Container = styled.div`
         padding: 40px;
         margin-left: 300px;
         background-color: white;
+
+
+        @media (max-width: 1200px) {
+           margin-left: 200px;
+        }
+
+        @media (max-width: 840px) {
+            margin-left: 150px;
+          }
+
+        @media (max-width: 768px) {
+            margin-left: 120px;
+         }
+
+         @media (max-width: 576px) {
+            margin-left: 30px;
+         }
     }
 
     input[type=text]{

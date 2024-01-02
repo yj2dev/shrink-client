@@ -183,13 +183,13 @@ const QnADetail = () => {
    }else {
     return (
         <Container>
-            <article class="readPosting">
+            <div class="readPosting">
                 <h3>게시글 보기</h3>
                 <div>
                     <h2>{data.post.title}</h2>
 
                     <div class="dates">
-                        <p>{new Date(data.post.created_at).toLocaleString()}</p>
+                        <p id="postdate">{new Date(data.post.created_at).toLocaleString()}</p>
                         <p id="postuser">
                             <img src={data.post.writer.profile_url} alt="profile-img"/>
                             <span style={{marginLeft: '5px'}}>{data.post.writer.nickname}</span>
@@ -213,7 +213,7 @@ const QnADetail = () => {
                         </button>
 
                         <div className="like-container">
-                                <div class="wrapper">
+                                <div class="wrapper2">
                                         <div class="action" onClick={boardLike}>
                                             <FaRegThumbsUp/>
                                             <div class="count">
@@ -264,7 +264,9 @@ const QnADetail = () => {
                                     />
                                 ) : (
                                     <p>
-                                    <p>{it.content}</p>
+                                    
+                                    <p id="commentc">{it.content}</p>
+                                    
                                     <small>{new Date(it.created_at).toLocaleString()}</small>
                                     </p>
                                     
@@ -273,7 +275,7 @@ const QnADetail = () => {
                         </div>
                         {editingCommentId === it.id ? (<></>) : (
                                 <div className="like-container" id="commentlike-container">
-                                    <div class="wrapper">
+                                    <div class="wrapper" id="commentl">
                                             <div class="action" onClick={() => commentLike(it.id)}>
                                                 <FaRegThumbsUp/>
                                                 <div class="count">
@@ -329,7 +331,7 @@ const QnADetail = () => {
                         <button onClick={handleCommentSubmit}>등록하기</button>
                 </div>
 
-            </article>
+            </div>
     
     </Container>
   );
