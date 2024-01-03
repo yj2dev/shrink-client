@@ -53,6 +53,19 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
     // setCodeExist(true);
   };
 
+  const handleOnKeyPress = (e, btn) => {
+    if(e.key === "Enter") {
+      console.log("enter");
+      if (btn === 'onClickPhone') {
+        onClickPhone();
+      } else if (btn === 'onClickCode') {
+        onClickCode();
+      } else if (btn === 'onClickRegister') {
+        onClickRegister();
+      }
+    };
+  };
+
   useEffect(() => {
     if (!show) {
       setPhone("");
@@ -225,6 +238,7 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
                   value={phone}
                   onChange={onChangePhone}
                   placeholder="01012345678"
+                  onKeyDown={(e) => handleOnKeyPress(e, 'onClickPhone')}
                 />
               </div>
               <div className="errorMessageWrap">
@@ -259,6 +273,7 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
                       value={code}
                       onChange={onChangeCode}
                       placeholder="인증번호를 입력해주세요"
+                      onKeyDown={(e) => handleOnKeyPress(e, 'onClickCode')}
                     />
                     <span className="timeCountingWrap">
                       {timeFormat(count)}
@@ -309,6 +324,7 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
                   value={password}
                   onChange={onChangePassword}
                   placeholder="영문, 숫자, 특수문자 포함 8자리 이상"
+                  onKeyDown={(e) => handleOnKeyPress(e, 'onClickRegister')}
                 />
               </div>
               <div className="errorMessageWrap">

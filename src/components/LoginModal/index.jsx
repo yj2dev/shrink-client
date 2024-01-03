@@ -47,6 +47,12 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
     // setPasswordExist(true);
     // setPasswordValid(true);
   };
+  const handleOnKeyPress = (e) => {
+    if(e.key === "Enter") {
+      console.log("enter");
+      onClickLogin();
+    };
+  };
   const onClickLogin = (e) => {
     setWrongLogin("");
     // 정규표현식 만족하는지 확인
@@ -137,6 +143,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
             // onChange={onChangePhone}
             onChange={handlePhone}
             placeholder="010-0000-0000"
+            onKeyDown={(e) => handleOnKeyPress(e)}
           />
         </div>
         <div className="errorMessageWrap">
@@ -153,6 +160,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
             value={password}
             onChange={onChangePassword}
             placeholder="영문, 숫자, 특수문자 포함 8자리 이상"
+            onKeyDown={(e) => handleOnKeyPress(e)}
           />
         </div>
         <div className="errorMessageWrap">
