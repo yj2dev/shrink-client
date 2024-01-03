@@ -21,6 +21,21 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
   const [passwordExist, setPasswordExist] = useState(true);
 
   const setUser = useSetRecoilState(userState);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // 버튼 hover이벤트
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+  const buttonStyle = {
+    backgroundColor: isHovered ? '#115ae1' : '#0F62FE', // 호버시 진한색
+    color: 'white',
+    padding: '10px',
+    cursor: 'pointer',
+  };
 
   useEffect(() => {
     if (!show) {
@@ -194,9 +209,12 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           </div>
         </div>
         <button
-          style={{ marginTop: "40px" }}
+          // style={{ marginTop: "40px" }}
+          style = {buttonStyle}
           className="bottomButton"
           onClick={onClickLogin}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           확인
         </button>

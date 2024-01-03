@@ -43,6 +43,19 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
   const [codeExist, setCodeExist] = useState(true);
   const [codeCheckValid, setCodeCheckValid] = useState(false);
 
+  const [isHovered, setIsHovered] = useState(false);
+
+  // 버튼 hover이벤트
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+  const buttonStyle = {
+    backgroundColor: isHovered ? '#115ae1' : '#0F62FE', // 호버시 진한색
+  };
+  
   const onChangePhone = (e) => {
     setPhone(e.target.value);
     // setPhoneExist(true);
@@ -245,6 +258,7 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
                   onChange={onChangePhone}
                   placeholder="01012345678"
                   onKeyDown={(e) => handleOnKeyPress(e, 'onClickPhone')}
+                  disabled={countdown}
                 />
               </div>
               <div className="errorMessageWrap">
@@ -255,7 +269,13 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
               </div>
 
               <div className="bottomWrap">
-                <button className="bottomButton" onClick={onClickPhone}>
+                <button
+                  className="bottomButton"
+                  onClick={onClickPhone}
+                  style = {buttonStyle}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
                   인증번호 전송
                 </button>
                 {/* <button className="resendButton" onClick={onClickPhone}>
@@ -290,7 +310,13 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
                     {!codeExist && <div>인증번호를 입력해주세요.</div>}
                   </div>
                   <div className="bottomWrap">
-                    <button className="bottomButton" onClick={onClickCode}>
+                    <button
+                      className="bottomButton"
+                      onClick={onClickCode}
+                      style = {buttonStyle}
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                    >
                       인증번호 확인
                     </button>
                   </div>
@@ -344,8 +370,11 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
 
             <div className="bottomWrap">
               <button
-                style={{ marginTop: "40px" }}
+                // style={{ marginTop: "40px" }}
                 className="bottomButton"
+                style = {buttonStyle}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
                 onClick={() => {
                   onClickRegister();
                 }}
