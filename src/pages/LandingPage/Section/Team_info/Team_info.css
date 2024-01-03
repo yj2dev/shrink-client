@@ -1,3 +1,35 @@
+/* scroll  */
+.hidden {
+    opacity: 0;
+    filter: blur(15px);
+    transform: translateX(-100%);
+    transition: all 1.7s;
+}
+
+.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+/* hover */
+.team-section-info {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .team-section-info:hover {
+    transform: scale(1.2);
+  }
+  
+  /* 나머지 스타일은 필요에 따라 조정 */
+  .team-boxes-img-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
 
 /* Team Info */
 .team-section-wrapper {
@@ -29,12 +61,13 @@
     max-width: 700px;
   }
   .team-text {
+    text-align: center;
     font-size: clamp(1rem, 3vw, 1.5rem);
-    max-width: 600px;
+    max-width: 670px;
     color: #6a6a6a;
     margin: 0.5rem 0rem;
   }
-  
+
 .team-section-info {
     width: 120px;
     min-height: 200px;

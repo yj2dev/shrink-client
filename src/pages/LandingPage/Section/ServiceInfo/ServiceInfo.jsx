@@ -1,12 +1,28 @@
 import React from "react";
-import Info from "./images/click_img.png";
+import Info from "./images/click_img(F0F0F0).png";
 import "./ServiceInfo.css";
 import { Link } from "react-router-dom";
 
 const ServiceInfo = () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      console.log(entry)
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      } else{
+        entry.target.classList.remove('show');
+      }
+    });
+  });
+
+  const hiddenElements = document.querySelectorAll('.hidden');
+  hiddenElements.forEach((el) => observer.observe(el));
+
   return (
     <div className="ServiceInfo-section-container">
+      
       <div className="ServiceInfo-section-text-container">
+      <section className="hidden">
         <p className="ServiceInfo-subheading">
           <span>슈링크플레이션 상품은</span>
           줄었슈링크에게
@@ -18,10 +34,11 @@ const ServiceInfo = () => {
             </Link>
           </div>
         </p>
-        <div className="ServiceInfo-heading">
+        </section>
+        <div className="ServiceInfo-heading hidden">
           슈링크 플레이션 방지 서비스로 똑똑한 소비를!
         </div>
-        <div className="ServiceInfo-text">
+        <div className="ServiceInfo-text hidden">
           슈링크플레이션은 제품의 가격은 그대로 두고 제품의 수량이나 크기,
           품질을 낮춰 판매하는 것입니다.
           <br />

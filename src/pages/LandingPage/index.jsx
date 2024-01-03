@@ -5,8 +5,9 @@ import Table from './Section/Table/Table'
 import RightSide from './Section/RightSide/RightSide'
 import ServiceInfo from './Section/ServiceInfo/ServiceInfo'
 import Team_info from './Section/Team_info/Team_info'
-
+import Experience from './Section/Experience/Experience';
 const LandingPage = () => {
+  
   return (
     <div className="LandingPage">
       <div className="main">
@@ -23,7 +24,9 @@ const LandingPage = () => {
       <div className="ServiceInfo">
         <ServiceInfo/>
       </div>
+      <Experience />
       <Team_info/>
+      
     </div>
   )
 }

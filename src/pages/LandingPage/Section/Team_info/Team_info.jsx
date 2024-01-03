@@ -56,9 +56,23 @@ const Team_info = () => {
     },
 
   ];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      console.log(entry)
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      } else{
+        entry.target.classList.remove('show');
+      }
+    });
+  });
+
+  const hiddenElements = document.querySelectorAll('.hidden');
+  hiddenElements.forEach((el) => observer.observe(el));
+
   return (
    <div className="team-section-wrapper">
-    <div className="team-section-top">
+    <div className="team-section-top hidden">
       <p className="team-subheading">팀 소개</p>
       <div className="team-heading">전남/전북 AI 9반 26조</div>
       <p className="team-text">
@@ -68,7 +82,7 @@ const Team_info = () => {
         김동민, 김성민, 김진우, 박성현, 이승주, 이유진, 최다인, 홍아현 총 8명의 팀원으로 이루어져 있습니다.✌️😊
       </p>
     </div>
-    <div className="team-section-bottom">
+    <div className="team-section-bottom hidden">
       {workInfoData.map((data) => (
         <div className="team-section-info" key={data.title}>
           <div className="team-boxes-img-container">

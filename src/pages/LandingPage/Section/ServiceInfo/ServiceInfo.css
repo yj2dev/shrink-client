@@ -1,5 +1,19 @@
+.hidden {
+    opacity: 0;
+    filter: blur(15px);
+    transform: translateX(-100%);
+    transition: all 1.7s;
+}
+
+.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+
 .ServiceInfo-section-container {
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     margin-top: 3rem;
     position: relative;
     display: flex;
@@ -9,6 +23,23 @@
     
     
 }
+/* img hover  */
+.ServiceInfo-section-image-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .ServiceInfo-section-image-container img {
+    display: block;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .ServiceInfo-section-image-container:hover img {
+    transform: scale(1.2);
+  }
+
+
+
   .ServiceInfo-section-image-container a{
     display: flex;
     flex-direction: column; /* 주축 방향을 세로로 변경 */

@@ -9,10 +9,12 @@
     position: relative;
     cursor: pointer;
     margin: 0.5rem;
+    
 }
 
 .CompactCard:hover {
     box-shadow: none !important;
+    transform: scale(1.1);
 }
 
 /* radial bar */

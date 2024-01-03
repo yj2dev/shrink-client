@@ -34,11 +34,11 @@ function createData(name, change, week, month, year) {
 }
 
 const rows = [
-  createData('허니버터아몬드', "변동 없음", 1234, 1234, 1234),
-  createData('옛날국수 소면', "변동 있음", 1234, 1234, 1234),
-  createData('백설 소면', "변동 있음", 1234, 1234, 1234),
-  createData('비비고 왕교자', "변동 없음", 1234, 1234, 1234),
-  createData('생야채돼지고기물만두', "변동 있음", 1234, 1234, 1234),
+  createData('신라면(5개입)', "변동 있음", "4,200", "4,292", "4,477"),
+  createData('진라면 순한맛(5개입)', "변동 있음", "3,870", "3,873", "3,838"),
+  createData('너구리(5개입)', "변동 없음", "5,500", "5,500", "5,500"),
+  createData('열라면(5개입)', "변동 없음", "4,750", "4,750", "4,750"),
+  createData('안성탕면(5개입)', "변동 없음", "4,500", "4,500", "4,500"),
 ];
 
 const makeStyle=(status)=>{
@@ -67,7 +67,7 @@ export default function CustomizedTables() {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                 <TableRow>
-                    <StyledTableCell sx={{ minWidth: 100 }}>상품 (100g 당 가격)</StyledTableCell>
+                    <StyledTableCell sx={{ minWidth: 100 }}>상품</StyledTableCell>
                     <StyledTableCell sx={{ minWidth: 50 }}align="center">최근 가격 변동 사항</StyledTableCell>
                     <StyledTableCell align="right">이번 주</StyledTableCell>
                     <StyledTableCell align="right">1달 전</StyledTableCell>
