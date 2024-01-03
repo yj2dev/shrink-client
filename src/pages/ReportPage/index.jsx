@@ -1,7 +1,12 @@
 import { Container, ReportWriteSection } from "./styled";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReportList from "./Section/ReportList";
+import {
+  InputHidden,
+  InputLabel,
+} from "../../components/ProfileImageCropModal/styled";
+import { IoImageOutline } from "react-icons/io5";
 
 const ReportPage = () => {
   const [contentPrevCnt, setContentPrevCnt] = useState(0);
@@ -14,11 +19,38 @@ const ReportPage = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
 
   const [productName, setProductName] = useState("");
-  const [productWeight, setProductWeight] = useState(1);
-  const [productPrice, setProductPrice] = useState(100);
+  const [productWeight, setProductWeight] = useState(100);
+  const [productPrice, setProductPrice] = useState(1000);
   const [productContent, setProductContent] = useState("");
   const [unit, setUnit] = useState("g");
   const [customUnit, setCustomUnit] = useState("");
+
+  const [isDrag, setIsDrag] = useState(false);
+
+  function onSelectFile(e) {
+    const files =
+      e.target.files || (e.dataTransfer ? e.dataTransfer.files : null);
+
+    // const files = Array.from(e.target.files);
+
+    const MAX_FILES = 12;
+    const MAX_SIZE_MB = 10;
+
+    if (files.length > MAX_FILES) {
+      alert(`최대 ${MAX_FILES}개의 이미지만 업로드할 수 있습니다.`);
+      return;
+    }
+
+    const isFileSizeValid = files.every(
+      (file) => file.size <= MAX_SIZE_MB * 1024 * 1024,
+    );
+    if (!isFileSizeValid) {
+      alert(`각 이미지의 최대 크기는 ${MAX_SIZE_MB}MB 입니다.`);
+      return;
+    }
+
+    setSelectedFiles(files);
+  }
 
   const handleUnitChange = (e) => {
     const selectedUnit = e.target.value;
@@ -47,8 +79,8 @@ const ReportPage = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     onSubmitReport();
+    e.preventDefault();
   };
 
   const getMoreReports = () => {
@@ -114,27 +146,6 @@ const ReportPage = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
-    const MAX_FILES = 12;
-    const MAX_SIZE_MB = 10;
-
-    if (files.length > MAX_FILES) {
-      alert(`최대 ${MAX_FILES}개의 이미지만 업로드할 수 있습니다.`);
-      return;
-    }
-
-    const isFileSizeValid = files.every(
-      (file) => file.size <= MAX_SIZE_MB * 1024 * 1024,
-    );
-    if (!isFileSizeValid) {
-      alert(`각 이미지의 최대 크기는 ${MAX_SIZE_MB}MB 입니다.`);
-      return;
-    }
-
-    setSelectedFiles(files);
-  };
-
   const getReportList = () => {
     axios
       .get("/api/report/selectall", {
@@ -154,6 +165,17 @@ const ReportPage = () => {
       });
   };
 
+  const writeFormInit = () => {
+    setShowWrite(false);
+    setProductName("");
+    setProductWeight(100);
+    setProductPrice(1000);
+    setProductContent("");
+    setUnit("g");
+    setCustomUnit("");
+    setSelectedFiles([]);
+  };
+
   const onSubmitReport = () => {
     const fd = new FormData();
 
@@ -164,6 +186,8 @@ const ReportPage = () => {
       content: productContent,
       unit,
     });
+
+    console.log("payload >> ", payload);
 
     selectedFiles.forEach((file) => {
       fd.append("image", file);
@@ -179,6 +203,7 @@ const ReportPage = () => {
       })
       .then((res) => {
         getReportList();
+        writeFormInit();
       })
       .catch((err) => {});
   };
@@ -195,6 +220,26 @@ const ReportPage = () => {
   };
   const onChangeProductContent = (e) => {
     setProductContent(e.target.value);
+  };
+
+  const onDragEnter = (e) => {
+    e.preventDefault();
+    setIsDrag(true);
+  };
+
+  const onDragLeave = (e) => {
+    e.preventDefault();
+    setIsDrag(false);
+  };
+
+  const onDrop = (e) => {
+    e.preventDefault();
+    setIsDrag(false);
+    onSelectFile(e);
+  };
+
+  const onDragOver = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -279,11 +324,29 @@ const ReportPage = () => {
             />
 
             <label>사진</label>
-            <input
+
+            <InputLabel
+              htmlFor="select-image"
+              onDragOver={onDragOver}
+              onDragEnter={onDragEnter}
+              onDragLeave={onDragLeave}
+              onDrop={onDrop}
+              className={`${isDrag ? "drag" : ""} ${
+                selectedFiles ? "active" : ""
+              }`}
+            >
+              {selectedFiles && (
+                <IoImageOutline
+                  style={{ fontSize: "24px", marginBottom: "8px" }}
+                />
+              )}
+              이미지 선택 또는 드래그
+            </InputLabel>
+            <InputHidden
               type="file"
-              multiple
-              onChange={handleFileChange}
               accept="image/*"
+              id="select-image"
+              onChange={onSelectFile}
             />
 
             <button type="submit">신고하기</button>

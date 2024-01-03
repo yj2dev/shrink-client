@@ -103,7 +103,7 @@ const QnACreate = ({isEdit, originData}) => {
                     } catch (error) {
                         console.error('Error creating post:', error.message);
                     }
-                    
+                    navigate('/question');
                 }
                 else {
                     try {
@@ -113,11 +113,11 @@ const QnACreate = ({isEdit, originData}) => {
                     } catch (error) {
                         console.error('Error editng post:', error.message);
                     }
-                    
+                    navigate(`/question/${originData.id}`);
                 }
             }
                 
-            navigate('/question');
+            
         
     };
     

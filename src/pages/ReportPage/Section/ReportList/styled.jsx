@@ -10,10 +10,7 @@ export const Container = styled.div`
     //border: 2px dashed orangered;
 
     display: flex;
-    padding: 16px;
-    //gap: 16px;
-    //background-color: #e7e7e7;
-    //border: 4px solid #ddd;
+
     background-color: #fff;
     border-radius: 8px;
 
@@ -21,8 +18,45 @@ export const Container = styled.div`
     box-sizing: border-box;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
+    padding: 16px;
     height: 180px;
     position: relative;
+    transition: 0.2s;
+
+    &.active {
+      height: 400px;
+
+      @media (max-width: 768px) {
+        height: 340px;
+      }
+    }
+
+    .report-content-wrapper {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      position: absolute;
+      top: 180px;
+      left: 0;
+
+      @media (max-width: 768px) {
+        top: 120px;
+      }
+
+      border-top: 4px dashed #ddd;
+
+      .report-content {
+        white-space: pre-wrap;
+        background-color: rgba(0, 0, 0, 0.04);
+        padding: 16px;
+        margin: 16px;
+        font-size: 1.2em;
+        height: 150px;
+        overflow: scroll;
+        //border: 1px solid red;
+        border-radius: 8px;
+      }
+    }
 
     @media (max-width: 768px) {
       height: 120px;
@@ -52,9 +86,7 @@ export const Container = styled.div`
 export const LeftArticle = styled.article`
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-shrink: 0;
-  //width: 120px;
   height: 100%;
 
   .undefined-image {
@@ -89,6 +121,38 @@ export const MiddleArticle = styled.article`
 
   position: relative;
 
+  button.show-content-btn {
+    cursor: pointer;
+    position: absolute;
+    left: 24px;
+    top: 84px;
+    font-size: 2em;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: rgba(0, 0, 0, 0.2);
+    //border: 1px solid red;
+    //border: 1px solid red;
+    width: 2em;
+    height: 2em;
+    transition: 0.2s;
+
+    &:hover {
+      color: rgba(0, 0, 0, 0.8);
+    }
+
+    &.active {
+      color: rgba(0, 0, 0, 0.8);
+      transform: rotate(180deg);
+    }
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+      left: 24px;
+      top: 64px;
+    }
+  }
+
   .name {
     border-bottom: 2px solid #ddd;
     padding: 8px 0;
@@ -102,10 +166,11 @@ export const MiddleArticle = styled.article`
     font-size: 54px;
     font-weight: 400;
     position: absolute;
-    bottom: 0;
+    top: 86px;
     right: 16px;
 
     @media (max-width: 768px) {
+      top: 60px;
       font-size: 28px;
       right: 8px;
     }
@@ -118,8 +183,8 @@ export const MiddleArticle = styled.article`
 
     @media (max-width: 768px) {
       font-size: 14px;
-      right: 8px;
       top: 30px;
+      right: 8px;
     }
   }
   .content {
@@ -144,6 +209,7 @@ export const RightArticle = styled.article`
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 148px;
 
   color: #fff;
   font-size: 24px;
@@ -152,6 +218,7 @@ export const RightArticle = styled.article`
   @media (max-width: 768px) {
     font-size: 14px;
     width: 58px;
+    height: 90px;
   }
 
   background-color: ${(props) => {

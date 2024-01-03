@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import { intOfKr } from "../../../../utils/format";
 import { MdOutlineHideImage } from "react-icons/md";
 import { getLikeType } from "../../../../utils/type";
+import { FaAnglesDown } from "react-icons/fa6";
 
 const ReportItem = ({ report }) => {
   const [timeText, setTimeText] = useState(timeAgo(report.created_at));
   const [likeType, setLikeType] = useState(getLikeType(report.like));
+  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
     setTimeText(timeAgo(report.created_at));
@@ -22,7 +24,7 @@ const ReportItem = ({ report }) => {
   }, [report.created_at]);
 
   return (
-    <div className="item">
+    <div className={`item ${showContent ? "active" : ""}`}>
       <LeftArticle>
         {report.thumbnail ? (
           <img
@@ -47,9 +49,22 @@ const ReportItem = ({ report }) => {
           {intOfKr(report.price)}
           <span style={{ fontSize: "0.5em" }}>원</span>
         </div>
+
+        <button
+          className={`show-content-btn ${showContent && "active"}`}
+          onClick={() => setShowContent(!showContent)}
+        >
+          <FaAnglesDown />
+        </button>
       </MiddleArticle>
 
       <RightArticle type={likeType}>{likeType}</RightArticle>
+
+      {showContent && (
+        <div className="report-content-wrapper">
+          <div className="report-content">{report.content}</div>
+        </div>
+      )}
     </div>
   );
 };

@@ -6,6 +6,8 @@ export const Container = styled.div`
   align-items: center;
   width: 100%;
 
+  border: 1px solid red;
+
   .report-wrapper {
     min-width: 600px;
 
@@ -64,7 +66,6 @@ export const ReportWriteSection = styled.section`
   flex-direction: column;
 
   overflow: hidden;
-  transition: height 0.2s ease-in-out;
 
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -73,19 +74,10 @@ export const ReportWriteSection = styled.section`
   border: none;
 
   height: 0;
-
-  @keyframes drawBorder {
-    from {
-      border-width: 0;
-    }
-    to {
-      border-width: 4px;
-    }
-  }
+  transition: 0.2s;
 
   &.active {
     height: 820px;
-    animation: drawBorder 0.2s ease-in-out forwards;
     border-style: dashed;
     border-color: #3f5dfe;
   }
@@ -205,5 +197,48 @@ export const ReportWriteSection = styled.section`
       margin-bottom: 5px;
       font-weight: bold;
     }
+  }
+`;
+
+export const InputHidden = styled.input`
+  display: none;
+`;
+
+export const InputLabel = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 120px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  //border: none;
+  //background-color: #ff5058;
+  //color: #ffffff;
+
+  border: 2px solid rgba(63, 93, 254, 0.5);
+  color: rgba(63, 93, 254, 0.5);
+  transition: 0.2s;
+
+  &.active {
+    background-color: #aab4fe;
+    border: 2px solid #aab4fe;
+    color: #ffffff;
+    height: 50px;
+  }
+
+  &.drag {
+    background-color: #aab4fe;
+    border: 2px solid #aab4fe;
+    color: #ffffff;
+  }
+
+  &:not(.active):hover {
+    border: 2px solid rgba(63, 93, 254, 1);
+    color: rgba(63, 93, 254, 1);
   }
 `;
