@@ -187,7 +187,7 @@ const Header = () => {
               }}
               className="login-button"
             >
-              <div className="loginTitle">로그인</div>
+              로그인
             </button>
           )}
 
@@ -201,7 +201,7 @@ const Header = () => {
             show={showRegisterModal}
             onClose={onCloseModal}
             onShowLogin={onShowLoginModal}
-            />
+          />
         </RightSection>
       </Container>
     </>

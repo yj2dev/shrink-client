@@ -51,14 +51,16 @@ export const LeftSection = styled.div`
   }
 
   .logo-img {
-    //width: 32px;
-    //height: 32px
+    height: 78px; /** logo1.png 사용시 주석 제거 */
+
+    height: 44px; /** logo2.png 사용시 주석 제거 */
+    width: 44px; /** logo2.png 사용시 주석 제거 */
+    margin-top: 8px; /** logo2.png 사용시 주석 제거 */
 
     @media (max-width: 768px) {
       display: none;
     }
 
-    height: 78px;
     margin-right: 10px;
   }
 
@@ -262,16 +264,25 @@ export const RightSection = styled.div`
   }
 
   .login-button {
-    padding: 10px 27px;
-    color: white;
+    box-shadow: 4px 4px 8px 1px rgba(0, 0, 0, 0.2);
     border: none;
-    background-color: #0f62fe;
+    outline: none;
     cursor: pointer;
+    transition: 0.2s;
+    background-color: #0f62fe;
+    color: #fff;
+
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: 500;
   }
 
-  .loginTitle {
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
+  .login-button:hover {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
+    position: relative;
+    top: 2px;
+    color: #fff;
+    background-color: #2245fd;
   }
 `;

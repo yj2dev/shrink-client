@@ -397,12 +397,6 @@ const AccountPage = () => {
               <label htmlFor="check-delete-account">복구할 수 없습니다</label>
             </div>
 
-            {/*<button*/}
-            {/*  onClick={() => setCheckDeleteAccount(!checkDeleteAccount)}*/}
-            {/*  className={checkDeleteAccount ? "active" : ""}*/}
-            {/*>*/}
-            {/*  복구할 수 없습니다*/}
-            {/*</button>*/}
             <br />
 
             <div
