@@ -22,6 +22,20 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
 
   const setUser = useSetRecoilState(userState);
 
+  useEffect(() => {
+    if (!show) {
+      setPhone("");
+      setPassword("")
+      setWrongLogin("");
+
+      setPhoneValid(true);
+      setPasswordValid(true);
+
+      setPhoneExist(true);
+      setPasswordExist(true);
+    }
+  }, [show]);
+
   const handlePhone = (e) => {
     setPhone(e.target.value);
     // setPhoneExist(true);
@@ -42,24 +56,31 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
 
     if (phoneRegex.test(phone)) {
       setPhoneValid(true);
-      console.log("phone Valid true", { phoneValid });
+      setPhoneExist(true);
+      console.log("phone Valid true", {phoneValid});
     } else if (phone.length === 0) {
       setPhoneExist(false);
       setPhoneValid(false);
-      console.log("no phone num", { phoneExist }, { phoneValid }, { phone });
-
+      console.log("no phone num", {phoneExist}, {phoneValid}, {phone});
       return;
     } else {
       setPhoneValid(false);
-      console.log("phone Valid false", { phoneValid });
-    }
+      setPhoneExist(true);
+      console.log("phone Valid false", {phoneValid});
+      return;
+    };
 
     if (passwordRegex.test(password)) {
       setPasswordValid(true);
+      setPasswordExist(true);
     } else if (password.length === 0) {
       setPasswordExist(false);
+      setPasswordValid(false);
+      return;
     } else {
       setPasswordValid(false);
+      setPasswordExist(true);
+      return;
     }
 
     if (phoneValid && passwordValid) {
@@ -87,9 +108,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
             setWrongLogin("phonePB");
             setPhone("");
             setPassword("");
-          } else if (
-            err.response.data.message === "비밀번호가 일치하지 않습니다."
-          ) {
+          } else if (err.response.data.message === "비밀번호가 일치하지 않습니다.") {
             setWrongLogin("passwordPB");
             setPassword("");
           } else {
@@ -97,14 +116,9 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           }
         });
     }
-    console.log(
-      "phoneValid >> ",
-      phoneValid,
-      "  passwordValid >> ",
-      passwordValid,
-      "  wrongLogin >> ",
-      wrongLogin,
-    );
+    console.log("phoneValid >> ", phoneValid
+              , "  passwordValid >> ", passwordValid
+              , "  wrongLogin >> ", wrongLogin);
   };
 
   return (
@@ -126,9 +140,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           />
         </div>
         <div className="errorMessageWrap">
-          {!phoneValid && phoneExist && passwordExist && (
-            <div>올바른 전화번호를 입력해주세요.</div>
-          )}
+          {!phoneValid && phoneExist && passwordExist && (<div>올바른 전화번호를 입력해주세요.</div>)}
         </div>
 
         <div style={{ marginTop: "20px" }} className="inputTitle">
@@ -154,30 +166,22 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
         <div className="existErrorMessage">
           <div>
             {!phoneExist && (
-              <div className="phoneExistErrorMessage">
-                전화번호를 입력해주세요.
-              </div>
+              <div className="phoneExistErrorMessage">전화번호를 입력해주세요.</div>
             )}
           </div>
           <div>
             {phoneExist && !passwordExist && (
-              <div className="passwordExistErrorMessage">
-                비밀번호를 입력해주세요.
-              </div>
+              <div className="passwordExistErrorMessage">비밀번호를 입력해주세요.</div>
             )}
           </div>
           <div>
             {wrongLogin === "phonePB" && (
-              <div className="loginPBMessage">
-                전화번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.
-              </div>
+              <div className="loginPBMessage">전화번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</div>
             )}
           </div>
           <div>
             {wrongLogin === "passwordPB" && (
-              <div className="loginPBMessage">
-                비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.
-              </div>
+              <div className="loginPBMessage">비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</div>
             )}
           </div>
         </div>
