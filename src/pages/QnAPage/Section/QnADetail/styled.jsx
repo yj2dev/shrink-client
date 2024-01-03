@@ -245,7 +245,6 @@ export const Container = styled.div`
 
     #comment-area {
         height: 80px;
-        //width: 760px;
         width: 100%;
         background-color: white;
         font-family: 'Noto Sans KR', sans-serif;
