@@ -6,13 +6,15 @@ export const Container = styled.div`
 
     .readPosting {
       width: 70%;
-      max-width: 800px;
+      //max-width: 800px;
+      max-width: 600px;
       min-width: 360px;
       border: 1px solid #d5d5d5;
       border-radius: 10px;
       margin: 50px auto;
       padding: 40px;
-      margin-left: 230px;
+      //margin-left: 230px;
+      margin-left: 300px;
       background-color: white;
       text-align: center;
 
@@ -28,8 +30,8 @@ export const Container = styled.div`
           .editmenu-wrap {
             margin-left: 150px;
           }
-          #commentc {
-            width:500px;
+          .commentc {
+            width:350px;
           }
           #edit-area {
             width:500px;
@@ -44,7 +46,7 @@ export const Container = styled.div`
         .wrapper {
           left: 700px;
         }
-        #commentc {
+        .commentc {
           width:300px;
         }
         #edit-area {
@@ -59,7 +61,7 @@ export const Container = styled.div`
         .wrapper {
           left: 650px;
         }
-        #commentc {
+        .commentc {
           width:250px;
         }
         #edit-area {
@@ -82,7 +84,7 @@ export const Container = styled.div`
           .wrapper {
             left: 450px;
           }
-          #commentc {
+          .commentc {
             width:200px;
           }
       }
@@ -97,17 +99,22 @@ export const Container = styled.div`
           .wrapper {
             left: 300px;
           }
-          #commentc {
+          .commentc {
             width:150px;
           }
           #edit-area {
             width:250px;
           }
       }
+
+      textarea {
+        resize: none;
+      }
     }
 
-    #commentc {
-      width:550px;
+    .commentc {
+      //width:550px;
+      width: 400px;
       overflow-wrap: break-word;
       word-wrap: break-word;
     }
@@ -115,6 +122,10 @@ export const Container = styled.div`
      margin: 20px 0 30px;
       color: #999;
       font-weight: 400;
+    }
+
+    .editorcontents p {
+      text-align: left;
     }
     
     .dates{
@@ -149,7 +160,8 @@ export const Container = styled.div`
     }
     
     .contents p{
-      margin: 20px 0;
+      //margin: 20px 0;
+      margin: 0px 0px 5px 0px;
       white-space: pre-line;
     }
     .contents<div{
@@ -195,7 +207,8 @@ export const Container = styled.div`
     }
     .editmenu-wrap {
       position:relative;
-      margin-left:320px;
+      //margin-left:320px;
+      margin-left: 200px;
       padding: 0px;
       border-radius: 5px;
     }
@@ -232,7 +245,8 @@ export const Container = styled.div`
 
     #comment-area {
         height: 80px;
-        width: 760px;
+        //width: 760px;
+        width: 100%;
         background-color: white;
         font-family: 'Noto Sans KR', sans-serif;
         border-radius: 5px;
@@ -244,7 +258,8 @@ export const Container = styled.div`
       border-radius: 5px;
       padding: 10px;
       height: auto;
-      width:600px;
+      //width:600px;
+      width: 500px;
     }
 
     .threedot {
@@ -352,43 +367,45 @@ export const Container = styled.div`
     border-radius: 20px;
     overflow: hidden;
     position: absolute;
-  .separator {
-    width: 1px;
-    background: #262626;
-    margin: 8px 0;
-  }
+      .separator {
+        width: 1px;
+        background: #262626;
+        margin: 8px 0;
+      }
 
-  .action {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 18px;
-    color: #262626;
-    font-family: Lato;
-    padding: 8px 12px;
-  
-  .count {
-    margin-left: 5px;
-    font-size: 14px;
-    font-weight: bold;
-  }
+      .action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 18px;
+        color: #262626;
+        font-family: Lato;
+        padding: 8px 12px;
+      
+      .count {
+        margin-left: 5px;
+        font-size: 14px;
+        font-weight: bold;
+      }
 
-  &:first-child {
-    padding-left: 14px;
-  }
+      &:first-child {
+        padding-left: 14px;
+      }
 
-  &:last-child {
-    padding-right: 14px;
-  }
+      &:last-child {
+        padding-right: 14px;
+      }
 
-  &:hover {
-    background: #e5e5e5;
-  }
-  }
-
-
+      &:hover {
+        background: #e5e5e5;
+      }
+    }
 }
+// .wrapper {
+//   right:-120px;
+//   bottom: -10px;
+// }
 
 .ql-size-small {
   font-size: .7rem;
