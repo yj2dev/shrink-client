@@ -128,6 +128,12 @@ const ReportItem = ({ report, likeList }) => {
       .catch((err) => {
         console.log("err >> ", err);
       });
+
+    const likeIcon = document.querySelector(".like-article svg");
+    likeIcon.classList.add("active");
+    setTimeout(() => {
+      likeIcon.classList.remove("active");
+    }, 400); // 애니메이션 시간과 동일하게 설정
   };
 
   return (
@@ -184,9 +190,11 @@ const ReportItem = ({ report, likeList }) => {
         type={likeType}
       >
         {hoverRightArticle ? (
-          <div className="like-article" onClick={onClickLike}>
+          <div
+            className={`like-article ${isLike ? "active" : ""}`}
+            onClick={onClickLike}
+          >
             {isLike ? <GoHeartFill /> : <GoHeart />}
-
             <div className="like-count">{like}</div>
           </div>
         ) : (

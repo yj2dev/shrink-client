@@ -296,6 +296,18 @@ export const RightArticle = styled.article`
     }
   }};
 
+  @keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
   .like-article {
     user-select: none;
     cursor: pointer;
@@ -303,12 +315,24 @@ export const RightArticle = styled.article`
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     font-size: 2em;
     .like-count {
       font-size: 0.5em;
     }
+  }
+
+  .like-article svg {
+    transition: color 0.2s ease;
+  }
+
+  .like-article svg:hover {
+  }
+
+  .like-article.active svg {
+    color: red;
+    animation: pop 0.4s ease;
   }
 `;
