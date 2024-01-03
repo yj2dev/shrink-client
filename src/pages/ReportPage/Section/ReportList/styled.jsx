@@ -7,10 +7,6 @@ export const IamgeSliderContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
 
-  img {
-    object-fit: contain;
-  }
-
   .left-arrow {
     left: 8px;
   }
@@ -93,6 +89,21 @@ export const Container = styled.div`
         padding: 16px;
         margin: 16px;
         font-size: 1.2em;
+        height: 150px;
+        overflow: scroll;
+        //border: 1px solid red;
+        border-radius: 8px;
+      }
+
+      .report-content-none {
+        background-color: rgba(0, 0, 0, 0.04);
+        padding: 16px;
+        margin: 16px;
+        font-size: 1.2em;
+        font-weight: 800;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         height: 150px;
         overflow: scroll;
         //border: 1px solid red;

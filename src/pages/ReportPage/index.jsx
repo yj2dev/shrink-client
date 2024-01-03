@@ -47,8 +47,6 @@ const ReportPage = () => {
         preview: URL.createObjectURL(file),
       }));
 
-    setSelectedFiles((prevFiles) => [...prevFiles, ...newSelectedFiles]);
-
     const isFileSizeValid = newSelectedFiles.every(
       (file) => file.file.size <= MAX_SIZE_MB * 1024 * 1024,
     );
@@ -57,7 +55,7 @@ const ReportPage = () => {
       return;
     }
 
-    console.log("newSelectedFiles >> ", newSelectedFiles);
+    setSelectedFiles((prevFiles) => [...prevFiles, ...newSelectedFiles]);
   }
 
   const handleRemoveFile = (fileName) => {
@@ -81,7 +79,7 @@ const ReportPage = () => {
           height: "8em",
           borderRadius: "8px",
           border: "1px solid #eee",
-          objectFit: "cover",
+          objectFit: "contain",
         }}
       />
       <button
@@ -260,6 +258,7 @@ const ReportPage = () => {
     });
 
     console.log("payload >> ", payload);
+    console.log("selectedFiles >> ", selectedFiles);
 
     selectedFiles.forEach((file) => {
       fd.append("image", file.file);

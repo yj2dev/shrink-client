@@ -72,7 +72,7 @@ const ImageSlider = ({ images, onImageClick, inModal }) => {
         style={imageStyle}
         src={`${process.env.REACT_APP_API_BASE_URL}/api/report/select/image/${images[currentImageIndex]}`}
         alt="신고상품 이미지"
-        onClick={() => onImageClick(currentImageIndex)}
+        onClick={() => onImageClick && onImageClick(currentImageIndex)}
       />
       <button style={buttonStyle} className="right-arrow" onClick={nextImage}>
         <IoIosArrowForward />
@@ -158,7 +158,11 @@ const ReportItem = ({ report }) => {
 
       {showContent && (
         <div className="report-content-wrapper">
-          <div className="report-content">{report.content}</div>
+          {report.content ? (
+            <div className="report-content">{report.content}</div>
+          ) : (
+            <div className="report-content-none">신고 내용 없음</div>
+          )}
         </div>
       )}
     </div>
