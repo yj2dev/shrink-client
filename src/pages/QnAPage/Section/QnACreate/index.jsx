@@ -97,8 +97,7 @@ const QnACreate = ({isEdit, originData}) => {
           if(window.confirm(isEdit? "질문을 수정하시겠습니까?" : "새로운 질문을 작성하시겠습니까?")){
                 if(!isEdit){
                     try {
-                        const response = await axios.post('/api/query/create', formData);
-                        console.log('created successfully:', response.data);
+                        await axios.post('/api/query/create', formData);
                         onCreate(formData.title, formData.content);
                     } catch (error) {
                         console.error('Error creating post:', error.message);
@@ -107,8 +106,7 @@ const QnACreate = ({isEdit, originData}) => {
                 }
                 else {
                     try {
-                        const response = await axios.put(`/api/query/update/${originData.id}`, formData);
-                        console.log('edited successfully:', response.data);
+                        await axios.put(`/api/query/update/${originData.id}`, formData);
                         onEdit(originData.id, formData.date, formData.title, formData.content);
                     } catch (error) {
                         console.error('Error editng post:', error.message);
@@ -124,13 +122,13 @@ const QnACreate = ({isEdit, originData}) => {
     useEffect(()=> {
         if(isEdit){ // 수정 페이지
             setformData(originData);
-            console.log("origin>>",originData);
+            //console.log("origin>>",originData);
         }
     }, [isEdit, originData]);
 
     return (
         <Container>
-            <article class="QnACreate">
+            <article className="QnACreate">
             <h3>{isEdit ? "질문 수정하기" :"질문 작성하기"}</h3>
 
             <input 
@@ -156,7 +154,7 @@ const QnACreate = ({isEdit, originData}) => {
 
             <div className="btn-container">
                 <button onClick={handleList}> <CiViewList/> 목록 </button>
-                <button onClick={handleSubmit}>등록하기</button>
+                <button onClick={handleSubmit}>{isEdit ? "수정하기" : "등록하기"}</button>
             </div>
         </article>
         

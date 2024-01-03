@@ -56,10 +56,9 @@ const QnADetail = () => {
         setEditingCommentContent(content);
 
         if(editingCommentId) {
-        const response = await axios.put(`/api/query/comment/update/${editingCommentId}`, {
+        await axios.put(`/api/query/comment/update/${editingCommentId}`, {
             content : editingCommentContent,
         });
-        console.log("comment edit>>",response.data);
         fetchPostDetail();
         setEditingCommentId(null);
         setEditingCommentContent("");
@@ -110,7 +109,6 @@ const QnADetail = () => {
           });
           //console.log("sortedcomments >>",sortedComments);
           setData(postData);
-          //console.log("data >>", data.post.writer.nickname);
         } catch (error) {
           console.error('Error post detail:', error.message);
         }
@@ -183,16 +181,16 @@ const QnADetail = () => {
     }, [id]);
 
    if(!data){
-    return <div className="QnADetail">로딩중입니다...</div>;
+    return <div className="QnADetail"><h3>로딩중입니다...</h3></div>;
    }else {
     return (
         <Container>
-            <div class="readPosting">
+            <div className="readPosting">
                 <h3>게시글 보기</h3>
                 <div>
                     <h2>{data.post.title}</h2>
 
-                    <div class="dates">
+                    <div className="dates">
                         <p id="postdate">{new Date(data.post.created_at).toLocaleString()}</p>
                         <p id="postuser">
                             <img src={data.post.writer.profile_url} alt="profile-img"/>
@@ -204,12 +202,8 @@ const QnADetail = () => {
                     </div>
                 </div>
 
-                <div class="contents">
+                <div className="contents">
                     <p className="editorcontents" dangerouslySetInnerHTML={{ __html: data.post.content }}></p>
-
-                    {/* <div class="btns">
-                        <button><img src="https://super.so/icon/light/heart.svg" alt="heart"/></button>
-                    </div> */}
 
                     <div className="btn-container">
                         <button className="left-btn" onClick={handleList}>
@@ -217,17 +211,17 @@ const QnADetail = () => {
                         </button>
 
                         <div className="like-container">
-                                <div class="wrapper2">
-                                        <div class="action" onClick={boardLike}>
+                                <div className="wrapper2">
+                                        <div className="action" onClick={boardLike}>
                                             <FaRegThumbsUp/>
-                                            <div class="count">
+                                            <div className="count">
                                                 {data.post.like}
                                             </div>
                                         </div>
-                                        <div class="separator"></div>
-                                        <div class="action" onClick={boardDislike}>
+                                        <div className="separator"></div>
+                                        <div className="action" onClick={boardDislike}>
                                             <FaRegThumbsDown/>
-                                            <div class="count">
+                                            <div className="count">
                                                 {data.post.dislike}
                                             </div>
                                         </div>
@@ -251,11 +245,11 @@ const QnADetail = () => {
                     </div>
                 </div>
 
-                <div class="commentsz">
+                <div className="commentsz">
                     <p>댓글 {data.post.comments.length}개</p>
 
                     {data.post.comments.map((it) => (
-                        <section class="readPost" key={it.id}>
+                        <section className="readPost" key={it.id}>
                         <div className="readdiv">
                             <img src={it.writer.profile_url} alt="profile-img"/>
                             <span>
@@ -282,17 +276,17 @@ const QnADetail = () => {
                         </div>
                         {editingCommentId === it.id ? (<></>) : (
                                 <div className="like-container" id="commentlike-container">
-                                    <div class="wrapper" id="commentl">
-                                            <div class="action" onClick={() => commentLike(it.id)}>
+                                    <div className="wrapper" id="commentl">
+                                            <div className="action" onClick={() => commentLike(it.id)}>
                                                 <FaRegThumbsUp/>
-                                                <div class="count">
+                                                <div className="count">
                                                     {it.likes_count}
                                                 </div>
                                             </div>
-                                            <div class="separator"></div>
-                                            <div class="action" onClick={() => commentDislike(it.id)}>
+                                            <div className="separator"></div>
+                                            <div className="action" onClick={() => commentDislike(it.id)}>
                                                 <FaRegThumbsDown/>
-                                                <div class="count">
+                                                <div className="count">
                                                     {it.dislikes_count}
                                                 </div>
                                             </div>
@@ -325,7 +319,6 @@ const QnADetail = () => {
                     
                     <textarea
                         id="comment-area" 
-                        name=""
                         onChange={handelCommentChange}
                         value={comment}
                         ref={commentInput}

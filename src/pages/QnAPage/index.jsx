@@ -73,33 +73,33 @@ const QnAPage = () => {
     <Container>
     
     <div className="QnaPost">
-    <section class="notice">
-        <div class="page-title">
-            <div class="container">
+    <section className="notice">
+        <div className="page-title">
+            <div className="container">
                 <h3><span style={{color: '#0F62FE'}}>슈링크플레이션</span> 제품 관련 질문</h3>
             </div>
         </div>
 
         <div id="board-search">
-                <div class="container">
+                <div className="container">
                 <div className="write-wrap">
                 <p>총 <span>{data.length}</span>개의 게시물이 있습니다.</p>
-                    {user && <button class="btn write-btn" onClick={handleWriteButtonClick}>글쓰기</button>}
+                    {user && <button className="btn write-btn" onClick={handleWriteButtonClick}>작성하기</button>}
                 </div>
-                    <div class="search-window">
+                    <div className="search-window">
                         <form action="">
-                            <div class="search-wrap">
-                                <label for="search" class="blind">질문게시판 내용 검색</label>
+                            <div className="search-wrap">
+                                <label for="search" className="blind">질문게시판 내용 검색</label>
                                 <input id="search" type="text" name="" placeholder="검색어를 입력해주세요." value={searchTerm} onChange={handleSearchInputChange}/>
-                                <button type="submit" class="btn search-btn" onClick={handleSearch}>검색 <FaSearch className="search-icon"/></button>
+                                <button type="submit" className="btn search-btn" onClick={handleSearch}>검색 <FaSearch className="search-icon"/></button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
             <div id="board-list">
-                <div class="container">
-                    <table class="board-table">
+                <div className="container">
+                    <table className="board-table">
                         <thead>
                         <tr>
                             <th scope="col" class="th-num">번호</th>

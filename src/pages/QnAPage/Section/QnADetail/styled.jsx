@@ -223,7 +223,6 @@ export const Container = styled.div`
       right: 40px;
       display: flex;
       flex-direction: column;
-      //border: 1px solid white;
       border: 1px solid #d5d5d5;
       padding: 0px;
       border-radius: 4px;

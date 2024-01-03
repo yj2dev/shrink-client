@@ -25,7 +25,6 @@ const QnAEdit = () => {
           };
 
         fetchData();
-        //console.log("edit postlist >>", postList);
     }, []);
 
     useEffect(()=> {
@@ -34,7 +33,7 @@ const QnAEdit = () => {
             const targetPost = postList.find(
                 (it) => parseInt(it.id) === parseInt(id)
             );
-            console.log("target >> ", targetPost);
+            //console.log("target >> ", targetPost);
 
             if(targetPost){
                 setOriginData(targetPost);

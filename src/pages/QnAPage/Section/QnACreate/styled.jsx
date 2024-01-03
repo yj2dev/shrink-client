@@ -57,7 +57,7 @@ export const Container = styled.div`
     }
 
     .ql-container:focus{
-        border: #252525
+        border: black;
     }
 
     .ql-editor.ql-blank::before {
