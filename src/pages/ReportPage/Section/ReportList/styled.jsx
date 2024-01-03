@@ -295,4 +295,20 @@ export const RightArticle = styled.article`
         return "#59dc85";
     }
   }};
+
+  .like-article {
+    user-select: none;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 2em;
+    .like-count {
+      font-size: 0.5em;
+    }
+  }
 `;

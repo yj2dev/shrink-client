@@ -13,6 +13,8 @@ import { getLikeType } from "../../../../utils/type";
 import { FaAnglesDown } from "react-icons/fa6";
 import Modal from "../../../../components/Modal";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import axios from "axios";
+import { GoHeart, GoHeartFill } from "react-icons/go";
 
 const ImageSlider = ({ images, onImageClick, inModal }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -81,17 +83,21 @@ const ImageSlider = ({ images, onImageClick, inModal }) => {
   );
 };
 
-const ReportItem = ({ report }) => {
+const ReportItem = ({ report, likeList }) => {
   const [timeText, setTimeText] = useState(timeAgo(report.created_at));
-  const [likeType, setLikeType] = useState(getLikeType(report.like));
+  const [like, setLike] = useState(report.like);
+  const [likeType, setLikeType] = useState(getLikeType(like));
+  const [isLike, setIsLike] = useState(likeList.includes(report.id));
   const [showContent, setShowContent] = useState(false);
 
-  const [modalOpen, setModalOpen] = useState(false);
+  const [showExtendModal, setShowExtendModal] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  const [hoverRightArticle, setHoverRightArticle] = useState(false);
 
   const handleImageClick = (index) => {
     setSelectedImageIndex(index);
-    setModalOpen(true);
+    setShowExtendModal(true);
   };
 
   useEffect(() => {
@@ -105,6 +111,24 @@ const ReportItem = ({ report }) => {
       clearInterval(intervalTime);
     };
   }, [report.created_at]);
+
+  const onClickLike = () => {
+    axios
+      .post(`https://api.dietshrink.kro.kr/api/report/like/${report.id}`)
+      .then((res) => {
+        if (res.data.status === "success") {
+          setLike((prevLike) => {
+            const newLike = isLike ? prevLike - 1 : prevLike + 1;
+            setLikeType(getLikeType(newLike));
+            setIsLike(!isLike);
+            return newLike;
+          });
+        }
+      })
+      .catch((err) => {
+        console.log("err >> ", err);
+      });
+  };
 
   return (
     <div className={`item ${showContent ? "active" : ""}`}>
@@ -122,8 +146,8 @@ const ReportItem = ({ report }) => {
         )}
 
         <Modal
-          show={modalOpen}
-          onClose={() => setModalOpen(false)}
+          show={showExtendModal}
+          onClose={() => setShowExtendModal(false)}
           showCloseBtn={false}
         >
           <ImageSlider
@@ -154,7 +178,21 @@ const ReportItem = ({ report }) => {
         </button>
       </MiddleArticle>
 
-      <RightArticle type={likeType}>{likeType}</RightArticle>
+      <RightArticle
+        onMouseEnter={() => setHoverRightArticle(true)}
+        onMouseLeave={() => setHoverRightArticle(false)}
+        type={likeType}
+      >
+        {hoverRightArticle ? (
+          <div className="like-article" onClick={onClickLike}>
+            {isLike ? <GoHeartFill /> : <GoHeart />}
+
+            <div className="like-count">{like}</div>
+          </div>
+        ) : (
+          <>{likeType}</>
+        )}
+      </RightArticle>
 
       {showContent && (
         <div className="report-content-wrapper">
@@ -171,11 +209,30 @@ const ReportItem = ({ report }) => {
 
 const ReportList = ({ reports }) => {
   // const reversedReports = [...reports].reverse();
+  const [likeList, setLikeList] = useState([]);
+
+  useEffect(() => {
+    getLikeList();
+  }, []);
+
+  const getLikeList = () => {
+    // 비회원 요청 안가게 처리 필요
+    axios
+      .get("https://api.dietshrink.kro.kr/api/report/likeall")
+      .then((res) => {
+        if (res.data.status === "success") {
+          setLikeList(res.data.like_list);
+        }
+      })
+      .catch((err) => {
+        console.log("err >> ", err);
+      });
+  };
 
   return (
     <Container>
       {reports.map((report, index) => (
-        <ReportItem key={index} report={report} />
+        <ReportItem key={index} report={report} likeList={likeList} />
       ))}
     </Container>
   );
