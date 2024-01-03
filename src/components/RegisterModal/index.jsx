@@ -43,6 +43,19 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
   const [codeExist, setCodeExist] = useState(true);
   const [codeCheckValid, setCodeCheckValid] = useState(false);
 
+  const [isHovered, setIsHovered] = useState(false);
+
+  // 버튼 hover이벤트
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+  const buttonStyle = {
+    backgroundColor: isHovered ? '#115ae1' : '#0F62FE', // 호버시 진한색
+  };
+  
   const onChangePhone = (e) => {
     setPhone(e.target.value);
     // setPhoneExist(true);
@@ -53,8 +66,45 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
     // setCodeExist(true);
   };
 
+  const handleOnKeyPress = (e, btn) => {
+    if(e.key === "Enter") {
+      console.log("enter");
+      if (btn === 'onClickPhone') {
+        onClickPhone();
+      } else if (btn === 'onClickCode') {
+        onClickCode();
+      } else if (btn === 'onClickRegister') {
+        onClickRegister();
+      }
+    };
+  };
+
+  useEffect(() => {
+    if (!show) {
+      setPhone("");
+      setCode("");
+      setPassword("")
+      setCountdown(false);
+
+      setPhoneValid(true);
+      setCodeValid(true);
+      setPasswordValid(true);
+
+      setPhoneExist(true);
+      setCodeExist(true);
+      setPasswordExist(true);
+      setCodeCheckValid(false);
+    }
+  }, [show]);
+
   let [count, setCount] = useState(180);
-  
+
+  useEffect(() => {
+    if (!show) {
+      setPhone("");
+    }
+  }, [show]);
+
   useInterval(() => {
     if (count <= 0) {
       setCountdown(false);
@@ -83,11 +133,11 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
     } else {
       setPhoneValid(false);
       setPhoneExist(true);
-    };
+    }
 
     if (phoneValid) {
       axios
-        .post("/api/auth/code", { phone}) //, withCredentials: true })
+        .post("/api/auth/code", { phone }) //, withCredentials: true })
         .then((res) => {
           console.log("res >> ", res);
           if (res.data.data.statusName === "success") {
@@ -108,11 +158,11 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
           setPhoneValid(false);
           //
         });
-    };
+    }
   };
 
   const onClickCode = (e) => {
-    if (code.length>0) {
+    if (code.length > 0) {
       setCodeExist(true);
       const payload = {
         phone,
@@ -140,7 +190,7 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
         });
     } else {
       setCodeExist(false);
-    };
+    }
   };
 
   const onClickRegister = (e) => {
@@ -181,7 +231,7 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
           console.log("err >> ", err);
           alert("회원가입 할 수 없습니다.");
         });
-    };
+    }
   };
 
   const onChangePassword = (e) => {
@@ -207,19 +257,25 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
                   value={phone}
                   onChange={onChangePhone}
                   placeholder="01012345678"
+                  onKeyDown={(e) => handleOnKeyPress(e, 'onClickPhone')}
+                  disabled={countdown}
                 />
               </div>
               <div className="errorMessageWrap">
                 {!phoneValid && phoneExist && (
                   <div>올바른 전화번호를 입력해주세요.</div>
                 )}
-                {!phoneExist && (
-                  <div>전화번호를 입력해주세요</div>
-                )}
+                {!phoneExist && <div>전화번호를 입력해주세요</div>}
               </div>
 
               <div className="bottomWrap">
-                <button className="bottomButton" onClick={onClickPhone}>
+                <button
+                  className="bottomButton"
+                  onClick={onClickPhone}
+                  style = {buttonStyle}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
                   인증번호 전송
                 </button>
                 {/* <button className="resendButton" onClick={onClickPhone}>
@@ -241,6 +297,7 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
                       value={code}
                       onChange={onChangeCode}
                       placeholder="인증번호를 입력해주세요"
+                      onKeyDown={(e) => handleOnKeyPress(e, 'onClickCode')}
                     />
                     <span className="timeCountingWrap">
                       {timeFormat(count)}
@@ -248,24 +305,29 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
                   </div>
                   <div className="errorMessageWrap">
                     {!codeValid && codeExist && (
-                    <div>잘못된 인증번호입니다.</div>)}
-                    {!codeExist && (
-                      <div>인증번호를 입력해주세요.</div>
+                      <div>잘못된 인증번호입니다.</div>
                     )}
+                    {!codeExist && <div>인증번호를 입력해주세요.</div>}
                   </div>
                   <div className="bottomWrap">
-                    <button className="bottomButton" onClick={onClickCode}>
+                    <button
+                      className="bottomButton"
+                      onClick={onClickCode}
+                      style = {buttonStyle}
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                    >
                       인증번호 확인
                     </button>
                   </div>
                 </div>
               )}
               <div className="loginLine">
-                      계정이 있으신가요?{" "}
-                      <button className="loginButton" onClick={onShowLogin}>
-                        로그인
-                      </button>
-                    </div>
+                계정이 있으신가요?{" "}
+                <button className="loginButton" onClick={onShowLogin}>
+                  로그인
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -291,13 +353,12 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
                   value={password}
                   onChange={onChangePassword}
                   placeholder="영문, 숫자, 특수문자 포함 8자리 이상"
+                  onKeyDown={(e) => handleOnKeyPress(e, 'onClickRegister')}
                 />
               </div>
               <div className="errorMessageWrap">
                 <div>
-                  {!passwordExist && (
-                    <div>비밀번호를 입력해주세요.</div>
-                  )}
+                  {!passwordExist && <div>비밀번호를 입력해주세요.</div>}
                 </div>
                 <div>
                   {!passwordValid && passwordExist && (
@@ -309,8 +370,11 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
 
             <div className="bottomWrap">
               <button
-                style={{ marginTop: "40px" }}
+                // style={{ marginTop: "40px" }}
                 className="bottomButton"
+                style = {buttonStyle}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
                 onClick={() => {
                   onClickRegister();
                 }}

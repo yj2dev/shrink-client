@@ -72,10 +72,11 @@ const QnAPage = () => {
   return (
     <Container>
     
+    <div className="QnaPost">
     <section class="notice">
         <div class="page-title">
             <div class="container">
-                <h3>질문게시판</h3>
+                <h3><span style={{color: '#0F62FE'}}>슈링크플레이션</span> 제품 관련 질문</h3>
             </div>
         </div>
 
@@ -138,6 +139,7 @@ const QnAPage = () => {
       nextPageText={"›"}
       onChange={handlePageChange}
     />
+    </div>
     </div>
     </Container>
   );

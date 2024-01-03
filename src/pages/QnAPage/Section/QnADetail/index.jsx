@@ -269,7 +269,10 @@ const QnADetail = () => {
                                 ) : (
                                     <p>
                                     
-                                    <p id="commentc">{it.content}</p>
+                                    <p 
+                                        style={{whiteSpace: 'pre-line'}} 
+                                        className="commentc"
+                                    >{it.content}</p>
                                     
                                     <small>{timeAgo(it.created_at)}</small>
                                     </p>

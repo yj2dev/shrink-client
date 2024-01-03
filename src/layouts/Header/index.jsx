@@ -1,8 +1,10 @@
+import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import LoginModal from "../../components/LoginModal";
 import RegisterModal from "../../components/RegisterModal";
-import UserPasswordModal from "../../components/UserPasswordModal";
+import { userState } from "../../state/selectors/userSelectors";
 import logoImg from "./img/logo.png";
 import {
   Container,
@@ -11,10 +13,6 @@ import {
   LeftSection,
   RightSection,
 } from "./styled";
-import axios from "axios";
-import { useRecoilState } from "recoil";
-import { userState } from "../../state/selectors/userSelectors";
-import Modal from "../../components/Modal";
 
 const Header = () => {
   const [isLogoHover, setIsLogoHover] = useState(false);
@@ -32,7 +30,6 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
-  const [showUserPasswordModal, setShowUserPasswordModal] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const [extendLogoutSubmit, setExtendLogoutSubmit] = useState(false);
@@ -87,19 +84,11 @@ const Header = () => {
   const onShowRegisterModal = () => {
     setShowLoginModal(false);
     setShowRegisterModal(true);
-    setShowUserPasswordModal(false);
-  };
-
-  const onShowUserPasswordModal = () => {
-    setShowLoginModal(false);
-    setShowRegisterModal(false);
-    setShowUserPasswordModal(true);
   };
 
   const onCloseModal = () => {
     setShowLoginModal(false);
     setShowRegisterModal(false);
-    setShowUserPasswordModal(false);
   };
 
   const onClickLogo = () => {
@@ -206,21 +195,13 @@ const Header = () => {
             show={showLoginModal}
             onClose={onCloseModal}
             onShowRegister={onShowRegisterModal}
-            onShowUserPassword={onShowUserPasswordModal}
             onCloseOutside={false}
           />
           <RegisterModal
             show={showRegisterModal}
             onClose={onCloseModal}
             onShowLogin={onShowLoginModal}
-            onShowUserPassword={onShowUserPasswordModal}
-          />
-          <UserPasswordModal
-            show={showUserPasswordModal}
-            onClose={onCloseModal}
-            onShowLogin={onShowLoginModal}
-            onShowRegister={onShowRegisterModal}
-          />
+            />
         </RightSection>
       </Container>
     </>

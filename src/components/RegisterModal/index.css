@@ -47,7 +47,10 @@
     color: #ef0000;
     font-size: 14px;
 }
-
+.timeCountingWrap {
+    color : #1555cb;
+    font-weight: 400;
+}
 /* .bottomWrap{
     position: fixed;
     

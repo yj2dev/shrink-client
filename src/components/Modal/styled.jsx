@@ -15,11 +15,12 @@ export const Container = styled.div`
   .content {
     position: relative;
     background: white;
-    width: 300px;
+    //width:
     padding: 20px;
     border-radius: 12px;
   }
   .close-btn {
+    z-index: 50;
     position: absolute;
     right: 8px;
     top: 8px;
@@ -38,6 +39,6 @@ export const Container = styled.div`
   }
 
   .close-btn:hover {
-    background-color: #eee;
+    background-color: rgba(0, 0, 0, 0.2);
   }
 `;

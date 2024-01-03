@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../../state/selectors/userSelectors";
@@ -21,6 +21,35 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
   const [passwordExist, setPasswordExist] = useState(true);
 
   const setUser = useSetRecoilState(userState);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // 버튼 hover이벤트
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+  const buttonStyle = {
+    backgroundColor: isHovered ? '#115ae1' : '#0F62FE', // 호버시 진한색
+    color: 'white',
+    padding: '10px',
+    cursor: 'pointer',
+  };
+
+  useEffect(() => {
+    if (!show) {
+      setPhone("");
+      setPassword("")
+      setWrongLogin("");
+
+      setPhoneValid(true);
+      setPasswordValid(true);
+
+      setPhoneExist(true);
+      setPasswordExist(true);
+    }
+  }, [show]);
 
   const handlePhone = (e) => {
     setPhone(e.target.value);
@@ -33,6 +62,12 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
     // setPasswordExist(true);
     // setPasswordValid(true);
   };
+  const handleOnKeyPress = (e) => {
+    if(e.key === "Enter") {
+      console.log("enter");
+      onClickLogin();
+    };
+  };
   const onClickLogin = (e) => {
     setWrongLogin("");
     // 정규표현식 만족하는지 확인
@@ -42,22 +77,31 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
 
     if (phoneRegex.test(phone)) {
       setPhoneValid(true);
+      setPhoneExist(true);
       console.log("phone Valid true", {phoneValid});
     } else if (phone.length === 0) {
       setPhoneExist(false);
       setPhoneValid(false);
       console.log("no phone num", {phoneExist}, {phoneValid}, {phone});
+      return;
     } else {
       setPhoneValid(false);
+      setPhoneExist(true);
       console.log("phone Valid false", {phoneValid});
+      return;
     };
 
     if (passwordRegex.test(password)) {
       setPasswordValid(true);
+      setPasswordExist(true);
     } else if (password.length === 0) {
       setPasswordExist(false);
+      setPasswordValid(false);
+      return;
     } else {
       setPasswordValid(false);
+      setPasswordExist(true);
+      return;
     }
 
     if (phoneValid && passwordValid) {
@@ -114,6 +158,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
             // onChange={onChangePhone}
             onChange={handlePhone}
             placeholder="010-0000-0000"
+            onKeyDown={(e) => handleOnKeyPress(e)}
           />
         </div>
         <div className="errorMessageWrap">
@@ -130,6 +175,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
             value={password}
             onChange={onChangePassword}
             placeholder="영문, 숫자, 특수문자 포함 8자리 이상"
+            onKeyDown={(e) => handleOnKeyPress(e)}
           />
         </div>
         <div className="errorMessageWrap">
@@ -163,9 +209,12 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           </div>
         </div>
         <button
-          style={{ marginTop: "40px" }}
+          // style={{ marginTop: "40px" }}
+          style = {buttonStyle}
           className="bottomButton"
           onClick={onClickLogin}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           확인
         </button>

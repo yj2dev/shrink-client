@@ -4,6 +4,7 @@ export const Container = styled.div`
 
     article{
         width: 100%;
+        width: 800px;
         max-width: 600px;
         min-width: 360px;
         border: 1px solid #d5d5d5;
@@ -11,6 +12,7 @@ export const Container = styled.div`
         margin: 50px auto;
         padding: 40px;
         margin-left: 300px;
+        //margin-left: 230px;
         background-color: white;
 
 
@@ -58,10 +60,15 @@ export const Container = styled.div`
         border: #252525
     }
 
+    .ql-editor.ql-blank::before {
+        font-family: 'Noto Sans KR', sans-serif;
+        font-style: normal !important;
+    }
+
 
 
     input[type=text]{
-        width: 100%;
+        width: 95%;
         height: 40px;
         
         padding: 10px;
