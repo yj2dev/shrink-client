@@ -60,9 +60,9 @@ export const Container = styled.div`
         border: #252525
     }
 
-    .ql-blank {
+    .ql-editor.ql-blank::before {
         font-family: 'Noto Sans KR', sans-serif;
-        font-style: normal; !important;
+        font-style: normal !important;
     }
 
 
