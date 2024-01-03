@@ -226,7 +226,8 @@ export const RightArticle = styled.article`
 
     switch (status) {
       case "등록":
-        return "#009432";
+        // return "#009432";
+        return "#59dc85";
       case "저위험":
         return "#FF9C08";
       case "중위험":
@@ -234,7 +235,8 @@ export const RightArticle = styled.article`
       case "고위험":
         return "#ff5058";
       default:
-        return "#009432";
+        // return "#009432";
+        return "#59dc85";
     }
   }};
 `;

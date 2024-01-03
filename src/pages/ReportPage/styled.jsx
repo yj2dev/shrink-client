@@ -6,8 +6,6 @@ export const Container = styled.div`
   align-items: center;
   width: 100%;
 
-  border: 1px solid red;
-
   .report-wrapper {
     min-width: 600px;
 
@@ -77,9 +75,13 @@ export const ReportWriteSection = styled.section`
   transition: 0.2s;
 
   &.active {
-    height: 820px;
     border-style: dashed;
     border-color: #3f5dfe;
+    height: 870px;
+
+    &.active-file {
+      height: 1000px;
+    }
   }
 
   form {
@@ -163,6 +165,10 @@ export const ReportWriteSection = styled.section`
     //  border-color: #3f5dfe;
     //}
 
+    button[type="submit"] {
+      margin-top: 20px;
+    }
+
     button {
       display: flex;
       justify-content: center;
@@ -205,40 +211,68 @@ export const InputHidden = styled.input`
 `;
 
 export const InputLabel = styled.label`
+  cursor: pointer;
+  user-select: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1em;
   flex-direction: column;
   width: 100%;
-  height: 120px;
-  font-size: 16px;
-  cursor: pointer;
+  height: 6em;
   border-radius: 8px;
-  font-weight: 800;
-  margin-bottom: 20px;
-  //border: none;
-  //background-color: #ff5058;
-  //color: #ffffff;
+  //border: 2px dashed #6c82f3;
+  border: 2px dashed #bcbcbc;
+  color: #bcbcbc;
+  //color: #2245fd;
+  transition: 0.1s;
 
-  border: 2px solid rgba(63, 93, 254, 0.5);
-  color: rgba(63, 93, 254, 0.5);
-  transition: 0.2s;
-
-  &.active {
-    background-color: #aab4fe;
-    border: 2px solid #aab4fe;
-    color: #ffffff;
-    height: 50px;
+  &:hover {
+    background-color: rgba(108, 130, 243, 0.1);
+    border: 2px dashed #6c82f3;
+    color: #6c82f3;
   }
 
   &.drag {
-    background-color: #aab4fe;
-    border: 2px solid #aab4fe;
-    color: #ffffff;
+    background-color: rgba(108, 130, 243, 0.2);
+    border: 2px dashed #4f68ea;
+    color: #4f68ea;
   }
 
-  &:not(.active):hover {
-    border: 2px solid rgba(63, 93, 254, 1);
-    color: rgba(63, 93, 254, 1);
+  &.active {
+    background-color: rgba(108, 130, 243, 0.2);
+    border: 2px dashed #4f68ea;
+    color: #4f68ea;
   }
+
+  //font-size: 16px;
+  //cursor: pointer;
+  //border-radius: 8px;
+  //font-weight: 800;
+  //margin-bottom: 20px;
+  ////border: none;
+  ////background-color: #ff5058;
+  ////color: #ffffff;
+  //
+  //border: 2px solid rgba(63, 93, 254, 0.5);
+  //color: rgba(63, 93, 254, 0.5);
+  //transition: 0.2s;
+  //
+  //&.active {
+  //  background-color: #aab4fe;
+  //  border: 2px solid #aab4fe;
+  //  color: #ffffff;
+  //  height: 50px;
+  //}
+  //
+  //&.drag {
+  //  background-color: #aab4fe;
+  //  border: 2px solid #aab4fe;
+  //  color: #ffffff;
+  //}
+  //
+  //&:not(.active):hover {
+  //  border: 2px solid rgba(63, 93, 254, 1);
+  //  color: rgba(63, 93, 254, 1);
+  //}
 `;
