@@ -1,4 +1,48 @@
 import styled from "styled-components";
+
+export const IamgeSliderContainer = styled.div`
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  img {
+    object-fit: contain;
+  }
+
+  .left-arrow {
+    left: 8px;
+  }
+
+  .right-arrow {
+    right: 8px;
+  }
+
+  &:hover button {
+    display: flex;
+  }
+
+  button {
+    display: none;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.25);
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    width: 1em;
+    height: 1em;
+    outline: none;
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    position: absolute;
+    top: 2em;
+    //top: 50%;
+    //transform: translateY(-50%);
+    z-index: 1;
+  }
+`;
 export const Container = styled.div`
   //border: 2px dashed #00b5ff;
 
@@ -7,8 +51,6 @@ export const Container = styled.div`
   gap: 24px;
 
   .item {
-    //border: 2px dashed orangered;
-
     display: flex;
 
     background-color: #fff;
@@ -70,7 +112,7 @@ export const Container = styled.div`
       box-sizing: border-box;
       height: 148px;
       width: 148px;
-      object-fit: contain;
+      object-fit: cover;
 
       @media (max-width: 768px) {
         height: 90px;
@@ -124,7 +166,7 @@ export const MiddleArticle = styled.article`
   button.show-content-btn {
     cursor: pointer;
     position: absolute;
-    left: 24px;
+    left: 16px;
     top: 84px;
     font-size: 2em;
     background-color: transparent;
@@ -136,12 +178,15 @@ export const MiddleArticle = styled.article`
     width: 2em;
     height: 2em;
     transition: 0.2s;
+    border-radius: 12px;
 
     &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
       color: rgba(0, 0, 0, 0.8);
     }
 
     &.active {
+      background-color: rgba(0, 0, 0, 0.05);
       color: rgba(0, 0, 0, 0.8);
       transform: rotate(180deg);
     }
