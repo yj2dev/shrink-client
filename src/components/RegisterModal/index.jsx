@@ -53,6 +53,24 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
     // setCodeExist(true);
   };
 
+  useEffect(() => {
+    if (!show) {
+      setPhone("");
+      setCode("");
+      setPassword("")
+      setCountdown(false);
+
+      setPhoneValid(true);
+      setCodeValid(true);
+      setPasswordValid(true);
+
+      setPhoneExist(true);
+      setCodeExist(true);
+      setPasswordExist(true);
+      setCodeCheckValid(false);
+    }
+  }, [show]);
+
   let [count, setCount] = useState(180);
   
   useInterval(() => {
