@@ -6,49 +6,52 @@ export const Container = styled.div`
 
     .readPosting {
       width: 70%;
-      //max-width: 800px;
-      max-width: 600px;
+      max-width: 800px;
       min-width: 360px;
       border: 1px solid #d5d5d5;
       border-radius: 10px;
       margin: 50px auto;
-      padding: 40px;
-      //margin-left: 230px;
-      margin-left: 300px;
+      padding: 40px 30px 40px 30px;
+      margin-left: 240px;
       background-color: white;
-      text-align: center;
+
+      h3, h2 {
+        text-align: center;
+      }
+
+      .editorcontents {
+        width: 600px;
+        margin-left:110px;
+      }
 
       @media (max-width: 1300px) {
-          margin-left: 70px;
+          margin-left: 150px;
 
-          #comment-area {
-            width:100%;
+          .editorcontents {
+            margin-left: 75px;
           }
           .left-btn {
             width:70px;
           }
-          .editmenu-wrap {
-            margin-left: 150px;
-          }
-          .commentc {
-            width:350px;
-          }
-          #edit-area {
-            width:500px;
-          }
       }
 
-      @media (max-width: 1000px) {
+      @media (max-width: 1100px) {
+        margin-left:90px;
+
+        .editorcontents {
+          margin-left: 50px;
+          width:80%;
+        }
+
+        .right-wrap {
+          margin-left: 350px;
+        }
+        .wrapper {
+          margin-left: 70px;
+        }
         .editmenu-wrap {
           right: 100px;
         };
-
-        .wrapper {
-          left: 700px;
-        }
-        .commentc {
-          width:300px;
-        }
         #edit-area {
           width:350px;
         }
@@ -59,10 +62,7 @@ export const Container = styled.div`
           right: 140px;
         };
         .wrapper {
-          left: 650px;
-        }
-        .commentc {
-          width:250px;
+          left: 500px;
         }
         #edit-area {
           width:300px;
@@ -83,14 +83,13 @@ export const Container = styled.div`
           }
           .wrapper {
             left: 450px;
-          }
-          .commentc {
-            width:200px;
+            margin-left:0px;
           }
       }
 
       @media (max-width: 680px) {
         margin-left: 30px;
+
         #postdate {
           margin-right: 30px;
             right: 50px;
@@ -99,11 +98,8 @@ export const Container = styled.div`
           .wrapper {
             left: 300px;
           }
-          .commentc {
-            width:150px;
-          }
           #edit-area {
-            width:250px;
+            width:230px;
           }
       }
 
@@ -124,8 +120,16 @@ export const Container = styled.div`
       font-weight: 400;
     }
 
-    .editorcontents p {
-      text-align: left;
+    .ql-align-center {
+      text-align: center;  
+    }
+
+    .ql-align-left {
+      text-align: left;  
+    }
+
+    .ql-align-right {
+      text-align: right;  
     }
     
     .dates{
@@ -203,7 +207,8 @@ export const Container = styled.div`
 
     .right-wrap {
       position: absolute;
-      margin-left: 400px;
+      margin-left: 450px;
+      margin-top: 20px;
     }
     .editmenu-wrap {
       position:relative;
@@ -257,8 +262,7 @@ export const Container = styled.div`
       border-radius: 5px;
       padding: 10px;
       height: auto;
-      //width:600px;
-      width: 500px;
+      width: 550px;
     }
 
     .threedot {

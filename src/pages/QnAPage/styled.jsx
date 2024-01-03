@@ -4,28 +4,37 @@ export const Container = styled.div`
 
     width: 80%;
 
+    .QnaPost {
+        width: 70%;
+        max-width: 1000px;
+        min-width: 360px;
+        border: 1px solid #d5d5d5;
+        border-radius: 10px;
+        margin: 50px auto;
+        padding: 40px 30px 40px 30px;
+        margin-left: 240px;
+        background-color: white;
+    }
+
     table {
         border-collapse: collapse;
         border-spacing: 0;
     }
      section.notice {
         padding: 50px 0;
-        margin-left: 100px;
+        margin-left: 0px;
         
     }
     .page-title {
         margin-bottom: 40px;
     }
      .page-title h3 {
-        font-size: 28px;
-        color: #333333;
-        font-weight: 400;
+        font-size: 30px;
         text-align: center;
     }
   
     #board-search .search-window {
         padding: 15px 0;
-        background-color: #F0F0F0;
     }
     #board-search .search-window .search-wrap {
         position: relative;
@@ -198,7 +207,7 @@ export const Container = styled.div`
         clear: both;
     }
     .container {
-        width: 1100px;
+        width: 100%;
         margin: 0 auto;
     }
     .blind {
@@ -276,72 +285,71 @@ export const Container = styled.div`
 
 
       @media (max-width: 1200px) {
-        // .board-table,
-        // .search-window {
-        //   width: 70%; 
-        //   //overflow-x: auto; 
-        // }
-      
-        .board-table th,
-        .board-table td {
-          padding: 7px; 
-        }
 
-        section.notice {
-            margin-left: 50px;
-        }
-
-        .page-title h3 {
-            font-size: 24px;
+        .QnaPost {
+            margin-left: 170px;
         }
 
         .container {
-            width:90%
+            width:100%
         }
-
-        section th,td,tr {
-            font-size: 15px;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .board-table th,
-        .board-table td {
-          padding: 5px; 
-        }
-
         section.notice {
             margin-left: 0px;
         }
 
+        .board-table th,
+        .board-table td {
+          padding: 7px; 
+        }
         .page-title h3 {
-            font-size: 22px;
+            font-size: 24px;
         }
-        .container {
-            width:125%
-        }
-
         section th,td,tr {
             font-size: 15px;
         }
+      }
 
+      @media (max-width: 1000px) {
+        .QnaPost {
+            margin-left: 120px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .QnaPost {
+            width: 600px;
+            margin-left: 80px;
+        }
+
+        .board-table th,
+        .board-table td {
+          padding: 5px; 
+        }
+        section.notice {
+            margin-left: 0px;
+        }
+        .page-title h3 {
+            font-size: 22px;
+        }
+        section th,td,tr {
+            font-size: 15px;
+        }
         .pagination {
-            margin-left:140px;
+            margin-left:30px;
         }
       }
 
       @media (max-width: 576px) {
-        .container {
-            width:130%;
+        .QnaPost {
+            width: 480px;
+            margin-left: 10px;
         }
-
 
         section th,td,tr {
             font-size: 13px;
         }
 
-        
       }
 
-  
+
 `;
