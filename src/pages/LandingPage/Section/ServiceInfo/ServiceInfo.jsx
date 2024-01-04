@@ -1,39 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Info from "./images/click_img(F0F0F0).png";
 import "./ServiceInfo.css";
 import { Link } from "react-router-dom";
 
 const ServiceInfo = () => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      console.log(entry)
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      } else{
-        entry.target.classList.remove('show');
-      }
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        } else {
+          entry.target.classList.remove('show');
+        }
+      });
     });
-  });
 
-  const hiddenElements = document.querySelectorAll('.hidden');
-  hiddenElements.forEach((el) => observer.observe(el));
+    const hiddenElements = document.querySelectorAll('.hidden');
+    hiddenElements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="ServiceInfo-section-container">
-      
-      <div className="ServiceInfo-section-text-container">
-      <section className="hidden">
-        <p className="ServiceInfo-subheading">
-          <span>슈링크플레이션 상품은</span>
-          줄었슈링크에게
-          <br />
-          <span>물어보세요!! </span>
-          <div className="ServiceInfo-section-image-container">
-            <Link to="/analysis">
-              <img src={Info} alt="" />
-            </Link>
-          </div>
-        </p>
+      <div className="ServiceInfo-section-text-container hidden">
+        <section>
+          <p className="ServiceInfo-subheading">
+            <span>슈링크플레이션 상품은</span>
+            줄었슈링크에게
+            <br />
+            <span>물어보세요!! </span>
+            <div className="ServiceInfo-section-image-container">
+              <Link to="/analysis">
+                <img src={Info} alt="" />
+              </Link>
+            </div>
+          </p>
         </section>
         <div className="ServiceInfo-heading hidden">
           슈링크 플레이션 방지 서비스로 똑똑한 소비를!
