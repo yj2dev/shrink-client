@@ -29,7 +29,17 @@ export const Container = styled.header`
   height: 78px;
   box-sizing: border-box;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-  background-color: rgba(255, 255, 255, 0.7);
+  //background-color: rgba(255, 255, 255, 0.7);
+  background: linear-gradient(
+    90deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
 `;
 
 export const LeftSection = styled.div`

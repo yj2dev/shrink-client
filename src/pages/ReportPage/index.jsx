@@ -287,6 +287,8 @@ const ReportPage = () => {
     setProductWeight(e.target.value);
   };
   const onChangeProductPrice = (e) => {
+    if (e.target.value.length > 6) return;
+
     setProductPrice(e.target.value);
   };
   const onChangeProductContent = (e) => {
@@ -356,6 +358,7 @@ const ReportPage = () => {
                   value={productWeight}
                   onChange={onChangeProductWeight}
                   min={0}
+                  max={99999999}
                   placeholder="중량"
                   required
                 />
@@ -384,7 +387,7 @@ const ReportPage = () => {
               type="number"
               value={productPrice}
               min={100}
-              max={99999999}
+              max={999999}
               onChange={onChangeProductPrice}
               placeholder="가격"
               required
