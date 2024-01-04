@@ -15,6 +15,8 @@ import Modal from "../../../../components/Modal";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import axios from "axios";
 import { GoHeart, GoHeartFill } from "react-icons/go";
+import { useRecoilState } from "recoil";
+import { loginModalState } from "../../../../state/modalState";
 
 const ImageSlider = ({ images, onImageClick, inModal }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -39,7 +41,7 @@ const ImageSlider = ({ images, onImageClick, inModal }) => {
       cursor: "pointer",
       width: "30em",
       height: "30em",
-      objectFit: "contain",
+      objectFit: "cover",
     };
   } else {
     const mobileWidth = window.innerWidth <= 768 ? "90px" : "148px";
@@ -49,7 +51,7 @@ const ImageSlider = ({ images, onImageClick, inModal }) => {
       cursor: "pointer",
       width: mobileWidth,
       height: mobileHeight,
-      objectFit: "contain",
+      objectFit: "cover",
     };
   }
 
@@ -72,7 +74,8 @@ const ImageSlider = ({ images, onImageClick, inModal }) => {
       </button>
       <img
         style={imageStyle}
-        src={`${process.env.REACT_APP_API_BASE_URL}/api/report/select/image/${images[currentImageIndex]}`}
+        // src={`${process.env.REACT_APP_API_BASE_URL}/api/report/select/image/${images[currentImageIndex]}`}
+        src={images[currentImageIndex]}
         alt="신고상품 이미지"
         onClick={() => onImageClick && onImageClick(currentImageIndex)}
       />
@@ -83,7 +86,7 @@ const ImageSlider = ({ images, onImageClick, inModal }) => {
   );
 };
 
-const ReportItem = ({ report, likeList }) => {
+const ReportItem = ({ report, likeList, onRequireLogin }) => {
   const [timeText, setTimeText] = useState(timeAgo(report.created_at));
   const [like, setLike] = useState(report.like);
   const [likeType, setLikeType] = useState(getLikeType(like));
@@ -113,6 +116,12 @@ const ReportItem = ({ report, likeList }) => {
   }, [report.created_at]);
 
   const onClickLike = () => {
+    if (!localStorage.getItem("token")) {
+      onRequireLogin();
+      console.log("not user");
+
+      // return;
+    }
     axios
       .post(`https://api.dietshrink.kro.kr/api/report/like/${report.id}`)
       .then((res) => {
@@ -218,6 +227,7 @@ const ReportItem = ({ report, likeList }) => {
 const ReportList = ({ reports }) => {
   // const reversedReports = [...reports].reverse();
   const [likeList, setLikeList] = useState([]);
+  const [showLoginModal, setShowLoginModal] = useRecoilState(loginModalState);
 
   useEffect(() => {
     getLikeList();
@@ -240,7 +250,12 @@ const ReportList = ({ reports }) => {
   return (
     <Container>
       {reports.map((report, index) => (
-        <ReportItem key={index} report={report} likeList={likeList} />
+        <ReportItem
+          key={index}
+          report={report}
+          likeList={likeList}
+          onRequireLogin={() => setShowLoginModal(true)}
+        />
       ))}
     </Container>
   );

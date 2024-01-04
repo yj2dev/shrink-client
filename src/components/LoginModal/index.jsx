@@ -179,7 +179,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           />
         </div>
         <div className="errorMessageWrap">
-          {!passwordValid && phoneValid && (
+          {!passwordValid && phoneValid && passwordExist && (
             <div>영문, 숫자 포함 8자 이상 입력해주세요.</div>
           )}
         </div>

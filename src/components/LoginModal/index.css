@@ -1,4 +1,4 @@
-.content {
+/* .content {
     width:300px;
 }
 
@@ -12,7 +12,7 @@
     margin-top: 26px;
     flex: 1;
     /* flex: 1; 하면 contentWrap말고 다른 애들이 밑으로 붙어야하는데 안 붙음.. */
-}
+/* }
 
 .inputTitle {
     font-size: 12px;
@@ -50,14 +50,14 @@
     margin-top: 8px;
     color: #ef0000;
     font-size: 12px;
-}
+} */
 
 /* .bottomWrap{
     position: fixed;
     
     bottom: 120px;
 } */
-.existErrorMessage{
+/* .existErrorMessage{
     color: #ef0000;
     font-size : 14px;
 }
@@ -72,7 +72,7 @@
     cursor: pointer;
     margin-bottom: 5%;
     /* margin-top: 40px; */
-}
+/* }
 
 .registerLine {
     text-align: center;
@@ -86,4 +86,4 @@
         text-decoration: underline;
         cursor: pointer;
     }
-}
+}  */

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import LoginModal from "../../components/LoginModal";
 import RegisterModal from "../../components/RegisterModal";
-import { userState } from "../../state/selectors/userSelectors";
+import { userState } from "../../state/userState";
 import logoImg from "./img/logo.png";
 import {
   Container,
