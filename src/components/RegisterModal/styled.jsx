@@ -62,12 +62,19 @@ export const Container = styled.div`
         height: 48px;
         border: none;
         font-weight: 700;
-        background-color: #0F62FE;
-        border-radius: 64px;
-        color: white;
+        background-color: #ebeeef;
+        border: 2px solid #eeeeee;
+        border-radius: 8px;
+        color: #0f62fe;
+
         cursor: pointer;
         margin-bottom: 3%;
         margin-top: 8%;
+        transition: 0.2s;
+    }
+    .phone-Button:hover {
+        color: #fff;
+        background-color: #0f62fe;
     }
 
     .code-Button {
@@ -75,12 +82,19 @@ export const Container = styled.div`
         height: 48px;
         border: none;
         font-weight: 700;
-        background-color: #0F62FE;
-        border-radius: 64px;
-        color: white;
+        background-color: #ebeeef;
+        border: 2px solid #eeeeee;
+        border-radius: 8px;
+        color: #0f62fe;
+
         cursor: pointer;
         margin-bottom: 3%;
         margin-top: 8%;
+        transition: 0.2s;
+    }
+    .code-Button:hover {
+        color: #fff;
+        background-color: #0f62fe;
     }
 
     .register-Button {
@@ -88,12 +102,19 @@ export const Container = styled.div`
         height: 48px;
         border: none;
         font-weight: 700;
-        background-color: #0F62FE;
-        border-radius: 64px;
-        color: white;
+        background-color: #ebeeef;
+        border: 2px solid #eeeeee;
+        border-radius: 8px;
+        color: #0f62fe;
+
         cursor: pointer;
         margin-bottom: 3%;
         margin-top: 8%;
+        transition: 0.2s;
+    }
+    .register-Button:hover {
+        color: #fff;
+        background-color: #0f62fe;
     }
 
     .loginLine {

@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width:300px;
+  padding-left: 5px;
+  padding-right: 5px;
 
   .titleWrap {
     font-size: 20px;
@@ -11,7 +13,7 @@ export const Container = styled.div`
 
   .contentWrap {
     margin-top: 26px;
-    flex: 1;
+    // flex: 1;
   }
 
   .inputTitle {
@@ -58,9 +60,9 @@ export const Container = styled.div`
     height: 48px;
     border: none;
     font-weight: 700;
-    background-color: #f6f8fa;
+    background-color: #ebeeef;
     border: 2px solid #eeeeee;
-    border-radius: 64px;
+    border-radius: 8px;
     color: #0f62fe;
 
     transition: 0.2s;
