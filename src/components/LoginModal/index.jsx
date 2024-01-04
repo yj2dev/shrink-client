@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { userState } from "../../state/userState.jsx";
+import { userState } from "../../state/userState";
 import Modal from "../Modal";
 import "./index.css";
 
@@ -31,16 +31,16 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
     setIsHovered(false);
   };
   const buttonStyle = {
-    backgroundColor: isHovered ? "#115ae1" : "#0F62FE", // 호버시 진한색
-    color: "white",
-    padding: "10px",
-    cursor: "pointer",
+    backgroundColor: isHovered ? '#115ae1' : '#0F62FE', // 호버시 진한색
+    color: 'white',
+    padding: '10px',
+    cursor: 'pointer',
   };
 
   useEffect(() => {
     if (!show) {
       setPhone("");
-      setPassword("");
+      setPassword("")
       setWrongLogin("");
 
       setPhoneValid(true);
@@ -63,10 +63,10 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
     // setPasswordValid(true);
   };
   const handleOnKeyPress = (e) => {
-    if (e.key === "Enter") {
+    if(e.key === "Enter") {
       console.log("enter");
       onClickLogin();
-    }
+    };
   };
   const onClickLogin = (e) => {
     setWrongLogin("");
@@ -78,18 +78,18 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
     if (phoneRegex.test(phone)) {
       setPhoneValid(true);
       setPhoneExist(true);
-      console.log("phone Valid true", { phoneValid });
+      console.log("phone Valid true", {phoneValid});
     } else if (phone.length === 0) {
       setPhoneExist(false);
       setPhoneValid(false);
-      console.log("no phone num", { phoneExist }, { phoneValid }, { phone });
+      console.log("no phone num", {phoneExist}, {phoneValid}, {phone});
       return;
     } else {
       setPhoneValid(false);
       setPhoneExist(true);
-      console.log("phone Valid false", { phoneValid });
+      console.log("phone Valid false", {phoneValid});
       return;
-    }
+    };
 
     if (passwordRegex.test(password)) {
       setPasswordValid(true);
@@ -129,9 +129,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
             setWrongLogin("phonePB");
             setPhone("");
             setPassword("");
-          } else if (
-            err.response.data.message === "비밀번호가 일치하지 않습니다."
-          ) {
+          } else if (err.response.data.message === "비밀번호가 일치하지 않습니다.") {
             setWrongLogin("passwordPB");
             setPassword("");
           } else {
@@ -139,14 +137,9 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           }
         });
     }
-    console.log(
-      "phoneValid >> ",
-      phoneValid,
-      "  passwordValid >> ",
-      passwordValid,
-      "  wrongLogin >> ",
-      wrongLogin,
-    );
+    console.log("phoneValid >> ", phoneValid
+              , "  passwordValid >> ", passwordValid
+              , "  wrongLogin >> ", wrongLogin);
   };
 
   return (
@@ -169,9 +162,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
           />
         </div>
         <div className="errorMessageWrap">
-          {!phoneValid && phoneExist && passwordExist && (
-            <div>올바른 전화번호를 입력해주세요.</div>
-          )}
+          {!phoneValid && phoneExist && passwordExist && (<div>올바른 전화번호를 입력해주세요.</div>)}
         </div>
 
         <div style={{ marginTop: "20px" }} className="inputTitle">
@@ -198,36 +189,28 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
         <div className="existErrorMessage">
           <div>
             {!phoneExist && (
-              <div className="phoneExistErrorMessage">
-                전화번호를 입력해주세요.
-              </div>
+              <div className="phoneExistErrorMessage">전화번호를 입력해주세요.</div>
             )}
           </div>
           <div>
             {phoneExist && !passwordExist && (
-              <div className="passwordExistErrorMessage">
-                비밀번호를 입력해주세요.
-              </div>
+              <div className="passwordExistErrorMessage">비밀번호를 입력해주세요.</div>
             )}
           </div>
           <div>
             {wrongLogin === "phonePB" && (
-              <div className="loginPBMessage">
-                전화번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.
-              </div>
+              <div className="loginPBMessage">전화번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</div>
             )}
           </div>
           <div>
             {wrongLogin === "passwordPB" && (
-              <div className="loginPBMessage">
-                비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.
-              </div>
+              <div className="loginPBMessage">비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</div>
             )}
           </div>
         </div>
         <button
           // style={{ marginTop: "40px" }}
-          style={buttonStyle}
+          style = {buttonStyle}
           className="bottomButton"
           onClick={onClickLogin}
           onMouseEnter={handleMouseEnter}
