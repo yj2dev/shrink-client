@@ -12,9 +12,13 @@ export const Container = styled.div`
         margin: 50px auto;
         padding: 40px;
         margin-left: 300px;
-        //margin-left: 230px;
         background-color: white;
 
+        .warn-length {
+            font-size: 12px;
+            color: red;
+            //display: none;
+        }
 
         @media (max-width: 1200px) {
            margin-left: 180px;
@@ -30,7 +34,7 @@ export const Container = styled.div`
          }
 
          @media (max-width: 576px) {
-            margin-left: 10px;
+            margin-left: 0px;
          }
     }
 
@@ -38,6 +42,7 @@ export const Container = styled.div`
         display: flex;
         flex-direction: column;
         max-width: 600px;
+        margin-bottom:0px;
     }
 
     .ql-editor {
@@ -54,6 +59,7 @@ export const Container = styled.div`
         overflow-wrap: break-word;
         cursor: text;
         height: 300px;
+        margin-bottom: 0px;
     }
 
     .ql-container:focus{
@@ -63,6 +69,7 @@ export const Container = styled.div`
     .ql-editor.ql-blank::before {
         font-family: 'Noto Sans KR', sans-serif;
         font-style: normal !important;
+        width: 630px;
     }
 
 
@@ -72,29 +79,13 @@ export const Container = styled.div`
         height: 40px;
         
         padding: 10px;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
         background-color: #f0f0f0;
         border: none;
         border-bottom: 1px solid #d5d5d5;
         background-color: white;
     }
     
-    // textarea{
-    //     width: 100%;
-    //     height: 300px;
-    //     border: 1px solid #d5d5d5;
-    //     border-radius: 5px;
-    //     padding: 10px;
-    //     margin-bottom: 20px;
-    //     background-color: #f0f0f0;
-    //     font-family: 'Noto Sans KR', sans-serif;
-    //     background-color: white;
-    // }
-
-    // textarea:focus{
-    //     border: #252525
-    // }
-
     div{
         display: flex;
         margin-bottom: 20px;

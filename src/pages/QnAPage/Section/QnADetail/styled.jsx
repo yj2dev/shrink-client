@@ -103,6 +103,20 @@ export const Container = styled.div`
           }
       }
 
+      @media (max-width: 576px) {
+        width:430px;
+        margin-left: 0px;
+        .wrapper {
+          left: 340px;
+        }
+        .editmenu-wrap {
+          right:65px;
+        }
+        #edit-area {
+          width:270px;
+        }
+      }
+
       textarea {
         resize: none;
       }

@@ -4,17 +4,17 @@ export const Container = styled.div`
 
     width: 80%;
 
-    .QnaPost {
-        width: 70%;
-        max-width: 1000px;
-        min-width: 360px;
-        border: 1px solid #d5d5d5;
-        border-radius: 10px;
-        margin: 50px auto;
-        padding: 40px 30px 40px 30px;
-        margin-left: 240px;
-        background-color: white;
-    }
+    // .QnaPost {
+    //     width: 70%;
+    //     max-width: 1000px;
+    //     min-width: 360px;
+    //     border: 1px solid #d5d5d5;
+    //     border-radius: 10px;
+    //     margin: 50px auto;
+    //     padding: 40px 30px 40px 30px;
+    //     margin-left: 240px;
+    //     background-color: white;
+    // }
 
     table {
         border-collapse: collapse;
@@ -22,7 +22,7 @@ export const Container = styled.div`
     }
      section.notice {
         padding: 50px 0;
-        margin-left: 0px;
+        margin-left: 100px;
         
     }
     .page-title {
@@ -125,7 +125,7 @@ export const Container = styled.div`
   
     .btn {
         display: inline-block;
-        padding: 0 30px;
+        padding: 0 20px;
         font-size: 15px;
         font-weight: 400;
         background: transparent;
@@ -251,7 +251,7 @@ export const Container = styled.div`
       
       ul.pagination li a {
         text-decoration: none;
-        color: #0F62FE;
+        color: black;
         font-size: 1rem;
       }
       
@@ -260,7 +260,7 @@ export const Container = styled.div`
       }
     
       ul.pagination li.active {
-        background-color: #0F62FE;
+        background-color: #99CCFF;
       }
       
       ul.pagination li a:hover,
@@ -341,8 +341,8 @@ export const Container = styled.div`
 
       @media (max-width: 576px) {
         .QnaPost {
-            width: 480px;
-            margin-left: 10px;
+            width: 490px;
+            margin-left: 0px;
         }
 
         section th,td,tr {

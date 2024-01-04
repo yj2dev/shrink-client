@@ -33,9 +33,10 @@ const formats = [
 const QnACreate = ({isEdit, originData}) => {
 
     const titleInput = useRef();
-    const contentInput = useRef();
+    const quillRef = useRef();
     const navigate = useNavigate();
     const {onCreate, onEdit} = useContext(PostDispatchContext);
+    const [clickedBtn, setClikedBtn] = useState(false);
     const [formData, setformData] = useState({
         title: "",
         content: "", 
@@ -81,16 +82,21 @@ const QnACreate = ({isEdit, originData}) => {
         navigate("/question");
     }
 
+    const removeHtmlTags = (input) => {
+        const regex = /(<([^>]+)>)/ig;
+        return input.replace(regex, "");
+    }
+
     const handleSubmit = async(e) => {
         e.preventDefault();
-
+        setClikedBtn(true);
           if(formData.title.length < 1) { // 제목은 최소 1글자 이상 작성
                     titleInput.current.focus();
                     return;
             }
-        
-          if(formData.content.length < 5) { // 내용은 최소 5글자 이상 작성
-                contentInput.current.focus();
+
+          if(removeHtmlTags(formData.content).length < 5) { // 내용은 최소 5글자 이상 작성
+                quillRef.current.focus();
                 return;
             }
         
@@ -114,15 +120,12 @@ const QnACreate = ({isEdit, originData}) => {
                     navigate(`/question/${originData.id}`);
                 }
             }
-                
-            
         
     };
     
     useEffect(()=> {
         if(isEdit){ // 수정 페이지
             setformData(originData);
-            //console.log("origin>>",originData);
         }
     }, [isEdit, originData]);
 
@@ -140,8 +143,12 @@ const QnACreate = ({isEdit, originData}) => {
                 placeholder="제목을 입력하세요"
                 onChange={handleChangeState}
             />
+            {clickedBtn && formData.title.length < 1 ? (<div className="warn-length">제목은 1글자 이상 입력해 주세요</div>) : (<div className="warn-length"></div>)}
+            
              <ReactQuill
-                ref={contentInput}
+                 ref={(el) => {
+                    quillRef.current = el;
+                }}
                 value={formData.content}
                 onChange={handleChangeEditor}
                 name="content"
@@ -150,8 +157,9 @@ const QnACreate = ({isEdit, originData}) => {
                 modules={modules}
                 formats={formats}
                 placeholder="내용을 입력하세요"
-        />
-
+            />
+            {clickedBtn && removeHtmlTags(formData.content).length < 5 ? (<div className="warn-length">내용은 5글자 이상 입력해 주세요</div>) : (<div className="warn-length"></div>)}
+            
             <div className="btn-container">
                 <button onClick={handleList}> <CiViewList/> 목록 </button>
                 <button onClick={handleSubmit}>{isEdit ? "수정하기" : "등록하기"}</button>

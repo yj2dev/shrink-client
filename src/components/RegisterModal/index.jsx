@@ -3,7 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 // import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal";
-import "./index.css";
+// import "./index.css";
+import { Container, } from "./styled";
 
 function useInterval(callback, delay) {
   const savedCallback = useRef(); // 최근에 들어온 callback을 저장할 ref를 하나 만든다.
@@ -42,19 +43,6 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
   const [passwordExist, setPasswordExist] = useState(true);
   const [codeExist, setCodeExist] = useState(true);
   const [codeCheckValid, setCodeCheckValid] = useState(false);
-
-  const [isHovered, setIsHovered] = useState(false);
-
-  // 버튼 hover이벤트
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-  const buttonStyle = {
-    backgroundColor: isHovered ? '#115ae1' : '#0F62FE', // 호버시 진한색
-  };
   
   const onChangePhone = (e) => {
     setPhone(e.target.value);
@@ -130,35 +118,33 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
     } else if (phone.length === 0) {
       setPhoneExist(false);
       setPhoneValid(false);
+      return;
     } else {
       setPhoneValid(false);
       setPhoneExist(true);
+      return;
     }
 
-    if (phoneValid) {
-      axios
-        .post("/api/auth/code", { phone }) //, withCredentials: true })
-        .then((res) => {
-          console.log("res >> ", res);
-          if (res.data.data.statusName === "success") {
-            setPhoneValid(true);
-            alert("인증번호가 전송되었습니다.");
-            setCountdown(true);
-            setCount(180);
-          } else {
-            setPhoneValid(false);
-          }
-        })
-        .catch((err) => {
-          console.log("err >> ", err);
-          //
-          if (err.response.data.message === "이미 가입한 사용자입니다.") {
-            alert(err.response.data.message);
-          }
+    axios
+      .post("/api/auth/code", { phone }) //, withCredentials: true })
+      .then((res) => {
+        console.log("res >> ", res);
+        if (res.data.data.statusName === "success") {
+          setPhoneValid(true);
+          alert("인증번호가 전송되었습니다.");
+          setCountdown(true);
+          setCount(180);
+        } else {
           setPhoneValid(false);
-          //
-        });
-    }
+        }
+      })
+      .catch((err) => {
+        console.log("err >> ", err);
+        if (err.response.data.message === "이미 가입한 사용자입니다.") {
+          alert(err.response.data.message);
+        }
+        // setPhoneValid(false);
+      });
   };
 
   const onClickCode = (e) => {
@@ -241,157 +227,148 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
 
   return (
     <Modal show={show} onClose={onClose} onCloseOutside={false}>
-      <div className="phoneWrap">
-        {!codeCheckValid && (
-          <div>
-            <div className="titleWrap">
-              <h2>회원가입</h2>
-            </div>
-
-            <div className="contentWrap">
-              <div className="inputTitle">전화번호</div>
-              <div className="inputWrap">
-                <input
-                  className="input"
-                  type="text"
-                  value={phone}
-                  onChange={onChangePhone}
-                  placeholder="01012345678"
-                  onKeyDown={(e) => handleOnKeyPress(e, 'onClickPhone')}
-                  disabled={countdown}
-                />
+      <Container>
+        <div className="phoneWrap">
+          {!codeCheckValid && (
+            <div>
+              <div className="titleWrap">
+                <h2>회원가입</h2>
               </div>
-              <div className="errorMessageWrap">
-                {!phoneValid && phoneExist && (
-                  <div>올바른 전화번호를 입력해주세요.</div>
+
+              <div className="contentWrap">
+                <div className="inputTitle">전화번호</div>
+                <div className="inputWrap">
+                  <input
+                    className="input"
+                    type="text"
+                    value={phone}
+                    onChange={onChangePhone}
+                    placeholder="01012345678"
+                    onKeyDown={(e) => handleOnKeyPress(e, 'onClickPhone')}
+                    disabled={countdown}
+                  />
+                </div>
+                <div className="errorMessageWrap">
+                  {!phoneValid && phoneExist && (
+                    <div>올바른 전화번호를 입력해주세요.</div>
+                  )}
+                  {!phoneExist && <div>전화번호를 입력해주세요</div>}
+                </div>
+
+                <div className="bottomWrap">
+                  <button
+                    className="phone-Button"
+                    onClick={onClickPhone}
+                  >
+                    인증번호 전송
+                  </button>
+                  {/* <button className="resendButton" onClick={onClickPhone}>
+                    인증번호 재전송
+                  </button> */}
+                </div>
+              </div>
+
+              <div className="validcodeWrap">
+                {countdown && (
+                  <div>
+                    <div style={{ marginTop: "20px" }} className="inputTitle">
+                      인증번호 {phoneValid}
+                    </div>
+                    <div className="inputWrap">
+                      <input
+                        className="input"
+                        type="text"
+                        value={code}
+                        onChange={onChangeCode}
+                        placeholder="인증번호를 입력해주세요"
+                        onKeyDown={(e) => handleOnKeyPress(e, 'onClickCode')}
+                      />
+                      <span className="timeCountingWrap">
+                        {timeFormat(count)}
+                      </span>
+                    </div>
+                    <div className="errorMessageWrap">
+                      {!codeValid && codeExist && (
+                        <div>잘못된 인증번호입니다.</div>
+                      )}
+                      {!codeExist && <div>인증번호를 입력해주세요.</div>}
+                    </div>
+                    <div className="bottomWrap">
+                      <button
+                        className="code-Button"
+                        onClick={onClickCode}
+                      >
+                        인증번호 확인
+                      </button>
+                    </div>
+                  </div>
                 )}
-                {!phoneExist && <div>전화번호를 입력해주세요</div>}
+                <div className="loginLine">
+                  계정이 있으신가요?{" "}
+                  <button className="loginButton" onClick={onShowLogin}>
+                    로그인
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="passwordWrap">
+          {codeCheckValid && (
+            <div>
+              <div className="titleWrap">
+                <h2>회원가입</h2>
+              </div>
+              <div className="contentWrap">
+                <div className="inputTitle">전화번호</div>
+                <div className="phoneTitle">{phone}</div>
+
+                <div style={{ marginTop: "20px" }} className="inputTitle">
+                  비밀번호
+                </div>
+                <div className="inputWrap">
+                  <input
+                    className="input"
+                    type="password"
+                    value={password}
+                    onChange={onChangePassword}
+                    placeholder="영문, 숫자, 특수문자 포함 8자리 이상"
+                    onKeyDown={(e) => handleOnKeyPress(e, 'onClickRegister')}
+                  />
+                </div>
+                <div className="errorMessageWrap">
+                  <div>
+                    {!passwordExist && <div>비밀번호를 입력해주세요.</div>}
+                  </div>
+                  <div>
+                    {!passwordValid && passwordExist && (
+                      <div>영문, 숫자 포함 8자 이상 입력해주세요.</div>
+                    )}
+                  </div>
+                </div>
               </div>
 
               <div className="bottomWrap">
                 <button
-                  className="bottomButton"
-                  onClick={onClickPhone}
-                  style = {buttonStyle}
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
+                  // style={{ marginTop: "40px" }}
+                  className="register-Button"
+                  onClick={() => {onClickRegister();}}
                 >
-                  인증번호 전송
+                  회원가입 완료
                 </button>
-                {/* <button className="resendButton" onClick={onClickPhone}>
-                  인증번호 재전송
-                </button> */}
-              </div>
-            </div>
 
-            <div className="validcodeWrap">
-              {countdown && (
-                <div>
-                  <div style={{ marginTop: "20px" }} className="inputTitle">
-                    인증번호 {phoneValid}
-                  </div>
-                  <div className="inputWrap">
-                    <input
-                      className="input"
-                      type="text"
-                      value={code}
-                      onChange={onChangeCode}
-                      placeholder="인증번호를 입력해주세요"
-                      onKeyDown={(e) => handleOnKeyPress(e, 'onClickCode')}
-                    />
-                    <span className="timeCountingWrap">
-                      {timeFormat(count)}
-                    </span>
-                  </div>
-                  <div className="errorMessageWrap">
-                    {!codeValid && codeExist && (
-                      <div>잘못된 인증번호입니다.</div>
-                    )}
-                    {!codeExist && <div>인증번호를 입력해주세요.</div>}
-                  </div>
-                  <div className="bottomWrap">
-                    <button
-                      className="bottomButton"
-                      onClick={onClickCode}
-                      style = {buttonStyle}
-                      onMouseEnter={handleMouseEnter}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      인증번호 확인
-                    </button>
-                  </div>
-                </div>
-              )}
-              <div className="loginLine">
-                계정이 있으신가요?{" "}
-                <button className="loginButton" onClick={onShowLogin}>
-                  로그인
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div className="passwordWrap">
-        {codeCheckValid && (
-          <div>
-            <div className="titleWrap">
-              <h2>회원가입</h2>
-            </div>
-            <div className="contentWrap">
-              <div className="inputTitle">전화번호</div>
-              <div className="phoneTitle">{phone}</div>
-
-              <div style={{ marginTop: "20px" }} className="inputTitle">
-                비밀번호
-              </div>
-              <div className="inputWrap">
-                <input
-                  className="input"
-                  type="password"
-                  value={password}
-                  onChange={onChangePassword}
-                  placeholder="영문, 숫자, 특수문자 포함 8자리 이상"
-                  onKeyDown={(e) => handleOnKeyPress(e, 'onClickRegister')}
-                />
-              </div>
-              <div className="errorMessageWrap">
-                <div>
-                  {!passwordExist && <div>비밀번호를 입력해주세요.</div>}
-                </div>
-                <div>
-                  {!passwordValid && passwordExist && (
-                    <div>영문, 숫자 포함 8자 이상 입력해주세요.</div>
-                  )}
+                <div className="loginLine">
+                  계정이 있으신가요?{" "}
+                  <button className="loginButton" onClick={onShowLogin}>
+                    로그인
+                  </button>
                 </div>
               </div>
             </div>
-
-            <div className="bottomWrap">
-              <button
-                // style={{ marginTop: "40px" }}
-                className="bottomButton"
-                style = {buttonStyle}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                onClick={() => {
-                  onClickRegister();
-                }}
-              >
-                회원가입 완료
-              </button>
-
-              <div className="registerLine">
-                계정이 있으신가요?{" "}
-                <button className="registerButton" onClick={onShowLogin}>
-                  로그인
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      </Container>
     </Modal>
   );
 };

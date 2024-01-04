@@ -15,9 +15,9 @@ export const ContainerBlur = styled.header`
 `;
 
 export const Container = styled.header`
-  //display: flex;
-  //justify-content: space-between;
-  //align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   //background-color: #fff;
   //background-color: rgba(255, 255, 255, 0.99);
   position: fixed;
@@ -64,13 +64,13 @@ export const LeftSection = styled.div`
     align-items: center;
     cursor: pointer;
 
-    //@media (max-width: 768px) {
-    //  position: fixed;
-    //  height: 78px;
-    //  left: 50%;
-    //  transform: translate(-50%, 0);
-    //  //top: 0;
-    //}
+    @media (max-width: 768px) {
+      position: fixed;
+      height: 78px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      //top: 0;
+    }
   }
 
   .logo-img {
@@ -127,10 +127,12 @@ export const LeftSection = styled.div`
   //flex-grow: 1;
   //justify-content: center;
   //}
+`;
 
-  //  ========================================
-  //                Right Section
-  //  ========================================
+export const RightSection = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .show-menu-btn {
     display: flex;
@@ -307,10 +309,4 @@ export const LeftSection = styled.div`
     color: #fff;
     background-color: #2245fd;
   }
-`;
-
-export const RightSection = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;

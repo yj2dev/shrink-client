@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  width:300px;
+
   .titleWrap {
     font-size: 20px;
     font-weight: 700;
@@ -13,9 +15,10 @@ export const Container = styled.div`
   }
 
   .inputTitle {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     color: #262626;
+    margin-left: 5px;
   }
 
   .inputWrap {
@@ -47,7 +50,7 @@ export const Container = styled.div`
   .errorMessageWrap {
     margin-top: 8px;
     color: #ef0000;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .bottomButton {
@@ -55,86 +58,25 @@ export const Container = styled.div`
     height: 48px;
     border: none;
     font-weight: 700;
-    background-color: #0f62fe;
+    background-color: #f6f8fa;
+    border: 2px solid #eeeeee;
     border-radius: 64px;
-    color: white;
-    // margin-bottom: 10px;
+    color: #0f62fe;
+
+    transition: 0.2s;
+    margin-top: 10%;
+    margin-bottom: 3%;
     cursor: pointer;
   }
-  .content {
-    width:300px;
+
+  .bottomButton:hover {
+    color: #fff;
+    background-color: #0f62fe;
   }
 
-  .titleWrap {
-      font-size: 20px;
-      font-weight: 700;
-      color:#262626;
-  }
-
-  .contentWrap {
-      margin-top: 26px;
-      flex: 1;
-      /* flex: 1; 하면 contentWrap말고 다른 애들이 밑으로 붙어야하는데 안 붙음.. */
-  }
-
-  .inputTitle {
-      font-size: 12px;
-      font-weight: 600;
-      color: #262626;
-  }
-
-  .inputWrap {
-      display : flex;
-      border-radius: 8px;
-      padding:16px;
-      margin-top: 8px;
-      background-color: white;
-      border: 1px solid #e2e0e0
-  }
-
-  .inputWrap:focus-within {
-      border : 1px solid #0F62FE;
-  }
-
-  .input {
-      width: 100%;
-      outline: none;
-      border: none;
-      height: 17px;
-      font-size: 14px;
-      font-weight: 400;
-  }
-
-  .input::placeholder {
-      color: #dadada;
-  }
-
-  .errorMessageWrap {
-      margin-top: 8px;
-      color: #ef0000;
-      font-size: 12px;
-  }
-
-  /* .bottomWrap{
-      position: fixed;
-      
-      bottom: 120px;
-  } */
   .existErrorMessage{
       color: #ef0000;
       font-size : 14px;
-  }
-  .bottomButton {
-      width: 100%;
-      height: 48px;
-      border: none;
-      font-weight: 700;
-      background-color: #0F62FE;
-      border-radius: 64px;
-      color: white;
-      cursor: pointer;
-      margin-bottom: 5%;
-      /* margin-top: 40px; */
   }
 
   .registerLine {
@@ -142,6 +84,7 @@ export const Container = styled.div`
       color: #bcbcbc;
       font-size: 13px;
       margin-bottom: 10px;
+      // margin-top: 8px;
       .registerButton {
           border: none;
           color: black;
