@@ -69,6 +69,8 @@ export const AnalysisResultMenu = styled.div`
     //width: 6em;
     //height: 6em;
     width: 100%;
+
+    transform: scaleX(-1);
   }
 
   &.active {
@@ -177,7 +179,8 @@ export const WebcamContainer = styled.div`
   video,
   img {
     position: absolute;
-    border-radius: 12px 12px 0 0;
+    //border-radius: 12px 12px 0 0;
+    border-radius: 12px;
     width: 100%;
     height: auto;
     min-height: 500px;
@@ -197,19 +200,21 @@ export const WebcamContainer = styled.div`
     bottom: 0;
 
     //margin: 0 32px 0 232px;
-    margin: 0 0 0 200px;
+    //margin: 0 0 0 200px;
     z-index: 3;
 
     height: 128px;
 
-    background-color: #f0f0f0;
+    background-color: #fff;
 
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .product-analyse-btn {
-    border-radius: 0 0 12px 12px;
+    //border-radius: 0 0 12px 12px;
+    border-radius: 12px;
+
     transition: 0.4s ease;
     width: 100%;
     margin: 0 32px;

@@ -1,5 +1,6 @@
 import { Container } from "./styled";
-import logoImg from "../../img/logo.png";
+import logoImg1 from "../../img/logo1.png";
+import logoImg2 from "../../img/logo2.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -29,7 +30,7 @@ const LogoContainer = () => {
         onMouseEnter={handleLogoEnter}
         onMouseLeave={handleLogoLeave}
       >
-        <img src={logoImg} alt="logo" className="logo-img" />
+        <img src={logoImg2} alt="logo" className="logo-img" />
         <div className="content">
           <h1 className={isLogoHover ? "active" : ""}>줄었슈링크</h1>
           <h3 className={isLogoHover ? "active" : ""}>

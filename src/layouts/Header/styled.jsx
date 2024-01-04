@@ -15,9 +15,9 @@ export const ContainerBlur = styled.header`
 `;
 
 export const Container = styled.header`
-  //display: flex;
-  //justify-content: space-between;
-  //align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   //background-color: #fff;
   //background-color: rgba(255, 255, 255, 0.99);
   position: fixed;
@@ -25,11 +25,13 @@ export const Container = styled.header`
   left: 0;
   z-index: 220;
   width: 100%;
-  padding: 16px 30px;
-  height: 78px;
+  padding: 1em 1.5em;
   box-sizing: border-box;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-  //background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.7);
+
+  //border: 4px solid purple;
+
   background: linear-gradient(
     90deg,
     red,
@@ -40,103 +42,97 @@ export const Container = styled.header`
     indigo,
     violet
   );
+  color: white;
+  //color: #000;
+
+  text-align: center;
+  transition: background-color 0.5s;
 `;
 
-export const LeftSection = styled.div`
+export const Section = styled.section`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  //border: 4px solid orangered;
+
+  a {
+    color: #fff;
+  }
+
+  .flex-item {
+    //border: 4px solid green;
+  }
+
+  .flex-item:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid red;
+    position: relative;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  .left {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    //top: 0;
+    //left: 0;
+  }
 
   .search-section {
+    border: 1px solid blue;
+    position: relative;
+
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
 
-    input {
-      border: 2px dashed red;
+    button[type="submit"] {
+      background-color: transparent;
+      color: #9aa0a6;
+      cursor: pointer;
+      position: absolute;
+      left: 8px;
+      font-size: 1.2em;
+      border: none;
       outline: none;
-      background-color: #fff;
-      border-radius: 24px;
-      //height: 56px;
-      width: 50%;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
-    button[type="submit"] {
+    button[type="submit"]:disabled {
+      cursor: default;
+    }
+
+    input {
+      border: 3px solid #dfe1e5;
+      background-color: #fff;
+      outline: none;
+      border-radius: 8px;
+      //height: 56px;
+      width: 300px;
+      padding: 8px 36px 8px 36px;
+    }
+
+    input: button[type= "submit"] {
       background-color: transparent;
       cursor: pointer;
       outline: none;
       border: 2px dashed red;
     }
   }
-
-  .logo-section {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-
-    //@media (max-width: 768px) {
-    //  position: fixed;
-    //  height: 78px;
-    //  left: 50%;
-    //  transform: translate(-50%, 0);
-    //  //top: 0;
-    //}
-  }
-
-  .logo-img {
-    height: 78px; /** logo1.png 사용시 주석 제거 */
-
-    height: 44px; /** logo2.png 사용시 주석 제거 */
-    width: 44px; /** logo2.png 사용시 주석 제거 */
-    margin-top: 8px; /** logo2.png 사용시 주석 제거 */
-
-    @media (max-width: 768px) {
-      display: none;
-    }
-
-    margin-right: 10px;
-  }
-
-  .content {
-    overflow: hidden;
-
-    h1 {
-      white-space: nowrap;
-      //border: 1px solid red;
-      width: 185px;
-      font-weight: bold;
-      //font-size: 2rem;
-      padding: 0;
-      margin: 0;
-      transition: 0.4s ease all;
-    }
-
-    h1.active {
-      font-size: 1.52rem;
-      letter-spacing: 12px;
-    }
-
-    h3 {
-      margin: 0;
-      padding: 0;
-      font-size: 0.75rem;
-      height: 0;
-      transition: 0.4s ease all;
-    }
-
-    h3.active {
-      margin: 0;
-      padding: 0;
-      font-size: 0.75rem;
-      height: 16px;
-    }
-  }
-
-  //@media (max-width: 768px) {
-  //order: -1;
-  //flex-grow: 1;
-  //justify-content: center;
-  //}
 
   //  ========================================
   //                Right Section

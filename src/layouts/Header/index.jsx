@@ -5,14 +5,7 @@ import { useRecoilState } from "recoil";
 import LoginModal from "../../components/LoginModal";
 import RegisterModal from "../../components/RegisterModal";
 import { userState } from "../../state/userState";
-import logoImg from "./img/logo.png";
-import {
-  Container,
-  ContainerBlur,
-  ContainerSpace,
-  LeftSection,
-  RightSection,
-} from "./styled";
+import { Container, ContainerBlur, ContainerSpace, Section } from "./styled";
 import { FaSearch } from "react-icons/fa";
 import { IoCameraOutline } from "react-icons/io5";
 import LogoContainer from "./Section/LogoCotainer";
@@ -32,6 +25,24 @@ const Header = () => {
   const navigate = useNavigate();
   const menuRef = useRef();
   const triggerRef = useRef();
+
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" && window.innerWidth <= 768,
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -96,33 +107,71 @@ const Header = () => {
       <ContainerSpace />
       <ContainerBlur />
       <Container>
-        <LeftSection>
-          <LogoContainer />
-          <div className="search-section">
-            <form onSubmit={onSubmitSearch}>
-              <input
-                type="text"
-                value={searchKeyword}
-                maxLength={20}
-                onChange={(e) => {
-                  setSearchKeyword(e.target.value);
-                }}
-              />
-              <button type="submit">
-                <FaSearch />
+        <Section>
+          <div className="flex-item">
+            <LogoContainer />
+            <div className="search-section">
+              <form onSubmit={onSubmitSearch}>
+                <input
+                  type="text"
+                  value={searchKeyword}
+                  maxLength={20}
+                  onChange={(e) => {
+                    setSearchKeyword(e.target.value);
+                  }}
+                />
+                {/*아이콘 용도로 사용 필요시 disable 상태 변경 후 검색 버튼으로 사용 가능 */}
+                <button type="submit" disabled={true}>
+                  <FaSearch />
+                </button>
+              </form>
+              <Link to="/analysis">
+                <IoCameraOutline />
+              </Link>
+            </div>
+            {isMobile &&
+              (user ? (
+                <button
+                  disabled={showMenu}
+                  className="show-menu-btn"
+                  onClick={() => {
+                    setShowMenu(true);
+                  }}
+                >
+                  <img
+                    src={user.profile_url}
+                    className={`profile-img ${showMenu ? "active" : ""}`}
+                    ref={triggerRef}
+                  />
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    setShowLoginModal(!showLoginModal);
+                  }}
+                  className="login-button"
+                >
+                  로그인
+                </button>
+              ))}
+
+            {isMobile && (
+              <button onClick={() => setShowMobileMenu((p) => !p)}>
+                햄버거
               </button>
-            </form>
+            )}
           </div>
 
-          <div>
-            <Link to="/analysis">
-              <IoCameraOutline />
-            </Link>
-
-            <Link to="/question">질문</Link>
-            <Link to="/report">신고</Link>
-          </div>
-
+          {(!isMobile || showMobileMenu) && (
+            <>
+              <div className="flex-item">
+                <Link to="/report">신고</Link>
+              </div>
+              <div className="flex-item">
+                <Link to="/question">질문</Link>
+              </div>
+            </>
+          )}
           {showMenu && (
             <nav className="user-menu" ref={menuRef}>
               {user && (
@@ -172,30 +221,31 @@ const Header = () => {
             </nav>
           )}
 
-          {user ? (
-            <button
-              disabled={showMenu}
-              className="show-menu-btn"
-              onClick={() => {
-                setShowMenu(true);
-              }}
-            >
-              <img
-                src={user.profile_url}
-                className={`profile-img ${showMenu ? "active" : ""}`}
-                ref={triggerRef}
-              />
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                setShowLoginModal(!showLoginModal);
-              }}
-              className="login-button"
-            >
-              로그인
-            </button>
-          )}
+          {!isMobile &&
+            (user ? (
+              <button
+                disabled={showMenu}
+                className="show-menu-btn"
+                onClick={() => {
+                  setShowMenu(true);
+                }}
+              >
+                <img
+                  src={user.profile_url}
+                  className={`profile-img ${showMenu ? "active" : ""}`}
+                  ref={triggerRef}
+                />
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  setShowLoginModal(!showLoginModal);
+                }}
+                className="login-button"
+              >
+                로그인
+              </button>
+            ))}
 
           <LoginModal
             show={showLoginModal}
@@ -208,7 +258,7 @@ const Header = () => {
             onClose={onCloseModal}
             onShowLogin={onShowLoginModal}
           />
-        </LeftSection>
+        </Section>
       </Container>
     </>
   );
