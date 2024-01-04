@@ -46,8 +46,7 @@ export const Container = styled.nav`
     display: flex;
     align-items: center;
     padding: 8px 0;
-    // color: #425691;
-    color: #1598254;
+    color: #425691;
   }
 
   li:not(:first-child) {
@@ -57,8 +56,7 @@ export const Container = styled.nav`
   a {
     display: flex;
     align-items: center;
-    // color: #333;
-    color: #1598254;
+    color: #333;
     text-decoration: none;
     font-size: 18px;
     flex-grow: 1;
