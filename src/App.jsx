@@ -15,7 +15,7 @@ import QnACreate from "./pages/QnAPage/Section/QnACreate";
 import QnADetail from "./pages/QnAPage/Section/QnADetail";
 import QnAEdit from "./pages/QnAPage/Section/QnAEdit";
 import AnalysisPage from "./pages/AnalysisPage";
-import axios from 'axios';
+import axios from "axios";
 
 const reducer = (state, action) => {
   let newState = [];
@@ -46,24 +46,21 @@ const reducer = (state, action) => {
 export const PostDispatchContext = React.createContext();
 
 function App() {
-
   const [data, dispatch] = useReducer(reducer, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/query');
+        const response = await axios.get("/api/query");
         const responseData = response.data.post_list;
 
-        dispatch({ type: 'INIT', data: responseData });
-        
+        dispatch({ type: "INIT", data: responseData });
       } catch (error) {
-        console.error('Error fetching data:', error.message);
+        console.error("Error fetching data:", error.message);
       }
     };
 
     fetchData();
-    
   }, []);
 
   const onCreate = (title, content) => {
@@ -102,28 +99,28 @@ function App() {
   }, []);
 
   return (
-      <PostDispatchContext.Provider value={memoizedDispatches}>
-        <div className="App">
-          <BrowserRouter>
-            <Header />
-            <div className="layout">
-              <LeftNav />
-              <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/account" element={<AccountPage />} />
-                <Route path="/analysis" element={<AnalysisPage />} />
-                <Route path="/favorite" element={<FavoritePage />} />
-                <Route path="/question" element={<QnAPage />} />
-                <Route path="/report" element={<ReportPage />} />
-                <Route path="/question/create" element={<QnACreate />} />
-                <Route path="/question/:id" element={<QnADetail />} />
-                <Route path="/question/edit/:id" element={<QnAEdit />} />
-              </Routes>
-            </div>
-            {/*<Footer />*/}
-          </BrowserRouter>
-        </div>
-      </PostDispatchContext.Provider>
+    <PostDispatchContext.Provider value={memoizedDispatches}>
+      <div className="App">
+        <BrowserRouter>
+          <Header />
+          <div className="layout">
+            <LeftNav />
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/account" element={<AccountPage />} />
+              <Route path="/analysis" element={<AnalysisPage />} />
+              <Route path="/favorite" element={<FavoritePage />} />
+              <Route path="/question" element={<QnAPage />} />
+              <Route path="/report" element={<ReportPage />} />
+              <Route path="/question/create" element={<QnACreate />} />
+              <Route path="/question/:id" element={<QnADetail />} />
+              <Route path="/question/edit/:id" element={<QnAEdit />} />
+            </Routes>
+          </div>
+          {/*<Footer />*/}
+        </BrowserRouter>
+      </div>
+    </PostDispatchContext.Provider>
   );
 }
 

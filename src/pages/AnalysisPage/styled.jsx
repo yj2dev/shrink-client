@@ -1,5 +1,58 @@
 import styled from "styled-components";
 
+export const AnalaysisResultButton = styled.button`
+  z-index: 49;
+  width: 64px;
+  height: 64px;
+  background-color: rgb(250, 250, 250);
+  border: none;
+  color: #333;
+  font-size: 24px;
+  border-radius: 32px 0 0 32px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  opacity: 0.5;
+  cursor: pointer;
+
+  top: 50%;
+  transform: translate(0, -50%);
+  transition: 0.2s;
+
+  right: -15px;
+  border-left: 3px dashed #4f68ea;
+  border-top: 3px dashed #4f68ea;
+  border-bottom: 3px dashed #4f68ea;
+
+  position: fixed;
+
+  &:hover {
+    transform: translate(0, -50%) scale(1.1);
+    opacity: 1;
+  }
+
+  & > svg {
+    transition: transform 0.3s ease;
+  }
+
+  &.active {
+    border: none;
+    right: 305px;
+    opacity: 1;
+
+    transform: translate(0, -50%) scale(1.1);
+    box-shadow: 10px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  &.active > svg {
+    transform: rotate(180deg);
+  }
+  .alert {
+    transform: translate(0, -50%) scale(1.1);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  }
+`;
+
 export const AnalysisResultMenu = styled.div`
   position: fixed;
   width: 320px;
@@ -10,10 +63,12 @@ export const AnalysisResultMenu = styled.div`
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transition: 0.2s ease all;
   z-index: 50;
+  overflow-y: scroll;
 
   img {
-    width: 6em;
-    height: 6em;
+    //width: 6em;
+    //height: 6em;
+    width: 100%;
   }
 
   &.active {
@@ -57,48 +112,6 @@ export const AnalysisResultMenu = styled.div`
     span {
       float: right;
       color: #888;
-    }
-  }
-
-  .result-btn {
-    z-index: -1;
-    width: 64px;
-    height: 64px;
-    position: absolute;
-    top: calc(50% - 64px);
-    left: -36px;
-    transform: translate(0, -50%);
-    background-color: rgb(250, 250, 250);
-    border: none;
-    color: #333;
-    font-size: 24px;
-    border-radius: 32px 0 0 32px;
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    //justify-content: center;
-    opacity: 0.5;
-    cursor: pointer;
-
-    transition:
-      transform 0.3s ease,
-      opacity 0.3s ease;
-
-    &:hover {
-      transform: translate(0, -50%) scale(1.1);
-      opacity: 1;
-    }
-
-    & > svg {
-      transition: transform 0.3s ease;
-    }
-
-    &.active {
-      opacity: 1;
-    }
-
-    &.active > svg {
-      transform: rotate(180deg);
     }
   }
 `;

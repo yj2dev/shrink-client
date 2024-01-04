@@ -41,7 +41,7 @@ const ImageSlider = ({ images, onImageClick, inModal }) => {
       cursor: "pointer",
       width: "30em",
       height: "30em",
-      objectFit: "cover",
+      objectFit: "contain",
     };
   } else {
     const mobileWidth = window.innerWidth <= 768 ? "90px" : "148px";
@@ -51,7 +51,7 @@ const ImageSlider = ({ images, onImageClick, inModal }) => {
       cursor: "pointer",
       width: mobileWidth,
       height: mobileHeight,
-      objectFit: "cover",
+      objectFit: "contain",
     };
   }
 

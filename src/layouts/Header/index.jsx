@@ -32,6 +32,8 @@ const Header = () => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
+  const [keyword, setKeyword] = useState("");
+
   const [extendLogoutSubmit, setExtendLogoutSubmit] = useState(false);
 
   const navigate = useNavigate();
@@ -95,6 +97,8 @@ const Header = () => {
     navigate("/");
   };
 
+  const onSubmitSearch = (e) => {};
+
   return (
     <>
       <ContainerSpace />
@@ -114,6 +118,12 @@ const Header = () => {
                 가격 변동 없는 상품도 다시 보자
               </h3>
             </div>
+          </div>
+          <div>
+            <form action={onSubmitSearch}>
+              <input type="text" />
+              <button type="submit"></button>
+            </form>
           </div>
         </LeftSection>
         <RightSection>

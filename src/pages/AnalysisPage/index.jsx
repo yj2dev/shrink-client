@@ -3,6 +3,7 @@ import Webcam from "react-webcam";
 import {
   AlertContainer,
   AlertContainerHidden,
+  AnalaysisResultButton,
   AnalysisResultMenu,
   CameraSelectCotainer,
   Container,
@@ -167,13 +168,14 @@ const AnalysisPage = () => {
             "서버와 통신이 원활하지 않습니다."}
         </AlertContainer>
 
+        <AnalaysisResultButton
+          className={`result-btn ${showResultMenu ? "active" : ""}`}
+          onClick={() => setShowResultMenu(!showResultMenu)}
+        >
+          <IoIosArrowBack />
+        </AnalaysisResultButton>
+
         <AnalysisResultMenu className={showResultMenu ? "active" : ""}>
-          <button
-            className={`result-btn ${showResultMenu ? "active" : ""}`}
-            onClick={() => setShowResultMenu(!showResultMenu)}
-          >
-            <IoIosArrowBack />
-          </button>
           <ul>
             {resultItems.map((result, index) => {
               return (
@@ -182,9 +184,7 @@ const AnalysisPage = () => {
                   onClick={() => handleItemClick(result.name)}
                   className={expandedItems[result.name] ? "expanded" : ""}
                 >
-                  <img
-                    src={`${process.env.REACT_APP_API_BASE_URL}/api/product/detect/${result.image_url}`}
-                  />
+                  <img src={result.image_url} />
                   <div>{result.is_reading ? "읽음" : "읽지 않음"}</div>
                   <div>{timeAgo(result.create_at)}</div>
                   <div>{toKst(result.create_at)}</div>
