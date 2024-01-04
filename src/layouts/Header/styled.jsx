@@ -36,6 +36,29 @@ export const LeftSection = styled.div`
   display: flex;
   align-items: center;
 
+  .search-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+    input {
+      border: 2px dashed red;
+      outline: none;
+      background-color: #fff;
+      border-radius: 24px;
+      //height: 56px;
+      width: 50%;
+    }
+
+    button[type="submit"] {
+      background-color: transparent;
+      cursor: pointer;
+      outline: none;
+      border: 2px dashed red;
+    }
+  }
+
   .logo-section {
     display: flex;
     align-items: center;
@@ -272,9 +295,10 @@ export const RightSection = styled.div`
     background-color: #0f62fe;
     color: #fff;
 
-    padding: 10px 28px;
+    //padding: 10px 28px;
+    padding: 0.5em 1em;
     border-radius: 8px;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: 500;
   }
 

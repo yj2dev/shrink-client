@@ -13,6 +13,7 @@ import {
   LeftSection,
   RightSection,
 } from "./styled";
+import { FaSearch } from "react-icons/fa";
 
 const Header = () => {
   const [isLogoHover, setIsLogoHover] = useState(false);
@@ -119,10 +120,12 @@ const Header = () => {
               </h3>
             </div>
           </div>
-          <div>
+          <div className="search-section">
             <form action={onSubmitSearch}>
               <input type="text" />
-              <button type="submit"></button>
+              <button type="submit">
+                <FaSearch />
+              </button>
             </form>
           </div>
         </LeftSection>

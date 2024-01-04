@@ -51,7 +51,7 @@ const ImageSlider = ({ images, onImageClick, inModal }) => {
       cursor: "pointer",
       width: mobileWidth,
       height: mobileHeight,
-      objectFit: "contain",
+      objectFit: "cover",
     };
   }
 
