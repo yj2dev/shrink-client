@@ -6,12 +6,11 @@
     overflow-x: hidden;
 }
 .main{
+    margin-top: 8rem;
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-top: 7rem;
-    margin-left: 12rem;
+    justify-content: center;
 } 
 
 .RightSide {
@@ -27,6 +26,11 @@
     color: rgb(89, 89, 89);
     margin-bottom: 2rem;
 }
+
+
+.LeftSide span {
+    white-space: pre-line;
+  }
 .LeftSide > span {
     color: black;
     font-size: 45px;

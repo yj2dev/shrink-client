@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Info from "./images/click_img(F0F0F0).png";
+import Info from "./images/click_img.png";
 import "./ServiceInfo.css";
 import { Link } from "react-router-dom";
 const ServiceInfo = () => {
@@ -19,7 +19,7 @@ const ServiceInfo = () => {
 
     return () => observer.disconnect();
   }, []);
-
+  
   return (
     <div className="ServiceInfo-section-container">
       <div className="ServiceInfo-section-text-container hidden">
