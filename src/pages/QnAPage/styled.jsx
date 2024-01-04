@@ -125,7 +125,7 @@ export const Container = styled.div`
   
     .btn {
         display: inline-block;
-        padding: 0 30px;
+        padding: 0 20px;
         font-size: 15px;
         font-weight: 400;
         background: transparent;
@@ -341,8 +341,8 @@ export const Container = styled.div`
 
       @media (max-width: 576px) {
         .QnaPost {
-            width: 480px;
-            margin-left: 10px;
+            width: 490px;
+            margin-left: 0px;
         }
 
         section th,td,tr {

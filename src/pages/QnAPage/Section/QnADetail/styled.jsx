@@ -103,6 +103,14 @@ export const Container = styled.div`
           }
       }
 
+      @media (max-width: 576px) {
+        width:430px;
+        margin-left: 0px;
+        .wrapper {
+          left: 340px;
+        }
+      }
+
       textarea {
         resize: none;
       }
