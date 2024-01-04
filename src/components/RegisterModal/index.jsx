@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 // import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal";
-// import "./index.css";
 import { Container, } from "./styled";
 
 function useInterval(callback, delay) {
@@ -355,7 +354,7 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
                   className="register-Button"
                   onClick={() => {onClickRegister();}}
                 >
-                  회원가입 완료
+                  회원가입
                 </button>
 
                 <div className="loginLine">

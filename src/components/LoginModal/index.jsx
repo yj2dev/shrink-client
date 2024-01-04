@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../../state/userState";
 import Modal from "../Modal";
-import "./index.css";
 import { Container } from "./styled";
 
 const LoginModal = ({ show, onClose, onShowRegister }) => {
@@ -200,7 +199,7 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
             className="bottomButton"
             onClick={onClickLogin}
           >
-            확인
+            로그인
           </button>
 
           <div className="registerLine">
