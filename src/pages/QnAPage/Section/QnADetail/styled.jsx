@@ -109,6 +109,12 @@ export const Container = styled.div`
         .wrapper {
           left: 340px;
         }
+        .editmenu-wrap {
+          right:65px;
+        }
+        #edit-area {
+          width:270px;
+        }
       }
 
       textarea {
