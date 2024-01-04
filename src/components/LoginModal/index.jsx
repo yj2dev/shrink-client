@@ -2,9 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { userState } from "../../state/selectors/userSelectors";
+import { userState } from "../../state/userState";
 import Modal from "../Modal";
 import "./index.css";
+import { Container } from "./styled";
 
 const LoginModal = ({ show, onClose, onShowRegister }) => {
   const navigate = useNavigate();
@@ -21,21 +22,6 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
   const [passwordExist, setPasswordExist] = useState(true);
 
   const setUser = useSetRecoilState(userState);
-  const [isHovered, setIsHovered] = useState(false);
-
-  // 버튼 hover이벤트
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-  const buttonStyle = {
-    backgroundColor: isHovered ? '#115ae1' : '#0F62FE', // 호버시 진한색
-    color: 'white',
-    padding: '10px',
-    cursor: 'pointer',
-  };
 
   useEffect(() => {
     if (!show) {
@@ -144,88 +130,87 @@ const LoginModal = ({ show, onClose, onShowRegister }) => {
 
   return (
     <Modal show={show} onClose={onClose} onCloseOutside={false}>
-      <div className="titleWrap">
-        <h2>로그인</h2>
-      </div>
-
-      <div className="contentWrap">
-        <div className="inputTitle">전화번호</div>
-        <div className="inputWrap">
-          <input
-            className="input"
-            type="text"
-            value={phone}
-            // onChange={onChangePhone}
-            onChange={handlePhone}
-            placeholder="010-0000-0000"
-            onKeyDown={(e) => handleOnKeyPress(e)}
-          />
-        </div>
-        <div className="errorMessageWrap">
-          {!phoneValid && phoneExist && passwordExist && (<div>올바른 전화번호를 입력해주세요.</div>)}
+      <Container>
+        <div className="titleWrap">
+          <h2>로그인</h2>
         </div>
 
-        <div style={{ marginTop: "20px" }} className="inputTitle">
-          비밀번호
-        </div>
-        <div className="inputWrap">
-          <input
-            className="input"
-            type="password"
-            value={password}
-            onChange={onChangePassword}
-            placeholder="영문, 숫자, 특수문자 포함 8자리 이상"
-            onKeyDown={(e) => handleOnKeyPress(e)}
-          />
-        </div>
-        <div className="errorMessageWrap">
-          {!passwordValid && phoneValid && passwordExist && (
-            <div>영문, 숫자 포함 8자 이상 입력해주세요.</div>
-          )}
-        </div>
-      </div>
+        <div className="contentWrap">
+          <div className="inputTitle">전화번호</div>
+          <div className="inputWrap">
+            <input
+              className="input"
+              type="text"
+              value={phone}
+              // onChange={onChangePhone}
+              onChange={handlePhone}
+              placeholder="010-0000-0000"
+              onKeyDown={(e) => handleOnKeyPress(e)}
+            />
+          </div>
+          <div className="errorMessageWrap">
+            {!phoneValid && phoneExist && passwordExist && (<div>올바른 전화번호를 입력해주세요.</div>)}
+          </div>
 
-      <div className="bottomWrap">
-        <div className="existErrorMessage">
-          <div>
-            {!phoneExist && (
-              <div className="phoneExistErrorMessage">전화번호를 입력해주세요.</div>
-            )}
+          <div style={{ marginTop: "20px" }} className="inputTitle">
+            비밀번호
           </div>
-          <div>
-            {phoneExist && !passwordExist && (
-              <div className="passwordExistErrorMessage">비밀번호를 입력해주세요.</div>
-            )}
+          <div className="inputWrap">
+            <input
+              className="input"
+              type="password"
+              value={password}
+              onChange={onChangePassword}
+              placeholder="영문, 숫자, 특수문자 포함 8자리 이상"
+              onKeyDown={(e) => handleOnKeyPress(e)}
+            />
           </div>
-          <div>
-            {wrongLogin === "phonePB" && (
-              <div className="loginPBMessage">전화번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</div>
-            )}
-          </div>
-          <div>
-            {wrongLogin === "passwordPB" && (
-              <div className="loginPBMessage">비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</div>
+          <div className="errorMessageWrap">
+            {!passwordValid && phoneValid && passwordExist && (
+              <div>영문, 숫자 포함 8자 이상 입력해주세요.</div>
             )}
           </div>
         </div>
-        <button
-          // style={{ marginTop: "40px" }}
-          style = {buttonStyle}
-          className="bottomButton"
-          onClick={onClickLogin}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          확인
-        </button>
 
-        <div className="registerLine">
-          회원이 아니신가요?{" "}
-          <button className="registerButton" onClick={onShowRegister}>
-            회원가입
+        <div className="bottomWrap">
+          <div className="existErrorMessage">
+            <div>
+              {!phoneExist && (
+                <div className="phoneExistErrorMessage">전화번호를 입력해주세요.</div>
+              )}
+            </div>
+            <div>
+              {phoneExist && !passwordExist && (
+                <div className="passwordExistErrorMessage">비밀번호를 입력해주세요.</div>
+              )}
+            </div>
+            <div>
+              {wrongLogin === "phonePB" && (
+                <div className="loginPBMessage">전화번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</div>
+              )}
+            </div>
+            <div>
+              {wrongLogin === "passwordPB" && (
+                <div className="loginPBMessage">비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</div>
+              )}
+            </div>
+          </div>
+          <button
+            // style={{ marginTop: "40px" }}
+            className="bottomButton"
+            onClick={onClickLogin}
+          >
+            확인
           </button>
+
+          <div className="registerLine">
+            회원이 아니신가요?{" "}
+            <button className="registerButton" onClick={onShowRegister}>
+              회원가입
+            </button>
+          </div>
         </div>
-      </div>
+      </Container>
     </Modal>
   );
 };

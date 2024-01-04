@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    .content {
-        width:3000px;
-    }
+    width:300px;
 
     .titleWrap {
         font-size: 20px;
@@ -20,6 +18,7 @@ export const Container = styled.div`
         font-size: 14px;
         font-weight: 600;
         color: #262626;
+        margin-left: 5px;
     }
 
     .inputWrap {
@@ -57,13 +56,8 @@ export const Container = styled.div`
         color : #1555cb;
         font-weight: 400;
     }
-    /* .bottomWrap{
-        position: fixed;
-        
-        bottom: 120px;
-    } */
 
-    .bottomButton {
+    .phone-Button {
         width: 100%;
         height: 48px;
         border: none;
@@ -72,8 +66,34 @@ export const Container = styled.div`
         border-radius: 64px;
         color: white;
         cursor: pointer;
-        margin-bottom: 5%;
-        margin-top: 10%;
+        margin-bottom: 3%;
+        margin-top: 8%;
+    }
+
+    .code-Button {
+        width: 100%;
+        height: 48px;
+        border: none;
+        font-weight: 700;
+        background-color: #0F62FE;
+        border-radius: 64px;
+        color: white;
+        cursor: pointer;
+        margin-bottom: 3%;
+        margin-top: 8%;
+    }
+
+    .register-Button {
+        width: 100%;
+        height: 48px;
+        border: none;
+        font-weight: 700;
+        background-color: #0F62FE;
+        border-radius: 64px;
+        color: white;
+        cursor: pointer;
+        margin-bottom: 3%;
+        margin-top: 8%;
     }
 
     .loginLine {
