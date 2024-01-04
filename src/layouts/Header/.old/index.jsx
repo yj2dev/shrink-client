@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import LoginModal from "../../components/LoginModal";
 import RegisterModal from "../../components/RegisterModal";
@@ -14,10 +14,18 @@ import {
   RightSection,
 } from "./styled";
 import { FaSearch } from "react-icons/fa";
-import { IoCameraOutline } from "react-icons/io5";
-import LogoContainer from "./Section/LogoCotainer";
 
 const Header = () => {
+  const [isLogoHover, setIsLogoHover] = useState(false);
+
+  const handleLogoEnter = () => {
+    setIsLogoHover(true);
+  };
+
+  const handleLogoLeave = () => {
+    setIsLogoHover(false);
+  };
+
   const [user, setUser] = useRecoilState(userState);
 
   const [showMenu, setShowMenu] = useState(false);
@@ -25,7 +33,7 @@ const Header = () => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-  const [searchKeyword, setSearchKeyword] = useState("");
+  const [keyword, setKeyword] = useState("");
 
   const [extendLogoutSubmit, setExtendLogoutSubmit] = useState(false);
 
@@ -86,10 +94,11 @@ const Header = () => {
     setShowRegisterModal(false);
   };
 
-  const onSubmitSearch = (e) => {
-    e.preventDefault();
-    navigate("/product/search", { state: { keyword: searchKeyword } });
+  const onClickLogo = () => {
+    navigate("/");
   };
+
+  const onSubmitSearch = (e) => {};
 
   return (
     <>
@@ -97,32 +106,30 @@ const Header = () => {
       <ContainerBlur />
       <Container>
         <LeftSection>
-          <LogoContainer />
+          <div
+            onClick={onClickLogo}
+            className="logo-section"
+            onMouseEnter={handleLogoEnter}
+            onMouseLeave={handleLogoLeave}
+          >
+            <img src={logoImg} alt="logo" className="logo-img" />
+            <div className="content">
+              <h1 className={isLogoHover ? "active" : ""}>줄었슈링크</h1>
+              <h3 className={isLogoHover ? "active" : ""}>
+                가격 변동 없는 상품도 다시 보자
+              </h3>
+            </div>
+          </div>
           <div className="search-section">
-            <form onSubmit={onSubmitSearch}>
-              <input
-                type="text"
-                value={searchKeyword}
-                maxLength={20}
-                onChange={(e) => {
-                  setSearchKeyword(e.target.value);
-                }}
-              />
+            <form action={onSubmitSearch}>
+              <input type="text" />
               <button type="submit">
                 <FaSearch />
               </button>
             </form>
           </div>
-
-          <div>
-            <Link to="/analysis">
-              <IoCameraOutline />
-            </Link>
-
-            <Link to="/question">질문</Link>
-            <Link to="/report">신고</Link>
-          </div>
-
+        </LeftSection>
+        <RightSection>
           {showMenu && (
             <nav className="user-menu" ref={menuRef}>
               {user && (
@@ -208,7 +215,7 @@ const Header = () => {
             onClose={onCloseModal}
             onShowLogin={onShowLoginModal}
           />
-        </LeftSection>
+        </RightSection>
       </Container>
     </>
   );

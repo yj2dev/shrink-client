@@ -16,6 +16,8 @@ import QnADetail from "./pages/QnAPage/Section/QnADetail";
 import QnAEdit from "./pages/QnAPage/Section/QnAEdit";
 import AnalysisPage from "./pages/AnalysisPage";
 import axios from "axios";
+import ProductPage from "./pages/ProductPage";
+import ProductSearchPage from "./pages/ProductPage/Section/ProductSearchPage";
 
 const reducer = (state, action) => {
   let newState = [];
@@ -104,11 +106,13 @@ function App() {
         <BrowserRouter>
           <Header />
           <div className="layout">
-            <LeftNav />
+            {/*<LeftNav />*/}
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/account" element={<AccountPage />} />
               <Route path="/analysis" element={<AnalysisPage />} />
+              <Route path="/product" element={<ProductPage />} />
+              <Route path="/product/search" element={<ProductSearchPage />} />
               <Route path="/favorite" element={<FavoritePage />} />
               <Route path="/question" element={<QnAPage />} />
               <Route path="/report" element={<ReportPage />} />
