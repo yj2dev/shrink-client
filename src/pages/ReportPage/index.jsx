@@ -79,7 +79,7 @@ const ReportPage = () => {
           height: "8em",
           borderRadius: "8px",
           border: "1px solid #eee",
-          objectFit: "contain",
+          objectFit: "cover",
         }}
       />
       <button

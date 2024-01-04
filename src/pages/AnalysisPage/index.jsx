@@ -20,6 +20,7 @@ import {
 
 import defaultCameraImg1 from "./img/default-camera.jpg";
 import defaultCameraImg2 from "./img/default-camera.gif";
+import { timeAgo, toKst } from "../../utils/time";
 
 const AnalysisPage = () => {
   const webcamRef = useRef(null);
@@ -31,7 +32,7 @@ const AnalysisPage = () => {
   const [alertStatus, setAlertStatus] = useState("");
 
   const [showResultMenu, setShowResultMenu] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [resultItems, setResultItems] = useState([]);
   const [expandedItems, setExpandedItems] = useState({});
 
   const [showCameraList, setShowCameraList] = useState(false);
@@ -39,6 +40,26 @@ const AnalysisPage = () => {
   const cameraMenuRef = useRef(null);
 
   const [randomCameraImg, setRandomCameraImg] = useState(null);
+
+  const getResultItems = () => {
+    axios
+      .post("/api/product/select/analysis_list", {
+        is_reading: false,
+      })
+      .then((res) => {
+        console.log("res >> ", res);
+        if (res.data.status === "success") {
+          setResultItems(res.data.response);
+        }
+      })
+      .catch((err) => {
+        console.log("err >> ", err);
+      });
+  };
+
+  useEffect(() => {
+    getResultItems();
+  }, []);
 
   useEffect(() => {
     const images = [defaultCameraImg1, defaultCameraImg2];
@@ -74,10 +95,6 @@ const AnalysisPage = () => {
       }
     });
   }, []);
-
-  const onChangeCamera = (e) => {
-    setSelectedCamera(e.target.value);
-  };
 
   const onSubmit = () => {
     if (webcamRef.current) {
@@ -158,20 +175,49 @@ const AnalysisPage = () => {
             <IoIosArrowBack />
           </button>
           <ul>
-            {["바나나킥", "콘초", "동원 참치", "분석 실패"].map(
-              (item, index) => (
+            {resultItems.map((result, index) => {
+              return (
                 <li
                   key={index}
-                  onClick={() => handleItemClick(item)}
-                  className={expandedItems[item] ? "expanded" : ""}
+                  onClick={() => handleItemClick(result.name)}
+                  className={expandedItems[result.name] ? "expanded" : ""}
                 >
-                  {item} <span>1분전</span>
-                  {expandedItems[item] && (
-                    <div className="item-details">상세 정보: {item}</div>
-                  )}
+                  <img
+                    src={`${process.env.REACT_APP_API_BASE_URL}/api/product/detect/${result.image_url}`}
+                  />
+                  <div>{result.is_reading ? "읽음" : "읽지 않음"}</div>
+                  <div>{timeAgo(result.create_at)}</div>
+                  <div>{toKst(result.create_at)}</div>
+                  <div>
+                    {result.result.length > 0 &&
+                      result.result.map((item, index) => {
+                        return (
+                          <div key={index}>
+                            <div>{item.product_id}</div>
+                            <div>{item.result}</div>
+                            <div>{item.weight}</div>
+                          </div>
+                        );
+                      })}
+                  </div>
                 </li>
-              ),
-            )}
+              );
+            })}
+
+            {/*{["바나나킥", "콘초", "동원 참치", "분석 실패"].map(*/}
+            {/*  (item, index) => (*/}
+            {/*    <li*/}
+            {/*      key={index}*/}
+            {/*      onClick={() => handleItemClick(item)}*/}
+            {/*      className={expandedItems[item] ? "expanded" : ""}*/}
+            {/*    >*/}
+            {/*      {item} <span>1분전</span>*/}
+            {/*      {expandedItems[item] && (정보: {item}</div>*/}
+            {/*      )}*/}
+            {/*    </li>*/}
+            {/*  <div className="item-details">상세*/}
+            {/*  ),*/}
+            {/*)}*/}
           </ul>
         </AnalysisResultMenu>
 

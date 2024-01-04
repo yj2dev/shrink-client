@@ -11,6 +11,11 @@ export const AnalysisResultMenu = styled.div`
   transition: 0.2s ease all;
   z-index: 50;
 
+  img {
+    width: 6em;
+    height: 6em;
+  }
+
   &.active {
     right: 0;
   }
@@ -56,6 +61,7 @@ export const AnalysisResultMenu = styled.div`
   }
 
   .result-btn {
+    z-index: -1;
     width: 64px;
     height: 64px;
     position: absolute;

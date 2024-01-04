@@ -1,6 +1,6 @@
 import { Container, Message, NotDelCheckContainer } from "./styled";
 import { useRecoilState } from "recoil";
-import { userState } from "../../state/selectors/userSelectors";
+import { userState } from "../../state/userState";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { MdOutlineEdit } from "react-icons/md";
