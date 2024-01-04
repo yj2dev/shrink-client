@@ -137,6 +137,7 @@ const AnalysisPage = () => {
         })
         .finally(() => {
           setIsLoading(false);
+          getResultItems();
         });
     }
   };
