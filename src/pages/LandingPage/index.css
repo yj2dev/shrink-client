@@ -1,47 +1,48 @@
 .LandingPage{
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     width: 100%;
-    overflow-x: hidden;
 }
 .main{
-    margin-top: 8rem;
+    margin-top: 7rem;
     position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    background: linear-gradient(to bottom, #ffffff, #a3c3fd);
 } 
 
-.RightSide {
-    justify-content: center;
+.Main_img{
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-content: center;
+    justify-content: center;
 }
 
-.explain{
+.main > img {
+    margin-top: 3rem;
+    width: 30%;
+}
+
+.main span {
+    white-space: pre-line;
+  }
+.main > span {
+    color: black;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.main > span > span:nth-of-type(1) {
+    color: #0F62FE;
+    font-size: 60px;
+    font-weight: bold;
+}
+.main > span > span:nth-of-type(2) {
     font-size: 25px;
     font-weight: bold;
     color: rgb(89, 89, 89);
     margin-bottom: 2rem;
 }
 
-
-.LeftSide span {
-    white-space: pre-line;
-  }
-.LeftSide > span {
-    color: black;
-    font-size: 45px;
-    font-weight: bold;
-}
-
-.LeftSide > span > span:nth-of-type(1) {
-    color: #0F62FE;
-    font-size: 45px;
-    font-weight: bold;
-}
 
 @media screen and (max-width: 1440px){
     .explain{
@@ -57,6 +58,8 @@
     }
 }
 
+
+/* 다른 스타일들 추가... */
 
 @media screen and (max-width: 1200px) {
     .LandingPage {
