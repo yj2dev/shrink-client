@@ -19,6 +19,12 @@ export const Container = styled.div`
       height: 44px; /** logo2.png 사용시 주석 제거 */
       width: 44px; /** logo2.png 사용시 주석 제거 */
       margin-top: 8px; /** logo2.png 사용시 주석 제거 */
+
+      @media (max-width: 768px) {
+        height: 38px;
+        width: 38px;
+        margin-top: 2px;
+      }
     }
 
     .content {

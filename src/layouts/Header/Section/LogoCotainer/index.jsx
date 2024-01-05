@@ -4,7 +4,7 @@ import logoImg2 from "../../img/logo2.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const LogoContainer = () => {
+const LogoContainer = ({ closeMobileMenu }) => {
   const navigate = useNavigate();
 
   const [isLogoHover, setIsLogoHover] = useState(false);
@@ -18,6 +18,8 @@ const LogoContainer = () => {
   };
 
   const onClickLogo = () => {
+    closeMobileMenu();
+
     navigate("/");
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };

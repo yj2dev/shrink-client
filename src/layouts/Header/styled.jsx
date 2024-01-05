@@ -233,7 +233,8 @@ export const Section = styled.section`
       }
 
       @media (max-width: 768px) {
-        width: 74px;
+        width: 64px;
+        font-size: 0.8em;
       }
       padding: 10px 90px 10px 44px;
 
@@ -464,6 +465,10 @@ export const Section = styled.section`
   }
 
   .login-button {
+    @media (max-width: 768px) {
+      font-size: 0.75em;
+    }
+
     justify-content: flex-end;
 
     box-shadow: 4px 4px 8px 1px rgba(0, 0, 0, 0.2);
@@ -527,7 +532,7 @@ export const RightSection = styled.div`
       width: 100%;
       display: block;
       padding: 8px 0;
-      border-radius: 8px 8px 0 0;
+      border-radius: 0 0 0 0;
       margin: 0;
       transition: 0.2s;
 
@@ -556,6 +561,7 @@ export const RightSection = styled.div`
       background-color: #2245fd;
       width: 0;
       transition: 0.2s ease-out width;
+      border-radius: 8px;
     }
 
     &:hover::after {

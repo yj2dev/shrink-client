@@ -15,6 +15,7 @@ import {
 import {
   IoCameraOutline,
   IoClose,
+  IoLogInOutline,
   IoMenu,
   IoSearchOutline,
 } from "react-icons/io5";
@@ -171,7 +172,7 @@ const Header = () => {
         <Section>
           <div className="flex-item mobile">
             <div className="mobile-logo-wrapper">
-              <LogoContainer />
+              <LogoContainer closeMobileMenu={() => setShowMobileMenu(false)} />
               <div className="search-section">
                 <form onSubmit={onSubmitSearch}>
                   <input
@@ -185,7 +186,13 @@ const Header = () => {
                     <IoSearchOutline />
                   </button>
                 </form>
-                <Link to="/analysis" className="camera-btn">
+                <Link
+                  to="/analysis"
+                  className="camera-btn"
+                  onClick={() => {
+                    setShowMobileMenu(false);
+                  }}
+                >
                   <IoCameraOutline />
                 </Link>
                 {showClean && (
@@ -225,6 +232,7 @@ const Header = () => {
                     className="login-button"
                   >
                     로그인
+                    {/*{isMobile ? <IoLogInOutline /> : "로그인"}*/}
                   </button>
                 ))}
 
