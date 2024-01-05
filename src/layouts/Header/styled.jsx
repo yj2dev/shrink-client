@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const ContainerSpace = styled.header`
-  height: 78px;
+  height: 82px;
 `;
 
 export const ContainerBlur = styled.header`
   position: fixed;
   backdrop-filter: blur(8px);
-  height: 78px;
+  height: 82px;
   z-index: 210;
   width: 100%;
   top: 0;
@@ -26,9 +26,10 @@ export const Container = styled.header`
   width: 100%;
   padding: 1em 1.5em;
   box-sizing: border-box;
+  transition: 0.2s;
 
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-  .active {
+  &.active {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   }
 
   background-color: rgba(255, 255, 255, 0.7);
@@ -36,7 +37,6 @@ export const Container = styled.header`
   color: #000;
 
   text-align: center;
-  transition: background-color 0.5s;
 `;
 
 export const Section = styled.section`
@@ -47,18 +47,26 @@ export const Section = styled.section`
   width: 100%;
   //border: 4px solid orangered;
 
-  a {
-    color: #000;
+  .mobile {
+    //border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .mobile-logo-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .mobile-menu-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .flex-item {
-    //width: 100%;
     display: flex;
     position: relative;
-    //flex-direction: row;
-    //align-items: center;
-    //justify-content: space-between;
-    //border: 1px solid red;
 
     @media (max-width: 768px) {
       width: 100%;
@@ -73,17 +81,15 @@ export const Section = styled.section`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    //top: 0;
-    //left: 0;
   }
 
   .search-section {
     position: relative;
 
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
 
     .camera-btn {
       position: absolute;
@@ -107,7 +113,45 @@ export const Section = styled.section`
         background-color: rgba(0, 0, 0, 0.1);
         border-radius: 8px;
       }
-    }
+
+      &:hover::before {
+        display: block;
+      }
+
+      &::before {
+        display: none;
+        font-size: 12px;
+        font-weight: 400;
+        padding: 4px 8px 6px 8px;
+        transition: 0.2s;
+        content: "웹캠으로 검색";
+        position: absolute;
+        top: 40px;
+        border-radius: 2px;
+        left: -18px;
+        background-color: #2d2d2d;
+        color: #fff;
+        white-space: nowrap;
+        z-index: 2;
+      }
+
+      &:hover::after {
+        display: block;
+      }
+
+      &::after {
+        display: none;
+        z-index: 5;
+        content: "";
+        position: absolute;
+        top: 34px;
+        left: 18px;
+
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 8px solid #2d2d2d;
+      }
+    } //camera-btn end
 
     button[type="submit"] {
       background-color: transparent;
@@ -118,7 +162,7 @@ export const Section = styled.section`
       font-size: 1.2em;
       border: none;
       outline: none;
-      top: 50%;
+      top: 53%;
       transform: translateY(-50%);
     }
 
@@ -127,6 +171,52 @@ export const Section = styled.section`
     }
 
     .clean-btn {
+      position: absolute;
+      right: 52px;
+      font-weight: 800;
+      font-size: 1.2em;
+      cursor: pointer;
+      padding-right: 8px;
+      margin-right: 8px;
+      border-right: 3px solid #dfe1e5;
+
+      &:hover::before {
+        display: block;
+      }
+
+      &::before {
+        display: none;
+        font-size: 12px;
+        font-weight: 400;
+        padding: 4px 8px 6px 8px;
+        transition: 0.2s;
+        content: "지우기";
+        position: absolute;
+        top: 38px;
+        border-radius: 2px;
+        left: -16px;
+        background-color: #2d2d2d;
+        color: #fff;
+        white-space: nowrap;
+        z-index: 2;
+      }
+
+      &:hover::after {
+        display: block;
+      }
+
+      &::after {
+        display: none;
+        z-index: 5;
+        content: "";
+        position: absolute;
+        top: 32px;
+        left: 4px;
+
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 8px solid #2d2d2d;
+      }
     }
     input {
       border: 3px solid #dfe1e5;
@@ -134,30 +224,26 @@ export const Section = styled.section`
       outline: none;
       border-radius: 8px;
       //height: 56px;
-      width: 300px;
+      //width: 50%;
+      width: 250px;
+      font-size: 1em;
+
+      @media (max-width: 1024px) {
+        width: 150px;
+      }
 
       @media (max-width: 768px) {
-        width: 100px;
+        width: 64px;
+        font-size: 0.8em;
       }
-      padding: 8px 36px 8px 36px;
+      padding: 10px 90px 10px 44px;
 
-      transition: 0.2s;
-
+      transition: 0.1s;
       &:hover {
+        box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.08);
       }
       &:focus {
-        box-shadow:
-          0 2px 4px rgba(0, 0, 0, 0.1),
-          2px 0 4px rgba(0, 0, 0, 0.1),
-          -2px 0 4px rgba(0, 0, 0, 0.1),
-          0 -2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      button[type="submit"] {
-        background-color: transparent;
-        cursor: pointer;
-        outline: none;
-        border: 2px dashed red;
+        box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.08);
       }
     }
   }
@@ -166,12 +252,72 @@ export const Section = styled.section`
   //                Right Section
   //  ========================================
 
+  .mobile-menu-wrapper {
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
+
+    margin-left: 12px;
+
+    input[id="mobile-menu"] {
+      display: none;
+    }
+
+    input[id="mobile-menu"] + label {
+      display: block;
+      width: 30px;
+      height: 20px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    input[id="mobile-menu"] + label > span {
+      transform-origin: center;
+
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      //height: 4px; // x가 대칭이 맞지 않는 문제(미해결)
+      border-radius: 30px;
+      background-color: #000;
+      transition: 0.2s;
+    }
+
+    input[id="mobile-menu"] + label > span:nth-child(1) {
+      top: 0;
+    }
+
+    input[id="mobile-menu"] + label > span:nth-child(2) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    input[id="mobile-menu"] + label > span:nth-child(3) {
+      bottom: 0;
+    }
+
+    input[id="mobile-menu"]:checked + label > span:nth-child(1) {
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    input[id="mobile-menu"]:checked + label > span:nth-child(2) {
+      opacity: 0;
+    }
+
+    input[id="mobile-menu"]:checked + label > span:nth-child(3) {
+      bottom: 50%;
+      transform: translateY(-50%) rotate(-45deg);
+    }
+  }
   .show-menu-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: transparent;
     border: none;
+
+    background-color: transparent;
   }
 
   .profile-img {
@@ -319,6 +465,10 @@ export const Section = styled.section`
   }
 
   .login-button {
+    @media (max-width: 768px) {
+      font-size: 0.75em;
+    }
+
     justify-content: flex-end;
 
     box-shadow: 4px 4px 8px 1px rgba(0, 0, 0, 0.2);
@@ -347,23 +497,76 @@ export const Section = styled.section`
 
 export const RightSection = styled.div`
   display: flex;
-  border: 1px solid green;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
 
-  //justify-content: center;
-  //align-items: center;
-  //width: 100%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 
-  .nav-link {
+  .flex-item {
+    margin-right: 1em;
+
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin: 0 0.5em;
-    padding: 0.5em 1em;
-    border: 1px solid red;
-    border-radius: 8px;
-    //text-align: center;
-    //width: 100%;
-    //background-color: #0f62fe;
+    justify-content: flex-end;
+    flex-direction: row;
+
+    //border: 1px solid green;
+
+    @media (max-width: 768px) {
+      margin-right: 0;
+      margin-top: 1em;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+  .nav-link {
+    width: 100%;
+    padding: 4px 8px;
+    box-sizing: border-box;
+  }
+  .nav-link a {
+    @media (max-width: 768px) {
+      width: 100%;
+      display: block;
+      padding: 8px 0;
+      border-radius: 0 0 0 0;
+      margin: 0;
+      transition: 0.2s;
+
+      &:hover {
+        background-color: #2245fd;
+        color: #fff;
+      }
+    }
+    text-decoration: none;
+    color: #000;
+
+    position: relative;
+
+    font-size: 1em;
+    font-weight: 500;
+
+    margin: 0 8px;
+    padding: 2px 8px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      height: 4px;
+      bottom: -6px;
+      left: 0;
+      background-color: #2245fd;
+      width: 0;
+      transition: 0.2s ease-out width;
+      border-radius: 8px;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
   }
 
   @media (max-width: 768px) {

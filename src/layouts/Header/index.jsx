@@ -12,10 +12,10 @@ import {
   RightSection,
   Section,
 } from "./styled";
-import { FaSearch } from "react-icons/fa";
 import {
   IoCameraOutline,
   IoClose,
+  IoLogInOutline,
   IoMenu,
   IoSearchOutline,
 } from "react-icons/io5";
@@ -39,13 +39,53 @@ const Header = () => {
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
+  const [isScroll, setIsScroll] = useState(false);
+
   const [isMobile, setIsMobile] = useState(
     typeof window !== "undefined" && window.innerWidth <= 768,
   );
 
+  const mobileMenuRef = useRef();
+
+  // 작성자: 이유진
+  // 작성일: 2024.01.05
+  // 내용: 모바일 메뉴 활성화 상태에서 외부 클릭시 닫히는 로직인데 이를 사용하면 원래 버튼이 동작하지 않습니다.
+  // 따라서 외부클릭을 포기하고 주석처리 하였습니다. (다른 외부클릭 로직들도 이런형태)
+  // useEffect(() => {
+  //   const onClickOutside = (e) => {
+  //     if (
+  //       showMobileMenu &&
+  //       mobileMenuRef.current &&
+  //       !mobileMenuRef.current.contains(e.target)
+  //     ) {
+  //       setShowMobileMenu(false);
+  //     }
+  //   };
+  //
+  //   document.addEventListener("mousedown", onClickOutside);
+  //
+  //   return () => {
+  //     document.removeEventListener("mousedown", onClickOutside);
+  //   };
+  // }, [showMobileMenu]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY) setIsScroll(true);
+      else setIsScroll(false);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
+      setShowMobileMenu(false);
     };
 
     window.addEventListener("resize", handleResize);
@@ -127,82 +167,122 @@ const Header = () => {
   return (
     <>
       <ContainerSpace />
-      <ContainerBlur />
-      <Container>
+      {!showMobileMenu && <ContainerBlur />}
+      <Container className={isScroll ? "active" : ""}>
         <Section>
-          <div className="flex-item">
-            <LogoContainer />
-            <div className="search-section">
-              <form onSubmit={onSubmitSearch}>
-                <input
-                  type="text"
-                  value={searchKeyword}
-                  maxLength={20}
-                  onChange={onChangeKeyword}
-                />
-                {/*아이콘 용도로 사용 필요시 disable 상태 변경 후 검색 버튼으로 사용 가능 */}
-                <button type="submit">
-                  <FaSearch />
-                </button>
-              </form>
-              <Link to="/analysis" className="camera-btn">
-                <IoCameraOutline />
-              </Link>
-              {showClean && (
-                <div
-                  className="clean-btn"
+          <div className="flex-item mobile">
+            <div className="mobile-logo-wrapper">
+              <LogoContainer closeMobileMenu={() => setShowMobileMenu(false)} />
+              <div className="search-section">
+                <form onSubmit={onSubmitSearch}>
+                  <input
+                    type="text"
+                    value={searchKeyword}
+                    maxLength={20}
+                    onChange={onChangeKeyword}
+                  />
+                  {/*아이콘 용도로 사용 필요시 disable 상태 변경 후 검색 버튼으로 사용 가능 */}
+                  <button type="submit">
+                    <IoSearchOutline />
+                  </button>
+                </form>
+                <Link
+                  to="/analysis"
+                  className="camera-btn"
                   onClick={() => {
-                    setSearchKeyword("");
-                    setShowClean(false);
+                    setShowMobileMenu(false);
                   }}
                 >
-                  &times;
+                  <IoCameraOutline />
+                </Link>
+                {showClean && (
+                  <div
+                    className="clean-btn"
+                    onClick={() => {
+                      setSearchKeyword("");
+                      setShowClean(false);
+                    }}
+                  >
+                    &times;
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="mobile-menu-wrapper">
+              {isMobile &&
+                (user ? (
+                  <button
+                    disabled={showMenu}
+                    className="show-menu-btn"
+                    onClick={() => {
+                      setShowMenu(true);
+                    }}
+                  >
+                    <img
+                      src={user.profile_url}
+                      className={`profile-img ${showMenu ? "active" : ""}`}
+                      ref={triggerRef}
+                    />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setShowLoginModal(!showLoginModal);
+                    }}
+                    className="login-button"
+                  >
+                    로그인
+                    {/*{isMobile ? <IoLogInOutline /> : "로그인"}*/}
+                  </button>
+                ))}
+
+              {isMobile && (
+                <div className="mobile-menu-wrapper">
+                  <input
+                    type="checkbox"
+                    id="mobile-menu"
+                    value={showMobileMenu}
+                    onClick={() => setShowMobileMenu((p) => !p)}
+                  />
+                  <label htmlFor="mobile-menu">
+                    <span />
+                    <span />
+                    <span />
+                  </label>
                 </div>
               )}
-            </div>
-            {isMobile &&
-              (user ? (
-                <button
-                  disabled={showMenu}
-                  className="show-menu-btn"
-                  onClick={() => {
-                    setShowMenu(true);
-                  }}
-                >
-                  <img
-                    src={user.profile_url}
-                    className={`profile-img ${showMenu ? "active" : ""}`}
-                    ref={triggerRef}
-                  />
-                </button>
-              ) : (
-                <button
-                  onClick={() => {
-                    setShowLoginModal(!showLoginModal);
-                  }}
-                  className="login-button"
-                >
-                  로그인
-                </button>
-              ))}
 
-            {isMobile && (
-              <button onClick={() => setShowMobileMenu((p) => !p)}>
-                {showMobileMenu ? <IoClose /> : <IoMenu />}
-              </button>
-            )}
+              {/*{isMobile && (*/}
+              {/*  <button*/}
+              {/*    className="mobile-menu"*/}
+              {/*    onClick={() => setShowMobileMenu((p) => !p)}*/}
+              {/*  >*/}
+              {/*    {showMobileMenu ? <IoClose /> : <IoMenu />}*/}
+              {/*  </button>*/}
+              {/*)}*/}
+            </div>
           </div>
 
           <RightSection>
             {(!isMobile || showMobileMenu) && (
-              <>
-                <div className="flex-item nav-link">
+              <div className="flex-item" ref={mobileMenuRef}>
+                <div
+                  className="nav-link"
+                  onClick={() => {
+                    setShowMobileMenu(false);
+                  }}
+                >
                   <Link to="/report">신고</Link>
                 </div>
-                <div className="flex-item nav-link">
+                <div
+                  className="nav-link"
+                  onClick={() => {
+                    setShowMobileMenu(false);
+                  }}
+                >
                   <Link to="/question">질문</Link>
                 </div>
-              </>
+              </div>
             )}
             {!isMobile &&
               (user ? (

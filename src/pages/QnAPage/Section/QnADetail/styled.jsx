@@ -12,7 +12,7 @@ export const Container = styled.div`
       border-radius: 10px;
       margin: 50px auto;
       padding: 40px 30px 40px 30px;
-      margin-left: 240px;
+      margin-left: 340px;
       background-color: white;
 
       h3, h2 {
@@ -123,7 +123,6 @@ export const Container = styled.div`
     }
 
     .commentc {
-      //width:550px;
       width: 400px;
       overflow-wrap: break-word;
       word-wrap: break-word;
@@ -178,7 +177,6 @@ export const Container = styled.div`
     }
     
     .contents p{
-      //margin: 20px 0;
       margin: 0px 0px 5px 0px;
       white-space: pre-line;
     }
@@ -209,8 +207,6 @@ export const Container = styled.div`
     }
     .readPost div{
       display: flex;
-      // padding: 10px;
-      //width: 95%;
     }
     .readdiv {
       padding: 10px;
@@ -226,7 +222,6 @@ export const Container = styled.div`
     }
     .editmenu-wrap {
       position:relative;
-      //margin-left:320px;
       margin-left: 200px;
       padding: 0px;
       border-radius: 5px;
@@ -283,7 +278,6 @@ export const Container = styled.div`
     }
     .commentsz div{
       display: flex;
-      // justify-content: space-between;
     }
     .commentsz div label{
       line-height: 3rem;
@@ -306,7 +300,6 @@ export const Container = styled.div`
     }
           
     .right-btns button {
-      //margin-right: 10px;
       margin-left: 15px;
       white-space: nowrap;
       width:100%;
@@ -323,8 +316,6 @@ export const Container = styled.div`
 
     .btn-container button,
     .active-btn button {
-      // width: 50%;
-      //padding: 5px;
       cursor: pointer;
       background: #99CCFF; 
       color: #fff;
@@ -418,10 +409,7 @@ export const Container = styled.div`
       }
     }
 }
-// .wrapper {
-//   right:-120px;
-//   bottom: -10px;
-// }
+
 
 .ql-size-small {
   font-size: .7rem;

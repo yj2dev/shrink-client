@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin-right: 1em;
+  @media (max-width: 768px) {
+    margin-right: 12px;
+  }
 
   .logo-section {
     display: flex;
@@ -16,10 +18,18 @@ export const Container = styled.div`
 
       height: 44px; /** logo2.png 사용시 주석 제거 */
       width: 44px; /** logo2.png 사용시 주석 제거 */
+      margin-top: 8px; /** logo2.png 사용시 주석 제거 */
+
+      @media (max-width: 768px) {
+        height: 38px;
+        width: 38px;
+        margin-top: 2px;
+      }
     }
 
     .content {
       margin-left: 0.5em;
+      margin-right: 1em;
 
       @media (max-width: 768px) {
         display: none;

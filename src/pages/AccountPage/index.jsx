@@ -74,8 +74,10 @@ const AccountPage = () => {
       try {
         const { data } = await axios.get("/api/auth/user/info");
         localStorage.setItem("user", JSON.stringify(data.user));
-        setUser(data.user);
 
+        console.log("data.user >> ", data.user);
+
+        setUser(data.user);
         setNickname(data.user.nickname);
 
         return data.user;

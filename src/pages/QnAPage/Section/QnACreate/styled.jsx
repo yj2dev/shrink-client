@@ -11,7 +11,7 @@ export const Container = styled.div`
         border-radius: 10px;
         margin: 50px auto;
         padding: 40px;
-        margin-left: 300px;
+        margin-left: 440px;
         background-color: white;
 
         .warn-length {
