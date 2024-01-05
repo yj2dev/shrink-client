@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { Container } from "./styled";
 import axios from "axios";
+import { GoAlert } from "react-icons/go";
+import { useNavigate } from "react-router-dom";
 
 
 const ProductPage = ({keyword}) => {
 
   const [product, setProduct] = useState([]);
+  const navigate = useNavigate();
 
   const fetchProductData = async () => {
     try {
@@ -32,12 +35,23 @@ const ProductPage = ({keyword}) => {
     fetchProductData();
   }, []);
 
-  // console.log("p",product);
+  console.log("p",product);
   // console.log("k",keyword);
 
   return (
     <Container>
-      {keyword && product.length === 0 ? (<h1>해당 상품이 없습니다.</h1>) : (
+      {keyword && product.length === 0 ? (
+        <div className="nosearch-wrap">
+          <GoAlert className="nosearch"/>
+          <h1>해당 상품의 검색 결과가 없습니다.</h1>
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}>
+            이전 페이지로 돌아가기
+          </button>
+        </div>
+      ) : (
         <div className="wrapper">
         <div className="products">
           {product.map((it) => (
@@ -50,7 +64,7 @@ const ProductPage = ({keyword}) => {
               <div className="detail">{it.detail ? it.detail : ""}</div>
               <div className="price">
                 <div className="price_l">
-                  <span className="weight_label">{it.weight}g</span>
+                  {/* <span className="weight_label">{it.weight}g</span> */}
                 </div>
               </div>
             </div>

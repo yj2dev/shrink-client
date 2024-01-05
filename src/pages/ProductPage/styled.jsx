@@ -7,7 +7,40 @@ export const Container = styled.div`
     padding: 0;
 }
 
+.nosearch-wrap {
+  text-align: center;
+  position: relative;
+  left: 260px;
+  top: 200px
+}
+.nosearch {
+  width: 100%;
+  font-size: 100px;
+  color: #ff5058;
+  margin-bottom: 5px;
+}
+
 margin-left: 18rem;
+
+button {
+  margin-top: 20px;
+  cursor: pointer;
+  width: 70%;
+  padding: 15px;
+  border: 1px solid #dee0e1;
+  border-radius: 12px;
+  background: #f6f8fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background-color: #dee0e1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
 
 .products {
   margin-top: 1rem;
