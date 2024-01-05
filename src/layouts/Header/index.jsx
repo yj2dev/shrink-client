@@ -5,9 +5,20 @@ import { useRecoilState } from "recoil";
 import LoginModal from "../../components/LoginModal";
 import RegisterModal from "../../components/RegisterModal";
 import { userState } from "../../state/userState";
-import { Container, ContainerBlur, ContainerSpace, Section } from "./styled";
+import {
+  Container,
+  ContainerBlur,
+  ContainerSpace,
+  RightSection,
+  Section,
+} from "./styled";
 import { FaSearch } from "react-icons/fa";
-import { IoCameraOutline } from "react-icons/io5";
+import {
+  IoCameraOutline,
+  IoClose,
+  IoMenu,
+  IoSearchOutline,
+} from "react-icons/io5";
 import LogoContainer from "./Section/LogoCotainer";
 
 const Header = () => {
@@ -99,9 +110,20 @@ const Header = () => {
 
   const onSubmitSearch = (e) => {
     e.preventDefault();
+
+    if (searchKeyword.length < 1) return;
+
     navigate("/product/search", { state: { keyword: searchKeyword } });
   };
 
+  const [showClean, setShowClean] = useState(false);
+
+  const onChangeKeyword = (e) => {
+    if (e.target.value.length > 0) setShowClean(true);
+    else setShowClean(false);
+
+    setSearchKeyword(e.target.value);
+  };
   return (
     <>
       <ContainerSpace />
@@ -116,18 +138,26 @@ const Header = () => {
                   type="text"
                   value={searchKeyword}
                   maxLength={20}
-                  onChange={(e) => {
-                    setSearchKeyword(e.target.value);
-                  }}
+                  onChange={onChangeKeyword}
                 />
-                {/*아이콘 용도로 사용 필요시 disable 상태 변경 후 검색 버튼으로 사용 가능 */}
-                <button type="submit" disabled={true}>
-                  <FaSearch />
+                <button type="submit" disabled={false}>
+                  <IoSearchOutline />
                 </button>
               </form>
-              <Link to="/analysis">
+              <Link to="/analysis" className="camera-btn">
                 <IoCameraOutline />
               </Link>
+              {showClean && (
+                <div
+                  className="clean-btn"
+                  onClick={() => {
+                    setSearchKeyword("");
+                    setShowClean(false);
+                  }}
+                >
+                  &times;
+                </div>
+              )}
             </div>
             {isMobile &&
               (user ? (
@@ -157,21 +187,48 @@ const Header = () => {
 
             {isMobile && (
               <button onClick={() => setShowMobileMenu((p) => !p)}>
-                햄버거
+                {showMobileMenu ? <IoClose /> : <IoMenu />}
               </button>
             )}
           </div>
 
-          {(!isMobile || showMobileMenu) && (
-            <>
-              <div className="flex-item">
-                <Link to="/report">신고</Link>
-              </div>
-              <div className="flex-item">
-                <Link to="/question">질문</Link>
-              </div>
-            </>
-          )}
+          <RightSection>
+            {(!isMobile || showMobileMenu) && (
+              <>
+                <div className="flex-item nav-link">
+                  <Link to="/report">신고</Link>
+                </div>
+                <div className="flex-item nav-link">
+                  <Link to="/question">질문</Link>
+                </div>
+              </>
+            )}
+            {!isMobile &&
+              (user ? (
+                <button
+                  disabled={showMenu}
+                  className="show-menu-btn"
+                  onClick={() => {
+                    setShowMenu(true);
+                  }}
+                >
+                  <img
+                    src={user.profile_url}
+                    className={`profile-img ${showMenu ? "active" : ""}`}
+                    ref={triggerRef}
+                  />
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    setShowLoginModal(!showLoginModal);
+                  }}
+                  className="login-button"
+                >
+                  로그인
+                </button>
+              ))}
+          </RightSection>
           {showMenu && (
             <nav className="user-menu" ref={menuRef}>
               {user && (
@@ -220,32 +277,6 @@ const Header = () => {
               </button>
             </nav>
           )}
-
-          {!isMobile &&
-            (user ? (
-              <button
-                disabled={showMenu}
-                className="show-menu-btn"
-                onClick={() => {
-                  setShowMenu(true);
-                }}
-              >
-                <img
-                  src={user.profile_url}
-                  className={`profile-img ${showMenu ? "active" : ""}`}
-                  ref={triggerRef}
-                />
-              </button>
-            ) : (
-              <button
-                onClick={() => {
-                  setShowLoginModal(!showLoginModal);
-                }}
-                className="login-button"
-              >
-                로그인
-              </button>
-            ))}
 
           <LoginModal
             show={showLoginModal}

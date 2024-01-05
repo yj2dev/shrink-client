@@ -123,6 +123,7 @@ const AnalysisPage = () => {
             setAlertStatus("shrinkOccurred");
           } else {
             setAlertStatus("noShrink");
+
             setTimeout(() => {
               setAlertStatus("");
             }, 4000);

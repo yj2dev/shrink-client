@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  margin-right: 1em;
+
   .logo-section {
     display: flex;
     align-items: center;
-    justify-content: center;
-    border: 1px solid red;
+    justify-content: flex-start;
+    //width: 220px;
+    height: 44px;
     cursor: pointer;
 
     .logo-img {
@@ -13,44 +16,42 @@ export const Container = styled.div`
 
       height: 44px; /** logo2.png 사용시 주석 제거 */
       width: 44px; /** logo2.png 사용시 주석 제거 */
-
-      //margin-right: 10px;
     }
 
     .content {
+      margin-left: 0.5em;
+
       @media (max-width: 768px) {
         display: none;
       }
 
       overflow: hidden;
 
-      h1 {
-        white-space: nowrap;
-        //width: 185px;
-        font-weight: bold;
-        padding: 0;
-        margin: 0;
-        transition: 0.4s ease all;
-      }
-
-      h1.active {
-        font-size: 1.52rem;
-        letter-spacing: 12px;
-      }
-
+      h1,
       h3 {
         margin: 0;
         padding: 0;
-        font-size: 0.75rem;
+        transition: 0.3s ease all;
+      }
+
+      h1 {
+        white-space: nowrap;
+        font-weight: bold;
+        letter-spacing: 2px;
+      }
+
+      h1.active {
+        letter-spacing: 4px;
+      }
+
+      h3 {
         height: 0;
-        transition: 0.4s ease all;
+        font-size: 0.75rem;
       }
 
       h3.active {
-        margin: 0;
-        padding: 0;
-        font-size: 0.75rem;
         height: 16px;
+        letter-spacing: 1.4px;
       }
     }
   }

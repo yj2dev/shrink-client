@@ -39,6 +39,6 @@ export const Container = styled.div`
   }
 
   .close-btn:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;

@@ -33,9 +33,7 @@ const LogoContainer = () => {
         <img src={logoImg2} alt="logo" className="logo-img" />
         <div className="content">
           <h1 className={isLogoHover ? "active" : ""}>줄었슈링크</h1>
-          <h3 className={isLogoHover ? "active" : ""}>
-            가격 변동 없는 상품도 다시 보자
-          </h3>
+          <h3 className={isLogoHover ? "active" : ""}>같은 과자도 다시 보자</h3>
         </div>
       </div>
     </Container>

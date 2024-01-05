@@ -7,6 +7,9 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
 
+  min-width: 300px;
+  max-width: 450px;
+
   section.btn {
     display: flex;
     justify-content: center;

@@ -9,7 +9,8 @@ import FavoritePage from "./pages/FavoritePage";
 import QnAPage from "./pages/QnAPage";
 import ReportPage from "./pages/ReportPage";
 import AccountPage from "./pages/AccountPage";
-import LandingPage from "./pages/LandingPage";
+// import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/LandingPage-re";
 import React, { useEffect, useMemo, useReducer } from "react";
 import QnACreate from "./pages/QnAPage/Section/QnACreate";
 import QnADetail from "./pages/QnAPage/Section/QnADetail";
@@ -114,8 +115,8 @@ function App() {
                        필요시 주석 해제 할 것
 
               */}
+              {/*<Route path="/" element={<LandingPage />} />*/}
               <Route path="/" element={<LandingPage />} />
-              {/*<Route path="/" element={<ReportPage />} />*/}
               <Route path="/account" element={<AccountPage />} />
               <Route path="/analysis" element={<AnalysisPage />} />
               <Route path="/product" element={<ProductPage />} />

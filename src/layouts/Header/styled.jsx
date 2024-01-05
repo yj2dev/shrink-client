@@ -18,8 +18,7 @@ export const Container = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  //background-color: #fff;
-  //background-color: rgba(255, 255, 255, 0.99);
+
   position: fixed;
   top: 0;
   left: 0;
@@ -27,23 +26,14 @@ export const Container = styled.header`
   width: 100%;
   padding: 1em 1.5em;
   box-sizing: border-box;
+
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  .active {
+  }
+
   background-color: rgba(255, 255, 255, 0.7);
 
-  //border: 4px solid purple;
-
-  background: linear-gradient(
-    90deg,
-    red,
-    orange,
-    yellow,
-    green,
-    blue,
-    indigo,
-    violet
-  );
-  color: white;
-  //color: #000;
+  color: #000;
 
   text-align: center;
   transition: background-color 0.5s;
@@ -58,20 +48,17 @@ export const Section = styled.section`
   //border: 4px solid orangered;
 
   a {
-    color: #fff;
+    color: #000;
   }
 
   .flex-item {
-    //border: 4px solid green;
-  }
-
-  .flex-item:nth-child(1) {
+    //width: 100%;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid red;
     position: relative;
+    //flex-direction: row;
+    //align-items: center;
+    //justify-content: space-between;
+    //border: 1px solid red;
 
     @media (max-width: 768px) {
       width: 100%;
@@ -91,13 +78,36 @@ export const Section = styled.section`
   }
 
   .search-section {
-    border: 1px solid blue;
     position: relative;
 
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
+
+    .camera-btn {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      color: #3a85fc;
+      font-size: 1.4em;
+      transition: 0.2s;
+      height: 32px;
+      width: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+    }
 
     button[type="submit"] {
       background-color: transparent;
@@ -116,6 +126,8 @@ export const Section = styled.section`
       cursor: default;
     }
 
+    .clean-btn {
+    }
     input {
       border: 3px solid #dfe1e5;
       background-color: #fff;
@@ -123,14 +135,30 @@ export const Section = styled.section`
       border-radius: 8px;
       //height: 56px;
       width: 300px;
-      padding: 8px 36px 8px 36px;
-    }
 
-    input: button[type= "submit"] {
-      background-color: transparent;
-      cursor: pointer;
-      outline: none;
-      border: 2px dashed red;
+      @media (max-width: 768px) {
+        width: 100px;
+      }
+      padding: 8px 36px 8px 36px;
+
+      transition: 0.2s;
+
+      &:hover {
+      }
+      &:focus {
+        box-shadow:
+          0 2px 4px rgba(0, 0, 0, 0.1),
+          2px 0 4px rgba(0, 0, 0, 0.1),
+          -2px 0 4px rgba(0, 0, 0, 0.1),
+          0 -2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      button[type="submit"] {
+        background-color: transparent;
+        cursor: pointer;
+        outline: none;
+        border: 2px dashed red;
+      }
     }
   }
 
@@ -291,6 +319,8 @@ export const Section = styled.section`
   }
 
   .login-button {
+    justify-content: flex-end;
+
     box-shadow: 4px 4px 8px 1px rgba(0, 0, 0, 0.2);
     border: none;
     outline: none;
@@ -317,6 +347,26 @@ export const Section = styled.section`
 
 export const RightSection = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  border: 1px solid green;
+
+  //justify-content: center;
+  //align-items: center;
+  //width: 100%;
+
+  .nav-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0.5em;
+    padding: 0.5em 1em;
+    border: 1px solid red;
+    border-radius: 8px;
+    //text-align: center;
+    //width: 100%;
+    //background-color: #0f62fe;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
