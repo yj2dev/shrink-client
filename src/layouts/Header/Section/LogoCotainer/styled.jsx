@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin-right: 1em;
+  margin-right: 2em;
 
   .logo-section {
     display: flex;

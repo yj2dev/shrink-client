@@ -12,7 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { ScaleLoader } from "react-spinners";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowBack, IoIosWarning } from "react-icons/io";
 import {
   IoCameraReverseOutline,
   IoCloseOutline,
@@ -122,7 +122,7 @@ const AnalysisPage = () => {
           if (res.data.isShrink) {
             setAlertStatus("shrinkOccurred");
           } else {
-            setAlertStatus("noShrink");
+            setAlertStatus("shrinkOccurred");
 
             setTimeout(() => {
               setAlertStatus("");
@@ -165,7 +165,14 @@ const AnalysisPage = () => {
         <AlertContainer className={alertStatus}>
           {alertStatus === "noShrink" &&
             "최근 슈링크 발생 내역이 없는 상품입니다."}
-          {alertStatus === "shrinkOccurred" && "슈링크가 발생했습니다."}
+          {alertStatus === "shrinkOccurred" && (
+            <>
+              <IoIosWarning
+                style={{ marginRight: "12px", fontSize: "1.6em" }}
+              />
+              슈링크플레이션이 발생했던 제품입니다.
+            </>
+          )}
           {alertStatus === "checkInternet" &&
             "서버와 통신이 원활하지 않습니다."}
         </AlertContainer>

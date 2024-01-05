@@ -134,7 +134,7 @@ export const AlertContainer = styled.div`
   top: 0;
   color: #fff;
   display: flex;
-  font-size: 1.4em;
+  font-size: 1.8em;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
@@ -150,12 +150,12 @@ export const AlertContainer = styled.div`
   }
 
   &.shrinkOccurred {
-    background-color: rgb(255, 146, 76);
+    background-color: rgb(255, 89, 89);
     top: 78px;
   }
 
   &.checkInternet {
-    background-color: rgb(255, 89, 89);
+    background-color: rgb(255, 146, 76);
     top: 78px;
   }
 `;

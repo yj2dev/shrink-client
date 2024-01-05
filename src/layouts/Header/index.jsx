@@ -39,9 +39,24 @@ const Header = () => {
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
+  const [isScroll, setIsScroll] = useState(false);
+
   const [isMobile, setIsMobile] = useState(
     typeof window !== "undefined" && window.innerWidth <= 768,
   );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY) setIsScroll(true);
+      else setIsScroll(false);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -128,7 +143,7 @@ const Header = () => {
     <>
       <ContainerSpace />
       <ContainerBlur />
-      <Container>
+      <Container className={isScroll ? "active" : ""}>
         <Section>
           <div className="flex-item">
             <LogoContainer />
@@ -194,14 +209,14 @@ const Header = () => {
 
           <RightSection>
             {(!isMobile || showMobileMenu) && (
-              <>
-                <div className="flex-item nav-link">
+              <div className="flex-item">
+                <div className="nav-link">
                   <Link to="/report">신고</Link>
                 </div>
-                <div className="flex-item nav-link">
+                <div className="nav-link">
                   <Link to="/question">질문</Link>
                 </div>
-              </>
+              </div>
             )}
             {!isMobile &&
               (user ? (
