@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const ContainerSpace = styled.header`
-  height: 78px;
+  height: 82px;
 `;
 
 export const ContainerBlur = styled.header`
   position: fixed;
   backdrop-filter: blur(8px);
-  height: 78px;
+  height: 82px;
   z-index: 210;
   width: 100%;
   top: 0;
@@ -46,6 +46,23 @@ export const Section = styled.section`
 
   width: 100%;
   //border: 4px solid orangered;
+
+  .mobile {
+    //border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .mobile-logo-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .mobile-menu-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   .flex-item {
     display: flex;
@@ -216,7 +233,7 @@ export const Section = styled.section`
       }
 
       @media (max-width: 768px) {
-        width: 100px;
+        width: 74px;
       }
       padding: 10px 90px 10px 44px;
 
@@ -234,12 +251,72 @@ export const Section = styled.section`
   //                Right Section
   //  ========================================
 
+  .mobile-menu-wrapper {
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
+
+    margin-left: 12px;
+
+    input[id="mobile-menu"] {
+      display: none;
+    }
+
+    input[id="mobile-menu"] + label {
+      display: block;
+      width: 30px;
+      height: 20px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    input[id="mobile-menu"] + label > span {
+      transform-origin: center;
+
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      //height: 4px; // x가 대칭이 맞지 않는 문제(미해결)
+      border-radius: 30px;
+      background-color: #000;
+      transition: 0.2s;
+    }
+
+    input[id="mobile-menu"] + label > span:nth-child(1) {
+      top: 0;
+    }
+
+    input[id="mobile-menu"] + label > span:nth-child(2) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    input[id="mobile-menu"] + label > span:nth-child(3) {
+      bottom: 0;
+    }
+
+    input[id="mobile-menu"]:checked + label > span:nth-child(1) {
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    input[id="mobile-menu"]:checked + label > span:nth-child(2) {
+      opacity: 0;
+    }
+
+    input[id="mobile-menu"]:checked + label > span:nth-child(3) {
+      bottom: 50%;
+      transform: translateY(-50%) rotate(-45deg);
+    }
+  }
   .show-menu-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: transparent;
     border: none;
+
+    background-color: transparent;
   }
 
   .profile-img {
@@ -417,11 +494,48 @@ export const RightSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  flex-direction: row;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 
   .flex-item {
     margin-right: 1em;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+
+    //border: 1px solid green;
+
+    @media (max-width: 768px) {
+      margin-right: 0;
+      margin-top: 1em;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+  .nav-link {
+    width: 100%;
+    padding: 4px 8px;
+    box-sizing: border-box;
   }
   .nav-link a {
+    @media (max-width: 768px) {
+      width: 100%;
+      display: block;
+      padding: 8px 0;
+      border-radius: 8px 8px 0 0;
+      margin: 0;
+      transition: 0.2s;
+
+      &:hover {
+        background-color: #2245fd;
+        color: #fff;
+      }
+    }
     text-decoration: none;
     color: #000;
 
@@ -441,7 +555,7 @@ export const RightSection = styled.div`
       left: 0;
       background-color: #2245fd;
       width: 0;
-      transition: 0.3s ease-out width;
+      transition: 0.2s ease-out width;
     }
 
     &:hover::after {

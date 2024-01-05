@@ -117,12 +117,10 @@ const AnalysisPage = () => {
           });
         })
         .then((res) => {
-          console.log("res >> ", res);
-
           if (res.data.isShrink) {
             setAlertStatus("shrinkOccurred");
           } else {
-            setAlertStatus("shrinkOccurred");
+            setAlertStatus("noShrink");
 
             setTimeout(() => {
               setAlertStatus("");
@@ -130,7 +128,6 @@ const AnalysisPage = () => {
           }
         })
         .catch((err) => {
-          console.error(err);
           setAlertStatus("checkInternet");
           setTimeout(() => {
             setAlertStatus("");
