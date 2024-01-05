@@ -155,8 +155,9 @@ const Header = () => {
                   maxLength={20}
                   onChange={onChangeKeyword}
                 />
-                <button type="submit" disabled={false}>
-                  <IoSearchOutline />
+                {/*아이콘 용도로 사용 필요시 disable 상태 변경 후 검색 버튼으로 사용 가능 */}
+                <button type="submit">
+                  <FaSearch />
                 </button>
               </form>
               <Link to="/analysis" className="camera-btn">
