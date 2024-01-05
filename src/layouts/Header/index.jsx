@@ -12,7 +12,6 @@ import {
   RightSection,
   Section,
 } from "./styled";
-import { FaSearch } from "react-icons/fa";
 import {
   IoCameraOutline,
   IoClose,
@@ -157,7 +156,7 @@ const Header = () => {
                 />
                 {/*아이콘 용도로 사용 필요시 disable 상태 변경 후 검색 버튼으로 사용 가능 */}
                 <button type="submit">
-                  <FaSearch />
+                  <IoSearchOutline />
                 </button>
               </form>
               <Link to="/analysis" className="camera-btn">

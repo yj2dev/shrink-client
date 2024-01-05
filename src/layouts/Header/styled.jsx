@@ -145,7 +145,7 @@ export const Section = styled.section`
       font-size: 1.2em;
       border: none;
       outline: none;
-      top: 52%;
+      top: 53%;
       transform: translateY(-50%);
     }
 
