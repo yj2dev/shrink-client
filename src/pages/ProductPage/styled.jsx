@@ -220,4 +220,22 @@ button {
   
 }
 
+@media (max-width: 768px) {
+  .nosearch-wrap {
+    width: 78%;
+    left: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .nosearch-wrap {
+    width: 50%;
+    left: 180px;
+
+    h1 {
+      font-size: 1.5em;
+    }
+  }
+}
+
 `;

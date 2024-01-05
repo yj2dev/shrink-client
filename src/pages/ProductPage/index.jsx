@@ -35,7 +35,7 @@ const ProductPage = ({keyword}) => {
     fetchProductData();
   }, []);
 
-  console.log("p",product);
+  //console.log("p",product);
   // console.log("k",keyword);
 
   return (
