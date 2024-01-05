@@ -2,19 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
-    width: 80%;
-
-    // .QnaPost {
-    //     width: 70%;
-    //     max-width: 1000px;
-    //     min-width: 360px;
-    //     border: 1px solid #d5d5d5;
-    //     border-radius: 10px;
-    //     margin: 50px auto;
-    //     padding: 40px 30px 40px 30px;
-    //     margin-left: 240px;
-    //     background-color: white;
-    // }
+    width: 90%;
 
     table {
         border-collapse: collapse;
@@ -22,7 +10,7 @@ export const Container = styled.div`
     }
      section.notice {
         padding: 50px 0;
-        margin-left: 100px;
+        margin-left: 155px;
         
     }
     .page-title {
@@ -38,7 +26,6 @@ export const Container = styled.div`
     }
     #board-search .search-window .search-wrap {
         position: relative;
-    /*   padding-right: 124px; */
         margin: 0 auto;
         width: 80%;
         max-width: 564px;
@@ -69,8 +56,6 @@ export const Container = styled.div`
     .board-table {
         font-size: 13px;
         width: 100%;
-        // border-collapse: separate;
-        // border-spacing: 0;
         border-top: 1px solid #ccc;
         border-bottom: 1px solid #ccc;
         
@@ -86,9 +71,6 @@ export const Container = styled.div`
     .board-table a:hover {
         text-decoration: underline;
     }
-    // .board-table th {
-    //     text-align: center;
-    // }
   
     .board-table .th-num {
         width: 100px;
@@ -98,10 +80,6 @@ export const Container = styled.div`
     .board-table .th-date {
         width: 200px;
     }
-
-    // .board-table .th-title {
-    //      width: 50%;
-    // }
   
     .board-table th, .board-table td {
         padding: 14px 0;
@@ -162,7 +140,6 @@ export const Container = styled.div`
     .search-btn:hover,
     .search-btn:focus {
         background: #0F62FE; 
-        // border-color: #0000FF; 
         color: #fff;
     }
 
@@ -192,7 +169,6 @@ export const Container = styled.div`
     margin-left: 5px;
   }
   
-  /* reset */
   
     * {
         list-style: none;
@@ -223,6 +199,7 @@ export const Container = styled.div`
         display: flex;
         justify-content: center;
         margin-top: 15px;
+        margin-left:50px;
       }
       
       ul {
