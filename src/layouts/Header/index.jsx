@@ -241,7 +241,7 @@ const Header = () => {
                   <input
                     type="checkbox"
                     id="mobile-menu"
-                    value={showMobileMenu}
+                    checked={showMobileMenu}
                     onClick={() => setShowMobileMenu((p) => !p)}
                   />
                   <label htmlFor="mobile-menu">

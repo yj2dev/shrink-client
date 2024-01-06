@@ -29,7 +29,7 @@ export const Container = styled.div`
 
     .content {
       margin-left: 0.5em;
-      margin-right: 1em;
+      margin-right: 2em;
 
       @media (max-width: 768px) {
         display: none;
