@@ -5,11 +5,10 @@ import {
   AlertContainerHidden,
   AnalaysisResultButton,
   AnalysisResultMenu,
-  CameraSelectCotainer,
   Container,
   WebcamContainer,
 } from "./styled";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ScaleLoader } from "react-spinners";
 import { IoIosArrowBack, IoIosWarning } from "react-icons/io";
@@ -22,8 +21,15 @@ import {
 import defaultCameraImg1 from "./img/default-camera.jpg";
 import defaultCameraImg2 from "./img/default-camera.gif";
 import { timeAgo, toKst } from "../../utils/time";
+import { useSetRecoilState } from "recoil";
+import { searchKeywordState } from "../../state/searchKeywordState";
 
 const AnalysisPage = () => {
+  const navigate = useNavigate();
+
+  const setSearchKeyword = useSetRecoilState(searchKeywordState);
+  const [notReadingCnt, setNotReadingCnt] = useState(0);
+
   const webcamRef = useRef(null);
 
   const [cameras, setCameras] = useState([]);
@@ -42,6 +48,22 @@ const AnalysisPage = () => {
 
   const [randomCameraImg, setRandomCameraImg] = useState(null);
 
+  const onClickReading = (imageId) => {
+    axios
+      .patch("/api/product/update/analysis", {
+        image_url: imageId,
+      })
+      .then((res) => {
+        console.log("res >> ", res);
+        if (res.data.status === "success") {
+          getResultItems();
+        }
+      })
+      .catch((err) => {
+        console.log("err >> ", err);
+      });
+  };
+
   const getResultItems = () => {
     axios
       .post("/api/product/select/analysis_list", {
@@ -51,6 +73,12 @@ const AnalysisPage = () => {
         console.log("res >> ", res);
         if (res.data.status === "success") {
           setResultItems(res.data.response);
+
+          setNotReadingCnt(
+            res.data.response.reduce((acc, cur) => {
+              return !cur?.is_reading ? acc + 1 : acc;
+            }, 0) || 0,
+          );
         }
       })
       .catch((err) => {
@@ -117,6 +145,17 @@ const AnalysisPage = () => {
           });
         })
         .then((res) => {
+          console.log("res is shrink >> ", res);
+          if (res.data.status === "fail") {
+            setAlertStatus("noProductDetected");
+
+            setTimeout(() => {
+              setAlertStatus("");
+            }, 4000);
+
+            return;
+          }
+
           if (res.data.isShrink) {
             setAlertStatus("shrinkOccurred");
           } else {
@@ -160,6 +199,7 @@ const AnalysisPage = () => {
       <Container>
         <AlertContainerHidden />
         <AlertContainer className={alertStatus}>
+          {alertStatus === "noProductDetected" && "인식된 제품이 없습니다."}
           {alertStatus === "noShrink" &&
             "최근 슈링크 발생 내역이 없는 상품입니다."}
           {alertStatus === "shrinkOccurred" && (
@@ -178,52 +218,68 @@ const AnalysisPage = () => {
           className={`result-btn ${showResultMenu ? "active" : ""}`}
           onClick={() => setShowResultMenu(!showResultMenu)}
         >
+          {notReadingCnt > 0 && <span>{notReadingCnt}</span>}
           <IoIosArrowBack />
         </AnalaysisResultButton>
 
         <AnalysisResultMenu className={showResultMenu ? "active" : ""}>
           <ul>
+            {resultItems.length === 0 && (
+              <li className="no-show-content">검색 기록이 없습니다.</li>
+            )}
             {resultItems.map((result, index) => {
               return (
                 <li
                   key={index}
-                  onClick={() => handleItemClick(result.name)}
-                  className={expandedItems[result.name] ? "expanded" : ""}
+                  className={!result.is_reading ? "not-reading" : ""}
+                  onClick={() => onClickReading(result.id)}
                 >
+                  {!result.is_reading && (
+                    <span className="not-read-content"></span>
+                  )}
                   <img src={result.image_url} />
-                  <div>{result.is_reading ? "읽음" : "읽지 않음"}</div>
-                  <div>{timeAgo(result.create_at)}</div>
-                  <div>{toKst(result.create_at)}</div>
-                  <div>
+
+                  <div className="result-item-wrapper">
+                    <div className="time-ago">{timeAgo(result.create_at)}</div>
                     {result.result.length > 0 &&
                       result.result.map((item, index) => {
                         return (
-                          <div key={index}>
-                            <div>{item.product_id}</div>
-                            <div>{item.result}</div>
-                            <div>{item.weight}</div>
-                          </div>
+                          <table key={index}>
+                            <tr>
+                              <td>
+                                <span>제품명</span>
+                              </td>
+                              <td>
+                                <button
+                                  className="link-search-btn"
+                                  value={item.result}
+                                  onClick={(e) => {
+                                    const keyword = e.target.value;
+
+                                    setSearchKeyword(keyword);
+
+                                    navigate("/product/search", {
+                                      state: { keyword: keyword },
+                                    });
+                                  }}
+                                >
+                                  {item.result}
+                                </button>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <span>중량</span>
+                              </td>
+                              <td className="weight">{item.weight}</td>
+                            </tr>
+                          </table>
                         );
                       })}
                   </div>
                 </li>
               );
             })}
-
-            {/*{["바나나킥", "콘초", "동원 참치", "분석 실패"].map(*/}
-            {/*  (item, index) => (*/}
-            {/*    <li*/}
-            {/*      key={index}*/}
-            {/*      onClick={() => handleItemClick(item)}*/}
-            {/*      className={expandedItems[item] ? "expanded" : ""}*/}
-            {/*    >*/}
-            {/*      {item} <span>1분전</span>*/}
-            {/*      {expandedItems[item] && (정보: {item}</div>*/}
-            {/*      )}*/}
-            {/*    </li>*/}
-            {/*  <div className="item-details">상세*/}
-            {/*  ),*/}
-            {/*)}*/}
           </ul>
         </AnalysisResultMenu>
 

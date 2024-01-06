@@ -73,18 +73,40 @@ const AccountPage = () => {
     if (localStorage.getItem("token")) {
       try {
         const { data } = await axios.get("/api/auth/user/info");
+        // 프로필 이미지 URL에 캐시 방지용 쿼리 문자열 추가 (with GPT4)
+        if (data.user && data.user.profile_url) {
+          data.user.profile_url += `?timestamp=${new Date().getTime()}`;
+        }
         localStorage.setItem("user", JSON.stringify(data.user));
-
         console.log("data.user >> ", data.user);
-
         setUser(data.user);
         setNickname(data.user.nickname);
-
         return data.user;
-      } catch (err) {}
+      } catch (err) {
+        console.log("err >> ", err);
+      }
     }
     return null;
   };
+
+  // const initUserInfo = async () => {
+  //   if (localStorage.getItem("token")) {
+  //     try {
+  //       const { data } = await axios.get("/api/auth/user/info");
+  //       localStorage.setItem("user", JSON.stringify(data.user));
+  //
+  //       console.log("data.user >> ", data.user);
+  //
+  //       setUser(data.user);
+  //       setNickname(data.user.nickname);
+  //
+  //       return data.user;
+  //     } catch (err) {
+  //       console.log("err >> ", err);
+  //     }
+  //   }
+  //   return null;
+  // };
 
   useEffect(() => {
     const setUserInfo = async () => {

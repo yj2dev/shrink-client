@@ -14,6 +14,7 @@ import Modal from "../Modal";
 import { Container, InputHidden, InputLabel } from "./styled";
 import { IoImageOutline } from "react-icons/io5";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function centerAspectCrop(mediaWidth, mediaHeight, aspect) {
   return centerCrop(
@@ -33,6 +34,8 @@ function centerAspectCrop(mediaWidth, mediaHeight, aspect) {
 }
 
 const ProfileImageCropModal = ({ show, close, initUserInfo }) => {
+  const navigate = useNavigate();
+
   const [isDrag, setIsDrag] = useState(false);
 
   const [imgSrc, setImgSrc] = useState("");
@@ -220,11 +223,8 @@ const ProfileImageCropModal = ({ show, close, initUserInfo }) => {
 
         <section className="btn">
           <button
-            // className={`submit ${completedCrop ? "active" : ""}`}
+            className={`submit ${completedCrop ? "active" : ""}`}
             disabled={!imgRef.current || !completedCrop}
-            className={`submit ${
-              !imgRef.current || !completedCrop ? "" : "hidden"
-            }`}
             onClick={onClickUploadImage}
           >
             변경

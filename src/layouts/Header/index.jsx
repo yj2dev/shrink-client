@@ -20,6 +20,7 @@ import {
   IoSearchOutline,
 } from "react-icons/io5";
 import LogoContainer from "./Section/LogoCotainer";
+import { searchKeywordState } from "../../state/searchKeywordState";
 
 const Header = () => {
   const [user, setUser] = useRecoilState(userState);
@@ -29,7 +30,7 @@ const Header = () => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-  const [searchKeyword, setSearchKeyword] = useState("");
+  const [searchKeyword, setSearchKeyword] = useRecoilState(searchKeywordState);
 
   const [extendLogoutSubmit, setExtendLogoutSubmit] = useState(false);
 

@@ -1,10 +1,102 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+// 펄스 애니메이션
+const pulseAnimation2 = keyframes`
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
+
+// 반짝임 애니메이션
+const blinkAnimation = keyframes`
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+`;
+
+// 부드러운 회전 애니메이션
+const smoothRotateAnimation = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+// 점프 애니메이션
+const jumpAnimation = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+`;
+
+// 팽창 및 수축 애니메이션
+const expandShrinkAnimation = keyframes`
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+`;
+
+// 빛나는 애니메이션
+const shiningAnimation = keyframes`
+  0% {
+    box-shadow: 0 0 5px #fff;
+  }
+  50% {
+    box-shadow: 0 0 15px #fff;
+  }
+  100% {
+    box-shadow: 0 0 5px #fff;
+  }
+`;
+
+const shiningAnimation2 = keyframes`
+  0% {
+    box-shadow: 0 0 5px #fff;
+  }
+  50% {
+    box-shadow: 10px 5px 15px #fff;
+  }
+  100% {
+    box-shadow: 0 0 5px #fff;
+  }
+`;
+
+const pulseAnimation = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 rgba(253, 98, 2, 1);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+`;
 
 export const AnalaysisResultButton = styled.button`
   z-index: 49;
   width: 64px;
   height: 64px;
-  background-color: rgb(250, 250, 250);
   border: none;
   color: #333;
   font-size: 24px;
@@ -12,23 +104,39 @@ export const AnalaysisResultButton = styled.button`
   display: flex;
   align-items: center;
   padding: 10px;
-  opacity: 0.5;
   cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
 
   top: 50%;
   transform: translate(0, -50%);
   transition: 0.2s;
 
   right: -15px;
-  border-left: 3px dashed #4f68ea;
-  border-top: 3px dashed #4f68ea;
-  border-bottom: 3px dashed #4f68ea;
 
   position: fixed;
 
+  span {
+    animation: ${pulseAnimation} 2s infinite;
+    z-index: 1;
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(253, 98, 2, 0.9);
+    color: #fff;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
   &:hover {
+    box-shadow: -5px 0 5px -3px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 1);
     transform: translate(0, -50%) scale(1.1);
-    opacity: 1;
   }
 
   & > svg {
@@ -36,20 +144,21 @@ export const AnalaysisResultButton = styled.button`
   }
 
   &.active {
+    background-color: rgba(255, 255, 255, 1);
     border: none;
     right: 305px;
     opacity: 1;
 
     transform: translate(0, -50%) scale(1.1);
-    box-shadow: 10px 0px 10px 0px rgba(0, 0, 0, 0.2);
   }
 
   &.active > svg {
     transform: rotate(180deg);
   }
+
   .alert {
     transform: translate(0, -50%) scale(1.1);
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -60,22 +169,143 @@ export const AnalysisResultMenu = styled.div`
   height: 100%;
   top: 78px;
   background-color: rgb(250, 250, 250);
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+
   transition: 0.2s ease all;
   z-index: 50;
   overflow-y: scroll;
 
-  img {
-    //width: 6em;
-    //height: 6em;
-    width: 100%;
+  .result-item-wrapper {
+    position: relative;
+    margin-top: 12px;
 
+    display: flex;
+    flex-direction: column;
+
+    table {
+      border-collapse: collapse;
+      margin: 0;
+      padding: 0;
+
+      font-size: 16px;
+
+      tr {
+        td {
+          vertical-align: top;
+          text-align: left;
+        }
+
+        td:first-child {
+          width: 54px;
+          text-align: left;
+        }
+      }
+    }
+
+    span {
+      color: #888;
+      cursor: default;
+    }
+    .weight {
+      cursor: default;
+    }
+
+    .link-search-btn {
+      cursor: pointer;
+      background-color: transparent;
+
+      border: none;
+      outline: none;
+      font-size: 1em;
+      margin: 0;
+      padding: 0;
+
+      &:hover {
+        //color: #333;
+        color: #4156ff;
+      }
+    }
+  }
+
+  img {
+    user-select: none;
+
+    width: 100%;
+    border-radius: 8px;
     transform: scaleX(-1);
   }
 
   &.active {
     right: 0;
   }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li.no-show-content {
+    font-size: 20px;
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    box-shadow: none;
+    display: flex;
+    border: none;
+    justify-content: center;
+    align-content: center;
+  }
+
+  li {
+    &.not-reading {
+      cursor: pointer;
+    }
+
+    //border-bottom: 1px solid #ddd;
+
+    position: relative;
+    padding: 24px 24px;
+    color: #333;
+    transition: background-color 0.1s;
+
+    span.not-read-content {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 1;
+      width: 20px;
+      height: 20px;
+      background-color: rgb(253, 98, 2, 0.9);
+      border-radius: 50%;
+      // animation: ${pulseAnimation2} 2s infinite;
+      //animation: ${blinkAnimation} 1.5s infinite;
+      //animation: ${smoothRotateAnimation} 3s linear infinite;
+      //animation: ${jumpAnimation} 1s infinite;
+      // animation: ${expandShrinkAnimation} 2s infinite;
+      animation: ${shiningAnimation2} 2s infinite;
+    }
+
+    &.not-reading {
+    }
+
+    .time-ago {
+      cursor: default;
+      color: #888;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+    box-shadow: 0 8px 15px -4px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      //background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
   .item-details {
     background-color: #f8f8f8;
     padding: 10px;
@@ -87,34 +317,6 @@ export const AnalysisResultMenu = styled.div`
     transition:
       max-height 0.3s ease,
       opacity 0.3s ease;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  li {
-    padding: 12px 24px;
-    border-bottom: 1px solid #ddd;
-    color: #333;
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    &.expanded .item-details {
-      max-height: 200px;
-      opacity: 1;
-    }
-
-    span {
-      float: right;
-      color: #888;
-    }
   }
 `;
 
@@ -131,18 +333,23 @@ export const AlertContainerHidden = styled.div`
 export const AlertContainer = styled.div`
   position: fixed;
   //top: -64px;
-  top: 0;
+  top: -10px;
   color: #fff;
   display: flex;
   font-size: 1.8em;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 78px;
   z-index: 20;
   transition: 0.2s;
+
+  &.noProductDetected {
+    background-color: #3f5dfe;
+    top: 78px;
+  }
 
   &.noShrink {
     background-color: rgba(0, 100, 0, 1);
@@ -162,7 +369,6 @@ export const AlertContainer = styled.div`
 
 export const Container = styled.div`
   width: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -179,6 +385,7 @@ export const WebcamContainer = styled.div`
 
   video,
   img {
+    user-select: none;
     position: absolute;
     //border-radius: 12px 12px 0 0;
     border-radius: 12px;
@@ -200,8 +407,6 @@ export const WebcamContainer = styled.div`
     position: fixed;
     bottom: 0;
 
-    //margin: 0 32px 0 232px;
-    //margin: 0 0 0 200px;
     z-index: 3;
 
     height: 128px;
@@ -289,7 +494,6 @@ export const WebcamContainer = styled.div`
         list-style: none;
         padding: 12px 18px;
         line-height: 24px;
-        //background-color: greenyellow;
         margin: 8px;
         color: #3f5dfe;
         font-size: 15px;
