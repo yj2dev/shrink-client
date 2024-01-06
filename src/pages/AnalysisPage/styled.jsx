@@ -116,12 +116,16 @@ export const AnalaysisResultButton = styled.button`
 
   position: fixed;
 
+  &.alert {
+    background-color: rgb(253, 98, 2, 0.5);
+    color: #fff;
+  }
   span {
     animation: ${pulseAnimation} 2s infinite;
     z-index: 1;
     position: absolute;
-    top: -6px;
-    left: -6px;
+    top: -2px;
+    left: -2px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -133,9 +137,10 @@ export const AnalaysisResultButton = styled.button`
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 
+  //&:not(.alert):hover {
   &:hover {
     box-shadow: -5px 0 5px -3px rgba(0, 0, 0, 0.3);
-    background-color: rgba(255, 255, 255, 1);
+    //background-color: rgba(255, 255, 255, 1);
     transform: translate(0, -50%) scale(1.1);
   }
 
@@ -147,6 +152,7 @@ export const AnalaysisResultButton = styled.button`
     background-color: rgba(255, 255, 255, 1);
     border: none;
     right: 305px;
+    color: #000;
     opacity: 1;
 
     transform: translate(0, -50%) scale(1.1);

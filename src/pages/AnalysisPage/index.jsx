@@ -215,7 +215,9 @@ const AnalysisPage = () => {
         </AlertContainer>
 
         <AnalaysisResultButton
-          className={`result-btn ${showResultMenu ? "active" : ""}`}
+          className={`result-btn ${showResultMenu ? "active" : ""} ${
+            notReadingCnt > 0 && "alert"
+          }`}
           onClick={() => setShowResultMenu(!showResultMenu)}
         >
           {notReadingCnt > 0 && <span>{notReadingCnt}</span>}
