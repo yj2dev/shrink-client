@@ -1,5 +1,6 @@
 
 import "./index.css";
+import Experience from "./Section/Experience/Experience";
 
 import Hero from "./Section/Hero/Hero";
 import ServiceInfo from "./Section/ServiceInfo/ServiceInfo";
@@ -10,6 +11,7 @@ const LandingPage = () => {
     <>
     <div className="LandingPage">
       <Hero />
+      <Experience />
       <ServiceInfo />
       <StartService />
       <Team_info />
