@@ -22,35 +22,33 @@
   
 }
 .background-image {
-  width: 100%;
-  height: 100%;
+  object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 /* Hero Section Style */
 .hero--section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    padding: 140px 120px 133.333px;
     justify-content: space-between;
-    gap: 32px;
+    padding: 100px 150px 0px 150px ; 
   }
   .hero--section--content-box {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 32px;
   }
   .hero--section--content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 21.333px;
   }
   .hero--section--content--box > button {
     margin-top: 21.333px;
   }
   .hero--section--title {
     color: #0F62FE;
-    font-size: 74.667px;
+    font-size: 66px;
     font-weight: 700;
     line-height: 90px;
     align-self: stretch;
@@ -73,3 +71,113 @@
     height: 100%;
   }
   /* Hero Section Style Ends */
+
+  .hero2 {
+    background-color: #A7BCEB; 
+    padding: 180px 0;
+  }
+  .hero--section--title2 {
+    justify-content: center;
+    color: #000;
+    font-size:50px;
+    font-weight: 700;
+    text-align: center;
+}
+  .hero--section-description2 {
+    color: #FFFFFF;
+    font-size: 40px;
+    font-weight: 400;
+  }
+
+/* scroll button */
+
+#section-1 {
+  background-color: #2d8df8;
+  scroll-behavior: smooth;
+}
+a#scroll-btn {
+  position: absolute;
+  height: 4.5em;
+  width: 2em;
+  border: 0.4em solid #ffffff;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 5.25em;
+  border-radius: 3em;
+}
+a#scroll-btn:before {
+  position: absolute;
+  content: "";
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: -10px;
+  height: 1.2em;
+  width: 1.2em;
+  background-color: #ffffff;
+  border-radius: 50%;
+  animation: move-down 2s infinite;
+}
+@keyframes move-down {
+  80% {
+    opacity: 0.5; 
+  }
+  100% {
+    transform: translateY(4.5em);
+    opacity: 0;
+  }
+}
+a#scroll-btn:after {
+  position: absolute;
+  content: "SCROLL DOWN";
+  width: 12em;
+  display: block;
+  width: 12em;
+  text-align: center;
+  left: -5em;
+  bottom: -2.5em;
+  font-size: 1em;
+  color: #ffffff;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+
+
+@media screen and (max-width: 500px) {
+  a#scroll-btn {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 1800px) {
+  .hero--section--title {
+    font-size: 68px;
+    line-height: 70px;
+  }
+}
+@media only screen and (max-width: 1200px) {
+.hero--section {
+  display: flex;
+  flex-direction: column;
+  padding: 70px 10px 80px 10px ; 
+}
+.hero--section--title,
+.hero--section-description,
+.footer--content {
+  text-align: center;
+}
+
+.hero--section--content,
+  .hero--section--content--box {
+    align-items: center;
+  }
+
+  .hero--section--title,
+  .hero--section--title2,
+  .hero--section-description2  {
+    font-size: 22px;
+  }
+}
+.hero--section--title2{
+  padding: 20px;
+}

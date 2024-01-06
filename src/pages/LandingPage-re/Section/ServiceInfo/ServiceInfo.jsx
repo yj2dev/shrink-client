@@ -20,11 +20,13 @@ const ServiceInfo = () => {
                 </p>
                 </div>
             </div>
-            <div className="ServiceInfo--section--img1">
-                <img src={Main_img}  alt="ServiceInfo Section" className='img1'/>
-            </div>
-            <div className="ServiceInfo--section--img2">
-                <img src={Main_img}  alt="ServiceInfo Section" className='img2'/>
+            <div className="imgs">
+                <div className="ServiceInfo--section--img1">
+                    <img src={Main_img}  alt="ServiceInfo Section" className='img1'/>
+                </div>
+                <div className="ServiceInfo--section--img2">
+                    <img src={Main_img}  alt="ServiceInfo Section" className='img2'/>
+                </div>
             </div>
             <p className="text">
                     속지말고 사세요 ~~~!~! ~~!~! ~!~~
