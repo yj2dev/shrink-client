@@ -16,7 +16,7 @@ export const Container = styled.div`
 .nosearch {
   width: 100%;
   font-size: 100px;
-  color: #ff5058;
+  color: #1f883d;
   margin-bottom: 5px;
 }
 
@@ -55,7 +55,7 @@ button {
     margin: 20px 0px 20px 0px;
     position: relative;
     max-height: 340px;
-    padding: 10px;
+    padding: 0px;
     border-radius: 8px;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
 
@@ -90,6 +90,7 @@ button {
       h3 {
         font-size: 22px;
         font-weight: 400;
+        text-align: center;
       }
 
       .detail {
@@ -229,11 +230,15 @@ button {
 
 @media (max-width: 576px) {
   .nosearch-wrap {
-    width: 50%;
-    left: 180px;
+    width: 46%;
+    left: 170px;
 
     h1 {
       font-size: 1.5em;
+    }
+
+    svg {
+      font-size: 60px;
     }
   }
 }

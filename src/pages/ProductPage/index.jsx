@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container } from "./styled";
 import axios from "axios";
-import { GoAlert } from "react-icons/go";
+import { FiAlertCircle } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
 
@@ -42,8 +42,8 @@ const ProductPage = ({keyword}) => {
     <Container>
       {keyword && product.length === 0 ? (
         <div className="nosearch-wrap">
-          <GoAlert className="nosearch"/>
-          <h1>해당 상품의 검색 결과가 없습니다.</h1>
+          <FiAlertCircle className="nosearch"/>
+          <h1>"{keyword}"에 대한 검색 결과가 없습니다.</h1>
           <button
             onClick={() => {
               navigate(-1);
@@ -68,6 +68,7 @@ const ProductPage = ({keyword}) => {
                 </div>
               </div>
             </div>
+            <div className="shrink-notice">꼬리표</div>
       </div>
       ))}
 
