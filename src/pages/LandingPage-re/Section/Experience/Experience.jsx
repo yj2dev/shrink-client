@@ -48,7 +48,7 @@ const ExperienceCard = ({ experience }) => {
       iconStyle={{ background: experience.iconBg }}
       
     >
-        <div className="content">
+        <div className="shrink_content">
           <h3 className='text-white text-[24px] font-bold'>{experience.title}</h3>
           <p
             className='text-secondary text-[16px] font-semibold'
@@ -97,7 +97,7 @@ const Experience = () => {
           <div className="ShrinkInfo hidden">
             <img src={shrink} className='shrink_img' alt="" />
           </div>
-          <div className="content">
+          <div className="shrink_content">
             <div className="shrink-heading"> 슈링크플레이션이란</div>
             <div className="shrink-text"> 
                 제품의 양은 줄어들거나 <br />
@@ -112,7 +112,7 @@ const Experience = () => {
       </div>
       <div className='hidden'>
         <div className="Shrink">
-          <div className="content">
+          <div className="shrink_content">
             <div className="shrink-heading"> 대부분의 소비자들은 <br />변화를 잘 눈치채지 못해요</div>
             <div className="shrink-text"> 
             슈링크 플레이션(Shrink Flation)상품에 대해 알고 있었습니까?
