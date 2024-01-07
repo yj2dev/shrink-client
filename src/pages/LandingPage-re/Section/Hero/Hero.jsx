@@ -14,8 +14,7 @@ const Hero = () => {
     
     // }, []);
   return (
-
-    <section id="heroSection">
+        <section id="heroSection">
         <div className="hero--section">
             <div className="hero--section--content--box">
                 <div className="main-back" >
@@ -40,7 +39,6 @@ const Hero = () => {
                     <Link to="section2" spy={true} smooth={true} duration={600} offset={-50} id="scroll-btn"></Link>
                 </Element>
         </div>
-        
         <div id="section2" className="hero2">
             <div className="hero--section--title2" >
                 <span className="hero--section-title--color">항상 구매하던 제품 양이<br />줄었다고 느낀 적 없으세요?</span>
@@ -49,7 +47,7 @@ const Hero = () => {
                 </p>
             </div>
         </div>
-    </section>
+        </section>
   )
 }
 

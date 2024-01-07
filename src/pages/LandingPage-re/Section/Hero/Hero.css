@@ -73,7 +73,7 @@
   /* Hero Section Style Ends */
 
   .hero2 {
-    background-color: #A7BCEB; 
+    /* background-color: #A7BCEB;  */
     padding: 180px 0;
   }
   .hero--section--title2 {
@@ -84,7 +84,7 @@
     text-align: center;
 }
   .hero--section-description2 {
-    color: #FFFFFF;
+    color: #4b4b4b;
     font-size: 40px;
     font-weight: 500;
   }

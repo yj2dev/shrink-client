@@ -28,7 +28,7 @@ const ServiceInfo = () => {
                     <img src={Main_img}  alt="ServiceInfo Section" className='img2'/>
                 </div>
             </div>
-            <p className="text">
+            <p className="text1">
                     속지말고 사세요 ~~~!~! ~~!~! ~!~~
             </p>
             

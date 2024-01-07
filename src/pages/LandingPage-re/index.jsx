@@ -1,4 +1,3 @@
-
 import "./index.css";
 import Experience from "./Section/Experience/Experience";
 
@@ -12,17 +11,10 @@ const LandingPage = () => {
     <div className="LandingPage">
       <Hero />
       <Experience />
-      <ServiceInfo />
       <StartService />
+      <ServiceInfo />
       <Team_info />
       </div>
-    
-      {/* <MySkills />
-      <AboutMe />
-      <MyPortfolio />
-      <Testimonial />
-      <ContactMe />
-      <Footer /> */}
     </>
 
   );

@@ -13,6 +13,7 @@ import { SectionWrapper } from "./hoc";
 import { textVariant } from "./utils/motion";
 import './Experience.css'
 
+    
 
 const ExperienceCard = ({ experience }) => {
   return (

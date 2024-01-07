@@ -10,8 +10,11 @@ import { experiences } from "./constants";
 import { SectionWrapper } from "./hoc";
 import './Experience.css'
 import 'react-vertical-timeline-component/style.min.css';
+import { motion } from "framer-motion";
+import { textVariant } from "./utils/motion";
 
-
+import shrink from "./constants/shrink.png";
+import shrink_graph from "./constants/img2(인지여부)_graph.png";
 
 const ExperienceCard = ({ experience }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
@@ -27,6 +30,8 @@ const ExperienceCard = ({ experience }) => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+
 
   return (
     <VerticalTimelineElement
@@ -69,10 +74,67 @@ const ExperienceCard = ({ experience }) => {
 };
 
 const Experience = () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      console.log(entry)
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      } else{
+        entry.target.classList.remove('show');
+      }
+    });
+  });
+  
+  const hiddenElements = document.querySelectorAll('.hidden');
+  hiddenElements.forEach((el) => observer.observe(el));
+
   return (
     <>
-    <div style={{ backgroundColor: '#F0F0F0' }}>
+    <div style={{ backgroundColor: '#F0F0F0' }} >
+      <div className="shrink_info_back ">
+      <div className='hidden'>
+        <div className="Shrink">
+          <div className="ShrinkInfo hidden">
+            <img src={shrink} className='shrink_img' alt="" />
+          </div>
+          <div className="content">
+            <div className="shrink-heading"> 슈링크플레이션이란</div>
+            <div className="shrink-text"> 
+                제품의 양은 줄어들거나 <br />
+                질이 낮아지면서 <br />
+                가격은 그대로거나 <br />
+                증가하는 것을 말해요
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      </div>
+      <div className='hidden'>
+        <div className="Shrink">
+          <div className="content">
+            <div className="shrink-heading"> 대부분의 소비자들은 <br />변화를 잘 눈치채지 못해요</div>
+            <div className="shrink-text"> 
+            슈링크 플레이션(Shrink Flation)상품에 대해 알고 있었습니까?
+              <br /> * 306명 응답
+            </div>
+          </div>
+          <div className="ShrinkInfo">
+            <img src={shrink_graph} className='shrink_img' alt="" />
+          </div>
+        </div>
+      </div>
 
+      <motion.div variants={textVariant()}>
+        <div className="text">
+          <div className="shrink-heading"> 
+            줄었슈링크는 
+            </div>
+            <div className="shrink-text">제품의 양에 의문을<br />
+            갖는 소비자들을 위해 만들어졌어요 </div>
+        </div>
+      </motion.div>
+      
       <div className='mt-20 flex flex-col'>
         <VerticalTimeline>
           {experiences.map((experience, index) => (
