@@ -317,10 +317,12 @@ export const Container = styled.div`
     .btn-container button,
     .active-btn button {
       cursor: pointer;
-      background: #99CCFF; 
-      color: #fff;
+      background: #f6f8fa; 
+      color: #3f5dfe;
       border-radius:5px;
-      border-color: #99CCFF;
+      border: none;
+      box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.2);
+      font-weight: 600;
       height: 30px;
       margin-top:10px;
     }
