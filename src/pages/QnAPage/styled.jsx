@@ -130,7 +130,7 @@ export const Container = styled.div`
     }
 
     .search-btn {
-        background: #99CCFF; 
+        background: rgb(15, 98, 254); 
         color: #fff;
         transition: background 0.3s, color 0.3s; 
         border-top-right-radius: 10px;
@@ -144,12 +144,14 @@ export const Container = styled.div`
     }
 
     .write-btn {
-        background: #99CCFF; 
-        color: #fff;
+        background: #f6f8fa; 
+        color: #3f5dfe;
         transition: background 0.3s, color 0.3s;
         margin-left:auto;
         margin-bottom: 10px;
         border-radius:5px;
+        box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.2);
+        font-weight: 600;
     }
 
     .write-wrap {
@@ -161,7 +163,6 @@ export const Container = styled.div`
     .write-btn:hover,
     .write-btn:focus {
         background: #0F62FE; 
-        // border-color: #0000FF; 
         color: #fff;
     }
     
@@ -237,7 +238,7 @@ export const Container = styled.div`
       }
     
       ul.pagination li.active {
-        background-color: #99CCFF;
+        background-color: rgb(15, 98, 254);
       }
       
       ul.pagination li a:hover,
