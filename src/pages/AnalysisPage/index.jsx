@@ -27,6 +27,8 @@ import { searchKeywordState } from "../../state/searchKeywordState";
 const AnalysisPage = () => {
   const navigate = useNavigate();
 
+  const [alertTimer, setAlertTimer] = useState(null);
+
   const setSearchKeyword = useSetRecoilState(searchKeywordState);
   const [notReadingCnt, setNotReadingCnt] = useState(0);
 
@@ -127,6 +129,28 @@ const AnalysisPage = () => {
     });
   }, []);
 
+  const showAlert = (status) => {
+    setAlertStatus(status);
+
+    if (alertTimer) {
+      clearTimeout(alertTimer);
+    }
+
+    const newTimer = setTimeout(() => {
+      setAlertStatus("");
+    }, 4000);
+
+    setAlertTimer(newTimer);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (alertTimer) {
+        clearTimeout(alertTimer);
+      }
+    };
+  }, [alertTimer]);
+
   const onSubmit = () => {
     if (webcamRef.current) {
       setIsLoading(true);
@@ -149,30 +173,18 @@ const AnalysisPage = () => {
         .then((res) => {
           console.log("res is shrink >> ", res);
           if (res.data.status === "fail") {
-            setAlertStatus("noProductDetected");
-
-            setTimeout(() => {
-              setAlertStatus("");
-            }, 4000);
-
+            showAlert("noProductDetected");
             return;
           }
 
           if (res.data.isShrink) {
-            setAlertStatus("shrinkOccurred");
+            showAlert("shrinkOccurred");
           } else {
-            setAlertStatus("noShrink");
-
-            setTimeout(() => {
-              setAlertStatus("");
-            }, 4000);
+            showAlert("noShrink");
           }
         })
         .catch((err) => {
-          setAlertStatus("checkInternet");
-          setTimeout(() => {
-            setAlertStatus("");
-          }, 4000);
+          showAlert("checkInternet");
         })
         .finally(() => {
           setIsLoading(false);

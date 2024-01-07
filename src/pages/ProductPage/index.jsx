@@ -66,7 +66,7 @@ const ProductPage = ({ keyword }) => {
                 <div className="weight">{item.weight}g</div>
               </div>
               <ShrinkResult className="shrink-result" type={item.is_shrink}>
-                {item.is_shrink === null && "알 수 없음"}
+                {item.is_shrink === null && "정보없음"}
                 {item.is_shrink === true && "슈링크"}
                 {item.is_shrink === false && "비슈링크"}
               </ShrinkResult>
