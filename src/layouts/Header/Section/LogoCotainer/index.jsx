@@ -32,7 +32,7 @@ const LogoContainer = ({ closeMobileMenu }) => {
         onMouseEnter={handleLogoEnter}
         onMouseLeave={handleLogoLeave}
       >
-        <img src={logoImg2} alt="logo" className="logo-img" />
+        <img src={logoImg1} alt="logo" className="logo-img" />
         <div className="content">
           <h1 className={isLogoHover ? "active" : ""}>줄었슈링크</h1>
           <h3 className={isLogoHover ? "active" : ""}>같은 과자도 다시 보자</h3>
