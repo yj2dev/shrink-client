@@ -48,7 +48,9 @@ const AnalysisPage = () => {
 
   const [randomCameraImg, setRandomCameraImg] = useState(null);
 
-  const onClickReading = (imageId) => {
+  const onClickReading = (imageId, isReading) => {
+    if (isReading) return;
+
     axios
       .patch("/api/product/update/analysis", {
         image_url: imageId,
@@ -234,7 +236,7 @@ const AnalysisPage = () => {
                 <li
                   key={index}
                   className={!result.is_reading ? "not-reading" : ""}
-                  onClick={() => onClickReading(result.id)}
+                  onClick={() => onClickReading(result.id, result.is_reading)}
                 >
                   {!result.is_reading && (
                     <span className="not-read-content"></span>

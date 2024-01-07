@@ -16,7 +16,9 @@ export const Container = styled.div`
     width: 200px;
     position: relative;
     padding: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+
+    //background-color: #fff;
     transition: 0.3s;
 
     &:hover {
@@ -28,19 +30,28 @@ export const Container = styled.div`
       border-radius: 8px 8px 44px 44px;
       background-color: #fff;
       padding-bottom: 32px;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
 
       img {
-        width: 100%;
+        width: 200px;
+        height: 200px;
         box-sizing: border-box;
-        border-radius: 8px;
+        border-radius: 8px 8px 0 0;
         margin-bottom: 8px;
       }
 
       .content {
         text-align: center;
+        padding: 12px 12px 0px 12px;
+        height: 60px;
       }
 
       .weight {
+        position: absolute;
+        top: 220px;
+        right: 24px;
+        font-size: 0.8em;
+        color: #888;
       }
     }
   }
@@ -54,7 +65,8 @@ export const ShrinkResult = styled.div`
   justify-content: center;
   align-items: flex-end;
   color: #fff;
-  padding: 8px 0;
+  padding: 16px 0;
+  font-size: 1.2em;
 
   &::before {
     content: "";
