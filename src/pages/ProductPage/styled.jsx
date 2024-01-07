@@ -27,6 +27,7 @@ export const Container = styled.div`
     }
 
     .item {
+      cursor: pointer;
       border-radius: 8px 8px 44px 44px;
       background-color: #fff;
       padding-bottom: 32px;

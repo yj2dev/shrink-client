@@ -90,7 +90,7 @@ export const Container = styled.div`
         margin-bottom: 20px;
     }
 
-    button {
+    .btn-container button {
         width: 25%;
         padding: 10px;
         cursor: pointer;
@@ -107,8 +107,8 @@ export const Container = styled.div`
         justify-content: space-between;
     }
 
-    button:hover,
-    button:focus {
+    .btn-container button:hover,
+    .btn-container button:focus {
         background: #0F62FE; 
         border:none;
         color: #fff;

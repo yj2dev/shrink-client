@@ -187,7 +187,7 @@ const QnADetail = () => {
     return (
       <Container>
         <div className="readPosting">
-          <h3>게시글 보기</h3>
+          {/* <h3>게시글 보기</h3> */}
           <div>
             <h2>{data.post.title}</h2>
 
@@ -247,7 +247,7 @@ const QnADetail = () => {
           </div>
 
           <div className="commentsz">
-            <p>댓글 {data.post.comments.length}개</p>
+            <p>답변 {data.post.comments.length}개</p>
 
             {data.post.comments.map((it) => (
               <section className="readPost" key={it.id}>

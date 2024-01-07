@@ -84,7 +84,7 @@ const QnAPage = () => {
             <div className="container">
               <div className="write-wrap">
                 <p>
-                  총 <span>{data.length}</span>개의 게시물이 있습니다.
+                  총 <span>{data.length}</span>개의 질문이 있습니다.
                 </p>
                 {user && (
                   <button
