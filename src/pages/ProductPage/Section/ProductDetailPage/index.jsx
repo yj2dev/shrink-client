@@ -55,7 +55,7 @@ const ProductSearchPage = () => {
             <div className="product-details">
                 <h2>{product.product_name}</h2>
                 <p>{product.detail ? product.detail : ""}</p>
-                <p>가격정보</p>
+                <p></p>
                 <p>용량</p>
                  
                 {product.is_shrink ? (

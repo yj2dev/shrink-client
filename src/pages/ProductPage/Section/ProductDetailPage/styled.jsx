@@ -59,12 +59,12 @@ export const Container = styled.div`
         margin: 0;
     }
 
-    .product-details p:nth-of-type(2) {
-        border: 1px solid lightgrey;
-        width: 140px;
-        height: 25px;
-        padding-left: 5px;
-    }
+    // .product-details p:nth-of-type(2) {
+    //     border: 1px solid lightgrey;
+    //     width: 140px;
+    //     height: 25px;
+    //     padding-left: 5px;
+    // }
 
     .product-details p:nth-of-type(2) span {
         font-size: 12px;
