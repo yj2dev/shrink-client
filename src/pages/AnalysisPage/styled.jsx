@@ -93,6 +93,11 @@ const pulseAnimation = keyframes`
   }
 `;
 
+const marquee = keyframes`
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+`;
+
 export const AnalaysisResultButton = styled.button`
   z-index: 49;
   width: 64px;
@@ -185,11 +190,12 @@ export const AnalysisResultMenu = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 12px 24px;
+    padding: 24px 24px 0 24px;
     //height: 60px;
     //border: 1px dashed orangered;
 
     .toggle-button-wrapper {
+      margin-right: 14px;
       display: inline-block;
       width: 60px;
       height: 30px;
@@ -197,26 +203,30 @@ export const AnalysisResultMenu = styled.div`
       transition: 0.2s;
       background-color: lightgray;
       cursor: pointer;
+      position: relative;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 
-      border: 1px solid red;
-
-      .active {
+      &.active {
         background-color: #3f5dfe;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
       }
+
       .toggle-handle {
         background-color: white;
         width: 26px;
         height: 26px;
         border-radius: 50%;
         transition: 0.2s;
-
+        position: absolute;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
         &.left {
-          top: 0;
-          left: 0;
+          top: 2px;
+          left: 2px;
         }
 
         &.right {
-          left: 30px;
+          top: 2px;
+          left: 32px;
         }
       }
     }
@@ -237,9 +247,26 @@ export const AnalysisResultMenu = styled.div`
       font-size: 16px;
 
       tr {
-        td {
+        td:nth-child(2) {
           vertical-align: top;
           text-align: left;
+
+          span {
+            margin-left: 4px;
+            font-size: 0.8em;
+            padding: 2px 4px;
+            border-radius: 4px;
+            display: inline-block;
+            color: #fff;
+          }
+
+          span.shrink {
+            background-color: rgb(255, 89, 89);
+          }
+
+          span.none-shrink {
+            background-color: rgba(0, 100, 0, 1);
+          }
         }
 
         td:first-child {
@@ -313,12 +340,38 @@ export const AnalysisResultMenu = styled.div`
       cursor: pointer;
     }
 
-    //border-bottom: 1px solid #ddd;
-
     position: relative;
     padding: 24px 24px;
     color: #333;
     transition: background-color 0.1s;
+    box-shadow: 0 8px 15px -4px rgba(0, 0, 0, 0.1);
+
+    span.image-is-shrink {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      color: #fff;
+      font-size: 1em;
+      border-radius: 8px 8px 0 0;
+      padding: 4px 0;
+      width: calc(100% - 48px);
+      white-space: nowrap;
+      overflow: hidden;
+
+      &.shrink {
+        background-color: rgb(255, 89, 89, 0.67);
+      }
+
+      &.none-shrink {
+        background-color: rgba(0, 100, 0, 0.67);
+      }
+      span.text {
+        animation: ${marquee} 10s linear infinite;
+        &:hover {
+          animation-play-state: paused;
+        }
+      }
+    }
 
     span.not-read-content {
       position: absolute;
@@ -347,8 +400,6 @@ export const AnalysisResultMenu = styled.div`
       bottom: 0;
       right: 0;
     }
-
-    box-shadow: 0 8px 15px -4px rgba(0, 0, 0, 0.1);
 
     &:hover {
       //background-color: rgba(0, 0, 0, 0.1);
@@ -394,6 +445,14 @@ export const AlertContainer = styled.div`
   height: 78px;
   z-index: 20;
   transition: 0.2s;
+
+  @media (max-width: 900px) {
+    font-size: 1.4em;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.4em;
+  }
 
   &.noProductDetected {
     background-color: #3f5dfe;
@@ -444,7 +503,6 @@ export const WebcamContainer = styled.div`
   img {
     user-select: none;
     position: absolute;
-    //border-radius: 12px 12px 0 0;
     border-radius: 12px;
     width: 100%;
     height: auto;
@@ -457,6 +515,8 @@ export const WebcamContainer = styled.div`
     }
   }
   .product-analyse-btn-wrapper {
+    max-width: 1064px;
+
     @media (min-width: 768px) {
       &.active {
         width: calc(100% - 322px);
@@ -481,8 +541,6 @@ export const WebcamContainer = styled.div`
     justify-content: center;
   }
   .product-analyse-btn {
-    max-width: 1000px;
-
     border-radius: 12px;
     transition: 0.2s;
 

@@ -50,7 +50,7 @@ const AnalysisPage = () => {
 
   const [randomCameraImg, setRandomCameraImg] = useState(null);
 
-  const [onlyRead, setOnlyRead] = useState(false);
+  const [isRead, setIsRead] = useState(false);
 
   const onClickReading = (imageId, isReading) => {
     if (isReading) return;
@@ -72,10 +72,38 @@ const AnalysisPage = () => {
   const getResultItems = () => {
     axios
       .post("/api/product/select/analysis_list", {
-        is_reading: onlyRead,
+        // false 전체
+        // true 읽지 않은 항목만
+
+        is_reading: isRead,
       })
       .then((res) => {
         if (res.data.status === "success") {
+          setResultItems(res.data.response);
+
+          setNotReadingCnt(
+            res.data.response.reduce((acc, cur) => {
+              return !cur?.is_reading ? acc + 1 : acc;
+            }, 0) || 0,
+          );
+        }
+      })
+      .catch((err) => {
+        console.log("err >> ", err);
+      });
+  };
+
+  const getToggleResultItems = () => {
+    axios
+      .post("/api/product/select/analysis_list", {
+        // false 전체
+        // true 읽지 않은 항목만
+
+        is_reading: !isRead,
+      })
+      .then((res) => {
+        if (res.data.status === "success") {
+          setIsRead(!isRead);
           setResultItems(res.data.response);
 
           setNotReadingCnt(
@@ -171,18 +199,14 @@ const AnalysisPage = () => {
           });
         })
         .then((res) => {
-          console.log("res is shrink >> ", res);
           if (res.data.status === "fail") {
             showAlert("noProductDetected");
             return;
           } else if (res.data.status === "success") {
             // 데이터 요청 성공
             if (res.data.is_shrink) {
-              console.log("슈링 발생");
-
               showAlert("shrinkOccurred");
             } else {
-              console.log("슈링 안 발생");
               showAlert("noShrink");
             }
           }
@@ -239,14 +263,16 @@ const AnalysisPage = () => {
         <AnalysisResultMenu className={showResultMenu ? "active" : ""}>
           <section className="toggle-read">
             <div
-              className="toggle-button-wrapper"
-              onClick={() => setOnlyRead(!onlyRead)}
+              className={`toggle-button-wrapper ${isRead ? "active" : ""}`}
+              onClick={() => {
+                getToggleResultItems();
+              }}
             >
-              <div
-                className={`toggle-handle ${!onlyRead ? "left" : "right"}`}
-              />
+              <div className={`toggle-handle ${isRead ? "right" : "left"}`} />
             </div>
-            읽지 않은 항목만
+            {isRead ? "읽지 않은 항목만 보기" : "모든 항목 보기"}
+            <br />
+            isRead >> {isRead ? "true" : "false"}
           </section>
 
           <ul>
@@ -264,6 +290,21 @@ const AnalysisPage = () => {
                     <span className="not-read-content"></span>
                   )}
                   <img src={result.image_url} />
+                  {result.is_shrink ? (
+                    <span className="image-is-shrink shrink">
+                      <span className="text">
+                        슈링크플레이션이 발생했던 제품입니다. 구매에
+                        주의해주세요.
+                      </span>
+                    </span>
+                  ) : (
+                    <span className="image-is-shrink none-shrink">
+                      <span className="text">
+                        최근 슈링크 발생 내역이 없는 상품입니다. 안심하고
+                        구매하세요!
+                      </span>
+                    </span>
+                  )}
 
                   <div className="result-item-wrapper">
                     <div className="time-ago">{timeAgo(result.create_at)}</div>
@@ -291,6 +332,11 @@ const AnalysisPage = () => {
                                 >
                                   {item.result}
                                 </button>
+                                {item.is_shrink ? (
+                                  <span className="shrink">슈링크</span>
+                                ) : (
+                                  <span className="none-shrink">비슈링크</span>
+                                )}
                               </td>
                             </tr>
                             <tr>
