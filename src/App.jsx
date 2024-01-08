@@ -111,15 +111,7 @@ function App() {
           <div className="layout">
             {/*<LeftNav />*/}
             <Routes>
-              {/* 작성자: 이유진
-                  작성일: 2024.01.05
-                  설명: LandingPage 로딩시 부하가 심해 ReportPage 교체 후 개발
-                       필요시 주석 해제 할 것
-
-              */}
-              {/*<Route path="/" element={<LandingPage />} />*/}
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/e" element={<ExamplePage />} />
+              <Route path="/" element={<ExamplePage />} />
               <Route path="/account" element={<AccountPage />} />
               <Route path="/analysis" element={<AnalysisPage />} />
               <Route path="/product" element={<ProductPage />} />
