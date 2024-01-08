@@ -28,15 +28,14 @@ export const Container = styled.header`
   box-sizing: border-box;
   transition: 0.2s;
 
+  color: #000;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  //background-color: #c8d0ff;
+
   &.active {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   }
-
-  background-color: rgba(255, 255, 255, 0.7);
-
-  color: #000;
-
-  text-align: center;
 `;
 
 export const Section = styled.section`

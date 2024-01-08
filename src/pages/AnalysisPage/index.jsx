@@ -193,13 +193,6 @@ const AnalysisPage = () => {
     }
   };
 
-  const handleItemClick = (item) => {
-    setExpandedItems((prevItems) => ({
-      ...prevItems,
-      [item]: !prevItems[item],
-    }));
-  };
-
   const onRotateCamera = () => {
     const currentIndex = cameras.findIndex(
       (camera) => camera.deviceId === selectedCamera,
@@ -210,7 +203,7 @@ const AnalysisPage = () => {
 
   return (
     <>
-      <Container>
+      <Container className={showResultMenu ? "active" : ""}>
         <AlertContainerHidden />
         <AlertContainer className={alertStatus}>
           {alertStatus === "noProductDetected" && "인식된 제품이 없습니다."}
@@ -352,7 +345,11 @@ const AnalysisPage = () => {
             }}
           />
 
-          <div className="product-analyse-btn-wrapper">
+          <div
+            className={`product-analyse-btn-wrapper ${
+              showResultMenu ? "active" : ""
+            }`}
+          >
             <button
               className="product-analyse-btn"
               disabled={isLoading}

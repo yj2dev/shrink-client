@@ -374,6 +374,12 @@ export const AlertContainer = styled.div`
 `;
 
 export const Container = styled.div`
+  @media (min-width: 768px) {
+    &.active {
+      width: calc(100% - 386px);
+    }
+  }
+  transition: 0.2s;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -402,11 +408,13 @@ export const WebcamContainer = styled.div`
     transform: scaleX(-1);
   }
   .product-analyse-btn-wrapper {
-    @media (max-width: 768px) {
-      //margin: 0 32px;
-      margin: 0;
+    @media (min-width: 768px) {
+      &.active {
+        width: calc(100% - 322px);
+      }
     }
-
+    width: 100%;
+    transition: 0.2s;
     left: 0;
     right: 0;
 
@@ -424,10 +432,9 @@ export const WebcamContainer = styled.div`
     justify-content: center;
   }
   .product-analyse-btn {
-    //border-radius: 0 0 12px 12px;
     border-radius: 12px;
+    transition: 0.2s;
 
-    transition: 0.4s ease;
     width: 100%;
     margin: 0 32px;
     height: 84px;
