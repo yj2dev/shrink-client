@@ -78,9 +78,16 @@ const AccountPage = () => {
         // 설명: 프로필 이미지 URL에 캐시 방지용 쿼리 문자열 추가해서 유저가 직접 올린 이미지는 변경 후 즉시 반영되도록 하였다.
         //      하지만 tiemstamp를 사용한 특성상 문자열이 랜덤으로 들어가고 이는 캐시를 무력화시키는데 도움이 되지만
         //      기본 프로필 또한 시드로 동작하기 때문에 문자열이 추가되면 기본 캐릭터가 바뀌어 사용자로 하여금 혼란을 줄 수 있다.
-        if (data.user && data.user.profile_url) {
+
+        // 'https://api.dicebear.com'로 시작하는지 확인
+        if (!data.user.profile_url.startsWith("https://api.dicebear.com")) {
           data.user.profile_url += `?timestamp=${new Date().getTime()}`;
         }
+
+        // if (data.user && data.user.profile_url) {
+        //   data.user.profile_url += `?timestamp=${new Date().getTime()}`;
+        // }
+
         localStorage.setItem("user", JSON.stringify(data.user));
         console.log("data.user >> ", data.user);
         setUser(data.user);
@@ -346,6 +353,23 @@ const AccountPage = () => {
       });
   };
 
+  // const resetProfileAndReloadUserInfo = async () => {
+  //   if (localStorage.getItem("token")) {
+  //     try {
+  //       const { data } = await axios.get("/api/auth/user/info");
+  //
+  //       localStorage.setItem("user", JSON.stringify(data.user));
+  //       console.log("data.user >> ", data.user);
+  //       setUser(data.user);
+  //       setNickname(data.user.nickname);
+  //       return data.user;
+  //     } catch (err) {
+  //       console.log("err >> ", err);
+  //     }
+  //   }
+  //   return null;
+  // };
+
   const onClickResetProfileImg = (e) => {
     setShowEditMenu(false);
 
@@ -357,6 +381,7 @@ const AccountPage = () => {
       .then((res) => {
         console.log("res img >> ", res);
         if (res.data.status === "success") {
+          // resetProfileAndReloadUserInfo();
           initUserInfo();
         }
       })

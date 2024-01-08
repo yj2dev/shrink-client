@@ -10,6 +10,10 @@ export const userState = atom({
       return user ? JSON.parse(user) : null;
     } catch (e) {
       console.error("JSON 파싱 에러 발생: ", e);
+
+      // 로그아웃 처리
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
       return null;
     }
   })(),
