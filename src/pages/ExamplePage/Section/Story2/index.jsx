@@ -3,44 +3,20 @@ import { Container } from "./styled";
 const Story2Section = () => {
   return (
     <Container id="story2">
-      <h1>Story2Section</h1>
-
-      <ul>
-        <li>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad aliquid
-          animi asperiores aut consequuntur dignissimos dolore doloribus
-          expedita facilis harum incidunt laudantium, magni nam nemo neque nulla
-          officiis placeat quam rerum saepe vel, veniam voluptatem. Autem, eum,
-          porro? Ad at corporis ducimus eaque earum illo illum in ipsa
-          laudantium, molestias necessitatibus nesciunt nobis pariatur quae
-          quasi quod reiciendis repellendus saepe soluta suscipit tempore veniam
-          voluptas voluptatum. Ab beatae culpa distinctio dolorem error, esse et
-          excepturi fugiat minus modi numquam optio quae quasi quis quo
-          veritatis voluptas. Accusantium, delectus eveniet fugiat maxime minus
-          nihil nisi possimus quam qui rem repellat repellendus ullam veritatis
-          vitae, voluptatibus? Adipisci animi architecto atque aut cum
-          cupiditate debitis deserunt dolor doloribus dolorum eligendi esse
-          eveniet facilis inventore laboriosam laborum laudantium molestiae
-          molestias non numquam optio porro quae quaerat quas quis reiciendis
-          repellendus saepe sapiente sed, sequi temporibus tenetur unde
-          voluptatem. At beatae, consequatur ducimus eaque eius laborum maiores
-          odit quaerat, ratione reiciendis sunt vero? Architecto, corporis
-          dolore ducimus ea error et laboriosam modi nulla praesentium quaerat
-          reiciendis similique! Adipisci alias cumque delectus dolores ea eos
-          eveniet, fugit illo, impedit molestiae neque nihil quaerat quidem
-          rerum, sit sunt tenetur vitae voluptatibus. Corporis exercitationem
-          porro quisquam vero.
-        </li>
-
-        <li>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias
-          aliquid at consequatur cum cupiditate dolorum eius exercitationem
-          explicabo fuga itaque labore libero nostrum, porro quaerat, quasi
-          quibusdam quos soluta voluptatum. Accusantium autem eaque labore. A
-          accusantium, amet atque exercitationem fugiat id incidunt inventore
-          natus omnis, perspiciatis quas soluta vero voluptatum.
-        </li>
-      </ul>
+      <div className="wrapper">
+          <div className="img-wrapper">
+            <img src="https://cdn.betterlifenews.co.kr/news/photo/202211/894_2556_445.jpg" className='shrink-img' alt="shrink-img" />
+          </div>
+          <div className="content">
+            <div className="content-header"> <span>슈링크 플레이션</span>이란</div>
+              <div className="content-text"> 
+                  제품의 양은 <span>줄어들거나</span> <br />
+                  질이 <span>낮아지면서</span> <br />
+                  가격은 그대로거나 <br />
+                  증가하는 것을 말해요
+              </div>
+            </div>
+          </div>
     </Container>
   );
 };
