@@ -19,6 +19,7 @@ export const Container = styled.div`
         font-weight: 600;
         color: #262626;
         margin-left: 5px;
+        text-align: left;
     }
 
     .inputWrap {
