@@ -13,7 +13,7 @@ const ProductPage = ({ keyword }) => {
       const response = await axios.get("/api/product/selectall");
       const responseData = response.data;
 
-      console.log(responseData);
+      //console.log(responseData);
       if (keyword) {
         const filtered = responseData.response.filter((p) =>
           p.product_name.toLowerCase().includes(keyword.toLowerCase()),
@@ -45,6 +45,7 @@ const ProductPage = ({ keyword }) => {
           <FiAlertCircle className="icon" />
           <h1>"{keyword}"에 대한 검색 결과가 없습니다.</h1>
           <button
+            className="back-btn"
             onClick={() => {
               navigate(-1);
             }}
@@ -62,16 +63,16 @@ const ProductPage = ({ keyword }) => {
                   src={item.image ? item.image : "http://placehold.it/160x160"}
                   alt="상품 이미지"
                 />
-
                 <div className="content">{item.product_name}</div>
                 <div className="weight">{item.weight}g</div>
               </div>
-              </Link>
+
               <ShrinkResult className="shrink-result" type={item.is_shrink}>
                 {item.is_shrink === null && "정보없음"}
                 {item.is_shrink === true && "슈링크"}
                 {item.is_shrink === false && "비슈링크"}
               </ShrinkResult>
+              </Link>
             </article>
           ))}
         </>

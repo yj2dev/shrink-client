@@ -36,6 +36,26 @@ export const Container = styled.div`
         border-radius: 5px;
     }
 
+    [data-product-detail] button {
+        background-color: #f6f8fa;
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+        width: 170px;
+        height: 35px;
+        border: 2px solid #eeeeee;
+        margin-top: 14px;
+        border-radius: 5px;
+        color: grey;
+        font-weight: 500;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    [data-product-detail] button:hover {
+        background-color: #eeeeee;
+    }
+
     .img-card .img {
         height: 80%;
         display: flex;

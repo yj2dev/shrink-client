@@ -169,7 +169,14 @@ export const Container = styled.div`
   .search-icon {
     margin-left: 5px;
   }
-  
+
+  .th-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px;
+        //border: 2px solid orangered;
+    }
   
     * {
         list-style: none;
@@ -282,9 +289,6 @@ export const Container = styled.div`
         .page-title h3 {
             font-size: 24px;
         }
-        section th,td,tr {
-            font-size: 15px;
-        }
       }
 
       @media (max-width: 1000px) {
@@ -309,9 +313,6 @@ export const Container = styled.div`
         .page-title h3 {
             font-size: 22px;
         }
-        section th,td,tr {
-            font-size: 15px;
-        }
         .pagination {
             margin-left:30px;
         }
@@ -324,7 +325,7 @@ export const Container = styled.div`
         }
 
         section th,td,tr {
-            font-size: 13px;
+            font-size: 12px;
         }
 
       }

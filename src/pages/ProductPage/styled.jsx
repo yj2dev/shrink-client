@@ -17,8 +17,6 @@ export const Container = styled.div`
     position: relative;
     padding: 16px;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-
-    //background-color: #fff;
     transition: 0.3s;
 
     &:hover {
@@ -142,7 +140,7 @@ export const NoSearchResult = styled.div`
     width: 100%;
   }
 
-  button {
+  .back-btn {
     width: 100%;
     font-size: 1.2em;
     margin-top: 20px;

@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Container, ProductDetailHeader } from "./styled";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaArrowDownLong } from "react-icons/fa6";
+import { MdOutlineArrowBackIos } from "react-icons/md";
 
 
 const ProductSearchPage = () => {
@@ -10,6 +11,7 @@ const ProductSearchPage = () => {
     const { product_id } = useParams();
     const [product, setProduct] = useState({});
     const [detailProduct, setDetailProduct] = useState({});
+    const navigate = useNavigate();
 
     const fetchProductDetail = async () => {
         try {
@@ -71,9 +73,8 @@ const ProductSearchPage = () => {
                 ) : (
                     <p><span>{product.weight}g</span></p>
                 )}
-                
-                
-            </div>    
+            </div>
+            <button onClick={() => navigate(-1)}><MdOutlineArrowBackIos style={{fontSize: '11px'}}/>이전 페이지로 돌아가기</button>    
         </div>
         </div>
     </section>

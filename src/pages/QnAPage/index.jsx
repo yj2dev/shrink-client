@@ -153,8 +153,8 @@ const QnAPage = () => {
                     : currentItems.map((it) => (
                         <tr key={it.id}>
                           <td>{it.id}</td>
-                          <th>
-                            <Link to={`/question/${it.id}`}>{it.title}</Link>
+                          <th className="th-title">
+                            <Link to={`/question/${it.id}`}>{it.title.length > 30 ? it.title.slice(0,30) + "···" : it.title}</Link>
                           </th>
                           <td>
                             {new Date(it.created_at).toLocaleDateString()}
