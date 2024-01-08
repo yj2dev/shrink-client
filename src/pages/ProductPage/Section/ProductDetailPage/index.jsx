@@ -32,13 +32,15 @@ const ProductSearchPage = () => {
     
 
     useEffect(() => {
-        console.log("p", product);
-        console.log("d", detailProduct);
+        // console.log("p", product);
+        // console.log("d", detailProduct);
+        //console.log("DDD", detailProduct.prices[detailProduct.prices.length-1]);
     }, [product]);
+    
   return <Container>
     <section>
         <ProductDetailHeader type={product.is_shrink}>
-            <h1>{product.is_shrink ? "슈링크플레이션 제품" : "비슈링크플레이션 제품"}</h1>
+            <h1>{product.is_shrink ? "슈링크플레이션 상품" : "비슈링크플레이션 상품"}</h1>
         </ProductDetailHeader>
         <div data-product-detail>
             <div className="img-card">
@@ -55,7 +57,9 @@ const ProductSearchPage = () => {
             <div className="product-details">
                 <h2>{product.product_name}</h2>
                 <p>{product.detail ? product.detail : ""}</p>
-                <p></p>
+                <p>최근 상품 가격 <span style={{color: '#0F62FE', fontSize: '16px', top: '0px', textDecoration: 'underline'}}>
+                    {detailProduct.prices && detailProduct.prices.length > 0 ?
+                     detailProduct.prices[detailProduct.prices.length-1]?.price + "원" : "알수없음"}</span></p>
                 <p>용량</p>
                  
                 {product.is_shrink ? (

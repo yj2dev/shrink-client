@@ -59,12 +59,11 @@ export const Container = styled.div`
         margin: 0;
     }
 
-    // .product-details p:nth-of-type(2) {
-    //     border: 1px solid lightgrey;
-    //     width: 140px;
-    //     height: 25px;
-    //     padding-left: 5px;
-    // }
+    .product-details p:nth-of-type(2) {
+        width: 200px;
+        height: 25px;
+        padding-left: 5px;
+    }
 
     .product-details p:nth-of-type(2) span {
         font-size: 12px;
@@ -209,9 +208,6 @@ export const ProductDetailHeader = styled.div`
             return "#009432";
         }
     }};
-    //background: #009432;
-    //  슈링크 #ff5058;
-    //   알수없음 #FF9C08;
     height: 50%;
     position: absolute;
     width: 100%;
