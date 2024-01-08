@@ -447,6 +447,10 @@ export const WebcamContainer = styled.div`
     min-height: 500px;
     object-fit: cover;
     transform: scaleX(-1);
+
+    @media (max-width: 768px) {
+      transform: scaleX(1);
+    }
   }
   .product-analyse-btn-wrapper {
     @media (min-width: 768px) {
