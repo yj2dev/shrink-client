@@ -7,9 +7,6 @@ export const userState = atom({
     try {
       const user = localStorage.getItem("user");
 
-      console.log("유저 갱신 데이터 결과");
-      console.log("user: ", user);
-
       return user ? JSON.parse(user) : null;
     } catch (e) {
       console.error("JSON 파싱 에러 발생: ", e);

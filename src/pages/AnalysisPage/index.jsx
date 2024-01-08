@@ -50,6 +50,8 @@ const AnalysisPage = () => {
 
   const [randomCameraImg, setRandomCameraImg] = useState(null);
 
+  const [onlyRead, setOnlyRead] = useState(false);
+
   const onClickReading = (imageId, isReading) => {
     if (isReading) return;
 
@@ -58,7 +60,6 @@ const AnalysisPage = () => {
         image_url: imageId,
       })
       .then((res) => {
-        console.log("res >> ", res);
         if (res.data.status === "success") {
           getResultItems();
         }
@@ -71,10 +72,9 @@ const AnalysisPage = () => {
   const getResultItems = () => {
     axios
       .post("/api/product/select/analysis_list", {
-        is_reading: false,
+        is_reading: onlyRead,
       })
       .then((res) => {
-        console.log("res >> ", res);
         if (res.data.status === "success") {
           setResultItems(res.data.response);
 
@@ -175,15 +175,20 @@ const AnalysisPage = () => {
           if (res.data.status === "fail") {
             showAlert("noProductDetected");
             return;
-          }
+          } else if (res.data.status === "success") {
+            // 데이터 요청 성공
+            if (res.data.is_shrink) {
+              console.log("슈링 발생");
 
-          if (res.data.isShrink) {
-            showAlert("shrinkOccurred");
-          } else {
-            showAlert("noShrink");
+              showAlert("shrinkOccurred");
+            } else {
+              console.log("슈링 안 발생");
+              showAlert("noShrink");
+            }
           }
         })
         .catch((err) => {
+          console.log("err >> ", err);
           showAlert("checkInternet");
         })
         .finally(() => {
@@ -232,6 +237,18 @@ const AnalysisPage = () => {
         </AnalaysisResultButton>
 
         <AnalysisResultMenu className={showResultMenu ? "active" : ""}>
+          <section className="toggle-read">
+            <div
+              className="toggle-button-wrapper"
+              onClick={() => setOnlyRead(!onlyRead)}
+            >
+              <div
+                className={`toggle-handle ${!onlyRead ? "left" : "right"}`}
+              />
+            </div>
+            읽지 않은 항목만
+          </section>
+
           <ul>
             {resultItems.length === 0 && (
               <li className="no-show-content">검색 기록이 없습니다.</li>

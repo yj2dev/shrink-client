@@ -20,6 +20,7 @@ import axios from "axios";
 import ProductPage from "./pages/ProductPage";
 import ProductSearchPage from "./pages/ProductPage/Section/ProductSearchPage";
 import ProductDetailPage from "./pages/ProductPage/Section/ProductDetailPage";
+import ExamplePage from "./pages/ExamplePage";
 
 const reducer = (state, action) => {
   let newState = [];
@@ -118,11 +119,16 @@ function App() {
               */}
               {/*<Route path="/" element={<LandingPage />} />*/}
               <Route path="/" element={<LandingPage />} />
+              <Route path="/e" element={<ExamplePage />} />
               <Route path="/account" element={<AccountPage />} />
               <Route path="/analysis" element={<AnalysisPage />} />
               <Route path="/product" element={<ProductPage />} />
               <Route path="/product/search" element={<ProductSearchPage />} />
-              <Route path="/product/select/detail/:product_id" element={<ProductDetailPage/>} Component={ProductDetailPage}/>
+              <Route
+                path="/product/select/detail/:product_id"
+                element={<ProductDetailPage />}
+                Component={ProductDetailPage}
+              />
               <Route path="/favorite" element={<FavoritePage />} />
               <Route path="/question" element={<QnAPage />} />
               <Route path="/report" element={<ReportPage />} />

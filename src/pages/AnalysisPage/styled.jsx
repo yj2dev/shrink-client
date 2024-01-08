@@ -173,13 +173,54 @@ export const AnalysisResultMenu = styled.div`
   width: 320px;
   right: -320px;
   height: 100%;
-  top: 78px;
+  top: 82px;
   background-color: rgb(250, 250, 250);
   box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
 
   transition: 0.2s ease all;
   z-index: 50;
   overflow-y: scroll;
+
+  section.toggle-read {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 12px 24px;
+    //height: 60px;
+    //border: 1px dashed orangered;
+
+    .toggle-button-wrapper {
+      display: inline-block;
+      width: 60px;
+      height: 30px;
+      border-radius: 32px;
+      transition: 0.2s;
+      background-color: lightgray;
+      cursor: pointer;
+
+      border: 1px solid red;
+
+      .active {
+        background-color: #3f5dfe;
+      }
+      .toggle-handle {
+        background-color: white;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        transition: 0.2s;
+
+        &.left {
+          top: 0;
+          left: 0;
+        }
+
+        &.right {
+          left: 30px;
+        }
+      }
+    }
+  }
 
   .result-item-wrapper {
     position: relative;
