@@ -268,7 +268,6 @@ export const AnalysisResultMenu = styled.div`
       padding: 0;
 
       &:hover {
-        //color: #333;
         color: #4156ff;
       }
     }
@@ -276,10 +275,13 @@ export const AnalysisResultMenu = styled.div`
 
   img {
     user-select: none;
-
     width: 100%;
     border-radius: 8px;
     transform: scaleX(-1);
+
+    @media (max-width: 768px) {
+      transform: scaleX(1);
+    }
   }
 
   &.active {
@@ -415,6 +417,8 @@ export const AlertContainer = styled.div`
 `;
 
 export const Container = styled.div`
+  max-width: 1000px;
+
   @media (min-width: 768px) {
     &.active {
       width: calc(100% - 386px);
@@ -477,6 +481,8 @@ export const WebcamContainer = styled.div`
     justify-content: center;
   }
   .product-analyse-btn {
+    max-width: 1000px;
+
     border-radius: 12px;
     transition: 0.2s;
 
