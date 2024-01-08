@@ -124,7 +124,7 @@ const AnalysisPage = () => {
       );
       setCameras(videoDevices);
       if (videoDevices.length > 0) {
-        setSelectedCamera(videoDevices[0].deviceId);
+        setSelectedCamera(videoDevices[videoDevices.length - 1].deviceId);
       }
     });
   }, []);
