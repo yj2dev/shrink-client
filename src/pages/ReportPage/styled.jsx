@@ -1,4 +1,57 @@
 import styled from "styled-components";
+export const ProductNameListSection = styled.section`
+  position: absolute;
+  width: calc(100% - 2px);
+  top: 100px;
+  padding: 12px 0;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  z-index: 1;
+
+  display: none;
+
+  &.active {
+    display: block;
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+
+      li {
+        padding: 3px 20px;
+        margin: 0;
+
+        button.product-name-btn {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          font-size: 1em;
+          background-color: transparent;
+          border: none;
+          box-shadow: none;
+          display: flex;
+          justify-content: flex-start;
+          font-weight: 400;
+          color: #000;
+
+          &:hover {
+            margin: 0;
+            padding: 0;
+            top: 0;
+            box-shadow: none;
+          }
+        }
+
+        &:hover {
+          background-color: #eeeeee;
+        }
+      }
+    }
+  }
+`;
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -14,11 +67,9 @@ export const Container = styled.div`
     }
 
     max-width: 700px;
-    //border: 2px dashed brown;
   }
 
   section.report-write {
-    //border: 1px dashed darkgoldenrod;
   }
   .report-write-btn {
     display: flex;
@@ -96,6 +147,7 @@ export const ReportWriteSection = styled.section`
 
     label {
       font-size: 1.2em;
+      position: relative;
     }
 
     label > span.require-label {

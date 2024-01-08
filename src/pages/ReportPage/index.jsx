@@ -3,6 +3,7 @@ import {
   ReportWriteSection,
   InputHidden,
   InputLabel,
+  ProductNameListSection,
 } from "./styled";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -19,6 +20,7 @@ const ReportPage = () => {
   const [showWrite, setShowWrite] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [productName, setProductName] = useState("");
+  const [productId, setProductId] = useState("");
   const [productWeight, setProductWeight] = useState(100);
   const [productPrice, setProductPrice] = useState(1000);
   const [productContent, setProductContent] = useState("");
@@ -26,6 +28,8 @@ const ReportPage = () => {
   const [customUnit, setCustomUnit] = useState("");
 
   const [isDrag, setIsDrag] = useState(false);
+
+  const [productNameList, setProductNameList] = useState([]);
 
   function onSelectFile(e) {
     const MAX_FILES = 12;
@@ -250,7 +254,8 @@ const ReportPage = () => {
     const fd = new FormData();
 
     const payload = JSON.stringify({
-      product: productName,
+      product_name: productName,
+      product: productId,
       weight: productWeight,
       price: productPrice,
       content: productContent,
@@ -277,10 +282,6 @@ const ReportPage = () => {
         writeFormInit();
       })
       .catch((err) => {});
-  };
-
-  const onChangeProductName = (e) => {
-    setProductName(e.target.value);
   };
 
   const onChangeProductWeight = (e) => {
@@ -315,6 +316,39 @@ const ReportPage = () => {
     e.preventDefault();
   };
 
+  const getProductNameList = (productName) => {
+    const MAX_KEYWORD = 7;
+    axios
+      .get("/api/product/search", {
+        params: { search: productName },
+      })
+      .then((res) => {
+        console.log("res >> ", res);
+        if (res.data.status === "success") {
+          setProductNameList(res.data.response.splice(0, MAX_KEYWORD));
+        }
+      })
+      .catch((err) => {
+        console.log("err >> ", err);
+      });
+  };
+
+  const onChangeProductName = (e) => {
+    setProductName(e.target.value);
+
+    if (e.target.value.length > 0) {
+      getProductNameList(e.target.value);
+    }
+  };
+  const onClickProductName = (e) => {
+    const [_productName, _productId] = e.target.value.split("|");
+    console.log(_productName, _productId);
+
+    setProductName(_productName);
+    setProductId(_productId);
+    setProductNameList([]);
+  };
+
   return (
     <Container>
       <div className="report-wrapper">
@@ -338,6 +372,25 @@ const ReportPage = () => {
           <form onSubmit={handleSubmit}>
             <label>
               상품명<span className="require-label">*</span>
+              <ProductNameListSection
+                className={`${productNameList.length > 0 && "active"}`}
+              >
+                {productName.length > 0 &&
+                  productNameList.length > 0 &&
+                  productNameList.map((item, index) => (
+                    <ul key={index}>
+                      <li>
+                        <button
+                          className="product-name-btn"
+                          value={`${item.product_name}|${item.product_id}`}
+                          onClick={onClickProductName}
+                        >
+                          {item.product_name}
+                        </button>
+                      </li>
+                    </ul>
+                  ))}
+              </ProductNameListSection>
             </label>
             <input
               type="text"
