@@ -1,12 +1,39 @@
 import styled from "styled-components";
 export const Container = styled.section`
-  //border: 2px dashed blue;
-  height: calc(100vh - 82px);
+  //height: calc(100vh - 82px);
+  //border: 2px dashed #fff;
+  height: 100vh;
+  background-color: rgba(63, 93, 254, 1);
 
-  background: linear-gradient(
-    0deg,
-    rgba(63, 93, 254, 1) 0%,
-    rgba(186, 197, 255, 1) 44%,
-    rgba(255, 255, 255, 1) 100%
-  );
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+
+  .space {
+    height: 84px;
+  }
+
+  article {
+    padding: 0;
+    margin: 0;
+    //border: 1px solid red;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h1 {
+      font-size: 5vw;
+      padding: 0;
+    }
+
+    h2 {
+      font-size: 3.5vw;
+      color: #fff;
+      padding: 0;
+      margin: 0;
+    }
+  }
 `;

@@ -1,46 +1,30 @@
-import { Container } from "./styled";
+import { Arrow, Container } from "./styled";
+import mockupImg from "./img/mockup.png";
 
 const IntroduceSection = () => {
+  const onClickTeam = () => {
+    document.getElementById("team").scrollIntoView({ behavior: "smooth" });
+  };
+
+  const onClickStory1 = () => {
+    document.getElementById("story1").scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <Container>
-      <h1>IntroduceSection</h1>
-
-      <ul>
-        <li>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad aliquid
-          animi asperiores aut consequuntur dignissimos dolore doloribus
-          expedita facilis harum incidunt laudantium, magni nam nemo neque nulla
-          officiis placeat quam rerum saepe vel, veniam voluptatem. Autem, eum,
-          porro? Ad at corporis ducimus eaque earum illo illum in ipsa
-          laudantium, molestias necessitatibus nesciunt nobis pariatur quae
-          quasi quod reiciendis repellendus saepe soluta suscipit tempore veniam
-          voluptas voluptatum. Ab beatae culpa distinctio dolorem error, esse et
-          excepturi fugiat minus modi numquam optio quae quasi quis quo
-          veritatis voluptas. Accusantium, delectus eveniet fugiat maxime minus
-          nihil nisi possimus quam qui rem repellat repellendus ullam veritatis
-          vitae, voluptatibus? Adipisci animi architecto atque aut cum
-          cupiditate debitis deserunt dolor doloribus dolorum eligendi esse
-          eveniet facilis inventore laboriosam laborum laudantium molestiae
-          molestias non numquam optio porro quae quaerat quas quis reiciendis
-          repellendus saepe sapiente sed, sequi temporibus tenetur unde
-          voluptatem. At beatae, consequatur ducimus eaque eius laborum maiores
-          odit quaerat, ratione reiciendis sunt vero? Architecto, corporis
-          dolore ducimus ea error et laboriosam modi nulla praesentium quaerat
-          reiciendis similique! Adipisci alias cumque delectus dolores ea eos
-          eveniet, fugit illo, impedit molestiae neque nihil quaerat quidem
-          rerum, sit sunt tenetur vitae voluptatibus. Corporis exercitationem
-          porro quisquam vero.
-        </li>
-
-        <li>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias
-          aliquid at consequatur cum cupiditate dolorum eius exercitationem
-          explicabo fuga itaque labore libero nostrum, porro quaerat, quasi
-          quibusdam quos soluta voluptatum. Accusantium autem eaque labore. A
-          accusantium, amet atque exercitationem fugiat id incidunt inventore
-          natus omnis, perspiciatis quas soluta vero voluptatum.
-        </li>
-      </ul>
+    <Container onClick={onClickStory1}>
+      <div className="left">
+        <div className="title">
+          <h2>같은 과자도 다시 보자</h2>
+          <h1>슈링크플레이션</h1>
+        </div>
+        <button className="move-story1">
+          <Arrow />
+          <Arrow className="delay" />
+        </button>
+      </div>
+      {/*<div className="right">*/}
+      {/*  <img className="mokup" src={mockupImg} alt="목업 이미지" />*/}
+      {/*</div>*/}
     </Container>
   );
 };
