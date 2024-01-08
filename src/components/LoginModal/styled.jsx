@@ -51,9 +51,10 @@ export const Container = styled.div`
   }
 
   .errorMessageWrap {
+    text-align: left;
     margin-top: 8px;
     color: #ef0000;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .bottomButton {
@@ -78,8 +79,9 @@ export const Container = styled.div`
   }
 
   .existErrorMessage{
-      color: #ef0000;
-      font-size : 14px;
+    text-align: left;
+    color: #ef0000;
+    font-size : 14px;
   }
 
   .registerLine {

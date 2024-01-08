@@ -1,10 +1,17 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import {
+  IoCameraOutline,
+  IoSearchOutline
+} from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import ContentModal from "../../components/ContentModal";
 import LoginModal from "../../components/LoginModal";
 import RegisterModal from "../../components/RegisterModal";
+import { searchKeywordState } from "../../state/searchKeywordState";
 import { userState } from "../../state/userState";
+import LogoContainer from "./Section/LogoCotainer";
 import {
   Container,
   ContainerBlur,
@@ -12,15 +19,6 @@ import {
   RightSection,
   Section,
 } from "./styled";
-import {
-  IoCameraOutline,
-  IoClose,
-  IoLogInOutline,
-  IoMenu,
-  IoSearchOutline,
-} from "react-icons/io5";
-import LogoContainer from "./Section/LogoCotainer";
-import { searchKeywordState } from "../../state/searchKeywordState";
 
 const Header = () => {
   const [user, setUser] = useRecoilState(userState);
@@ -28,6 +26,7 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showContentModal, setShowContentModal] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const [searchKeyword, setSearchKeyword] = useRecoilState(searchKeywordState);
@@ -144,9 +143,17 @@ const Header = () => {
     setShowRegisterModal(true);
   };
 
+  const onShowContentModal = () => {
+    setShowContentModal(true);
+  };
+
   const onCloseModal = () => {
     setShowLoginModal(false);
     setShowRegisterModal(false);
+  };
+
+  const onCloseContentModal = () => {
+    setShowContentModal(false);
   };
 
   const onSubmitSearch = (e) => {
@@ -370,6 +377,11 @@ const Header = () => {
             show={showRegisterModal}
             onClose={onCloseModal}
             onShowLogin={onShowLoginModal}
+            onShowContent={onShowContentModal}
+          />
+          <ContentModal
+            show={showContentModal}
+            onClose={onCloseContentModal}
           />
         </Section>
       </Container>

@@ -1,6 +1,6 @@
+import { Checkbox } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-// import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal";
 import { Container, } from "./styled";
@@ -24,7 +24,7 @@ function useInterval(callback, delay) {
   }, [delay]); // delay가 바뀔 때마다 새로 실행된다.
 }
 
-const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
+const RegisterModal = ({ show, onClose, onShowLogin, onShowContent, onShowUserPassword }) => {
   // const user = useSelector((state) => state.user);
 
   const navigate = useNavigate();
@@ -81,6 +81,8 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
       setCodeExist(true);
       setPasswordExist(true);
       setCodeCheckValid(false);
+
+      setChecked(false);
     }
   }, [show]);
 
@@ -221,10 +223,17 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
-    setPasswordExist(true);
+    // setPasswordExist(true);
+  };
+
+  const [checked, setChecked] = useState(false);
+
+  const handleCheck = () => {
+    setChecked(!checked);
   };
 
   return (
+          
     <Modal show={show} onClose={onClose} onCloseOutside={false}>
       <Container>
         <div className="phoneWrap">
@@ -349,9 +358,23 @@ const RegisterModal = ({ show, onClose, onShowLogin, onShowUserPassword }) => {
               </div>
 
               <div className="bottomWrap">
+                <div className="CheckTerm">
+                  <Checkbox
+                    type="checkbox"
+                    name="check"
+                    onChange={handleCheck}
+                  ></Checkbox>
+                  <span>
+                    개인정보 수집 및 이용 동의(필수)
+                  </span>
+                  <button className="contentButton" onClick={onShowContent}>
+                    내용보기
+                  </button>
+                </div>
                 <button
                   // style={{ marginTop: "40px" }}
                   className="register-Button"
+                  disabled={!checked}
                   onClick={() => {onClickRegister();}}
                 >
                   회원가입

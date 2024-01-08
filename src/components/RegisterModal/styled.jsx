@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     width:300px;
+    padding-left: 5px;
+    padding-right: 5px;
 
     .titleWrap {
         font-size: 20px;
@@ -49,9 +51,10 @@ export const Container = styled.div`
     }
 
     .errorMessageWrap {
+        text-align: left;
         margin-top: 8px;
         color: #ef0000;
-        font-size: 14px;
+        font-size: 13px;
     }
     .timeCountingWrap {
         color : #1555cb;
@@ -70,7 +73,7 @@ export const Container = styled.div`
 
         cursor: pointer;
         margin-bottom: 3%;
-        margin-top: 8%;
+        // margin-top: 8%;
         transition: 0.2s;
     }
     .phone-Button:hover {
@@ -90,12 +93,36 @@ export const Container = styled.div`
 
         cursor: pointer;
         margin-bottom: 3%;
-        margin-top: 8%;
+        // margin-top: 8%;
         transition: 0.2s;
     }
     .code-Button:hover {
         color: #fff;
         background-color: #0f62fe;
+    }
+
+    .phoneTitle {
+        text-align: left;
+        margin-left: 5%;
+        font-weight: 400;
+        margin-top: 3%;
+        color: #303030;
+    }
+
+    .bottomWrap {
+        margin-top: 8%;
+    }
+
+    .CheckTerm {
+        text-align: left;
+        font-size: 14px;
+        .contentButton {
+            border: none;
+            color: black;
+            background-color: white;
+            text-decoration: underline;
+            cursor: pointer;
+        }
     }
 
     .register-Button {
@@ -110,7 +137,7 @@ export const Container = styled.div`
 
         cursor: pointer;
         margin-bottom: 3%;
-        margin-top: 8%;
+        // margin-top: 3%;
         transition: 0.2s;
     }
     .register-Button:hover {
