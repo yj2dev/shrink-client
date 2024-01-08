@@ -26,10 +26,12 @@ const ReportPage = () => {
   const [productContent, setProductContent] = useState("");
   const [unit, setUnit] = useState("g");
   const [customUnit, setCustomUnit] = useState("");
+  const [productNameList, setProductNameList] = useState([]);
+  const [isProductSelected, setIsProductSelected] = useState(false);
+
+  const [selectProductName, setSelectProductName] = useState("");
 
   const [isDrag, setIsDrag] = useState(false);
-
-  const [productNameList, setProductNameList] = useState([]);
 
   function onSelectFile(e) {
     const MAX_FILES = 12;
@@ -152,11 +154,6 @@ const ReportPage = () => {
     return null;
   };
 
-  const handleSubmit = (e) => {
-    onSubmitReport();
-    e.preventDefault();
-  };
-
   const getMoreReports = () => {
     if (isLoading || !hasMore) return;
 
@@ -250,20 +247,24 @@ const ReportPage = () => {
     setSelectedFiles([]);
   };
 
-  const onSubmitReport = () => {
+  const onSubmitReport = (e) => {
+    e.preventDefault();
+
+    if (!isProductSelected) {
+      alert("상품명은 상품명 목록에서 선택해주세요.");
+      return;
+    }
+
     const fd = new FormData();
 
     const payload = JSON.stringify({
-      product_name: productName,
+      product_name: selectProductName,
       product: productId,
       weight: productWeight,
       price: productPrice,
       content: productContent,
       unit,
     });
-
-    console.log("payload >> ", payload);
-    console.log("selectedFiles >> ", selectedFiles);
 
     selectedFiles.forEach((file) => {
       fd.append("image", file.file);
@@ -334,19 +335,28 @@ const ReportPage = () => {
   };
 
   const onChangeProductName = (e) => {
+    // 작성자: 이유진
+    // 작성일: 2024.01.08
+    // 내용: 자동완성 2번 열리는 버그 있음
+    // 원인: 자동완성안의 onClick 이벤트가 발생하면 동시에 onChange 이벤트도 발생하면서 자동완성이 한번 더 호출된다.
+    // 해결: onClick으로 변경된 값을 다른 변수로 분리해서 사용
+
+    setIsProductSelected(false);
     setProductName(e.target.value);
 
-    if (e.target.value.length > 0) {
+    if (!isProductSelected && e.target.value.length > 0) {
       getProductNameList(e.target.value);
     }
   };
+
   const onClickProductName = (e) => {
     const [_productName, _productId] = e.target.value.split("|");
-    console.log(_productName, _productId);
 
-    setProductName(_productName);
+    setProductName("");
+    setSelectProductName(_productName);
     setProductId(_productId);
     setProductNameList([]);
+    setIsProductSelected(true);
   };
 
   return (
@@ -369,11 +379,24 @@ const ReportPage = () => {
             selectedFiles.length > 0 ? "active-file" : ""
           }`}
         >
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={onSubmitReport}>
             <label>
-              상품명<span className="require-label">*</span>
+              상품명 검색<span className="require-label">*</span>&nbsp;
+              <span
+                className="select-product-name"
+                style={{
+                  fontSize: "0.9em",
+                  color: "gray",
+                }}
+              >
+                {selectProductName}
+              </span>
               <ProductNameListSection
-                className={`${productNameList.length > 0 && "active"}`}
+                className={`${
+                  productName.length > 0 &&
+                  productNameList.length > 0 &&
+                  "active"
+                }`}
               >
                 {productName.length > 0 &&
                   productNameList.length > 0 &&
@@ -397,8 +420,8 @@ const ReportPage = () => {
               maxLength="32"
               value={productName}
               onChange={onChangeProductName}
-              placeholder="상품명"
-              required
+              placeholder="신고할 상품명을 입력 후 선택해주세요."
+              // required
             />
 
             <div className="weight-wrapper">
