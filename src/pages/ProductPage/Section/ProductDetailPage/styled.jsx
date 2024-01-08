@@ -22,7 +22,7 @@ export const Container = styled.div`
 
     [data-product-detail] .img-card {
         width: 300px;
-        height: 80%;
+        height: 90%;
         border: 1px solid lightgrey;
         border-radius: 5px;
     }
@@ -33,11 +33,11 @@ export const Container = styled.div`
         flex-direction: column;
     }
     .img-card .img img {
-        width: 70%;
+        width: 80%;
         height: 200px;
         position: relative;
-        left: 60px;
-        top: 20px;
+        left: 30px;
+        top: 40px;
     }
 
     .img-card .img-options {
@@ -104,14 +104,14 @@ export const Container = styled.div`
     }
     .img-options div {
         border: 1px solid lightgrey;
-        margin: 10px 20px;
-        width: 40px;
-        height: 40px;
+        margin: 10px 5px;
+        width: 60px;
+        height: 50px;
     }
 
     .img-options div img {
         width: 80%;
-        margin: 7px 4px;
+        margin: 0px 4px;
     }
 
     .img-options div:nth-of-type(2) img {
@@ -120,10 +120,14 @@ export const Container = styled.div`
 
     .img-options div:nth-of-type(3) img {
         transform: rotate(-45deg);
+        width: 65%;
+        margin: 6px 10px;
     }
 
     .img-options div:nth-of-type(4) img {
         transform: rotate(45deg);
+        width: 65%;
+        margin: 6px 10px;
     }
 
     @media (max-width: 1200px) {
@@ -152,7 +156,7 @@ export const Container = styled.div`
         }
 
         .img-card .img img {
-            width: 60%;
+            width: 70%;
             height: 150px;
             left: 40px;
             top: 20px;
@@ -164,10 +168,6 @@ export const Container = styled.div`
 
         .product-details h2 {
             font-size: 30px;
-        }
-
-        .product-details p {
-            //font-size: 10px;
         }
     }
 
@@ -184,7 +184,7 @@ export const Container = styled.div`
 
         .img-card .img img {
             height: 130px;
-            left: 30px;
+            left: 25px;
             top: 30px;
         }
 
