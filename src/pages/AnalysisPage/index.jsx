@@ -16,6 +16,7 @@ import {
   IoCameraReverseOutline,
   IoCloseOutline,
   IoMenu,
+  IoSettingsOutline,
 } from "react-icons/io5";
 
 import defaultCameraImg1 from "./img/default-camera.jpg";
@@ -51,6 +52,7 @@ const AnalysisPage = () => {
   const [randomCameraImg, setRandomCameraImg] = useState(null);
 
   const [isRead, setIsRead] = useState(false);
+  const [showDeleteBtn, setShowDeleteBtn] = useState(false);
 
   const onClickReading = (imageId, isReading) => {
     if (isReading) return;
@@ -202,11 +204,15 @@ const AnalysisPage = () => {
           if (res.data.status === "fail") {
             showAlert("noProductDetected");
             return;
+            // 데이터 응답 성공
           } else if (res.data.status === "success") {
-            // 데이터 요청 성공
             if (res.data.is_shrink) {
               showAlert("shrinkOccurred");
             } else {
+              if (res.data.is_doubt > 0) {
+                showAlert("shrinkDoubt");
+                return;
+              }
               showAlert("noShrink");
             }
           }
@@ -230,12 +236,31 @@ const AnalysisPage = () => {
     setSelectedCamera(cameras[nextIndex].deviceId);
   };
 
+  const onClickDelete = (imageId) => {
+    axios
+      .delete("/api/product/delete/analysis_list", {
+        data: {
+          id: imageId,
+        },
+      })
+      .then((res) => {
+        if (res.data.status === "success") {
+          getResultItems();
+        }
+      })
+      .catch((err) => {
+        console.log("err >> ", err);
+      });
+  };
+
   return (
     <>
       <Container className={showResultMenu ? "active" : ""}>
         <AlertContainerHidden />
         <AlertContainer className={alertStatus}>
           {alertStatus === "noProductDetected" && "인식된 제품이 없습니다."}
+          {alertStatus === "shrinkDoubt" &&
+            "슈링크로 신고건수가 많은 제품입니다."}
           {alertStatus === "noShrink" &&
             "최근 슈링크 발생 내역이 없는 상품입니다."}
           {alertStatus === "shrinkOccurred" && (
@@ -262,96 +287,132 @@ const AnalysisPage = () => {
 
         <AnalysisResultMenu className={showResultMenu ? "active" : ""}>
           <section className="toggle-read">
-            <div
-              className={`toggle-button-wrapper ${isRead ? "active" : ""}`}
+            <div className="flex-left">
+              <div
+                className={`toggle-button-wrapper ${isRead ? "active" : ""}`}
+                onClick={() => {
+                  getToggleResultItems();
+                }}
+              >
+                <div className={`toggle-handle ${isRead ? "right" : "left"}`} />
+              </div>
+
+              {isRead ? "모든 항목" : "읽지 않은 항목만"}
+            </div>
+            <button
+              className={`show-delete-btn ${showDeleteBtn && "active"}`}
               onClick={() => {
-                getToggleResultItems();
+                setShowDeleteBtn(!showDeleteBtn);
               }}
             >
-              <div className={`toggle-handle ${isRead ? "right" : "left"}`} />
-            </div>
-            {isRead ? "읽지 않은 항목만 보기" : "모든 항목 보기"}
-            <br />
-            isRead >> {isRead ? "true" : "false"}
+              <IoSettingsOutline />
+            </button>
+            <span className="show-delete-btn-tip">검색 기록 편집</span>
           </section>
 
           <ul>
             {resultItems.length === 0 && (
               <li className="no-show-content">검색 기록이 없습니다.</li>
             )}
-            {resultItems.map((result, index) => {
-              return (
-                <li
-                  key={index}
-                  className={!result.is_reading ? "not-reading" : ""}
-                  onClick={() => onClickReading(result.id, result.is_reading)}
-                >
-                  {!result.is_reading && (
-                    <span className="not-read-content"></span>
-                  )}
-                  <img src={result.image_url} />
-                  {result.is_shrink ? (
-                    <span className="image-is-shrink shrink">
-                      <span className="text">
-                        슈링크플레이션이 발생했던 제품입니다. 구매에
-                        주의해주세요.
-                      </span>
-                    </span>
-                  ) : (
-                    <span className="image-is-shrink none-shrink">
-                      <span className="text">
-                        최근 슈링크 발생 내역이 없는 상품입니다. 안심하고
-                        구매하세요!
-                      </span>
-                    </span>
-                  )}
+            {resultItems.length > 0 &&
+              resultItems.map((result, index) => {
+                return (
+                  <li
+                    key={index}
+                    className={!result.is_reading ? "not-reading" : ""}
+                    onClick={() => onClickReading(result.id, result.is_reading)}
+                  >
+                    {!result.is_reading && (
+                      <span className="not-read-content"></span>
+                    )}
+                    <div className="img-wrapper">
+                      <img src={result.image_url} />
 
-                  <div className="result-item-wrapper">
-                    <div className="time-ago">{timeAgo(result.create_at)}</div>
-                    {result.result.length > 0 &&
-                      result.result.map((item, index) => {
-                        return (
-                          <table key={index}>
-                            <tr>
-                              <td>
-                                <span>제품명</span>
-                              </td>
-                              <td>
-                                <button
-                                  className="link-search-btn"
-                                  value={item.result}
-                                  onClick={(e) => {
-                                    const keyword = e.target.value;
+                      {showDeleteBtn && (
+                        <button
+                          className={`delete-btn ${
+                            showDeleteBtn ? "active" : ""
+                          }`}
+                          onClick={() => {
+                            onClickDelete(result.id);
+                          }}
+                        >
+                          삭제
+                        </button>
+                      )}
+                      {result.is_shrink ? (
+                        <span className="image-is-shrink shrink">
+                          <span className="text">
+                            슈링크플레이션이 발생했던 제품입니다. 구매에
+                            주의해주세요.
+                          </span>
+                        </span>
+                      ) : result.is_doubt > 0 ? (
+                        <span className="image-is-shrink doubt">
+                          <span className="text">
+                            슈링크로 신고건수가 많은 제품입니다. 구매에 주의해
+                            주세요.
+                          </span>
+                        </span>
+                      ) : (
+                        <span className="image-is-shrink none-shrink">
+                          <span className="text">
+                            최근 슈링크 발생 내역이 없는 상품입니다. 안심하고
+                            구매하세요!
+                          </span>
+                        </span>
+                      )}
+                    </div>
+                    <div className="result-item-wrapper">
+                      <div className="time-ago">
+                        {timeAgo(result.create_at)}
+                      </div>
+                      {result.result.length > 0 &&
+                        result.result.map((item, index) => {
+                          return (
+                            <table key={index}>
+                              <tr>
+                                <td>
+                                  <span>제품명</span>
+                                </td>
+                                <td>
+                                  <button
+                                    className="link-search-btn"
+                                    value={item.result}
+                                    onClick={(e) => {
+                                      const keyword = e.target.value;
 
-                                    setSearchKeyword(keyword);
+                                      setSearchKeyword(keyword);
 
-                                    navigate("/product/search", {
-                                      state: { keyword: keyword },
-                                    });
-                                  }}
-                                >
-                                  {item.result}
-                                </button>
-                                {item.is_shrink ? (
-                                  <span className="shrink">슈링크</span>
-                                ) : (
-                                  <span className="none-shrink">비슈링크</span>
-                                )}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <span>중량</span>
-                              </td>
-                              <td className="weight">{item.weight}</td>
-                            </tr>
-                          </table>
-                        );
-                      })}
-                  </div>
-                </li>
-              );
-            })}
+                                      navigate("/product/search", {
+                                        state: { keyword: keyword },
+                                      });
+                                    }}
+                                  >
+                                    {item.result}
+                                  </button>
+                                  {item.is_shrink ? (
+                                    <span className="shrink">슈링크</span>
+                                  ) : (
+                                    <span className="none-shrink">
+                                      비슈링크
+                                    </span>
+                                  )}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <span>중량</span>
+                                </td>
+                                <td className="weight">{item.weight}</td>
+                              </tr>
+                            </table>
+                          );
+                        })}
+                    </div>
+                  </li>
+                );
+              })}
           </ul>
         </AnalysisResultMenu>
 

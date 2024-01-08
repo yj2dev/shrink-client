@@ -94,8 +94,8 @@ const pulseAnimation = keyframes`
 `;
 
 const marquee = keyframes`
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+  0% { transform: translateX(128%); }
+  100% { transform: translateX(-128%); }
 `;
 
 export const AnalaysisResultButton = styled.button`
@@ -186,13 +186,100 @@ export const AnalysisResultMenu = styled.div`
   z-index: 50;
   overflow-y: scroll;
 
+  .img-wrapper {
+    position: relative;
+  }
+
+  span.show-delete-btn-tip {
+    display: none;
+    z-index: 201;
+    position: absolute;
+    top: 58px;
+    right: 28px;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 4px 8px 6px 8px;
+    transition: 0.2s;
+    border-radius: 2px;
+    background-color: #2d2d2d;
+    color: #fff;
+    white-space: nowrap;
+
+    &::before {
+      content: " ";
+      position: absolute;
+      top: -6px;
+      right: 8px;
+      z-index: 200;
+
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 8px solid #2d2d2d;
+    }
+  }
+
+  button.show-delete-btn:hover + span.show-delete-btn-tip {
+    display: block;
+  }
+
+  button.show-delete-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      color: #3f5dfe;
+      transform: rotate(45deg);
+    }
+
+    &.active {
+      transform: rotate(45deg);
+      color: #3f5dfe;
+    }
+  }
+
+  .delete-btn {
+    position: absolute;
+    cursor: pointer;
+    top: 32px;
+    right: 0;
+    color: #fff;
+    font-size: 1.5em;
+    width: 84px;
+    height: calc(100% - 5px - 32px);
+    border-radius: 0 0 8px 0;
+    border: none;
+    background: rgba(255, 0, 0, 0.63);
+    transition: 0.1s;
+    &:hover {
+      background: rgba(255, 0, 0, 1);
+    }
+  }
+
   section.toggle-read {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     padding: 24px 24px 0 24px;
-    //height: 60px;
-    //border: 1px dashed orangered;
+
+    .flex-left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .show-delete-btn {
+      background: transparent;
+
+      border: none;
+      outline: none;
+      font-size: 1.5em;
+      //position: absolute;
+      //top: 12px;
+      //right: 24px;
+    }
 
     .toggle-button-wrapper {
       margin-right: 14px;
@@ -219,6 +306,7 @@ export const AnalysisResultMenu = styled.div`
         transition: 0.2s;
         position: absolute;
         box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+
         &.left {
           top: 2px;
           left: 2px;
@@ -241,10 +329,10 @@ export const AnalysisResultMenu = styled.div`
 
     table {
       border-collapse: collapse;
-      margin: 0;
       padding: 0;
 
       font-size: 16px;
+      margin-bottom: 8px;
 
       tr {
         td:nth-child(2) {
@@ -267,6 +355,10 @@ export const AnalysisResultMenu = styled.div`
           span.none-shrink {
             background-color: rgba(0, 100, 0, 1);
           }
+
+          span.doubt {
+            background-color: rgb(255, 146, 76);
+          }
         }
 
         td:first-child {
@@ -280,6 +372,7 @@ export const AnalysisResultMenu = styled.div`
       color: #888;
       cursor: default;
     }
+
     .weight {
       cursor: default;
     }
@@ -347,14 +440,17 @@ export const AnalysisResultMenu = styled.div`
     box-shadow: 0 8px 15px -4px rgba(0, 0, 0, 0.1);
 
     span.image-is-shrink {
+      box-shadow: 0 8px 15px -4px rgba(0, 0, 0, 0.1);
+
       position: absolute;
-      top: 24px;
-      left: 24px;
+      top: 0;
+      left: 0;
       color: #fff;
       font-size: 1em;
       border-radius: 8px 8px 0 0;
       padding: 4px 0;
-      width: calc(100% - 48px);
+      //width: calc(100% - 48px);
+      width: 100%;
       white-space: nowrap;
       overflow: hidden;
 
@@ -365,8 +461,10 @@ export const AnalysisResultMenu = styled.div`
       &.none-shrink {
         background-color: rgba(0, 100, 0, 0.67);
       }
+
       span.text {
         animation: ${marquee} 10s linear infinite;
+
         &:hover {
           animation-play-state: paused;
         }
@@ -464,13 +562,18 @@ export const AlertContainer = styled.div`
     top: 78px;
   }
 
+  &.shrinkDoubt {
+    background-color: rgb(255, 146, 76);
+    top: 78px;
+  }
+
   &.shrinkOccurred {
     background-color: rgb(255, 89, 89);
     top: 78px;
   }
 
   &.checkInternet {
-    background-color: rgb(255, 146, 76);
+    background-color: rgb(0, 0, 0);
     top: 78px;
   }
 `;
