@@ -1,16 +1,24 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+    width: 100%;
 
     section {
-    height: 100vh;
+        height: 100vh;
+        display: flex;
+        width: 100%;
+    }
+
+    .product-body {
+        display: flex;
+        justify-content: center;
+        width: 100%;
     }
 
     [data-product-detail] {
         width: 950px;
         height: 400px;
-        margin: 0 auto;
-        margin-left: 300px;
+        margin: 0;
         position: relative;
         top: 200px;
         background: white;
@@ -18,6 +26,7 @@ export const Container = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        border-radius: 10px
     }
 
     [data-product-detail] .img-card {
@@ -131,21 +140,18 @@ export const Container = styled.div`
 
     @media (max-width: 1200px) {
         [data-product-detail] {
-            margin-left: 200px;
             width: 800px;
         }
     }
 
     @media (max-width: 1000px) {
         [data-product-detail] {
-            margin-left: 100px;
             width: 700px;
         }
     }
 
     @media (max-width: 768px) {
         [data-product-detail] {
-            margin-left: 70px;
             width: 600px;
         }
 
@@ -172,7 +178,6 @@ export const Container = styled.div`
 
     @media (max-width: 576px) {
         [data-product-detail] {
-            margin-left: 10px;
             width: 510px;
         }
 

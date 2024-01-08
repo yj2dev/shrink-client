@@ -36,12 +36,13 @@ const ProductSearchPage = () => {
         // console.log("d", detailProduct);
         //console.log("DDD", detailProduct.prices[detailProduct.prices.length-1]);
     }, [product]);
-    
+
   return <Container>
     <section>
         <ProductDetailHeader type={product.is_shrink}>
             <h1>{product.is_shrink ? "슈링크플레이션 상품" : "비슈링크플레이션 상품"}</h1>
         </ProductDetailHeader>
+        <div className="product-body">
         <div data-product-detail>
             <div className="img-card">
                 <div className='img'>
@@ -73,6 +74,7 @@ const ProductSearchPage = () => {
                 
                 
             </div>    
+        </div>
         </div>
     </section>
   </Container>;
