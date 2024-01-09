@@ -3,11 +3,14 @@ import logoImg1 from "../../img/logo1.png";
 import logoImg2 from "../../img/logo2.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { searchKeywordState } from "../../../../state/searchKeywordState";
 
 const LogoContainer = ({ closeMobileMenu }) => {
   const navigate = useNavigate();
 
   const [isLogoHover, setIsLogoHover] = useState(false);
+  const setSearchKeyword = useSetRecoilState(searchKeywordState);
 
   const handleLogoEnter = () => {
     setIsLogoHover(true);
@@ -19,6 +22,8 @@ const LogoContainer = ({ closeMobileMenu }) => {
 
   const onClickLogo = () => {
     closeMobileMenu();
+
+    setSearchKeyword("");
 
     navigate("/");
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });

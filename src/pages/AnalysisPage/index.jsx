@@ -382,7 +382,8 @@ const AnalysisPage = () => {
                                     onClick={(e) => {
                                       const keyword = e.target.value;
 
-                                      setSearchKeyword(keyword);
+                                      // 헤더 검색창 검색어 반영 코드
+                                      // setSearchKeyword(keyword);
 
                                       navigate("/product/search", {
                                         state: { keyword: keyword },
