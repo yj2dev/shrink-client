@@ -1,9 +1,10 @@
 import styled from "styled-components";
 export const Container = styled.footer`
     .nav-link {
+        bottom: 0;
         .contentButton {
             margin-left: 12%;
-            margin-top: 5%;
+            margin-top: 1%;
             margin-bottom: 1%;
             margin-right: 5%;
             font-size: 15px;
