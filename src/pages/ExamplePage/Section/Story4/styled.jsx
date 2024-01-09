@@ -57,7 +57,7 @@ background: #fff;
 
     .content {
       bottom: -80px;
-      right: 150px;
+      right: 120px;
     }
     .content-header span {
       font-size: 35px;
@@ -90,7 +90,7 @@ background: #fff;
         right: 0px;
         opacity: 0;
       } to {
-        right: 110px
+        right: 80px
         opacity : 1;
       }
     }
@@ -113,7 +113,7 @@ background: #fff;
       right: 0px;
       opacity: 0;
     } to {
-      right: 150px;
+      right: 60px;
       opacity : 1;
     }
   }

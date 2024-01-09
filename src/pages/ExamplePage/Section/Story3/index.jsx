@@ -14,7 +14,7 @@ const Story3Section = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.style.animation = 'slide-left 3s forwards';
+            entry.target.style.animation = 'slide-left 4s forwards';
             entry.target.style.opacity = 1;
           } else {
             entry.target.style.animation = 'none';
