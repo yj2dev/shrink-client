@@ -87,7 +87,7 @@ background: #fff;
 
     @keyframes slide-right {
       from {
-        right: -100px;
+        right: 0px;
         opacity: 0;
       } to {
         right: 110px
@@ -99,7 +99,7 @@ background: #fff;
   @media (max-width: 1200px) {
     @keyframes slide-right {
       from {
-        right: -100px;
+        right: 0px;
         opacity: 0;
       } to {
         right: 170px
@@ -110,10 +110,10 @@ background: #fff;
 
   @keyframes slide-right {
     from {
-      right: -100px;
+      right: 0px;
       opacity: 0;
     } to {
-      right: 280px
+      right: 150px;
       opacity : 1;
     }
   }

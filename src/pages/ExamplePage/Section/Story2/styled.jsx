@@ -91,7 +91,7 @@ export const Container = styled.section`
 
     .img-wrapper img {
       width: 90%;
-      right: 70px;
+      right: 90px;
       top: 10px;
       bottom: 50px;
     }
@@ -99,6 +99,7 @@ export const Container = styled.section`
     #down-img {
       width: 80px;
       height: 80px;
+      right: -180px;
     }
   }
 
