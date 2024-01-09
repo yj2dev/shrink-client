@@ -126,17 +126,19 @@ const ContentModal = ({ show, onClose }) => {
     return (
         <Modal show={show} onClose={onClose} onCloseOutside={false}>
             <Container>
-                <div className="titleWrap">
-                    <h2>개인정보 처리 방침</h2>
+                <div className="contentWrap">
+                    <div className="titleWrap">
+                        <h2>개인정보 처리 방침</h2>
+                    </div>
+                    <textarea
+                        className="content-text"
+                        // cols="30"
+                        // rows="5"
+                        value={text}
+                        readOnly
+                    >
+                    </textarea>
                 </div>
-                <textarea
-                    className="content-text"
-                    // cols="30"
-                    // rows="5"
-                    value={text}
-                    readOnly
-                >
-                </textarea>
             </Container>
         </Modal>
     );

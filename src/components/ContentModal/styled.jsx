@@ -4,16 +4,21 @@ export const Container = styled.div`
     width:400px;
     height: 400px;
 
-    .titleWrap {
-        font-size: 20px;
-        font-weight: 700;
-        color:#262626;
+    .contentWrap {
+        text-align: center;
+
+        .titleWrap {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            color:#262626;
+        }
+        .content-text {
+            width: 360px;
+            height: 280px;
+            border: none;
+            resize: none;
+        }
     }
-    .content-text {
-        width: 90%;
-        height: 70%;
-        border: none;
-        resize: none;
-    }
-s
+
 `
