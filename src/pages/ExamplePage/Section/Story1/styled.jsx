@@ -25,12 +25,13 @@ export const Container = styled.section`
     flex-direction: column;
 
     h1 {
-      font-size: 5vw;
+      font-size: 4vw;
       padding: 0;
     }
 
     h2 {
-      font-size: 3.5vw;
+      font-size: 2.5vw;
+      font-weight: 400;
       color: #fff;
       padding: 0;
       margin: 0;

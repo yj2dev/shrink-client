@@ -18,7 +18,7 @@ export const Container = styled.div`
 
       height: 44px; /** logo2.png 사용시 주석 제거 */
       width: 44px; /** logo2.png 사용시 주석 제거 */
-      margin-top: 8px; /** logo2.png 사용시 주석 제거 */
+      margin-top: 2px; /** logo2.png 사용시 주석 제거 */
 
       @media (max-width: 768px) {
         height: 38px;
@@ -30,6 +30,8 @@ export const Container = styled.div`
     .content {
       margin-left: 0.5em;
       margin-right: 2em;
+
+      font-family: "SOYOMapleBoldTTF";
 
       @media (max-width: 768px) {
         display: none;

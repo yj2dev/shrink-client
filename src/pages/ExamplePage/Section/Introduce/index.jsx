@@ -1,5 +1,6 @@
 import { Arrow, Container } from "./styled";
 import mockupImg from "./img/mockup.png";
+import { IoIosArrowDown } from "react-icons/io";
 
 const IntroduceSection = () => {
   const onClickTeam = () => {
@@ -18,13 +19,17 @@ const IntroduceSection = () => {
           <h1>슈링크플레이션</h1>
         </div>
         <button className="move-story1">
-          <Arrow />
-          <Arrow className="delay" />
+          <Arrow>
+            <IoIosArrowDown />
+          </Arrow>
+          <Arrow className="delay">
+            <IoIosArrowDown />
+          </Arrow>
         </button>
       </div>
-      {/*<div className="right">*/}
-      {/*  <img className="mokup" src={mockupImg} alt="목업 이미지" />*/}
-      {/*</div>*/}
+      <div className="right">
+        <img className="mokup" src={mockupImg} alt="목업 이미지" />
+      </div>
     </Container>
   );
 };

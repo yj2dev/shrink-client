@@ -1,12 +1,18 @@
 @import url('https://webfontworld.github.io/gmarket/GmarketSans.css');
-/*@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');*/
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+@font-face {
+    font-family: "SOYOMapleBoldTTF";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/SOYOMapleBoldTTF.woff2")
+    format("woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+
 
 body {
     margin: 0;
-    /*background-color: #F0F0F0;*/
     background-color: #fff;
-    /*background-color: #F9FAFB;*/
     font-family: 'Noto Sans KR', sans-serif;
 }
 
