@@ -356,7 +356,7 @@ export const AnalysisResultMenu = styled.div`
             background-color: rgba(0, 100, 0, 1);
           }
 
-          span.doubt {
+          span.shrink-doubt {
             background-color: rgb(255, 146, 76);
           }
         }
@@ -456,6 +456,10 @@ export const AnalysisResultMenu = styled.div`
 
       &.shrink {
         background-color: rgb(255, 89, 89, 0.67);
+      }
+
+      &.shrink-doubt {
+        background-color: rgba(255, 146, 67, 0.67);
       }
 
       &.none-shrink {
@@ -563,7 +567,7 @@ export const AlertContainer = styled.div`
   }
 
   &.shrinkDoubt {
-    background-color: rgb(255, 146, 76);
+    background-color: rgba(255, 146, 76, 1);
     top: 78px;
   }
 

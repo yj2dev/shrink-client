@@ -80,6 +80,8 @@ const AnalysisPage = () => {
         is_reading: isRead,
       })
       .then((res) => {
+        console.log("res items >> ", res);
+
         if (res.data.status === "success") {
           setResultItems(res.data.response);
 
@@ -348,7 +350,7 @@ const AnalysisPage = () => {
                           </span>
                         </span>
                       ) : result.is_doubt > 0 ? (
-                        <span className="image-is-shrink doubt">
+                        <span className="image-is-shrink shrink-doubt">
                           <span className="text">
                             슈링크로 신고건수가 많은 제품입니다. 구매에 주의해
                             주세요.
@@ -394,6 +396,8 @@ const AnalysisPage = () => {
                                   </button>
                                   {item.is_shrink ? (
                                     <span className="shrink">슈링크</span>
+                                  ) : item.is_doubt > 0 ? (
+                                    <span className="shrink-doubt">의심</span>
                                   ) : (
                                     <span className="none-shrink">
                                       비슈링크

@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
 export const Container = styled.section`
-  border: 2px dashed blue;
+  //border: 2px dashed blue;
   height: calc(100vh - 82px);
 
   display: flex;

@@ -72,11 +72,11 @@ export const Container = styled.section`
         font-size: 6vw;
         color: #0f62fe;
 
-        text-shadow:
-          1px 1px 0 #fff,
-          2px 2px 0 #fff,
-          3px 3px 0 #fff,
-          4px 4px 0 #fff;
+        text-shadow:;
+        //1px 1px 0 #fff,
+        //2px 2px 0 #fff,
+        //3px 3px 0 #fff,
+        //4px 4px 0 #fff;
       }
     }
 
@@ -112,7 +112,6 @@ export const Container = styled.section`
     //border: 4px dashed red;
 
     img.mokup {
-      padding-left: 24px;
       width: 100%;
 
       @media (max-width: 768px) {
