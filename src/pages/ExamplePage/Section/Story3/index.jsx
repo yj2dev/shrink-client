@@ -1,11 +1,43 @@
 import { Container } from "./styled";
 import vote from "../../img/vote-shadow.png";
+import { useRef } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Story3Section = () => {
+
+  const contentRef = useRef(null);
+
+
+  useEffect(() => {
+    const contentObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = 'slide-left 3s forwards';
+            entry.target.style.opacity = 1;
+          } else {
+            entry.target.style.animation = 'none';
+            entry.target.style.opacity = 0;
+          }
+        });
+      },
+      { threshold: 0.5 } 
+    );
+
+
+    contentObserver.observe(contentRef.current);
+
+    return () => {
+      contentObserver.disconnect();
+    };
+  }, []);
+
+
   return (
     <Container id="story3">
       <div className="wrapper">
-          <div className="content">
+          <div className="content" ref={contentRef}>
             <div className="content-header"> 
               대부분의 소비자들은 <br />
               변화를 잘 눈치채지 못 해요

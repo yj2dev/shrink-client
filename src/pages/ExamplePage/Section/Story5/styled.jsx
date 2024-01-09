@@ -49,4 +49,12 @@ export const Container = styled.section`
     }
   }
 
+  @keyframes Fade-In {
+    from {
+      opacity : 0;
+    } to {
+      opacity : 1;
+    }
+  }
+
 `;

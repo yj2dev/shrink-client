@@ -23,16 +23,19 @@ export const Container = styled.section`
       flex-direction: column;
       align-items: flex-start;
       position: relative;
-      right: 60px;
+      //right: 60px;
       top: 40px;
+      //animation: slide-left 2s ease-out;
   }
 
   .content-header {
+    position: absolute;
+    bottom: 80px;
     font-weight: 700;
-    font-size: 40px;
+    font-size: 38px;
     color: #4c4c4c;
     max-width: 700px;
-    margin-top: 150px;
+    //margin-top: 150px;
   }
 
   .content-text {
@@ -74,6 +77,38 @@ export const Container = styled.section`
 
     img {
       width: 90%;
+    }
+
+    @keyframes slide-left {
+      from {
+        left: 100px;
+        opacity: 0;
+      } to {
+        left: 50px;
+        opacity: 1;
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    @keyframes slide-left {
+      from {
+        left: 100px;
+        opacity: 0;
+      } to {
+        left: 100px;
+        opacity: 1;
+      }
+    }
+  }
+
+  @keyframes slide-left {
+    from {
+      left: -400px;
+      opacity: 0;
+    } to {
+      left: 0px;
+      opacity: 1;
     }
   }
 `;

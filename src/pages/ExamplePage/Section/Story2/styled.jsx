@@ -12,12 +12,30 @@ export const Container = styled.section`
     height: 600px;
   }
 
-  img {
-    width: 400px;
-    height: 250px;
+  .img-wrapper {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .img-wrapper.pressed img {
+    animation: pressAnimation 3s;
+  }
+
+  .img-wrapper img {
+    width: 100%;
+    height: 400px;
     padding: 15px;
     position: relative;
     right: 80px;
+    top: 40px;
+  }
+
+  #down-img {
+    right: -200px;
+    width: 100px;
+    height: 100px;
   }
 
   .content {
@@ -25,7 +43,7 @@ export const Container = styled.section`
       flex-direction: column;
       align-items: flex-start;
       position: relative;
-      bottom: 80px;
+      bottom: 50px;
   }
 
   .content-header {
@@ -71,11 +89,41 @@ export const Container = styled.section`
       font-size: 20px;
     }
 
-    img {
+    .img-wrapper img {
       width: 90%;
-      right: 0px;
+      right: 70px;
+      top: 10px;
       bottom: 50px;
     }
+
+    #down-img {
+      width: 80px;
+      height: 80px;
+    }
   }
+
+
+  @keyframes pressAnimation {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.4);
+    }
+    100% {
+      transform: scale(0.4);
+    }
+  }
+
+  @keyframes slide {
+      from {
+        top: -40px;
+        opacity: 0;   
+      }
+      to {
+        top: 50px;
+        opacity: 1;
+      }
+    }
 
 `;

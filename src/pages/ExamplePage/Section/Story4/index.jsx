@@ -1,14 +1,43 @@
 import { Container } from "./styled";
 import cute from "../../img/cute_26.jpg"
+import { useRef } from "react";
+import { useEffect } from "react";
 
 const Story4Section = () => {
+
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const contentObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = 'slide-right 3s forwards';
+            entry.target.style.opacity = 1;
+          } else {
+            entry.target.style.animation = 'none';
+            entry.target.style.opacity = 0;
+          }
+        });
+      },
+      { threshold: 0.5 } 
+    );
+
+
+    contentObserver.observe(contentRef.current);
+
+    return () => {
+      contentObserver.disconnect();
+    };
+  }, []);
+
   return (
     <Container id="story4">
      <div className="wrapper">
           <div className="img-wrapper">
             <img src={cute} className='cute-img' alt="cute-img" />
           </div>
-          <div className="content">
+          <div className="content" ref={contentRef}>
             <div className="content-header"> <span>줄었슈링크</span>는</div>
               <div className="content-text"> 
                   제품의 양에 의문을 <br />
