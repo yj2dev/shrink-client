@@ -55,7 +55,7 @@ background: #fff;
       right: 0px;
       opacity: 0;
     } to {
-      right: 180px;
+      right: 280px;
       opacity : 1;
     }
   }
@@ -126,6 +126,22 @@ background: #fff;
         opacity: 0;
       } to {
         right: 60px;
+        opacity : 1;
+      }
+    }
+  }
+
+  @media (min-width: 1700px) {
+    img {
+      right: 250px;
+    }
+
+    @keyframes slide-right {
+      from {
+        right: 0px;
+        opacity: 0;
+      } to {
+        right: 420px;
         opacity : 1;
       }
     }

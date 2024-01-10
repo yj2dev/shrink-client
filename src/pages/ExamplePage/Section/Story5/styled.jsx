@@ -35,6 +35,25 @@ export const Container = styled.section`
     text-align: center;
   }
 
+  button {
+    // background-color: #1B8EF2;
+    background-color: #3f5dfe;
+    border: 2px solid black;
+    width: 70%;
+    margin: 25px 0 0 0;
+    font-weight: 700;
+    padding: 10px 0;
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #fff;
+  }
+
+  button:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
   @media (max-width: 768px) {
     .content-header {
       font-size: 30px;
