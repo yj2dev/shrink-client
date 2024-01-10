@@ -36,11 +36,20 @@ const TeamSection = () => {
               />
             </CardFront>
             <CardBack>
-              <p>{member.name}</p>
-              <p>{member.part}</p>
-              <a href={member.githubUrl}>
-                <FaGithub />
-              </a>
+              <article>
+                <div className="title">
+                  {member.name}&nbsp;<span>{member.part}</span>
+                </div>
+                <ul className="content">
+                  {member.content.length > 0 &&
+                    member.content.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                </ul>
+                <a href={member.githubUrl}>
+                  <FaGithub />
+                </a>
+              </article>
             </CardBack>
           </Card>
         ))}

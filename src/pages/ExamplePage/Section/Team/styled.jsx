@@ -79,13 +79,47 @@ export const CardBack = styled(CardFace)`
   background-color: #007bff;
   color: #fff;
   transform: rotateY(180deg);
-  flex-direction: column;
 
-  a {
-    color: #fff;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 12px;
+  article {
+    padding: 20px 20px 54px 20px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+
+    div.title {
+      font-size: 1.2em;
+
+      span {
+        color: rgba(255, 255, 255, 0.65);
+        margin-top: 4px;
+        display: block;
+        font-weight: 300;
+        font-size: 0.8em;
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        padding: 4px 0;
+        margin: 0;
+        font-size: 0.7em;
+      }
+    }
+
+    a {
+      color: #fff;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 12px;
+    }
   }
 `;
