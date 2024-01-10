@@ -129,7 +129,7 @@ function App() {
               <Route path="/question/edit/:id" element={<QnAEdit />} />
             </Routes>
           </div>
-          <Footer />
+          {/*<Footer />*/}
         </BrowserRouter>
       </div>
     </PostDispatchContext.Provider>
