@@ -54,7 +54,7 @@ export const Container = styled.section`
 
   @media (min-width: 1600px){
     .wrapper {
-      margin-top: 170px;
+      //margin-top: 170px;
     }
 
     .content-header {
@@ -69,7 +69,7 @@ export const Container = styled.section`
 
   @media (max-width: 576px) {
     .wrapper {
-      margin-top: 200px;
+      //margin-top: 200px;
     }
   }
 
