@@ -67,6 +67,18 @@ export const Container = styled.section`
     }
   }
 
+  @media (max-width: 576px) {
+    .wrapper {
+      margin-top: 100px;
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .wrapper {
+      margin-top: 120px;
+    }
+  }
+
   @keyframes Fade-In {
     from {
       opacity: 0;

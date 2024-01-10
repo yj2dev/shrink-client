@@ -52,6 +52,27 @@ export const Container = styled.section`
     margin-left: 20px;
   }
 
+  @media (min-width: 1600px){
+    .wrapper {
+      margin-top: 170px;
+    }
+
+    .content-header {
+      font-size:45px;
+      width: 600px;
+    }
+
+    img {
+      margin-left: 50px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .wrapper {
+      margin-top: 200px;
+    }
+  }
+
   @media (max-width: 768px) {
     .wrapper {
       flex-direction: column;

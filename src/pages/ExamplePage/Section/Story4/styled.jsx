@@ -125,6 +125,10 @@ export const Container = styled.section`
   }
 
   @media (max-width: 600px) {
+
+    .content {
+      bottom: 40px;
+    }
     @keyframes slide-right {
       from {
         right: 0px;
@@ -137,9 +141,37 @@ export const Container = styled.section`
     }
   }
 
-  @media (min-width: 1700px) {
+  @media (max-width: 1200px) {
+    .content {
+      bottom: -0px;
+    }
+  }
+
+  @media (max-width: 1500px) {
+    .content {
+      bottom: -100px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .wrapper {
+      margin-top: 100px;
+    }
+
+    .content {
+      bottom: -60px;
+    }
+  }
+ 
+
+  @media (min-width: 1600px) {
     img {
       right: 250px;
+      top: 120px;
+    }
+
+    .content {
+      bottom: 20px;
     }
 
     @keyframes slide-right {
