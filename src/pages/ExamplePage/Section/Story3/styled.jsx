@@ -96,7 +96,7 @@ export const Container = styled.section`
         left: 100px;
         opacity: 0;
       } to {
-        left: 100px;
+        left: 0px;
         opacity: 1;
       }
     }

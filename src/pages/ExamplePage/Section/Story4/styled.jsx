@@ -105,8 +105,18 @@ background: #fff;
         right: 0px;
         opacity: 0;
       } to {
-        right: 130px;
+        right: 0px;
         opacity : 1;
+      }
+    }
+
+    @keyframes slide-left {
+      from {
+        left: -200px;
+        opacity: 0;
+      } to {
+        left: 0px;
+        opacity: 1;
       }
     }
   }
