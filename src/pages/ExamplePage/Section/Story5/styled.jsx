@@ -1,6 +1,10 @@
 import styled from "styled-components";
 export const Container = styled.section`
-  height: calc(100vh - 82px);
+  scroll-snap-align: start;
+
+  //height: calc(100vh - 82px);
+  height: 100vh;
+
   background: #fff;
 
   .wrapper {
@@ -12,10 +16,10 @@ export const Container = styled.section`
   }
 
   .content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
   }
 
   .content-header {
@@ -65,10 +69,10 @@ export const Container = styled.section`
 
   @keyframes Fade-In {
     from {
-      opacity : 0;
-    } to {
-      opacity : 1;
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
-
 `;

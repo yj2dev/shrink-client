@@ -1,5 +1,7 @@
 import styled from "styled-components";
 export const Container = styled.section`
+  scroll-snap-align: start;
+
   //height: calc(100vh - 82px);
   //border: 2px dashed #fff;
   height: 100vh;
@@ -17,7 +19,7 @@ export const Container = styled.section`
     padding: 0;
     margin: 0;
     //border: 1px solid red;
-    height: 100%;
+    height: 90%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -27,11 +29,6 @@ export const Container = styled.section`
     h1 {
       font-size: 4vw;
       padding: 0;
-
-      //text-shadow: 1px 1px 0 #fff;
-      //2px 2px 0 #fff;
-      //3px 3px 0 #fff,
-      //4px 4px 0 #fff;
     }
 
     h2 {

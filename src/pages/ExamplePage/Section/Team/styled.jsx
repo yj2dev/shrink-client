@@ -1,12 +1,25 @@
 import styled, { keyframes } from "styled-components";
 
 export const Container = styled.section`
+  scroll-snap-align: start;
+
   //border: 2px dashed blue;
-  height: calc(100vh - 82px);
+  //height: calc(100vh - 82px);
+  height: 100vh;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  h1 {
+    color: #fff;
+    font-size: 4em;
+    span {
+      font-family: "SOYOMapleBoldTTF";
+    }
+    margin-bottom: 2em;
+  }
 `;
 
 export const CardContainer = styled.div`
@@ -18,8 +31,8 @@ export const CardContainer = styled.div`
 `;
 
 export const Card = styled.div`
-  width: 150px;
-  height: 200px;
+  width: 210px;
+  height: 280px;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.6s;
@@ -46,8 +59,8 @@ export const CardFace = styled.div`
   color: #333;
   border-radius: 10px;
   img {
-    width: 150px;
-    height: 200px;
+    width: 210px;
+    height: 280px;
     object-fit: cover;
     border-radius: 16px;
     padding: 10px;

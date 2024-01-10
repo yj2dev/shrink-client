@@ -1,6 +1,9 @@
 import styled from "styled-components";
 export const Container = styled.section`
-  height: calc(100vh - 82px);
+  scroll-snap-align: start;
+
+  //height: calc(100vh - 82px);
+  height: 100vh;
   background: #fff;
 
   .wrapper {
@@ -18,11 +21,11 @@ export const Container = styled.section`
   }
 
   .content {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      position: relative;
-      top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    top: 40px;
   }
 
   .content-header {
@@ -80,7 +83,8 @@ export const Container = styled.section`
       from {
         left: 100px;
         opacity: 0;
-      } to {
+      }
+      to {
         left: 50px;
         opacity: 1;
       }
@@ -92,7 +96,8 @@ export const Container = styled.section`
       from {
         left: 100px;
         opacity: 0;
-      } to {
+      }
+      to {
         left: 0px;
         opacity: 1;
       }
@@ -103,7 +108,8 @@ export const Container = styled.section`
     from {
       left: -400px;
       opacity: 0;
-    } to {
+    }
+    to {
       left: 0px;
       opacity: 1;
     }

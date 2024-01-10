@@ -16,6 +16,9 @@ const TeamSection = () => {
 
   return (
     <Container id="team">
+      <h1>
+        <span>줄었슈링크</span> 가족들을 소개합니다
+      </h1>
       <CardContainer>
         {teamInfo.map((member, index) => (
           <Card

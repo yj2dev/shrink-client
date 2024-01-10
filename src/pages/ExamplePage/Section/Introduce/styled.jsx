@@ -18,6 +18,8 @@ export const Arrow = styled.div`
   }
 `;
 export const Container = styled.section`
+  scroll-snap-align: start;
+
   background: linear-gradient(
     0deg,
     rgba(63, 93, 254, 1) 0%,

@@ -1,7 +1,11 @@
 import styled from "styled-components";
 export const Container = styled.section`
-height: calc(100vh - 82px);
-background: #fff;
+  scroll-snap-align: start;
+
+  //height: calc(100vh - 82px);
+  height: 100vh;
+
+  background: #fff;
 
   .wrapper {
     display: flex;
@@ -22,11 +26,11 @@ background: #fff;
   }
 
   .content {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      position: absolute;
-      right: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    right: 300px;
   }
 
   .content-header {
@@ -37,8 +41,8 @@ background: #fff;
   }
 
   .content-header span {
-      font-size: 45px;
-      color: #3f5dfe;
+    font-size: 45px;
+    color: #3f5dfe;
   }
 
   .content-text {
@@ -48,20 +52,18 @@ background: #fff;
     margin-top: 20px;
   }
 
-
-
   @keyframes slide-right {
     from {
       right: 0px;
       opacity: 0;
-    } to {
+    }
+    to {
       right: 280px;
-      opacity : 1;
+      opacity: 1;
     }
   }
 
   @media (max-width: 768px) {
-
     .wrapper {
       flex-direction: column;
     }
@@ -90,7 +92,8 @@ background: #fff;
       from {
         left: -200px;
         opacity: 0;
-      } to {
+      }
+      to {
         left: 0px;
         opacity: 1;
       }
@@ -102,9 +105,10 @@ background: #fff;
       from {
         right: 0px;
         opacity: 0;
-      } to {
+      }
+      to {
         right: 0px;
-        opacity : 1;
+        opacity: 1;
       }
     }
 
@@ -112,7 +116,8 @@ background: #fff;
       from {
         left: -200px;
         opacity: 0;
-      } to {
+      }
+      to {
         left: 0px;
         opacity: 1;
       }
@@ -124,9 +129,10 @@ background: #fff;
       from {
         right: 0px;
         opacity: 0;
-      } to {
+      }
+      to {
         right: 60px;
-        opacity : 1;
+        opacity: 1;
       }
     }
   }
@@ -140,9 +146,10 @@ background: #fff;
       from {
         right: 0px;
         opacity: 0;
-      } to {
+      }
+      to {
         right: 420px;
-        opacity : 1;
+        opacity: 1;
       }
     }
   }

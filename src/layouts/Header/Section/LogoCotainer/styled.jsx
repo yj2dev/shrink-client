@@ -10,7 +10,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: flex-start;
     //width: 220px;
-    height: 44px;
+    height: 48px;
     cursor: pointer;
 
     .logo-img {
