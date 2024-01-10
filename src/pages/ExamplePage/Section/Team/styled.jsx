@@ -1,6 +1,16 @@
 import styled, { keyframes } from "styled-components";
 
 export const Container = styled.section`
+  .space {
+    border: none;
+    background-color: transparent;
+    @media (max-width: 768px) {
+      height: 0;
+    }
+
+    height: 140px;
+  }
+
   scroll-snap-align: start;
 
   //border: 2px dashed blue;
@@ -11,6 +21,7 @@ export const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 12em;
 
   h1 {
     color: #fff;

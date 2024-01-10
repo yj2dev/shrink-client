@@ -54,6 +54,7 @@ const TeamSection = () => {
           </Card>
         ))}
       </CardContainer>
+      <div className="space" />
     </Container>
   );
 };
