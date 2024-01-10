@@ -1,5 +1,5 @@
 import { Container } from "./styled";
-import cute from "../../img/cute.png"
+import cute from "../../img/26.jpg"
 import { useRef } from "react";
 import { useEffect } from "react";
 
