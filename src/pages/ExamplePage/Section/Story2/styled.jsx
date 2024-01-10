@@ -11,7 +11,7 @@ export const Container = styled.section`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: 600px;
+    height: 800px;
   }
 
   .img-wrapper {
@@ -69,6 +69,24 @@ export const Container = styled.section`
 
   .content-text span {
     color: #bdbdbd;
+  }
+
+  @media (min-width: 1600px){
+
+    .wrapper {
+      margin-top: 100px;
+    }
+
+    .content-header span {
+      font-size: 50px;
+    }
+    .content-header {
+      font-size: 35px;
+    }
+
+    .content-text {
+      font-size: 30px;
+    }
   }
 
   @media (max-width: 768px) {
