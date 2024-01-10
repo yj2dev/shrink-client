@@ -511,10 +511,11 @@ const AccountPage = () => {
       </AlertModal>
 
       <Modal
-        show={() => {
-          setShowGoodbyeModal(true);
+        show={showGoodbyeModal}
+        onClose={() => {
+          setShowGoodbyeModal(false);
+          navigate("/");
         }}
-        onClose={() => setShowGoodbyeModal(false)}
       >
         <GoodbyeModalWrapper>
           <img src={logoImg} alt="줄었슈링크 로고 이미지" />
