@@ -10,13 +10,11 @@ const Story2Section = () => {
   const [isPressed, setPressed] = useState(false);
 
   const handleScroll = () => {
-    const value = window.scrollY;
     if (window.scrollY > 950) {
       setPressed(true);
     } else {
       setPressed(false);
     }
-    console.log("scroll",value);
   };
 
   useEffect(() => {

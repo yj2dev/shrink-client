@@ -50,7 +50,20 @@ background: #fff;
     margin-top: 20px;
   }
 
+
+
+  @keyframes slide-right {
+    from {
+      right: 0px;
+      opacity: 0;
+    } to {
+      right: 180px;
+      opacity : 1;
+    }
+  }
+
   @media (max-width: 768px) {
+
     .wrapper {
       flex-direction: column;
     }
@@ -84,16 +97,6 @@ background: #fff;
         opacity: 1;
       }
     }
-
-    @keyframes slide-right {
-      from {
-        right: 0px;
-        opacity: 0;
-      } to {
-        right: 80px
-        opacity : 1;
-      }
-    }
   }
 
   @media (max-width: 1200px) {
@@ -102,19 +105,21 @@ background: #fff;
         right: 0px;
         opacity: 0;
       } to {
-        right: 170px
+        right: 130px;
         opacity : 1;
       }
     }
   }
 
-  @keyframes slide-right {
-    from {
-      right: 0px;
-      opacity: 0;
-    } to {
-      right: 60px;
-      opacity : 1;
+  @media (max-width: 600px) {
+    @keyframes slide-right {
+      from {
+        right: 0px;
+        opacity: 0;
+      } to {
+        right: 60px;
+        opacity : 1;
+      }
     }
   }
 `;
