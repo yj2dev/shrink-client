@@ -64,6 +64,7 @@ export const CardBack = styled(CardFace)`
   background-color: #007bff;
   color: #fff;
   transform: rotateY(180deg);
+  flex-direction: column;
 
   a {
     color: #fff;

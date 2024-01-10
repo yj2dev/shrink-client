@@ -1,52 +1,60 @@
 export const teamInfo = [
   {
     name: "김동민",
-    profileUrl: "",
+    profileUrl: "https://shrink-bucket.s3.ap-northeast-2.amazonaws.com/team_profile_images/DM2.jpg",
     githubUrl: "https://github.com/dongmin1011",
+    part: "Back-End",
   },
 
   {
     name: "김성민",
     profileUrl:
-      "https://shrink-bucket.s3.ap-northeast-2.amazonaws.com/team_profile_images/%EA%B9%80%EC%84%B1%EB%AF%BC.png",
+      "https://shrink-bucket.s3.ap-northeast-2.amazonaws.com/team_profile_images/SM2.jpg",
     githubUrl: "https://github.com/gilgagun",
+    part: "AI",
   },
 
   {
     name: "김진우",
     profileUrl:
-      "https://shrink-bucket.s3.ap-northeast-2.amazonaws.com/team_profile_images/%EA%B9%80%EC%A7%84%EC%9A%B0.png",
+      "https://shrink-bucket.s3.ap-northeast-2.amazonaws.com/team_profile_images/JW2.jpg",
     githubUrl: "https://github.com/heyteddy",
+    part: "AI",
   },
 
   {
     name: "박성현",
-    profileUrl: "",
+    profileUrl: "https://shrink-bucket.s3.ap-northeast-2.amazonaws.com/team_profile_images/SH2.jpg",
     githubUrl: "https://github.com/psh1011",
+    part: "Back-End",
   },
 
   {
     name: "이승주",
-    profileUrl: "",
+    profileUrl: "https://shrink-bucket.s3.ap-northeast-2.amazonaws.com/team_profile_images/SJ2.jpg",
     githubUrl: "https://github.com/SeungJu3",
+    part: "Front-End",
   },
 
   {
     name: "이유진",
     profileUrl:
-      "https://shrink-bucket.s3.ap-northeast-2.amazonaws.com/team_profile_images/%EC%9D%B4%EC%9C%A0%EC%A7%84.png",
+      "https://shrink-bucket.s3.ap-northeast-2.amazonaws.com/team_profile_images/YJ2.jpg",
     githubUrl: "https://github.com/yj2dev",
+    part: "Full-Stack",
   },
 
   {
     name: "최다인",
-    profileUrl: "",
+    profileUrl: "https://shrink-bucket.s3.ap-northeast-2.amazonaws.com/team_profile_images/DI2.jpg",
     githubUrl: "https://github.com/DAAIN",
+    part: "Front-End",
   },
 
   {
     name: "홍아현",
-    profileUrl: "",
+    profileUrl: "https://shrink-bucket.s3.ap-northeast-2.amazonaws.com/team_profile_images/AH2.jpg",
     githubUrl: "https://github.com/ForAhyun",
+    part: "Front-End",
   },
 ];

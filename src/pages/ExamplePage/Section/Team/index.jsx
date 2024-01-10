@@ -34,6 +34,7 @@ const TeamSection = () => {
             </CardFront>
             <CardBack>
               <p>{member.name}</p>
+              <p>{member.part}</p>
               <a href={member.githubUrl}>
                 <FaGithub />
               </a>
