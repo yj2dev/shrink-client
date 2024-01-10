@@ -8,7 +8,7 @@ export const Container = styled.section`
       height: 0;
     }
 
-    height: 140px;
+    height: 54px;
   }
 
   scroll-snap-align: start;
