@@ -1,6 +1,5 @@
 import styled from "styled-components";
 export const Container = styled.section`
-  //border: 2px dashed blue;
   height: calc(100vh - 82px);
   background: #fff;
 
@@ -37,10 +36,6 @@ export const Container = styled.section`
   }
 
   @media (max-width: 768px) {
-    // .wrapper {
-    //   flex-direction: column;
-    // }
-
     .content-header {
       font-size: 30px;
     }

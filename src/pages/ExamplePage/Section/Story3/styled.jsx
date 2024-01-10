@@ -1,6 +1,5 @@
 import styled from "styled-components";
 export const Container = styled.section`
-  //border: 2px dashed blue;
   height: calc(100vh - 82px);
   background: #fff;
 
@@ -23,9 +22,7 @@ export const Container = styled.section`
       flex-direction: column;
       align-items: flex-start;
       position: relative;
-      //right: 60px;
       top: 40px;
-      //animation: slide-left 2s ease-out;
   }
 
   .content-header {

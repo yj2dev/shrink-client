@@ -2,7 +2,6 @@ import { Container } from "./styled";
 import vote from "../../img/vote-shadow.png";
 import { useRef } from "react";
 import { useEffect } from "react";
-import { useState } from "react";
 
 const Story3Section = () => {
 

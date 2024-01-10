@@ -1,6 +1,5 @@
 import styled from "styled-components";
 export const Container = styled.section`
-  //border: 2px dashed blue;
   height: calc(100vh - 82px);
   background: #fff;
 
@@ -99,7 +98,7 @@ export const Container = styled.section`
     #down-img {
       width: 80px;
       height: 80px;
-      right: -180px;
+      right: -170px;
     }
   }
 
