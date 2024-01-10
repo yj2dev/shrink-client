@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   @media (min-width: 1200px) {
     width: 60%;
-    padding-left: 280px;
+    padding-left: 305px;
   }
   //display: flex;
   //justify-content: center;
