@@ -46,7 +46,7 @@ export const teamInfo = [
 
   {
     name: "최다인",
-    profileUrl: "https://shrink-bucket.s3.ap-northeast-2.amazonaws.com/team_profile_images/DI2.jpg",
+    profileUrl: "https://shrink-bucket.s3.ap-northeast-2.amazonaws.com/team_profile_images/DI3.jpg",
     githubUrl: "https://github.com/DAAIN",
     part: "Front-End",
   },
