@@ -1,257 +1,257 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  @media (min-width: 1200px) {
+    padding-left: 180px;
+  }
 
-    width: 80%;
+  width: 80%;
 
-    .readPosting {
-      width: 70%;
-      max-width: 800px;
-      min-width: 360px;
-      border: 1px solid #d5d5d5;
-      border-radius: 10px;
-      margin: 50px auto;
-      padding: 40px 30px 40px 30px;
-      margin-left: 340px;
-      background-color: white;
+  .readPosting {
+    width: 70%;
+    max-width: 800px;
+    min-width: 360px;
+    border: 1px solid #d5d5d5;
+    border-radius: 10px;
+    margin: 50px auto;
+    padding: 40px 30px 40px 30px;
+    margin-left: 340px;
+    background-color: white;
 
-      h3, h2 {
-        text-align: center;
-      }
+    h3,
+    h2 {
+      text-align: center;
+    }
+
+    .editorcontents {
+      width: 600px;
+      margin-left: 110px;
+    }
+
+    @media (max-width: 1300px) {
+      margin-left: 150px;
 
       .editorcontents {
-        width: 600px;
-        margin-left:110px;
+        margin-left: 75px;
+      }
+      .left-btn {
+        width: 70px;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      margin-left: 90px;
+
+      .editorcontents {
+        margin-left: 50px;
+        width: 80%;
       }
 
-      @media (max-width: 1300px) {
-          margin-left: 150px;
-
-          .editorcontents {
-            margin-left: 75px;
-          }
-          .left-btn {
-            width:70px;
-          }
+      .right-wrap {
+        margin-left: 350px;
       }
-
-      @media (max-width: 1100px) {
-        margin-left:90px;
-
-        .editorcontents {
-          margin-left: 50px;
-          width:80%;
-        }
-
-        .right-wrap {
-          margin-left: 350px;
-        }
-        .wrapper {
-          margin-left: 70px;
-        }
-        .editmenu-wrap {
-          right: 100px;
-        };
-        #edit-area {
-          width:350px;
-        }
+      .wrapper {
+        margin-left: 70px;
       }
-
-      @media (max-width: 840px) {
-        .editmenu-wrap {
-          right: 140px;
-        };
-        .wrapper {
-          left: 500px;
-        }
-        #edit-area {
-          width:300px;
-        }
+      .editmenu-wrap {
+        right: 100px;
       }
-
-      @media (max-width: 768px) {
-          margin-left: 120px;
-
-          .left-btn {
-            width:55px;
-          }
-          .dates {
-            font-size: .7rem;
-          }
-          .editmenu-wrap {
-            margin-left: 100px;
-          }
-          .wrapper {
-            left: 450px;
-            margin-left:0px;
-          }
+      #edit-area {
+        width: 350px;
       }
+    }
 
-      @media (max-width: 680px) {
-        margin-left: 30px;
-
-        #postdate {
-          margin-right: 30px;
-            right: 50px;
-            margin-left: 0px;
-          }
-          .wrapper {
-            left: 300px;
-          }
-          #edit-area {
-            width:230px;
-          }
+    @media (max-width: 840px) {
+      .editmenu-wrap {
+        right: 140px;
       }
+      .wrapper {
+        left: 500px;
+      }
+      #edit-area {
+        width: 300px;
+      }
+    }
 
-      @media (max-width: 576px) {
-        width:430px;
+    @media (max-width: 768px) {
+      margin-left: 120px;
+
+      .left-btn {
+        width: 55px;
+      }
+      .dates {
+        font-size: 0.7rem;
+      }
+      .editmenu-wrap {
+        margin-left: 100px;
+      }
+      .wrapper {
+        left: 450px;
         margin-left: 0px;
-        .wrapper {
-          left: 340px;
-        }
-        .editmenu-wrap {
-          right:65px;
-        }
-        #edit-area {
-          width:270px;
-        }
-      }
-
-      @media (min-width: 1600px) {
-        margin-left: 550px;
-      }
-
-      textarea {
-        resize: none;
       }
     }
 
-    .commentc {
-      width: 400px;
-      overflow-wrap: break-word;
-      word-wrap: break-word;
-    }
-    .readPosting div h5{
-     margin: 20px 0 30px;
-      color: #999;
-      font-weight: 400;
+    @media (max-width: 680px) {
+      margin-left: 30px;
+
+      #postdate {
+        margin-right: 30px;
+        right: 50px;
+        margin-left: 0px;
+      }
+      .wrapper {
+        left: 300px;
+      }
+      #edit-area {
+        width: 230px;
+      }
     }
 
-    .ql-align-center {
-      text-align: center;  
+    @media (max-width: 576px) {
+      width: 430px;
+      margin-left: 0px;
+      .wrapper {
+        left: 340px;
+      }
+      .editmenu-wrap {
+        right: 65px;
+      }
+      #edit-area {
+        width: 270px;
+      }
     }
 
-    .ql-align-left {
-      text-align: left;  
+    textarea {
+      resize: none;
     }
+  }
 
-    .ql-align-right {
-      text-align: right;  
-    }
-    
-    .dates{
-      display: flex;
-      justify-content: space-between;
-      padding: 5px 0;
-      border-top: 2px solid #d5d5d5;
-      border-bottom: 1px solid #d5d5d5;
-      margin: 20px 0;
-      font-size: .8rem;
-      color: #999;
-    }
-    
-    .dates div{
-      display: flex;
-    }
-    .dates div p{
-      padding: 3px;
-    }
-    .dates div p b{
-      color: #222;
-      padding: 5px;
-    }
-    .contents {
+  .commentc {
+    width: 400px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+  .readPosting div h5 {
+    margin: 20px 0 30px;
+    color: #999;
+    font-weight: 400;
+  }
+
+  .ql-align-center {
+    text-align: center;
+  }
+
+  .ql-align-left {
+    text-align: left;
+  }
+
+  .ql-align-right {
+    text-align: right;
+  }
+
+  .dates {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-top: 2px solid #d5d5d5;
+    border-bottom: 1px solid #d5d5d5;
+    margin: 20px 0;
+    font-size: 0.8rem;
+    color: #999;
+  }
+
+  .dates div {
+    display: flex;
+  }
+  .dates div p {
+    padding: 3px;
+  }
+  .dates div p b {
+    color: #222;
+    padding: 5px;
+  }
+  .contents {
     border-bottom: 2px solid #d5d5d5;
     padding: 10px 0;
     margin-bottom: 20px;
-    }
-    .contents img{
-      width: 100%;
-      margin-bottom:10px;
-    }
-    
-    .contents p{
-      margin: 0px 0px 5px 0px;
-      white-space: pre-line;
-    }
-    .contents<div{
-      padding: 0 280px;
-      display: flex;
-    }
-    
-    .commentsz {
-      text-align: start;
-      margin-bottom: 20px;
-    }
-    .commentsz section{
-      display: flex;
-      font-size: .8rem;
-      margin: 15px 0;
-    }
-    
-    .readPost {
-      display: flex;
-      justify-content: space-between;
-    }
-    .readPost span{
-      padding-left: 10px;
-      height: auto;
-      overflow: hidden;
-      text-overflow:clip;
-    }
-    .readPost div{
-      display: flex;
-    }
-    .readdiv {
-      padding: 10px;
-    }
-    .readPost div img{
-      padding-left: 0;
-    }
+  }
+  .contents img {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 
-    .right-wrap {
-      position: absolute;
-      margin-left: 450px;
-      margin-top: 20px;
-    }
-    .editmenu-wrap {
-      position:relative;
-      margin-left: 200px;
-      padding: 0px;
-      border-radius: 5px;
-    }
+  .contents p {
+    margin: 0px 0px 5px 0px;
+    white-space: pre-line;
+  }
+  .contents<div {
+    padding: 0 280px;
+    display: flex;
+  }
 
-   .editmenu {
-      position:absolute;
-      right: 40px;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #d5d5d5;
-      padding: 0px;
-      border-radius: 4px;
-      width:50px; 
-      left: 15px;
-      overflow: hidden;
-      box-shadow: 4px 0 16px -4px rgba(0, 0, 0, 0.2);
-   }
+  .commentsz {
+    text-align: start;
+    margin-bottom: 20px;
+  }
+  .commentsz section {
+    display: flex;
+    font-size: 0.8rem;
+    margin: 15px 0;
+  }
 
-   .editmenu button {
-      border: none;
-      background-color: white;
-      cursor: pointer;
-   }
+  .readPost {
+    display: flex;
+    justify-content: space-between;
+  }
+  .readPost span {
+    padding-left: 10px;
+    height: auto;
+    overflow: hidden;
+    text-overflow: clip;
+  }
+  .readPost div {
+    display: flex;
+  }
+  .readdiv {
+    padding: 10px;
+  }
+  .readPost div img {
+    padding-left: 0;
+  }
 
-   .editmenu button:hover {
+  .right-wrap {
+    position: absolute;
+    margin-left: 450px;
+    margin-top: 20px;
+  }
+  .editmenu-wrap {
+    position: relative;
+    margin-left: 200px;
+    padding: 0px;
+    border-radius: 5px;
+  }
+
+  .editmenu {
+    position: absolute;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #d5d5d5;
+    padding: 0px;
+    border-radius: 4px;
+    width: 50px;
+    left: 15px;
+    overflow: hidden;
+    box-shadow: 4px 0 16px -4px rgba(0, 0, 0, 0.2);
+  }
+
+  .editmenu button {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  .editmenu button:hover {
     text-decoration: underline;
   }
 
@@ -260,117 +260,117 @@ export const Container = styled.div`
     justify-content: flex-end;
   }
 
-    #comment-area {
-        height: 80px;
-        width: 100%;
-        background-color: white;
-        font-family: 'Noto Sans KR', sans-serif;
-        border-radius: 5px;
-        padding: 10px;
-    }
-    #edit-area {
-      background-color: white;
-      font-family: 'Noto Sans KR', sans-serif;
-      border-radius: 5px;
-      padding: 10px;
-      height: auto;
-      width: 550px;
-    }
+  #comment-area {
+    height: 80px;
+    width: 100%;
+    background-color: white;
+    font-family: "Noto Sans KR", sans-serif;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  #edit-area {
+    background-color: white;
+    font-family: "Noto Sans KR", sans-serif;
+    border-radius: 5px;
+    padding: 10px;
+    height: auto;
+    width: 550px;
+  }
 
-    .threedot {
-      cursor: pointer;
-    }
-    .commentsz div{
-      display: flex;
-    }
-    .commentsz div label{
-      line-height: 3rem;
-    }
+  .threedot {
+    cursor: pointer;
+  }
+  .commentsz div {
+    display: flex;
+  }
+  .commentsz div label {
+    line-height: 3rem;
+  }
 
-    .btn-container {
-        display: flex;
-        justify-content: space-between;
-        padding-top: 10px;
-    }
-    
-    .left-btn {
-        margin-right: auto; 
-        width: 10%;
-        white-space: nowrap;
-    }
-          
-    .right-btns {
-        display: flex;
-    }
-          
-    .right-btns button {
-      margin-left: 15px;
-      white-space: nowrap;
-      width:100%;
-    }
+  .btn-container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+  }
 
-    .btn-container button:hover,
-    .active-btn button:hover,
-    .active-btn button:focus,
-    .btn-container button:focus {
-      background: #0F62FE; 
-      border: none;
-      color: #fff;
-    }
+  .left-btn {
+    margin-right: auto;
+    width: 10%;
+    white-space: nowrap;
+  }
 
-    .btn-container button,
-    .active-btn button {
-      cursor: pointer;
-      background: #f6f8fa; 
-      color: #3f5dfe;
-      border-radius:5px;
-      border: none;
-      box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.2);
-      font-weight: 600;
-      height: 30px;
-      margin-top:10px;
-    }
+  .right-btns {
+    display: flex;
+  }
 
-    .active-btn {
-      text-align: right;
-    }
+  .right-btns button {
+    margin-left: 15px;
+    white-space: nowrap;
+    width: 100%;
+  }
 
-    .active-btn button {
-      margin-top: -10px;
-      margin-right: -10px;
-    }
-    
-    .commentsz img,
-    .dates img {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        border: 2px solid #ccc;
-        transition: 0.2s;
-        box-sizing: border-box;
-        padding: 2px;
-    }
+  .btn-container button:hover,
+  .active-btn button:hover,
+  .active-btn button:focus,
+  .btn-container button:focus {
+    background: #0f62fe;
+    border: none;
+    color: #fff;
+  }
 
-    #postuser {
-      margin-right:70px;
-      margin-top: 0px;
-      margin-bottom: 0px;
-      align-items: center;
-      justify-content: center;
-      display: flex;
-      white-space: nowrap;
-    }
+  .btn-container button,
+  .active-btn button {
+    cursor: pointer;
+    background: #f6f8fa;
+    color: #3f5dfe;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    height: 30px;
+    margin-top: 10px;
+  }
 
-    #commentlike-container {
-      height:30px;
-      margin-top: 70px;
-    }
+  .active-btn {
+    text-align: right;
+  }
 
-    .like-container {
-      padding: 5px 5px;
-      display: flex;
-      justify-content: right;
-    }
+  .active-btn button {
+    margin-top: -10px;
+    margin-right: -10px;
+  }
+
+  .commentsz img,
+  .dates img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    transition: 0.2s;
+    box-sizing: border-box;
+    padding: 2px;
+  }
+
+  #postuser {
+    margin-right: 70px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    white-space: nowrap;
+  }
+
+  #commentlike-container {
+    height: 30px;
+    margin-top: 70px;
+  }
+
+  .like-container {
+    padding: 5px 5px;
+    display: flex;
+    justify-content: right;
+  }
 
   .wrapper,
   .wrapper2 {
@@ -380,22 +380,22 @@ export const Container = styled.div`
     border-radius: 20px;
     overflow: hidden;
     position: absolute;
-      .separator {
-        width: 1px;
-        background: #262626;
-        margin: 8px 0;
-      }
+    .separator {
+      width: 1px;
+      background: #262626;
+      margin: 8px 0;
+    }
 
-      .action {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        font-size: 18px;
-        color: #262626;
-        font-family: Lato;
-        padding: 8px 12px;
-      
+    .action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      color: #262626;
+      font-family: Lato;
+      padding: 8px 12px;
+
       .count {
         margin-left: 5px;
         font-size: 14px;
@@ -414,19 +414,17 @@ export const Container = styled.div`
         background: #e5e5e5;
       }
     }
-}
+  }
 
+  .ql-size-small {
+    font-size: 0.7rem;
+  }
 
-.ql-size-small {
-  font-size: .7rem;
-}
+  .ql-size-large {
+    font-size: 1.5rem;
+  }
 
-.ql-size-large {
-  font-size: 1.5rem;
-}
-
-.ql-size-huge {
-  font-size: 2.5rem;
-}
-   
+  .ql-size-huge {
+    font-size: 2.5rem;
+  }
 `;

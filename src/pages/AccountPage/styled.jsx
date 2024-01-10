@@ -1,5 +1,29 @@
 import styled from "styled-components";
 
+export const GoodbyeModalWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 24px;
+
+  text-align: center;
+  font-size: 20px;
+  width: 550px;
+  line-height: 2;
+
+  img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 32px;
+  }
+
+  p.writer {
+    font-family: "iceJaram-Rg";
+    font-weight: 800;
+    font-size: 32px;
+  }
+`;
 export const NotDelCheckContainer = styled.div`
   display: flex;
   flex-direction: column;

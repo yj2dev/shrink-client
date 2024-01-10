@@ -7,7 +7,7 @@ export const Container = styled.div`
   height: 100vh;
 
   section {
-    border: 2px solid red;
+    //border: 2px solid red;
     padding: 0;
     margin: 0;
   }

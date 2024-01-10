@@ -1,4 +1,9 @@
-import { Container, Message, NotDelCheckContainer } from "./styled";
+import {
+  Container,
+  GoodbyeModalWrapper,
+  Message,
+  NotDelCheckContainer,
+} from "./styled";
 import { useRecoilState } from "recoil";
 import { userState } from "../../state/userState";
 import { useEffect, useRef, useState } from "react";
@@ -8,9 +13,12 @@ import { useNavigate } from "react-router-dom";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import ProfileImageCropModal from "../../components/ProfileImageCropModal";
 import AlertModal from "../../components/AlertModal";
+import Modal from "../../components/Modal";
+import logoImg from "./img/logo.png";
 
 const AccountPage = () => {
   const navigate = useNavigate();
+  const [showGoodbyeModal, setShowGoodbyeModal] = useState(false);
 
   const [user, setUser] = useRecoilState(userState);
 
@@ -343,6 +351,9 @@ const AccountPage = () => {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
         setUser(null);
+
+        setShowGoodbyeModal(true);
+
         navigate("/");
       })
       .catch((err) => {
@@ -499,6 +510,27 @@ const AccountPage = () => {
         </span>
       </AlertModal>
 
+      <Modal
+        show={showGoodbyeModal}
+        onClose={() => {
+          setShowGoodbyeModal(false);
+          navigate("/");
+        }}
+      >
+        <GoodbyeModalWrapper>
+          <img src={logoImg} alt="줄었슈링크 로고 이미지" />
+          <b style={{ fontSize: "1.2em" }}>
+            지금까지 줄었슈링크를 이용해주셔서 <br />
+            진심으로 감사드립니다.
+          </b>
+          <br />
+          앞으로도 저희 서비스에 대한 소중한 의견이나 제안이 있으시면
+          <br />
+          언제든지 알려주세요. 다시 만날 날을 기대하며, 더 나은 서비스를
+          제공하기 위해 끊임없이 노력하겠습니다.
+          <p className="writer">- 줄었슈링크 개발자 일동</p>
+        </GoodbyeModalWrapper>
+      </Modal>
       <Container>
         <article>
           <h1>내 계정정보</h1>
