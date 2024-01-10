@@ -1,5 +1,7 @@
 import styled from "styled-components";
 export const Container = styled.footer`
+  scroll-snap-align: start;
+
   background-color: #fff;
   .nav-link {
     bottom: 0;

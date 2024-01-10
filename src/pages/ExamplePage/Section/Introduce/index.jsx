@@ -13,35 +13,21 @@ const IntroduceSection = () => {
   useEffect(() => {
     const handleScroll = () => {
       console.log("scrollY", window.scrollY);
-
-      // if (window.scrollY) setIsScroll(true);
-      // else setIsScroll(false);
+      if (window.scrollY > 100) {
+        setShowDownArrow(false);
+      } else {
+        setShowDownArrow(true);
+      }
     };
 
+    // 스크롤 이벤트 리스너 추가
     window.addEventListener("scroll", handleScroll);
 
+    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     console.log(window.scroll);
-  //     console.log(window.scrollY);
-  //     if (window.scrollY > 0) {
-  //       setShowDownArrow(false);
-  //     } else {
-  //       setShowDownArrow(true);
-  //     }
-  //   };
-  //
-  //   window.addEventListener("scroll", handleScroll);
-  //
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
 
   const onClickStory1 = () => {
     document.getElementById("story1").scrollIntoView({ behavior: "smooth" });
@@ -54,7 +40,7 @@ const IntroduceSection = () => {
           <h2>같은 과자도 다시 보자</h2>
           <h1>슈링크플레이션</h1>
         </div>
-        {showDownArrow && (
+        {!showDownArrow && (
           <button className="move-story1">
             <Arrow>
               <IoIosArrowDown />

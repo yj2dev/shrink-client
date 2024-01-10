@@ -14,9 +14,10 @@ export const Container = styled.section`
 
   h1 {
     color: #fff;
-    font-size: 4em;
+    font-size: 3vw;
     span {
       font-family: "SOYOMapleBoldTTF";
+      font-size: 4vw;
     }
     margin-bottom: 2em;
   }
@@ -26,8 +27,9 @@ export const CardContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 32px;
   perspective: 1000px;
+  max-width: 1000px;
 `;
 
 export const Card = styled.div`

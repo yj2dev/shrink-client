@@ -264,8 +264,8 @@ export const Section = styled.section`
 
     input[id="mobile-menu"] + label {
       display: block;
-      width: 30px;
-      height: 20px;
+      width: 24px;
+      height: 16px;
       position: relative;
       cursor: pointer;
     }
@@ -465,7 +465,7 @@ export const Section = styled.section`
 
   .login-button {
     @media (max-width: 768px) {
-      font-size: 0.75em;
+      font-size: 0.5em;
     }
 
     justify-content: flex-end;
@@ -527,7 +527,9 @@ export const RightSection = styled.div`
     box-sizing: border-box;
   }
   .nav-link a {
+    font-size: 1.2em;
     @media (max-width: 768px) {
+      font-size: 1em;
       width: 100%;
       display: block;
       padding: 8px 0;
@@ -545,7 +547,7 @@ export const RightSection = styled.div`
 
     position: relative;
 
-    font-size: 1em;
+    //font-size: 1em;
     font-weight: 500;
 
     margin: 0 8px;
