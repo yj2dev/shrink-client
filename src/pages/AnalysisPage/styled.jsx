@@ -525,6 +525,7 @@ export const AnalysisResultMenu = styled.div`
 export const AlertContainerHidden = styled.div`
   position: fixed;
   width: 100%;
+  max-width: 1000px;
   left: 0;
   background-color: #f0f0f0;
   top: 0;
@@ -533,6 +534,9 @@ export const AlertContainerHidden = styled.div`
 `;
 
 export const AlertContainer = styled.div`
+  width: 100%;
+  max-width: 1000px;
+
   position: fixed;
   //top: -64px;
   top: -10px;
@@ -543,7 +547,6 @@ export const AlertContainer = styled.div`
   align-items: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
   height: 78px;
   z-index: 20;
   transition: 0.2s;
@@ -553,7 +556,7 @@ export const AlertContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    font-size: 1.4em;
+    font-size: 1.2em;
   }
 
   &.noProductDetected {
