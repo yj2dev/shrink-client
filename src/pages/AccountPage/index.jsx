@@ -353,8 +353,6 @@ const AccountPage = () => {
         setUser(null);
 
         setShowGoodbyeModal(true);
-
-        navigate("/");
       })
       .catch((err) => {
         if (err.response.data.status === "fail") {
