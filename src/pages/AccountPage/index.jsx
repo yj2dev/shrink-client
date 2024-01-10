@@ -130,7 +130,9 @@ const AccountPage = () => {
   useEffect(() => {
     const setUserInfo = async () => {
       const userInfo = await initUserInfo();
-      if (!userInfo) navigate("/");
+      if (!userInfo && !showGoodbyeModal) {
+        navigate("/");
+      }
     };
 
     setUserInfo();
