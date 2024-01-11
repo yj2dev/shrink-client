@@ -71,6 +71,13 @@ export const Container = styled.section`
     color: #bdbdbd;
   }
 
+
+  @media (max-width: 576px) {
+    .wrapper {
+      height: 80%;
+    }
+  }
+
   @media (min-width: 1600px){
 
     .wrapper {

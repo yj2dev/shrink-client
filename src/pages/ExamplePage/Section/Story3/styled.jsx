@@ -69,13 +69,14 @@ export const Container = styled.section`
 
   @media (max-width: 576px) {
     .wrapper {
-      //margin-top: 200px;
+      height:90%;
     }
   }
 
   @media (max-width: 768px) {
     .wrapper {
       flex-direction: column;
+      height:100%;
     }
 
     .content {
