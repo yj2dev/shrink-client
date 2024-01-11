@@ -75,7 +75,7 @@ export const Container = styled.section`
 
   @media (min-width: 1600px) {
     .wrapper {
-      //margin-top: 120px;
+      height: 90%;
     }
   }
 
