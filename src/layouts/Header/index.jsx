@@ -1,9 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import {
-  IoCameraOutline,
-  IoSearchOutline
-} from "react-icons/io5";
+import { IoCameraOutline, IoSearchOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import ContentModal from "../../components/ContentModal";
@@ -124,7 +121,7 @@ const Header = () => {
   }, []);
 
   const onClickLogout = () => {
-    navigate("/");
+    // navigate("/");
 
     localStorage.removeItem("user");
     localStorage.removeItem("token");
@@ -379,10 +376,7 @@ const Header = () => {
             onShowLogin={onShowLoginModal}
             onShowContent={onShowContentModal}
           />
-          <ContentModal
-            show={showContentModal}
-            onClose={onCloseContentModal}
-          />
+          <ContentModal show={showContentModal} onClose={onCloseContentModal} />
         </Section>
       </Container>
     </>
