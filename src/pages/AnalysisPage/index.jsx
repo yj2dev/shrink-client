@@ -261,10 +261,9 @@ const AnalysisPage = () => {
         <AlertContainerHidden />
         <AlertContainer className={alertStatus}>
           {alertStatus === "noProductDetected" && "인식된 제품이 없습니다."}
-          {alertStatus === "shrinkDoubt" &&
-            "슈링크로 신고건수가 많은 제품입니다."}
+          {alertStatus === "shrinkDoubt" && "슈링크로 의심되는 제품입니다."}
           {alertStatus === "noShrink" &&
-            "최근 슈링크 발생 내역이 없는 상품입니다."}
+            "최근 슈링크 발생 내역이 없는 제품입니다."}
           {alertStatus === "shrinkOccurred" && (
             <>
               <IoIosWarning
@@ -359,7 +358,7 @@ const AnalysisPage = () => {
                       ) : (
                         <span className="image-is-shrink none-shrink">
                           <span className="text">
-                            최근 슈링크 발생 내역이 없는 상품입니다. 안심하고
+                            최근 슈링크 발생 내역이 없는 제품입니다. 안심하고
                             구매하세요!
                           </span>
                         </span>
@@ -484,7 +483,7 @@ const AnalysisPage = () => {
               disabled={isLoading}
               onClick={onSubmit}
             >
-              {!isLoading ? "상품 분석" : <ScaleLoader color="#fff" />}
+              {!isLoading ? "제품 분석" : <ScaleLoader color="#fff" />}
             </button>
           </div>
         </WebcamContainer>
