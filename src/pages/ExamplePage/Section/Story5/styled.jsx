@@ -69,7 +69,7 @@ export const Container = styled.section`
 
   @media (max-width: 576px) {
     .wrapper {
-      //margin-top: 100px;
+      height: 100%;
     }
   }
 
